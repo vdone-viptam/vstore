@@ -100,8 +100,8 @@ class ProductController extends Controller
         $this->v['requests'] = DB::table('categories')->join('products', 'categories.id', '=', 'products.category_id')
             ->join('requests', 'products.id', '=', 'requests.product_id')
             ->join('users', 'requests.user_id', '=', 'users.id')
-            ->selectRaw('requests.code,requests.id,requests.created_at,categories.name as cate_name,products.name,users.name as user_name,products.price,requests.discount,requests.status,products.vstore_confirm_date')
-            ->where('requests.status','<>','0')
+            ->selectRaw('requests.code,requests.id,requests.created_at,categories.name as cate_name,products.name,users.name as user_name,products.price,requests.discount,requests.status,requests.vstore_confirm_date')
+            ->where('requests.status', '<>', '0')
             ->where('requests.vstore_id', Auth::id());
         if (strlen($this->v['key_search']) > 0) {
             $this->v['requests'] = $this->v['requests']->where(function ($query) {
@@ -168,6 +168,7 @@ class ProductController extends Controller
             if (isset($request->note)) {
                 $currentRequest->note = $request->note;
             }
+            $currentRequest->vstore_confirm_date = Carbon::now();
             $currentRequest->save();
             DB::table('products')->where('id', $currentRequest->product_id)->update(['vstore_confirm_date' => Carbon::now()]);
             $userLogin = Auth::user();
@@ -329,13 +330,13 @@ class ProductController extends Controller
         Discount::where('start_date', '<=', Carbon::now())
             ->where('end_date', '>=', Carbon::now())
             ->where('status', 0)
-            ->where('type',2)
+            ->where('type', 2)
             ->where('discounts.user_id', Auth::id())
             ->update(['status' => 1]);
 
         Discount::where('end_date', '<', Carbon::now())
             ->where('status', 1)
-            ->where('type',2)
+            ->where('type', 2)
             ->where('discounts.user_id', Auth::id())
             ->update(['status' => 2]);
 
