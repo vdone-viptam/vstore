@@ -108,7 +108,7 @@
                                 </span>
                             </th>
                             <th class="white-space-120">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                              
                                     Giá sản phẩm
 
                                     <span style="float: right;cursor: pointer">
@@ -122,7 +122,7 @@
                                             <i class="fas fa-sort sort" data-sort="products.price"></i>
                                         @endif
                                 </span>
-                                </div>
+                               
                             </th>
                             <th class="white-space-90 text-center">Số lượng
                                 <span style="float: right;cursor:pointer">
@@ -154,7 +154,7 @@
                              
                             </th>
                             <th class="white-space-150">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                      
                                     Thời gian đặt hàng
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'order.created_at')
@@ -167,10 +167,10 @@
                                             <i class="fas fa-sort sort" data-sort="order.created_at"></i>
                                         @endif
                                 </span>
-                                </div>
+                                
                             </th>
                             <th class="white-space-130">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                               
                                     Thời gian hoàn thành
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'order.estimated_date')
@@ -185,10 +185,10 @@
                                             <i class="fas fa-sort sort" data-sort="order.estimated_date"></i>
                                         @endif
                                 </span>
-                                </div>
+                              
                             </th>
                             <th class="white-space-250">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                
                                     Phần trăm chiết khấu nhận được
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'products.discount')
@@ -201,10 +201,10 @@
                                             <i class="fas fa-sort sort" data-sort="products.discount"></i>
                                         @endif
                              </span>
-                                </div>
+                                
                             </th>
                             <th class="white-space-180">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                
                                     Chiết khấu nhận được
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'money')
@@ -217,7 +217,7 @@
                                             <i class="fas fa-sort sort" data-sort="money"></i>
                                         @endif
                              </span>
-                                </div>
+                                
                             </th>
                             <th class="white-space-100">
                             </th>

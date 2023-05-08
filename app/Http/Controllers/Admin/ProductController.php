@@ -185,14 +185,14 @@ class ProductController extends Controller
         try {
             $product = Product::find($id);
 
-            $code = 'VN-' . Str::random(10);
+            $code = 'vns' . Str::lower(Str::random(10));
             $check = true;
             while ($check) {
                 $checkProduct = Product::where('publish_id', $code)->count();
                 if (!$checkProduct || $checkProduct < 1) {
                     $check = false;
                 }
-                $code = 'VN' . rand(1000000000, 9999999999);
+                $code = 'vns' . Str::lower(Str::random(10));
             }
             $product->publish_id = $code;
             $product->save();

@@ -166,7 +166,7 @@
                               
                             </th>
                             <th class="white-space-120">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                             
                                     Giá sản phẩm
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'price')
@@ -179,10 +179,10 @@
                                             <i class="fas fa-sort sort" data-sort="price"></i>
                                         @endif
                                 </span>
-                                </div>
+                              
                             </th>
                             <th class="white-space-100">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                                
                                     Giảm giá
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.discount')
@@ -197,7 +197,7 @@
                                             <i class="fas fa-sort sort" data-sort="pre_order_vshop.discount"></i>
                                         @endif
                                 </span>
-                                </div>
+                                
                             </th>
                             <th class="white-space-100 text-center">
                                 Số lượng
@@ -243,7 +243,7 @@
                             </th>
                             <th class="white-space-100 text-center">Trạng thái</th>
                             <th class="white-space-150">
-                            <div class="d-flex justify-content-center align-items-center" style="gap:6px">
+                            
                             Thời gian tạo đơn
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.created_at')
@@ -258,7 +258,7 @@
                                             <i class="fas fa-sort sort" data-sort="pre_order_vshop.created_at"></i>
                                         @endif
                                 </span>
-                                </div>
+                                
                             </th>
                             <th class="white-space-100"></th>
                         </tr>
