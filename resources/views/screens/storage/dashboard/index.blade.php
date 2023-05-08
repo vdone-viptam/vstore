@@ -104,7 +104,7 @@
                             <th class="text-center white-space-180">Mã đơn hàng/Mã yêu cầu</th>
                             <th class="white-space-130 text-center">Mã sản phẩm</th>
                             <th class="white-space-250">
-                            
+
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -198,7 +198,7 @@
                                         <div style="display:flex; justify-content:center; gap:10px"><a
                                                 href="javascript:void(0)" onclick="upDateStatus({{$product->id}},5,1)"
                                                 style="text-decoration:underline"
-                                                class="text-success font-medium  ">
+                                                class="text-primary font-medium  ">
                                                 Đồng ý
                                             </a>
                                             <a href="javascript:void(0)" onclick="upDateStatus({{$product->id}},10,1)"
@@ -211,7 +211,7 @@
                                                 href="javascript:void(0)"
                                                 onclick="upDateStatus('{{$product->code}}',1,7)"
                                                 style="text-decoration:underline"
-                                                class="text-success font-medium ">
+                                                class="text-primary font-medium ">
                                                 Đồng ý
                                             </a>
                                             <a href="javascript:void(0)"
