@@ -98,17 +98,17 @@
                             <th class="text-center white-space-130">Mã sản phẩm</th>
                             <th class="white-space-250">
 
-                                    Tên sản phẩm
-                                    <span style="float: right;cursor: pointer">
+                                Tên sản phẩm
+                                <span style="float: right;cursor: pointer">
                                     @if($field == 'name')
-                                            @if($type == 'desc')
-                                                <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
-                                            @else
-                                                <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
-                                            @endif
+                                        @if($type == 'desc')
+                                            <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
                                         @else
-                                            <i class="fas fa-sort sort" data-sort="name"></i>
+                                            <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
                                         @endif
+                                    @else
+                                        <i class="fas fa-sort sort" data-sort="name"></i>
+                                    @endif
                                 </span>
 
                             </th>
@@ -173,9 +173,10 @@
                                 <tr>
                                     <td class="text-center ">{{$ord->no}}</td>
                                     <td class="text-center ">{{$ord->publish_id}}</td>
-                                    <td title="{{$ord->name}}" class="white-space-250">{{\Illuminate\Support\Str::limit($ord->name,50,'...')}}</td>
+                                    <td title="{{$ord->name}}"
+                                        class="white-space-250">{{\Illuminate\Support\Str::limit($ord->name,50,'...')}}</td>
                                     <td class="text-center">{{$ord->quantity}}</td>
-                                    <td class="text-center" >
+                                    <td class="text-center">
                                         @if($ord->method_payment == 'COD')
                                             <span class="text-danger font-medium">Chưa thanh toán</span>
                                         @else
@@ -183,7 +184,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center">{{\Illuminate\Support\Carbon::parse($ord->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="status{{$ord->id}} text-center" >
+                                    <td class="status{{$ord->id}} text-center">
                                         @if($ord->export_status == 0)
                                             <div style="display:flex; justify-content:center; gap:10px"><a
                                                     href="javascript:void(0)" onclick="upDateStatus({{$ord->id}},1)"
@@ -362,7 +363,7 @@
 
 
                         <div class="form-group">
-                            <label for="quantity">Số lượng nhập:</label>
+                            <label for="quantity">Số lượng xuất:</label>
                             <input type="text" class="form-control form-control-lg" id="quantity" value="${data.data.quantity}" readonly>
                         </div>
                         <div class="form-group">
@@ -386,7 +387,7 @@
                    </form>     `;
                     $('.md-content').html(htmlData)
                     $('#modalDetail').modal('show');
-                    if (data.data.status == 1) {
+                    if (data.data.export_status != 0) {
                         $('.btn-update').addClass('hidden');
                     } else {
                         $('.btn-update').removeClass('hidden');
