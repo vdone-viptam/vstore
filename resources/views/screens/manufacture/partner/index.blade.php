@@ -48,7 +48,7 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th class="white-space-100 text-center">Mã V-Store</th>
+                            <th class="white-space-130 text-center">Mã V-Store</th>
                             <th class="white-space-150 text-center">Tên V-Store
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
@@ -107,7 +107,7 @@
                                     </span>
                                
                             </th>
-                            <th class="white-space-100">
+                            <th class="white-space-80">
                             </th>
                         </tr>
                         </thead>
@@ -115,12 +115,12 @@
                         @if(count($products) > 0)
                             @foreach($products as $value)
                                 <tr>
-                                    <td class="white-space-100 text-center">{{$value->account_code}}</td>
-                                    <td class="white-space-150 text-center">{{$value->vstore_name}}</td>
+                                    <td class="white-space-140 text-center">{{$value->account_code}}</td>
+                                    <td class="white-space-200 text-center">{{$value->vstore_name}}</td>
                                     <td class="text-center white-space-150">{{$value->phone_number}}</td>
-                                    <td class="text-center white-space-250">{{$value->total_product}}</td>
-                                    <td class="text-center">{{$value->total_category}}</td>
-                                    <td class="text-center white-space-100"><a href="javascript:void(0)" data-toggle="modal"
+                                    <td class="text-center white-space-150">{{$value->total_product}}</td>
+                                    <td class="text-center white-space-150">{{$value->total_category}}</td>
+                                    <td class="text-center white-space-80"><a href="javascript:void(0)" data-toggle="modal"
                                            data-target=".bd-example-modal-lg"
                                            data-account_code="{{$value->account_code}}"
                                            data-vstore_name="{{$value->vstore_name}}"
@@ -129,7 +129,7 @@
                                            data-address="{{$value->address}}"
                                            data-total_product="{{$value->total_product}}"
                                            data-total_category="{{$value->total_category}}"
-                                           data-id="{{$value->vstore_id}}" class="btn btn-link more-details" style="text-decoration:underline">Chi
+                                           data-id="{{$value->vstore_id}}" class="btn btn-link more-details p-0" style="text-decoration:underline">Chi
                                             tiết</a>
                                     </td>
 

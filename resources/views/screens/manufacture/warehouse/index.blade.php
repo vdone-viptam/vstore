@@ -162,9 +162,9 @@
                         <table id="example" class="table table-striped table-bordered second" style="width:100%">
                             <thead>
                             <tr>
-                                <th class="white-space-300 text-center">Tên kho hàng</th>
+                                <th>Tên kho hàng</th>
                                 <th class="text-center white-space-120">Số điện thoại</th>
-                                <th class="white-space-200 text-center">Địa chỉ
+                                <th >Địa chỉ
 
                                 </th>
                                 <th class="text-center white-space-200" >Tổng số mặt hàng
@@ -194,7 +194,7 @@
                                 </span>
                                 </th>
 
-                                <th class="th th_status white-space-100"></th>
+                                <th class="th th_status white-space-80"></th>
                             </tr>
                             </thead>
                             <tbody>
@@ -202,12 +202,12 @@
                             @foreach($warehouses as $val)
                                 <tr>
                                     <td class=" white-space-300">{{$val->ware_name}}</td>
-                                    <td class="text-center">{{$val->phone_number}}</td>
+                                    <td class="text-center white-space-120">{{$val->phone_number}}</td>
                                     <td class="white-space-200">{{$val->address}}</td>
-                                    <td class="text-center">{{$val->amount ?? 0}}</td>
-                                    <td class="text-center">{{$val->amount_product ?? 0}}</td>
-                                    <td class="text-center white-space-100">
-                                        <a href="javascript:void(0)" style="text-decoration:underline" class="btn btn-link px-2"
+                                    <td class="text-center white-space-100">{{$val->amount ?? 0}}</td>
+                                    <td class="text-center white-space-100">{{$val->amount_product ?? 0}}</td>
+                                    <td class="text-center white-space-80">
+                                        <a href="javascript:void(0)" style="text-decoration:underline" class="btn btn-link p-0"
                                                 onclick="showDetail({{$val->id}})">Chi tiết
                                         </a>
 
@@ -363,8 +363,8 @@
                         <table id="example" class="table table-striped table-bordered second" style="width:100%">
                             <thead>
                             <tr role="row">
-                                <th class="sorting_asc"  style="width: 250px;">Tên sản phẩm</th>
-                                <th style="min-width: 250px;">Số lượng</th>
+                                <th class="sorting_asc white-space-250"  >Tên sản phẩm</th>
+                                <th class="white-space-250">Số lượng</th>
 
                             </tr>
                             </thead>

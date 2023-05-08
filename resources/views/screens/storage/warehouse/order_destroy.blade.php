@@ -76,9 +76,9 @@
                         <thead>
                         <tr>
                             <th class="text-center white-space-120">Mã đơn hàng</th>
-                            <th class="text-center white-space-150">Mã sản phẩm</th>
-                            <th class="white-space-300" >
-                            <div class=" d-flex justify-content-between align-items-center" style="gap:6px">       
+                            <th class="text-center white-space-140">Mã sản phẩm</th>
+                            <th  >
+                             
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -91,7 +91,7 @@
                                         <i class="fas fa-sort sort" data-sort="product_name"></i>
                                     @endif
                                 </span>
-</div>
+
                             </th>
                             <th class="white-space-100 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
@@ -106,7 +106,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="text-center white-space-300">Lý do hủy</th>
+                            <th class="text-center ">Lý do hủy</th>
                             <th class="white-space-120 text-center">Trạng thái
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'cancel_status')
@@ -120,19 +120,19 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-100"></th>
+                            <th class="white-space-80"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($orders) > 0)
                             @foreach($orders as $request)
                                 <tr>
-                                    <td class="text-center">{{$request->no}}</td>
-                                    <td class="text-center">{{$request->publish_id}}</td>
-                                    <td title="{{$request->product_name}}" class="white-space-300">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
-                                    <td class="text-center">{{$request->quantity}}</td>
+                                    <td class="text-center white-space-140">{{$request->no}}</td>
+                                    <td class="text-center white-space-140">{{$request->publish_id}}</td>
+                                    <td title="{{$request->product_name}}" class="white-space-350">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
+                                    <td class="text-center white-space-100">{{$request->quantity}}</td>
                                     <td class="white-space-300">{{$request->note}}</td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-160">
                                         @if($request->cancel_status == 1)
                                             <p class="text-primary font-medium">Chưa hoàn hàng</p>
                                         @elseif($request->cancel_status == 3)
@@ -141,9 +141,9 @@
                                             <p class="text-danger font-medium">Hàng chưa xuất kho</p>
                                         @endif
                                     </td>
-                                    <td class="text-center white-space-100"><a href="javascript:void(0)" style="text-decoration:underline;"
+                                    <td class="text-center white-space-80"><a href="javascript:void(0)" style="text-decoration:underline;"
                                            onclick="showDetail({{$request->order_id}},{{$request->cancel_status}})"
-                                           class="btn btn-link">Chi tiết</a></td>
+                                           class="btn btn-link px-2 py-0">Chi tiết</a></td>
                                 </tr>
                             @endforeach
                         @else

@@ -79,9 +79,9 @@
                     <table id="example" class="table table-striped table-bordered second    ">
                         <thead>
                         <tr>
-                            <th class="white-space-100 text-center">Mã sản phẩm</th>
+                            <th class="white-space-130 text-center">Mã sản phẩm</th>
                             <th class="text-center white-space-100">Hình ảnh</th>
-                            <th class="white-space-250 text-center">
+                            <th>
                              
                                     Tên sản phẩm
                               
@@ -116,9 +116,11 @@
                              
 
                             </th>
-                            <th class="white-space-180">
-                            
-                                    Thuế giá trị gia tăng
+                            <th class="white-space-130">
+                            <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                    Thuế giá trị <br> gia tăng
+</span>
                                     <span style="float: right;cursor:pointer">
                                             @if ($field == 'vat')
                                             @if ($type == 'desc')
@@ -130,9 +132,9 @@
                                             <i class="fas fa-sort sort" data-sort="vat"></i>
                                         @endif
                                         </span>
-                            
+</div>
                             </th>
-                            <th class="white-space-100">
+                            <th class="white-space-120">
                                 
                                     Trạng thái
                                     <span style="float: right;cursor:pointer">
@@ -165,9 +167,11 @@
                                         </span>
                             
                             </th>
-                            <th class="white-space-180">
-                               
-                                    Chiết khấu cho V-Store
+                            <th class="white-space-130">
+                            <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                    Chiết khấu cho <br> V-Store
+</span>
                                     <span style="float: right;cursor: pointer">
                                             @if ($field == 'products.discount')
                                             @if ($type == 'desc')
@@ -180,11 +184,13 @@
                                             <i class="fas fa-sort sort" data-sort="products.discount"></i>
                                         @endif
                                         </span>
-                               
+</div>
                             </th>
-                            <th class="white-space-140">
-                               
-                                    Số lượng đã bán
+                            <th class="white-space-120">
+                            <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                    Số lượng <br> đã bán
+</span>
                                     <span style="float: right;cursor: pointer">
                                             @if ($field == 'amount_product_sold')
                                             @if ($type == 'desc')
@@ -198,11 +204,13 @@
                                             <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
                                         @endif
                                         </span>
-                               
+</div>
                             </th>
-                            <th class="white-space-160">
-                               
-                                    Số lượng trong kho
+                            <th class="white-space-120">
+                            <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                    Số lượng <br> trong kho
+</span>
                                     <span style="float: right;cursor: pointer">
                                             @if ($field == 'amount')
                                             @if ($type == 'desc')
@@ -214,9 +222,9 @@
                                             <i class="fas fa-sort sort" data-sort="amount"></i>
                                         @endif
                                         </span>
-                               
+</div>
                             </th>
-                            <th class="white-space-100">
+                            <th class="white-space-80">
                             </th>
                         </tr>
                         </thead>
@@ -224,15 +232,15 @@
                         @if (count($products) > 0)
                             @foreach ($products as $product)
                                 <tr>
-                                    <td class="text-center">{{ $product->publish_id }}</td>
-                                    <td class="text-center"><img style="height: 125px;"
+                                    <td class="text-center white-space-140">{{ $product->publish_id }}</td>
+                                    <td class="text-center white-space-100"><img style="height: 125px;"
                                                                  src="{{ strlen(json_decode($product->images)[0]) > 0 ? asset(json_decode($product->images)[0]) : 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png' }}"/>
                                     </td>
                                     <td class="white-space-250">{{ $product->name }}</td>
-                                    <td class="text-center">{{ $product->cate_name }}</td>
-                                    <td class="text-right">{{ number_format($product->price, 0, '.', '.') }} đ</td>
-                                    <td class="text-center">{{ isset($product->vat) ? $product->vat.'%' : '_'}}</td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-150">{{ $product->cate_name }}</td>
+                                    <td class="text-right white-space-140">{{ number_format($product->price, 0, '.', '.') }} đ</td>
+                                    <td class="text-center white-space-80">{{ isset($product->vat) ? $product->vat.'%' : '_'}}</td>
+                                    <td class="text-center white-space-180">
                                         @if ($product->status == 0)
                                             <div class="text-danger d-flex justify-content-center align-items-center font-medium"
                                                  style="gap:6px;">
@@ -267,16 +275,16 @@
                                             </div>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{ $product->vstore_name && $product->status == 2 ? $product->vstore_name : '' }}
+                                    <td class="text-center white-space-150">{{ $product->vstore_name && $product->status == 2 ? $product->vstore_name : '' }}
                                     </td>
-                                    <td class="text-center">{{ $product->discount != null ? $product->discount.'%' : '_' }}
+                                    <td class="text-center white-space-80">{{ $product->discount != null ? $product->discount.'%' : '_' }}
                                     </td>
 
-                                    <td class="text-center">
+                                    <td class="text-center white-space-80">
                                         {{ number_format($product->amount_product_sold, 0, '.', '.') }}</td>
-                                    <td class="text-center">{{ number_format($product->amount, 0, '.', '.') }}</td>
-                                    <td style="min-width: 70px">
-                                        <button type="button" class="btn btn-link pl-0" style="text-decoration:underline"
+                                    <td class="text-center white-space-80">{{ number_format($product->amount, 0, '.', '.') }}</td>
+                                    <td class="white-space-80 text-center">
+                                        <button type="button" class="btn btn-link p-0" style="text-decoration:underline"
                                                 onclick="showDetail({{ $product->id }})">Chi tiết
                                         </button>
                                     </td>

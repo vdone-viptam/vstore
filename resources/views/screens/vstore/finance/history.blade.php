@@ -51,7 +51,7 @@
                                 <tr>
                                     <th class="text-center white-space-120" >Mã giao dịch</th>
                                     <th class="text-center white-space-100" >Trạng thái</th>
-                                    <th class="white-space-120 text-center">Số tiền
+                                    <th class="white-space-130 text-center">Số tiền
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -77,7 +77,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-150">Tên chủ tài khoản
+                                    <th class="white-space-200">Tên chủ tài khoản
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'name')
                                                 @if($type == 'desc')
@@ -90,7 +90,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-150 text-center">Ngân hàng
+                                    <th class="white-space-200 text-center">Ngân hàng
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'bank_name')
                                                 @if($type == 'desc')
@@ -103,7 +103,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="text-center white-space-200">Nội dung</th>
+                                    <th class="text-center ">Nội dung</th>
                                     <th class="text-center white-space-150">Thời gian yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
@@ -123,39 +123,39 @@
                                 @if(count($histories) > 0)
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td class="text-center">{{$history->code}}</td>
+                                            <td class="text-center white-space-120">{{$history->code}}</td>
 
                                             @if($history->status == 0)
-                                                <td class="text-warning font-medium text-center">
+                                                <td class="text-warning font-medium text-center white-space-140">
                                                     Đang chờ duyệt
                                                 </td>
                                             @elseif($history->status == 1)
-                                                <td class="text-success font-medium text-center">
+                                                <td class="text-success font-medium text-center white-space-140">
                                                     Thành công
                                                 </td>
                                             @else
-                                                <td class="text-danger font-medium text-center">
+                                                <td class="text-danger font-medium text-center white-space-140">
                                                     Thất bại
                                                 </td>
                                             @endif
-                                            <td class=" text-right">
+                                            <td class=" text-right white-space-130">
                                                 {{number_format($history->amount,0,'.','.')}} đ
                                             </td>
-                                            <td>
+                                            <td class="white-space-150">
                                                 {{ $history->account_number }}
                                             </td>
-                                            <td>
+                                            <td class="white-space-150">
                                                 {{ $history->name }}bank_name
                                             </td>
-                                            <td>
+                                            <td class="white-space-200">
                                                 {{ $history->bank_name }}
                                             </td>
-                                            <td class="white-space-200">
+                                            <td class="white-space-300">
                                                 Chuyển khoản ra ngoài
                                             </td>
 
 
-                                            <td class="text-center">
+                                            <td class="text-center white-space-130">
                                                 {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                             </td>
                                         </tr>

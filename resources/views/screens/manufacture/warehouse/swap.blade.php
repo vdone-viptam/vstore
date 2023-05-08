@@ -75,7 +75,7 @@
                         <thead>
                         <tr>
                             <th class="text-center white-space-120">Mã yêu cầu</th>
-                            <th class="text-center white-space-200">
+                            <th class="white-space-150">
                                 
                                 Tên kho hàng
                                 <span style="float: right;cursor: pointer">
@@ -90,7 +90,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-300 ">
+                            <th >
                       
                                 Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
@@ -106,7 +106,7 @@
                                 </span>
 
                             </th>
-                            <th class="white-space-150 ">
+                            <th class="white-space-150">
                       
                             Loại yêu cầu
                                 <span style="float: right;cursor: pointer">
@@ -123,8 +123,8 @@
                                 </span>
 
                             </th>
-                            <th>
-                            <div class="white-space-150 d-flex justify-content-center align-items-center" style="gap:6px">        
+                            <th class="white-space-130">
+                                  
                             Tình trạng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'request_warehouses.status')
@@ -139,7 +139,7 @@
                                         <i class="fas fa-sort sort" data-sort="request_warehouses.status"></i>
                                     @endif
                                 </span>
-</div>
+
                             </th>
                             <th class="white-space-100 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
@@ -154,7 +154,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th>  <div class="white-space-150 d-flex justify-content-center align-items-center" style="gap:6px">    
+                            <th class="white-space-130">      
                                 Thời gian
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'request_warehouses.created_at')
@@ -169,7 +169,7 @@
                                         <i class="fas fa-sort sort" data-sort="request_warehouses.created_at"></i>
                                     @endif
                                 </span>
-</div>
+
                             </th>
                         </tr>
                         </thead>
@@ -177,17 +177,17 @@
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td class="white-space-120">{{$product->code}}</td>
-                                    <td class="white-space-200">{{$product->ware_name}}</td>
+                                    <td class="white-space-140">{{$product->code}}</td>
+                                    <td class="white-space-200 text-center">{{$product->ware_name}}</td>
                                     <td class="white-space-300">{{$product->name}}</td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-120">
                                         @if($product->type == 1)
                                             <span class="text-success">Nhập kho</span>
                                         @else
                                             <span class="text-danger">Xuất kho</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-150">
                                         @if($product->type == 1)
                                             @if($product->status == 0)
                                                 <span class="text-secondary">Đang chờ kho duyệt</span>
@@ -206,8 +206,8 @@
                                             @endif
                                         @endif
                                     </td>
-                                    <td class="text-center">{{number_format($product->quantity,0,'.','.')}}</td>
-                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-100">{{number_format($product->quantity,0,'.','.')}}</td>
+                                    <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                 </tr>
                             @endforeach
                         @else

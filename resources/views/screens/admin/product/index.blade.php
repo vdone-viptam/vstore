@@ -84,11 +84,15 @@
                             <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th class="white-space-150 text-center">Mã yêu cầu</th>
-                                    <th class="white-space-200 text-center">Tên sản phẩm</th>
-                                    <th class="white-space-150 text-center">Ngành hàng</th>
-                                    <th class="white-space-150 text-center">Nhà cung cấp</th>
-                                    <th class="text-center" style="min-width: 200px">Chiết khấu cho V-Store
+                                    <th class="white-space-130 text-center">Mã yêu cầu</th>
+                                    <th class="">Tên sản phẩm</th>
+                                    <th class="white-space-130 text-center">Ngành hàng</th>
+                                    <th class="white-space-130 text-center">Nhà cung cấp</th>
+                                    <th class="white-space-130">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">    
+                                    Chiết khấu cho <br> V-Store
+</span>
                                         <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.discount')
                                                 @if($type == 'desc')
@@ -102,9 +106,13 @@
                                                 <i class="fas fa-sort sort" data-sort="requests.discount"></i>
                                             @endif
                                 </span>
+</div>
                                     </th>
 
-                                    <th class="text-center" style="min-width: 200px">Chiết khấu cho V-Shop
+                                    <th class="white-space-130">     <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">    
+                                    Chiết khấu cho <br> V-Shop
+</span>
                                         <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.discount_vShop')
                                                 @if($type == 'desc')
@@ -118,9 +126,15 @@
                                                 <i class="fas fa-sort sort" data-sort="requests.discount_vShop"></i>
                                             @endif
                                 </span>
+</div>
                                     </th>
-                                    <th class="text-center" style="min-width: 200px">V-Store xét duyệt</th>
-                                    <th class="white-space-150 text-center">Trạng thái
+                                    <th class="white-space-100">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">        
+                                    V-Store xét duyệt
+</span>
+                                </th>
+                                    <th class="white-space-120 text-center">Trạng thái
                                         <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.status')
                                                 @if($type == 'desc')
@@ -135,8 +149,8 @@
                                             @endif
                                 </span>
                                     </th>
-                                    <th class="text-center white-space-150">Thao tác</th>
-                                    <th class="white-space-100 text-center"></th>
+                                    <th class="text-center white-space-120">Thao tác</th>
+                                    <th class="white-space-80 text-center"></th>
 
                                 </tr>
                                 </thead>
@@ -144,14 +158,14 @@
                                 @if(count($requests) > 0)
                                     @foreach($requests as $request)
                                         <tr class="line-clamp3">
-                                            <td class="text-center">{{$request->code}}</td>
-                                            <td>{{$request->product_name}}</td>
-                                            <td class="text-center">{{$request->name}}</td>
-                                            <td class="text-center font-medium">{{$request->user_name}}</td>
-                                            <td class="text-center">{{$request->discount}}%</td>
-                                            <td class="text-center">{{$request->discount_vShop}}%</td>
-                                            <td class="text-center"><span>{{$request->vstore_name}}</span></td>
-                                            <td class="text-center">
+                                            <td class="text-center white-space-130">{{$request->code}}</td>
+                                            <td class="white-space-300">{{$request->product_name}}</td>
+                                            <td class="text-center white-space-150">{{$request->name}}</td>
+                                            <td class="text-center font-medium white-space-130">{{$request->user_name}}</td>
+                                            <td class="text-center white-space-100">{{$request->discount}}%</td>
+                                            <td class="text-center white-space-100">{{$request->discount_vShop}}%</td>
+                                            <td class="text-center white-space-100"><span>{{$request->vstore_name}}</span></td>
+                                            <td class="text-center white-space-160">
                                                 @if($request->status == 1)
                                                     <div class="text-warning font-medium "
                                                          style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i>Chờ
@@ -177,12 +191,12 @@
                                                 @if($request->status == 1)
                                                     <a href="javascript:void(0)"
                                                        onclick="appect({{$request->id}},{{$request->discount}},3,{{$request->discount_vShop}})"
-                                                       class="btn text-primary font-medium px-2 "
+                                                       class="btn text-primary font-medium px-2 py-0"
                                                        style="text-decoration:underline;">Duyệt
                                                     </a>
                                                     <a href="javascript:void(0)"
                                                        onclick="unAppect({{$request->id}},{{$request->discount}},4,{{$request->discount_vShop}})"
-                                                       class="btn text-danger font-medium px-2 "
+                                                       class="btn text-danger font-medium px-2 py-0"
                                                        style="text-decoration:underline;">Từ chối
                                                     </a>
                                                 @else
@@ -190,7 +204,7 @@
                                                         duyệt</p>
                                                 @endif
                                             </td>
-                                            <td><a href="javascript:void(0)" class="btn btn-link"
+                                            <td class="white-space-80 text-center"><a href="javascript:void(0)" class="btn btn-link p-0"
                                                    style="text-decoration: underline;"
                                                    onclick="showDetail({{$request->id}})"
                                                    data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a>

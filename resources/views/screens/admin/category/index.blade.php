@@ -82,11 +82,11 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-400 text-center">Ngành hàng
+                            <th >Ngành hàng
                             </th>
                             <th class="text-center white-space-150">Ảnh hiện thị
                             </th>
-                            <th class="text-center white-space-150">
+                            <th class="text-center white-space-120">
                                 Ngày tạo
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.created_at')
@@ -100,7 +100,7 @@
                                     @endif
                              </span>
                             </th>
-                            <th class="text-center white-space-200">Số loại sản phẩm
+                            <th class="text-center white-space-180">Số loại sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'count_product')
                                         @if($type == 'desc')
@@ -121,14 +121,14 @@
                         @if(count($categories) > 0)
                             @foreach($categories as $category)
                                 <tr>
-                                    <td>{{$category->name}}</td>
-                                    <td class="text-center"><img src="{{asset($category->img)}}"
+                                    <td class="white-space-400">{{$category->name}}</td>
+                                    <td class="text-center white-space-150"><img src="{{asset($category->img)}}"
                                                                  style="width: 75px;height: 75px" alt="">
                                     </td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($category->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-center">{{number_format($category->count_product,0,'.','.')}}</td>
+                                    <td class="text-center white-space-130">{{\Carbon\Carbon::parse($category->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-150">{{number_format($category->count_product,0,'.','.')}}</td>
                                     <td class="white-space-120 text-center">
-                                        <a href="javascript:void(0)" onclick="edit({{$category->id}})" class="btn text-primary font-medium " style="text-decoration:underline;">Cập
+                                        <a href="javascript:void(0)" onclick="edit({{$category->id}})" class="btn text-primary font-medium p-0" style="text-decoration:underline;">Cập
                                             nhật</a>
                                     </td>
                                 </tr>

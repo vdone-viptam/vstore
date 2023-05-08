@@ -49,7 +49,7 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th class="white-space-150">
+                                    <th class="white-space-130">
                                      
                                             Mã tài khoản
                                             <span style="float: right;cursor: pointer">
@@ -83,7 +83,7 @@
                                     </span>
                                       
                                     </th>
-                                    <th class="text-center">
+                                    <th >
                                      
                                             Tên
                                             <span style="float: right;cursor: pointer">
@@ -99,7 +99,7 @@
                                     </span>
                                     
                                     </th>
-                                    <th class="text-center">
+                                    <th >
                                     
                                             Email
                                             <span style="float: right;cursor: pointer">
@@ -115,7 +115,7 @@
                                     </span>
                                      
                                     </th>
-                                    <th class="white-space-150">
+                                    <th class="white-space-120">
                                        
                                             Số điện thoại
                                             <span style="float: right;cursor: pointer">
@@ -133,7 +133,7 @@
                                     </span>
                                         
                                     </th>
-                                    <th class="text-center">
+                                    <th class="white-space-100">
                                    
                                             Tên công ty
                                             <span style="float: right;cursor: pointer">
@@ -151,7 +151,7 @@
                                     </span>
                                      
                                     </th>
-                                    <th class="white-space-120">
+                                    <th class="white-space-130">
                         
                                             Mã số thuế
                                             <span style="float: right;cursor: pointer">
@@ -167,9 +167,11 @@
                                     </span>
                                      
                                     </th>
-                                    <th class="white-space-200 text-center">
-                                        
-                                            Id P-Done người đại diện
+                                    <th class="white-space-130 ">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                            Id P-Done <br> người đại diện
+</span>
                                             <span style="float: right;cursor: pointer">
                                         @if($field == 'id_vdone')
                                                     @if($type == 'desc')
@@ -181,9 +183,9 @@
                                                     <i class="fas fa-sort sort" data-sort="id_vdone"></i>
                                                 @endif
                                     </span>
-                                      
+</div>
                                     </th>
-                                    <th>
+                                    <th class="white-space-130">
                                         
                                             Ngày xét duyệt
                                             <span style="float: right;cursor: pointer">
@@ -201,7 +203,7 @@
                                     </span>
                                       
                                     </th>
-                                    <th class="white-space-120"></th>
+                                    <th class="white-space-100"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -209,8 +211,8 @@
                                 @if(count($users) > 0)
                                     @foreach($users as $user)
                                         <tr>
-                                            <td class="text-center">{{$user->account_code}}</td>
-                                            <td class="text-center">
+                                            <td class="text-center white-space-140">{{$user->account_code}}</td>
+                                            <td class="text-center white-space-110">
                                                 @if($user->role_id == 2)
                                                     <span class="text-primary font-medium">Nhà cung cấp</span>
                                                 @elseif($user->role_id == 1)
@@ -221,17 +223,17 @@
                                                     <span class="text-success font-medium">V-Store</span>
                                                 @endif
                                             </td>
-                                            <td>{{$user->name}}</td>
-                                            <td>{{$user->email}}</td>
-                                            <td class="text-center">{{$user->phone_number}}</td>
-                                            <td>{{$user->company_name}}</td>
-                                            <td class="text-center">{{$user->tax_code}}</td>
-                                            <td>{{$user->id_vdone}}</td>
-                                            <td>{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
-                                            <td>
+                                            <td class="white-space-150">{{$user->name}}</td>
+                                            <td class="white-space-150">{{$user->email}}</td>
+                                            <td class="text-center white-space-110">{{$user->phone_number}}</td>
+                                            <td class="white-space-130 text-center">{{$user->company_name}}</td>
+                                            <td class="text-center white-space-130">{{$user->tax_code}}</td>
+                                            <td class="white-space-140 text-center">{{$user->id_vdone}}</td>
+                                            <td class="text-center white-space-130">{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
+                                            <td class="text-center white-space-100">
                                                 @if($user->role_id==3 && $user->branch !=2 )
                                                     <a
-                                                       class="btn btn-primary px-4 py-2 check-yes-no"
+                                                       class="btn btn-primary px-3 py-1 check-yes-no"
                                                        href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng
                                                         cấp</a>
                                                 @endif

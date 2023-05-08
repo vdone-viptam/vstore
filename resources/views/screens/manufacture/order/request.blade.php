@@ -136,7 +136,7 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th class="white-space-110 text-center">Mã đơn hàng
+                            <th class="white-space-130 text-center">Mã đơn hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.no')
                                         @if($type == 'desc')
@@ -149,7 +149,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-200">
+                            <th >
                                
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
@@ -165,7 +165,7 @@
                                 </span>
                               
                             </th>
-                            <th class="white-space-120">
+                            <th class="white-space-130">
                              
                                     Giá sản phẩm
                                     <span style="float: right;cursor:pointer">
@@ -181,7 +181,7 @@
                                 </span>
                               
                             </th>
-                            <th class="white-space-100">
+                            <th class="white-space-110 ">
                                 
                                     Giảm giá
                                     <span style="float: right;cursor: pointer">
@@ -215,7 +215,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-110 text-center">Tiền đặt cọc
+                            <th class="white-space-130 text-center">Tiền đặt cọc
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'deposit_money')
                                         @if($type == 'desc')
@@ -228,7 +228,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-100 text-center">Tổng tiền
+                            <th class="white-space-110 text-center">Tổng tiền
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.money')
                                         @if($type == 'desc')
@@ -241,7 +241,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-100 text-center">Trạng thái</th>
+                            <th class="white-space-120 text-center">Trạng thái</th>
                             <th class="white-space-150">
                             
                             Thời gian tạo đơn
@@ -260,25 +260,25 @@
                                 </span>
                                 
                             </th>
-                            <th class="white-space-100"></th>
+                            <th class="white-space-80"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($orders) > 0)
                             @foreach($orders as $order)
                                 <tr>
-                                    <td class="white-space-100 text-center">{{$order->no}}</td>
-                                    <td class="white-space-200">{{$order->product->name}}</td>
-                                    <td class="white-space-120 text-right">{{number_format($order->product->price,0,'.','.')}}
+                                    <td class="white-space-140 text-center">{{$order->no}}</td>
+                                    <td class="white-space-20">{{$order->product->name}}</td>
+                                    <td class="white-space-130 text-right">{{number_format($order->product->price,0,'.','.')}}
                                         đ
                                     </td>
                                     <td class="text-center white-space-100">{{(int)$order->discount}}%</td>
                                     <td class="text-center white-space-100">{{number_format($order->quantity,0,'.','.')}}</td>
-                                    <td class="text-right">{{number_format($order->deposit_money ,0,'.','.')}} đ</td>
-                                    <td class="text-right">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}}
+                                    <td class="text-right white-space-140">{{number_format($order->deposit_money ,0,'.','.')}} đ</td>
+                                    <td class="text-right white-space-140">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}}
                                         đ
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-150">
                                         @if($order->status == 1)
                                             <span class="text-success font-medium"> Đã hoàn thành</span>
                                         @elseif($order->status == 3)
@@ -289,11 +289,11 @@
                                             <span class="text-danger font-medium">Từ chối</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-center white-space-100">
+                                    <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-80">
                                         <a href="javascript:void(0)" data-toggle="modal"
                                            data-target=".bd-example-modal-lg" data-id="{{$order->id}}"
-                                           class="btn btn-link more-details" style="text-decoration:underline">Chi
+                                           class="btn btn-link more-details p-0" style="text-decoration:underline">Chi
                                             tiết</a>
                                     </td>
                                 </tr>

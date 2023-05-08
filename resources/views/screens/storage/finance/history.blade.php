@@ -64,7 +64,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class=" text-center white-space-300">Nội dung</th>
+                                    <th >Nội dung</th>
                                     <th class="white-space-150 text-center">Ngày tạo yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'created_at')
@@ -84,7 +84,7 @@
                                 @if(count($histories) > 0)
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td class="text-center">{{$history->code}}</td>
+                                            <td class="text-center white-space-140">{{$history->code}}</td>
 
                                             @if($history->status == 0)
                                                 <td class="text-warning font-medium text-center">
@@ -99,15 +99,15 @@
                                                     Thất bại
                                                 </td>
                                             @endif
-                                            <td class="text-right ">
+                                            <td class="text-right white-space-130">
                                                 {{number_format($history->amount,0,'.','.')}} đ
                                             </td>
-                                            <td class="white-space-300">
+                                            <td class="white-space-400">
                                                 Chuyển khoản ra ngoài
                                             </td>
 
 
-                                            <td class="text-center">
+                                            <td class="text-center white-space-130">
                                                 {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y')}}
                                             </td>
                                         </tr>

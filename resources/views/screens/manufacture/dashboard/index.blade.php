@@ -224,17 +224,17 @@
                             <table id="example" class="table table-striped table-bordered second"
                                    style="width:100%">
                                 <thead>
-                                <th class="white-space-100">
+                                <th class="white-space-130">
                                   
                                         Mã sản phẩm
                                     
                                 </th>
-                                <th class="white-space-200 text-center">
+                                <th >
                                     
                                         Tên sản phẩm
                                    
                                 </th>
-                                <th class="white-space-100">
+                                <th class="white-space-130">
                                     
                                         Ngành hàng
                                         <span style="float: right;cursor:pointer">
@@ -251,7 +251,7 @@
                                         </span>
                                  
                                 </th>
-                                <th class="white-space-80">
+                                <th class="white-space-100">
 
                                     
                                         Giá bán
@@ -268,9 +268,7 @@
                                         </span>
                                    
                                 </th>
-                                <th class="white-space-150">
-
-                                    
+                                <th class="white-space-150">        
                                         V-Store niêm yết
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'vstore_name')
@@ -285,10 +283,12 @@
                                         </span>
                                     
                                 </th>
-                                <th class="white-space-180">
+                                <th class="white-space-130">
 
-                                    
-                                        Chiết khấu cho V-Store
+                                <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                        Chiết khấu cho <br> V-Store
+                                        </span>
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'discount')
                                                 @if($type == 'desc')
@@ -300,7 +300,7 @@
                                                 <i class="fas fa-sort sort" data-sort="discount"></i>
                                             @endif
                                         </span>
-                                   
+                                        </div>
                                 </th>
                                 <th class="white-space-120">
                                     
@@ -320,10 +320,11 @@
                                         </span>
                                   
                                 </th>
-                                <th class="white-space-150">
-
-                                    
-                                        Số lượng đã bán
+                                <th class="white-space-130">
+                                <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                        Số lượng <br> đã bán
+                                        </span>
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'amount_product_sold')
                                                 @if($type == 'desc')
@@ -337,12 +338,14 @@
                                                 <i class="fas fa-sort sort" data-sort="amount_product_sold"></i>
                                             @endif
                                         </span>
-                                  
+                                    </div>
                                 </th>
-                                <th class="white-space-160">
-
+                                <th class="white-space-130">
+                                <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
                                     
-                                        Số lượng trong kho
+                                        Số lượng <br> trong kho
+                                        </span>
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -354,25 +357,25 @@
                                                 <i class="fas fa-sort sort" data-sort="amount"></i>
                                             @endif
                                         </span>
-                                   
+                                    </div>
                                 </th>
-                                <th class="white-space-100"></th>
+                                <th class="white-space-80"></th>
                                 </thead>
                                 <tbody>
                                 @if(count($data) > 0)
                                     @foreach($data as $product)
                                         <tr>
-                                            <td class="text-center">{{$product->publish_id}}</td>
+                                            <td class="text-center white-space-140">{{$product->publish_id}}</td>
                                             <td class="white-space-200">{{$product->name}}</td>
-                                            <td class="text-center">{{$product->cate_name}}</td>
-                                            <td class="text-right">{{number_format($product->price,0,'.','.')}} đ</td>
-                                            <td class="text-center">{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
-                                            <td class="text-center">{{$product->discount != null ? $product->discount."%" : 'Chưa niêm yết'}}</td>
-                                            <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
-                                            <td class="text-center">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
-                                            <td class="text-center">{{number_format($product->amount,0,'.','.')}}</td>
-                                            <td class="white-space-100 text-center">
-                                                <a href="javascript:void(0)" class="btn btn-link"
+                                            <td class="text-center white-space-150">{{$product->cate_name}}</td>
+                                            <td class="text-right white-space-140">{{number_format($product->price,0,'.','.')}} đ</td>
+                                            <td class="text-center white-space-150">{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
+                                            <td class="text-center white-space-100">{{$product->discount != null ? $product->discount."%" : 'Chưa niêm yết'}}</td>
+                                            <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
+                                            <td class="text-center white-space-80">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
+                                            <td class="text-center white-space-100">{{number_format($product->amount,0,'.','.')}}</td>
+                                            <td class="white-space-80 text-center">
+                                                <a href="javascript:void(0)" class="btn btn-link p-0"
                                                    style="text-decoration:underline"
                                                    onclick="showDetail({{$product->id}},'{{$product->name}}')">Chi
                                                     tiết
