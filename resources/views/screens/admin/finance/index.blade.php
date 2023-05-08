@@ -102,7 +102,9 @@
                                     <tr class="line-clamp3">
                                         <td class="white-space-150 text-center">{{$his->code}}</td>
                                         <td class="white-space-200 text-center">{{$his->account_code}}</td>
-                                        <td class="text-right font-medium">{{$his->amount}} đ</td>
+                                        <td class="text-right font-medium">
+                                            {{number_format($his->amount,0,'.','.')}} đ
+                                        </td>
                                         <td>{{$his->account_number}}</td>
                                         <td style="text-transform: uppercase;">{{$his->name}}</td>
                                         <td>{{$his->bank->name}}</td>
