@@ -364,7 +364,10 @@ class ProductController extends Controller
 
         try {
 
-            $order = Order::where('id', $request->id)->orWhere('no', $request->id)->first();
+            $order = Order::where('id', $request->id)->first();
+            if (!$order) {
+                $order = Order::where('no', $request->id)->first();
+            }
 
             if (!$order) {
                 return response()->json([
