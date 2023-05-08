@@ -313,7 +313,7 @@ onlyNumberVer1.forEach(item => {
 
             // Nếu dữ liệu paste vào là số, thì set giá trị cho input
 
-            e.target.value += pastedData;
+            e.target.value = pastedData;
         });
     }
 })
@@ -343,7 +343,7 @@ if(numberPercent){
 
         // Nếu dữ liệu paste vào là số, thì set giá trị cho input
 
-        e.target.value += pastedData;
+        e.target.value = pastedData;
     });
 }
 
@@ -379,7 +379,7 @@ document.querySelectorAll('.only-text').forEach(item => {
 
         // Nếu dữ liệu paste vào là chữ, thì set giá trị cho input
 
-        e.target.value += pastedData;
+        e.target.value = pastedData;
     });
 })
 
