@@ -128,7 +128,7 @@
                                     <td class="text-center">{{\Carbon\Carbon::parse($category->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center">{{number_format($category->count_product,0,'.','.')}}</td>
                                     <td class="white-space-120 text-center">
-                                        <a href="javascript:void(0)" onclick="edit({{$category->id}})" class="btn btn-primary">Cập
+                                        <a href="javascript:void(0)" onclick="edit({{$category->id}})" class="btn text-primary font-medium " style="text-decoration:underline;">Cập
                                             nhật</a>
                                     </td>
                                 </tr>
