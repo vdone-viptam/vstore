@@ -49,7 +49,7 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th class="white-space-120 text-center">Mã giao dịch</th>
+                                    <th class="white-space-130 text-center">Mã giao dịch</th>
                                     <th class="white-space-100 text-center">Trạng thái</th>
                                     <th class="white-space-120 text-center">Số tiền
                                         <span style="float: right;cursor: pointer">
@@ -77,7 +77,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-200 text-center">Tên chủ tài khoản
+                                    <th class="white-space-150 text-center">Tên chủ tài khoản
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'name')
                                                 @if($type == 'desc')
@@ -90,7 +90,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-120 text-center">Ngân hàng
+                                    <th class="white-space-150 text-center">Ngân hàng
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'bank_name')
                                                 @if($type == 'desc')
@@ -123,31 +123,31 @@
                                 @if(count($histories) > 0)
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td class="text-center">{{$history->code}}</td>
+                                            <td class="text-center white-space-140">{{$history->code}}</td>
 
                                             @if($history->status == 0)
-                                                <td class="text-warning font-medium text-center">
+                                                <td class="text-warning font-medium text-center white-space-130">
                                                     Đang chờ duyệt
                                                 </td>
                                             @elseif($history->status == 1)
-                                                <td class="text-success font-medium text-center">
+                                                <td class="text-success font-medium text-center white-space-130">
                                                     Thành công
                                                 </td>
                                             @else
-                                                <td class="text-danger font-medium text-center">
+                                                <td class="text-danger font-medium text-center white-space-130">
                                                     Thất bại
                                                 </td>
                                             @endif
-                                            <td class=" text-right">
+                                            <td class=" text-right white-space-130">
                                                 {{number_format($history->amount,0,'.','.')}} đ
                                             </td>
-                                            <td>
+                                            <td class="white-space-150">
                                                 {{ $history->account_number }}
                                             </td>
-                                            <td class="white-space-200 text-center">
-                                                {{ $history->name }}
+                                            <td class="white-space-150 text-center">
+                                                {{ $history->name }}bank_name
                                             </td>
-                                            <td>
+                                            <td class="white-space-200">
                                                 {{ $history->bank_name }}
                                             </td>
                                             <td class="white-space-200">
@@ -155,7 +155,7 @@
                                             </td>
 
 
-                                            <td class="text-center">
+                                            <td class="text-center white-space-130">
                                                 {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                             </td>
                                         </tr>

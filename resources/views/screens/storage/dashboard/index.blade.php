@@ -103,8 +103,8 @@
                         <tr>
                             <th class="text-center white-space-180">Mã đơn hàng/Mã yêu cầu</th>
                             <th class="white-space-130 text-center">Mã sản phẩm</th>
-                            <th class="white-space-250">
-
+                            <th >
+                            
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -132,7 +132,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-90 text-center">Số lượng
+                            <th class="white-space-100 text-center">Số lượng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'quantity')
                                         @if($type == 'desc')
@@ -172,28 +172,28 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="text-center white-space-180">Xác nhận/từ chối</th>
+                            <th class="text-center white-space-150">Xác nhận/từ chối</th>
                         </tr>
                         </thead>
                         <tbody>
                             @if(count($products) > 0)
                         @foreach($products as $product)
                             <tr>
-                                <td class="text-center"> {{$product->code}}</td>
-                                <td class="text-center">{{$product->publish_id}}</td>
+                                <td class="text-center white-space-130"> {{$product->code}}</td>
+                                <td class="text-center white-space-150">{{$product->publish_id}}</td>
                                 <td title="{{$product->product_name}}" class="white-space-250">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
-                                <td class="text-center">{{$product->ncc_name}}</td>
-                                <td class="text-center">{{$product->quantity}}</td>
-                                <td class="text-center">0</td>
-                                <td class="text-center">{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                <td class="text-center ">
+                                <td class="text-center white-space-150">{{$product->ncc_name}}</td>
+                                <td class="text-center white-space-80">{{$product->quantity}}</td>
+                                <td class="text-center white-space-80">0</td>
+                                <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
+                                <td class="text-center white-space-160">
                                     @if($product->type == 1)
                                         <span class="text-warning">Yêu cầu nhập kho</span>
                                     @else
                                         <span style="color:#005d1d;">Đơn hàng mới</span>
                                     @endif
                                 </td>
-                                <td class="text-center">
+                                <td class="text-center white-space-150">
                                     @if($product->type == 1)
                                         <div style="display:flex; justify-content:center; gap:10px"><a
                                                 href="javascript:void(0)" onclick="upDateStatus({{$product->id}},5,1)"

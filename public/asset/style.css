@@ -461,7 +461,6 @@ table thead th{
 
 .white-space-50{
     white-space: unset !important;
-    width: 50px !important;
     min-width: 50px !important;
 
 }
@@ -469,102 +468,86 @@ table thead th{
 
 
     white-space: unset !important;
-    width: 80px !important;
     min-width: 80px !important;
 }
 .white-space-90{
 
   
     white-space: unset !important;
-    width: 90px !important;
     min-width: 90px !important;
 }
 .white-space-100{
  
     white-space: unset !important;
-    width: 100px !important;
+
     min-width: 100px !important;
 }
 .white-space-110{
 
     white-space: unset !important;
-    width: 110px !important;
     min-width: 110px !important;
 }
 .white-space-120{
 
     white-space: unset !important;
-    width: 120px !important;
     min-width: 120px !important;
 }
 .white-space-130{
 
     white-space: unset !important;
-    width: 130px !important;
     min-width: 130px !important;
 }
 .white-space-140{
 
     white-space: unset !important;
-    width: 140px !important;
     min-width: 140px !important;
 }
 .white-space-150{
 
     white-space: unset !important;
-    width: 150px !important;
     min-width: 150px !important;
 }
 .white-space-180{
     white-space: unset !important;
-    width: 180px !important;
     min-width: 180px !important;
 }
 .white-space-200{
     white-space: unset !important;
-    width: 200px !important;
     min-width: 200px !important;
 }
 .white-space-250{
 
     white-space: unset !important;
-    width: 250px !important;
     min-width: 250px !important;
 }
 .white-space-300{
   
     white-space: unset !important;
-    width: 300px !important;
     min-width: 300px !important;
 }
 .white-space-350{
 
     white-space: unset !important;
-    width: 350px !important;
     min-width: 350px !important;
 }
 .white-space-400{
 
     white-space: unset !important;
-    width: 400px !important;
     min-width: 400px !important;
 }
 .white-space-450{
 
     white-space: unset !important;
-    width: 450px !important;
     min-width: 450px !important;
 }
 .white-space-500{
   
     white-space: unset !important;
-    width: 500px !important;
     min-width: 500px !important;
 }
 .white-space-600{
   
     white-space: unset !important;
-    width: 600px !important;
     min-width: 600px !important;
 }
 

@@ -212,8 +212,13 @@
                             style="width:100%">
                             <thead>
                                 <tr>
+<<<<<<< HEAD
+                                    <th >
+                                      
+=======
                                     <th class="white-space-200 text-center">
 
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             Tên
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.name')
@@ -228,7 +233,7 @@
                                             </span>
 
                                     </th>
-                                    <th class="white-space-200 text-center">
+                                    <th >
 
 
                                             Email
@@ -245,8 +250,13 @@
                                             </span>
 
                                     </th>
+<<<<<<< HEAD
+                                    <th class="white-space-120">
+                                     
+=======
                                     <th class="white-space-150">
 
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             Số điện thoại
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'phone_number')
@@ -261,8 +271,13 @@
                                             </span>
 
                                     </th>
+<<<<<<< HEAD
+                                    <th >
+                                    
+=======
                                     <th class="white-space-200 text-center">
 
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             Tên công ty
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'company_name')
@@ -277,8 +292,13 @@
                                             </span>
 
                                     </th>
+<<<<<<< HEAD
+                                    <th class="white-space-130">
+                                        
+=======
                                     <th class="white-space-150">
 
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             Mã số thuế
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'tax_code')
@@ -293,9 +313,17 @@
                                             </span>
 
                                     </th>
+<<<<<<< HEAD
+                                    <th class="white-space-130 text-center">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                            Id P-Done <br> người đại diện
+                                </span>
+=======
                                     <th class="white-space-200 text-center">
 
                                             Id P-Done người đại diện
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'id_vdone')
                                                     @if($type == 'desc')
@@ -307,11 +335,21 @@
                                                     <i class="fas fa-sort sort" data-sort="id_vdone"></i>
                                                 @endif
                                             </span>
+<<<<<<< HEAD
+                                </div>
+                                    </th>
+                                    <th class="white-space-120">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                            Phân loại <br> tài khoản
+                                </span>
+=======
 
                                     </th>
                                     <th class="white-space-200">
 
                                             Phân loại tài khoản
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.role_id')
                                                     @if($type == 'desc')
@@ -323,11 +361,21 @@
                                                     <i class="fas fa-sort sort" data-sort="users.role_id"></i>
                                                 @endif
                                             </span>
+<<<<<<< HEAD
+                                </div>
+                                    </th>
+                                    <th class="white-space-120">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-80">
+                                            Thời gian <br> đăng ký
+                                </span>
+=======
 
                                     </th>
                                     <th class="white-space-200">
 
                                             Thời gian đăng ký
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.created_at')
                                                     @if($type == 'desc')
@@ -339,11 +387,21 @@
                                                     <i class="fas fa-sort sort" data-sort="users.created_at"></i>
                                                 @endif
                                             </span>
+<<<<<<< HEAD
+                                </div>
+                                    </th>
+                                    <th class="white-space-120">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-80">
+                                            Thời gian <br> xét duyệt
+                                </span>
+=======
 
                                     </th>
                                     <th class="white-space-200">
 
                                             Thời gian xét duyệt
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'confirm_date')
                                                     @if($type == 'desc')
@@ -355,11 +413,21 @@
                                                     <i class="fas fa-sort sort" data-sort="confirm_date"></i>
                                                 @endif
                                             </span>
+<<<<<<< HEAD
+                                </div>
+                                    </th>
+                                    <th class="white-space-90">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-80">
+                                            Mã người <br> giới  thiệu
+                                </span>
+=======
 
                                     </th>
                                     <th class="white-space-200">
 
                                             Mã người giới thiệu
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.referral_code')
                                                     @if($type == 'desc')
@@ -371,15 +439,22 @@
                                                     <i class="fas fa-sort sort" data-sort="users.referral_code"></i>
                                                 @endif
                                             </span>
+<<<<<<< HEAD
+                                </div>
+                                    </th>
+                                    <th class="white-space-100">
+                                 
+=======
 
                                     </th>
                                     <th class="white-space-150">
 
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             Trạng thái
 
                                     </th>
                                     <th class="white-space-100">Thao tác</th>
-                                    <th class="white-space-100"></th>
+                                    <th class="white-space-80"></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -387,6 +462,15 @@
                         @if(count($users) > 0)
                             @foreach($users as $user)
                                 <tr>
+<<<<<<< HEAD
+                                    <td class="white-space-150">{{$user->name}}</td>
+                                    <td class="white-space-100">{{ Str::limit($user->email, 15) }}</td>
+                                    <td class="text-center white-space-110">{{$user->phone_number}}</td>
+                                    <td class="white-space-100">{{$user->company_name}}</td>
+                                    <td class="text-center white-space-130">{{$user->tax_code}}</td>
+                                    <td class="text-center white-space-140">{{$user->id_vdone}}</td>
+                                    <td class="text-center white-space-110">
+=======
                                     <td class="white-space-200">{{$user->name}}</td>
                                     <td class="white-space-200">{{ $user->email}}</td>
                                     <td class="text-center white-space-150">{{$user->phone_number}}</td>
@@ -394,6 +478,7 @@
                                     <td class="text-center">{{$user->tax_code}}</td>
                                     <td class="text-center">{{$user->id_vdone}}</td>
                                     <td class="text-center">
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                         @if($user->role_id == 2)
                                             <span class="text-primary font-medium">Nhà cung cấp</span>
                                         @elseif($user->role_id == 1)
@@ -404,28 +489,28 @@
                                             <span class="text-success font-medium">V-Store</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-center">{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-130">{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
+                                    <td class="text-center white-space-80">
                                         {{strlen($user->referral_code) > 0 ? $user->referral_code : ''}}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-110">
                                         @if(!empty($user->confirm_date))
-                                            <div class=" text-success font-medium px-4 py-2" style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã duyệt</div>
+                                            <div class=" text-success font-medium " style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã duyệt</div>
                                         @else
-                                            <div class=" text-warning font-medium px-4 py-2" style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i> Chờ duyệt</div>
+                                            <div class=" text-warning font-medium " style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i> Chờ duyệt</div>
                                         @endif
                                     </td>
-                                    <td class="text-center white-space-100">
+                                    <td class="text-center white-space-80">
                                         @if(!$user->confirm_date)
                                             <a data-abc="{{$loop->iteration - 1}}"
                                             href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
-                                            class="duyet btn text-primary font-medium px-2" style="text-decoration:underline;"
-                                            href="#">Duyệt
+                                            class="duyet btn text-primary font-medium px-2 py-0" style="text-decoration:underline;"
+                                            href="javascript:void(0)">Duyệt
                                             </a>
                                         @endif
                                     </td>
-                                    <td class="text-center white-space-100">
+                                    <td class="text-center white-space-80">
                                             <a href="javascript:void(0)" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
                                                 onclick="showDetail({{$user->id}})"
                                             class="more-details text-primary" style="text-decoration:underline">

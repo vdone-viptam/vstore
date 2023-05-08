@@ -72,7 +72,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="text-center white-space-300">
+                                    <th class="text-center ">
                                         Nội dung
                                     </th>
                                     <th class="text-center white-space-120">
@@ -96,15 +96,15 @@
                                 @if(count($histories) > 0)
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td class="text-center">{{$histories->code ?? 0012020233}}</td>
-                                            <td class="text-center">
+                                            <td class="text-center white-space-120">{{$histories->code ?? 0012020233}}</td>
+                                            <td class="text-center white-space-140">
                                                 @if($history->status == 0)
                                                     <p class="text-danger font-medium">Thất bại</p>
                                                 @else
                                                     <p class="text-success font-medium">Chưa xử lý</p>
                                                 @endif
                                             </td>
-                                            <td class=" text-right">
+                                            <td class=" text-right white-space-130">
                                                 @if($history->type == 1)
                                                     <p class="text-success">
                                                         +{{number_format($history->money_history,0,'.','.')}} đ
@@ -114,8 +114,8 @@
                                                         -{{number_format($history->money_history,0,'.','.')}} đ</p>
                                                 @endif
                                             </td>
-                                            <th class="white-space-300">{{$history->title}}</th>
-                                            <td class="text-center">
+                                            <th class="text-left white-space-400">{{$history->title}}</th>
+                                            <td class="text-center white-space-130">
                                                 {{\Carbon\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                             </td>
                                         </tr>

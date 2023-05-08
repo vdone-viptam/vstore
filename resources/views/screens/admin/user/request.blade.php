@@ -77,9 +77,9 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-150 text-center">Mã yêu cầu
+                            <th class="white-space-130 text-center">Mã yêu cầu
                             </th>
-                            <th class="white-space-150 text-center">Vai trò
+                            <th class="white-space-120 text-center">Vai trò
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'role_id')
                                         @if($type == 'desc')
@@ -92,16 +92,22 @@
                                     @endif
                           </span>
                             </th>
-                            <th class="white-space-200">
+                            <th >
                                 Tên
                             </th>
-                            <th class="white-space-200">Email
+                            <th >Email
                             </th>
-                            <th class="white-space-200 text-center">Id P-Done người đại diện</th>
-                            <th class="white-space-200 text-center">Tên công ty</th>
-                            <th class="white-space-200 text-center">Mã số thuế cũ</th>
-                            <th class="white-space-200 text-center">Mã số thuế mới</th>
-                            <th class="white-space-200 text-center">Thao tác / Trạng thái</th>
+                            <th class="white-space-130 text-center">
+                            <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                Id P-Done <br> người đại diện
+</span>
+</div>
+                            </th>
+                            <th class="white-space-130 text-center">Tên công ty</th>
+                            <th class="white-space-130 text-center">Mã số thuế cũ</th>
+                            <th class="white-space-130 text-center">Mã số thuế mới</th>
+                            <th class="white-space-180 text-center">Thao tác / Trạng thái</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -109,8 +115,8 @@
                         @if(count($requests) > 0)
                             @foreach($requests as $request)
                                 <tr>
-                                    <td class="text-center">{{$request->code ?? 'Chưa có mã'}}</td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-140">{{$request->code ?? 'Chưa có mã'}}</td>
+                                    <td class="text-center white-space-110">
                                         @if($request->role_id == 2)
                                             <span class="text-primary font-medium">Nhà cung cấp</span>
                                         @elseif($request->role_id == 3)
@@ -120,18 +126,18 @@
                                         @endif
                                     </td>
                                     <td class="white-space-200">{{$request->name}}</td>
-                                    <td class="white-space-200">{{$request->email}}</td>
-                                    <td class="white-space-200 text-center">{{$request->id_vdone}}</td>
-                                    <td class="white-space-200">{{$request->company_name}}</td>
-                                    <td class="white-space-150 text-center">{{$request->old_tax}}</td>
-                                    <td class="white-space-150 text-center">{{$request->tax_code}}</td>
-                                    <td class="text-center white-space-200">
+                                    <td class="white-space-150">{{$request->email}}</td>
+                                    <td class="white-space-130 text-center">{{$request->id_vdone}}</td>
+                                    <td class="white-space-150 text-center">{{$request->company_name}}</td>
+                                    <td class="white-space-140 text-center">{{$request->old_tax}}</td>
+                                    <td class="white-space-140 text-center">{{$request->tax_code}}</td>
+                                    <td class="text-center white-space-160">
                                         @if($request->status == 0)
                                             <a href="javascript:void(0)" onclick="upDateStatus({{$request->id}},1)"
-                                               class="btn text-primary font-medium px-2" style="text-decoration:underline;">Đồng
+                                               class="btn text-primary font-medium px-2 py-0" style="text-decoration:underline;">Đồng
                                                 ý</a>
                                             <a href="javascript:void(0)" onclick="upDateStatus({{$request->id}},2)"
-                                               class="btn text-danger font-medium px-2" style="text-decoration:underline;">Từ chối</a>
+                                               class="btn text-danger font-medium px-2 py-0" style="text-decoration:underline;">Từ chối</a>
                                         @elseif($request->status == 2)
                                             <p class="text-danger"><i class="fas fa-times mr-2"></i>Từ chối</p>
 

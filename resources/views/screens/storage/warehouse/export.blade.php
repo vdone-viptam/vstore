@@ -113,11 +113,10 @@
                            style="width:100%">
                         <thead>
                         <tr>
-                            <th class="white-space-120 text-center">Mã xuất hàng</th>
+                            <th class="white-space-130 text-center">Mã xuất hàng</th>
                             <th class="white-space-130 text-center">Mã sản phẩm</th>
-                            <th class="white-space-250">
-                                <div class=" d-flex justify-content-between align-items-center"
-                                     style="gap:6px">
+                            <th >
+                               
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -130,7 +129,7 @@
                                             <i class="fas fa-sort sort" data-sort="product_name"></i>
                                         @endif
                                 </span>
-                                </div>
+                                
                             </th>
                             <th class="white-space-130 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
@@ -171,7 +170,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-150 text-center">Thời gian yêu cầu
+                            <th class="white-space-180 text-center">
+                                Thời gian tạo yêu cầu
                                 <span style="float: right;cursor: pointer">
                                 @if($field == 'created_at')
                                         @if($type == 'desc')
@@ -184,8 +184,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-180">
-                                <div class="d-flex justify-content-center align-items-center" style="gap:6px;">
+                            <th class="white-space-160">
+                               
                                 Thao tác/Trạng thái
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'status')
@@ -198,24 +198,24 @@
                                         <i class="fas fa-sort sort" data-sort="status"></i>
                                     @endif
                                 </span>
-                                </div>
-
+                            
+                     
                             </th>
                             <th class="text-center white-space-120">Xuất hóa đơn</th>
-                            <th class="white-space-100"></th>
+                            <th class="white-space-80"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($requests) > 0)
                             @foreach($requests as $request)
                                 <tr>
-                                    <td class="text-center ">{{$request->code}}</td>
-                                    <td class="text-center ">{{$request->publish_id}}</td>
-                                    <td title="{{$request->product_name}}" class="white-space-250">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
-                                    <td class="text-center">{{$request->ncc_name}}</td>
-                                    <td class="text-center">{{$request->quantity}}</td>
+                                    <td class="text-center white-space-140">{{$request->code}}</td>
+                                    <td class="text-center  white-space-140">{{$request->publish_id}}</td>
+                                    <td title="{{$request->product_name}}" class="white-space-300">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
+                                    <td class="text-center white-space-150">{{$request->ncc_name}}</td>
+                                    <td class="text-center white-space-100">{{$request->quantity}}</td>
 
-                                    <td class="text-center">
+                                    <td class="text-center white-space-130">
                                         @if($request->status == 1 )
                                             {{\Carbon\Carbon::parse($request->updated_at)->format('d/m/Y H:i')}}
                                         @else
@@ -224,9 +224,9 @@
 
 
                                     </td>
-                                    <td class="text-center"> {{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-130"> {{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}</td>
 
-                                    <td class="status{{$request->id}} text-center">
+                                    <td class="status{{$request->id}} text-center white-space-150">
                                         @if($request->status == 0)
                                             <a href="javascript:void(0)"
                                                onclick="upDateStatus({{$request->id}}, 1)"
@@ -235,7 +235,7 @@
                                             </a>
                                         @else
                                             <div
-                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
+                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5  whitespace-nowrap text-success"
                                                 style="gap:14px;">
                                                 <svg width="14" height="9" viewBox="0 0 14 9" fill="transparent"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -247,7 +247,7 @@
 
                                         @endif
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-150">
                                         <div class="">
                                             <a href="javascript:void(0)" onclick="showBill({{$request->order_number}})"
                                                class="bg-danger  text-white font-medium py-2 px-2 rounded ">
@@ -255,9 +255,9 @@
                                             </a>
                                         </div>
                                     </td>
-                                    <td class="white-space-100 text-center"><a href="javascript:void(0)"
+                                    <td class="white-space-80 text-center"><a href="javascript:void(0)"
                                                                    onclick="showDetail({{$request->id}})"
-                                                                   class="btn btn-link px-2"
+                                                                   class="btn btn-link px-2 py-0"
                                                                    style="text-decoration:underline">Chi
                                             tiết</a></td>
                                 </tr>

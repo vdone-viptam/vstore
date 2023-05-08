@@ -69,7 +69,7 @@
                                 <thead>
                                 <tr>
                                     <th class="white-space-120 text-center">Mã đối tác</th>
-                                    <th class="white-space-300 text-center">Tên đối tác
+                                    <th class=" text-center">Tên đối tác
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'name_partner')
                                                 @if($type == 'desc')
@@ -82,7 +82,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="text-center white-space-150">Tổng đơn hàng đã giao
+                                    <th class="text-center white-space-160">Tổng đơn hàng đã giao
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'count_product')
                                                 @if($type == 'desc')
@@ -95,7 +95,9 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="text-center white-space-200">Số đơn hàng không hoàn thành
+                                    <th class="text-center white-space-250">
+                                        
+                                    Số đơn hàng không hoàn thành
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'destroy_order')
                                                 @if($type == 'desc')
@@ -108,18 +110,18 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-100"></th>
+                                    <th class="white-space-80"></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @if(count($deliveryPartners) > 0)
                                     @foreach($deliveryPartners as $deliveryPartners)
                                         <tr>
-                                            <td class="text-center">{{$deliveryPartners->code_partner}}</td>
-                                            <td class="text-center white-space-300">{{$deliveryPartners->name_partner}}</td>
-                                            <td class="text-center">{{$deliveryPartners->count_product}}</td>
-                                            <td class="text-center">{{$deliveryPartners->destroy_order}}</td>
-                                            <td class="text-center white-space-100"><a class="text-primary" href="javascript:void(0)" style="text-decoration:underline;"
+                                            <td class="text-center white-space-140">{{$deliveryPartners->code_partner}}</td>
+                                            <td class="text-center white-space-400">{{$deliveryPartners->name_partner}}</td>
+                                            <td class="text-center white-space-100">{{$deliveryPartners->count_product}}</td>
+                                            <td class="text-center white-space-100">{{$deliveryPartners->destroy_order}}</td>
+                                            <td class="text-center white-space-80"><a class="text-primary" href="javascript:void(0)" style="text-decoration:underline;"
                                                 onclick="showDetail({{$deliveryPartners->delivery_partner_id}})">Chi
                                                     tiết</a></td>
                                         </tr>

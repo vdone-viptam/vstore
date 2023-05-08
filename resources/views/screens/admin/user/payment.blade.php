@@ -78,23 +78,28 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-150 text-center">Mã hóa đơn
+                            <th class="white-space-130 text-center">Mã hóa đơn
                             </th>
-                            <th class="white-space-150 text-center">Phân loại
+                            <th class="white-space-120 text-center">Phân loại
 
                             </th>
-                            <th class="white-space-200">
+                            <th >
                                 Tên
                             </th>
-                            <th class="white-space-200">Email
+                            <th >Email
                             </th>
-                            <th class="white-space-150 text-center">Số điện thoại</th>
-                            <th class="white-space-150">Tên công ty</th>
-                            <th class="white-space-200 text-center">Phương thức thanh toán</th>
+                            <th class="white-space-100 text-center">Số điện thoại</th>
+                            <th class="white-space-130">Tên công ty</th>
+                            <th class="white-space-130 text-center">
+                            <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">    
+                            Phương thức <br> thanh toán
+</span>
+                        </th>
                             <th class="white-space-100 text-center">Số tiền</th>
                             <th class="white-space-120 text-center">Thời gian</th>
-                            <th class="white-space-150 text-center">Trạng thái</th>
-                            <th class="white-space-100 text-center"></th>
+                            <th class="white-space-130 text-center">Trạng thái</th>
+                            <th class="white-space-80 text-center"></th>
                         </tr>
                         </thead>
                         <tbody>
@@ -102,8 +107,8 @@
                         @if(count($histories) > 0)
                             @foreach($histories as $history)
                                 <tr>
-                                    <td class="text-center">{{$history->no ?? 'Chưa có mã'}}</td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-140">{{$history->no ?? 'Chưa có mã'}}</td>
+                                    <td class="text-center white-space-120">
                                         @if($history->type == 'NCC')
                                             <span class="text-primary font-medium">Nhà cung cấp</span>
                                         @elseif($history->type == 'KHO')
@@ -113,20 +118,20 @@
                                         @endif
                                     </td>
                                     <td class="white-space-200">{{$history->name}}</td>
-                                    <td class="white-space-200">{{$history->email}}</td>
-                                    <td class="text-center">{{$history->phone_number}}</td>
-                                    <td  class="white-space-200">{{$history->company_name}}</td>
-                                    <td  class="text-center"><span class="textx-success">Thanh toán trước</span></td>
-                                    <td class="text-right white-space-150">{{number_format($history->total,0,'.','.')}} đ</td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-center">
+                                    <td class="white-space-150">{{$history->email}}</td>
+                                    <td class="text-center white-space-110">{{$history->phone_number}}</td>
+                                    <td  class="white-space-150 text-center">{{$history->company_name}}</td>
+                                    <td  class="text-center white-space-150"><span class="text-success">Thanh toán trước</span></td>
+                                    <td class="text-right white-space-130">{{number_format($history->total,0,'.','.')}} đ</td>
+                                    <td class="text-center white-space-130">{{\Carbon\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-120">
                                         @if($history->status == 3 && $history->payment_status == 1)
                                             <p class="text-success"><i class="fas fa-check mr-2"></i>Thành công</p>
                                         @else
                                             <p class="text-danger"><i class="fas fa-times mr-2"></i>Thất bại</p>
                                         @endif
                                     </td>
-                                    <td class="text-center white-space-100"><a href="javascript:void(0)" style="text-decoration:underline;" onclick="checkPayment({{$history->id}})" class="btn btn-link">Chi
+                                    <td class="text-center white-space-80"><a href="javascript:void(0)" style="text-decoration:underline;" onclick="checkPayment({{$history->id}})" class="btn btn-link px-2 py-0">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach

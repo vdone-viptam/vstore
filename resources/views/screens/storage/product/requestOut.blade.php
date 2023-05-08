@@ -96,10 +96,10 @@
                         <tr>
                             <th class="text-center white-space-120">Mã đơn hàng</th>
                             <th class="text-center white-space-130">Mã sản phẩm</th>
-                            <th class="white-space-250">
-
-                                Tên sản phẩm
-                                <span style="float: right;cursor: pointer">
+                            <th>
+                            
+                                    Tên sản phẩm
+                                    <span style="float: right;cursor: pointer">
                                     @if($field == 'name')
                                         @if($type == 'desc')
                                             <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
@@ -138,7 +138,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="text-center white-space-150">Thời gian đặt hàng
+                            <th class="text-center white-space-160">Thời gian đặt hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'created_at')
                                         @if($type == 'desc')
@@ -151,7 +151,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="text-center white-space-180">Xác nhận / Từ chối
+                            <th class="text-center white-space-160">Xác nhận / Từ chối
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'export_status')
                                         @if($type == 'desc')
@@ -164,32 +164,31 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-100"></th>
+                            <th class="white-space-80"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($order) > 0)
                             @foreach($order as $ord)
                                 <tr>
-                                    <td class="text-center ">{{$ord->no}}</td>
-                                    <td class="text-center ">{{$ord->publish_id}}</td>
-                                    <td title="{{$ord->name}}"
-                                        class="white-space-250">{{\Illuminate\Support\Str::limit($ord->name,50,'...')}}</td>
-                                    <td class="text-center">{{$ord->quantity}}</td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-140">{{$ord->no}}</td>
+                                    <td class="text-center white-space-140">{{$ord->publish_id}}</td>
+                                    <td title="{{$ord->name}}" class="white-space-350">{{\Illuminate\Support\Str::limit($ord->name,50,'...')}}</td>
+                                    <td class="text-center white-space-100">{{$ord->quantity}}</td>
+                                    <td class="text-center white-space-150" >
                                         @if($ord->method_payment == 'COD')
                                             <span class="text-danger font-medium">Chưa thanh toán</span>
                                         @else
                                             <span class="text-success font-medium">Đã thanh toán</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($ord->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="status{{$ord->id}} text-center">
+                                    <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($ord->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="status{{$ord->id}} text-center white-space-160" >
                                         @if($ord->export_status == 0)
                                             <div style="display:flex; justify-content:center; gap:10px"><a
                                                     href="javascript:void(0)" onclick="upDateStatus({{$ord->id}},1)"
                                                     style="text-decoration:underline"
-                                                    class="text-success font-medium ">
+                                                    class="text-success font-medium">
                                                     Đồng ý
                                                 </a>
                                                 <a href="javascript:void(0)" onclick="upDateStatus({{$ord->id}},3)"
@@ -199,7 +198,7 @@
                                                 </a></div>
                                         @elseif($ord->export_status != 3 && $ord->export_status != 5)
                                             <div
-                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
+                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5  whitespace-nowrap text-success"
                                                 style="gap:14px;">
                                                 <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -210,7 +209,7 @@
                                             </div>
                                         @elseif($ord->export_status == 5)
                                             <div
-                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5 p-2 whitespace-nowrap"
+                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5  whitespace-nowrap"
                                                 style="gap:14px;">
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -222,7 +221,7 @@
                                             </div>
                                         @else
                                             <div
-                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5 p-2 whitespace-nowrap"
+                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5  whitespace-nowrap"
                                                 style="gap:14px;">
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -235,7 +234,7 @@
 
                                         @endif
                                     </td>
-                                    <td class="white-space-100"><a href="javascript:void(0)" class="btn btn-link px-2"
+                                    <td class="white-space-80 text-center"><a href="javascript:void(0)" class="btn btn-link px-2 py-0"
                                                                    style="text-decoration:underline"
                                                                    onclick="showDetail({{$ord->id}})">Chi tiết</a>
                                     </td>
@@ -288,7 +287,7 @@
                     if (+status === 1) {
                         $('.status' + id).html(`
                        <div
-                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
+                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5  whitespace-nowrap text-success"
                                                 style="gap:14px;">
                                                 <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -301,7 +300,7 @@
                     } else {
                         $('.status' + id).html(`
                    <div
-                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5 p-2 whitespace-nowrap"
+                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5  whitespace-nowrap"
                                                 style="gap:14px;">
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -419,7 +418,7 @@
                                 if (+$('#inputGroupSelect01').val() === 1) {
                                     $('.status' + id).html(`
                        <div
-                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5 p-2 whitespace-nowrap text-success"
+                                                class="d-flex font-medium justify-content-center align-items-center  rounded-5  whitespace-nowrap text-success"
                                                 style="gap:14px;">
                                                 <svg width="14" height="9" viewBox="0 0 14 9" fill="white"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -432,7 +431,7 @@
                                 } else {
                                     $('.status' + id).html(`
                    <div
-                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5 p-2 whitespace-nowrap"
+                                                class="d-flex justify-content-center font-medium align-items-center gap-4 text-danger rounded-5  whitespace-nowrap"
                                                 style="gap:14px;">
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">

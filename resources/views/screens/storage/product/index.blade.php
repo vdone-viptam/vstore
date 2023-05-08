@@ -73,9 +73,9 @@
                         <thead>
                         <tr>
                             <th class="text-center white-space-120">Mã sản phẩm</th>
-                            <th class="text-center white-space-180">Mã SKU sản phẩm</th>
-                            <th class="white-space-250">
-                            <div class="d-flex align-items-center justify-content-between" style="gap:6px">
+                            <th class="text-center white-space-150">Mã SKU sản phẩm</th>
+                            <th >
+                         
                                 Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -88,7 +88,7 @@
                                         <i class="fas fa-sort sort" data-sort="product_name"></i>
                                     @endif
                                 </span>
-                            </div>
+                           
                             </th>
                             <th class="white-space-120 text-center">Danh mục
                                 <span style="float: right;cursor: pointer">
@@ -104,7 +104,7 @@
                                 </span>
                             </th>
 
-                            <th class="white-space-120 text-center">Nhà cung cấp
+                            <th class="white-space-130 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -117,7 +117,11 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-180 text-center">Số lượng hàng tồn kho
+                            <th class="white-space-130 text-center">
+                            <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                Số lượng hàng <br> tồn kho
+</span>
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'in_stock')
                                         @if($type == 'desc')
@@ -129,9 +133,14 @@
                                         <i class="fas fa-sort sort" data-sort="in_stock"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
 
-                            <th class="text-center white-space-180">Số lượng chờ xuất
+                            <th class="text-center white-space-100">
+                            <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">    
+                            Số lượng chờ <br> xuất
+</span>
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'pause_product')
                                         @if($type == 'desc')
@@ -143,22 +152,23 @@
                                         <i class="fas fa-sort sort" data-sort="pause_product"></i>
                                     @endif
                                 </span>
+</div>
                             </th>
-                            <th class="white-space-100"></th>
+                            <th class="white-space-80"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($products) > 0)
                             @foreach($products as $product)
                                 <tr>
-                                    <td class=" text-center">{{$product->publish_id}}</td>
-                                    <td class="text-center" >{{$product->sku_id}}</td>
-                                    <td title="{{$product->product_name}}" class="white-space-250">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
-                                    <td class="text-center">{{$product->cate_name}}</td>
-                                    <td class="text-center">{{$product->name}}</td>
-                                    <td class="text-center">{{$product->in_stock ?? 0}}</td>
-                                    <td class="text-center ">{{$product->pause_product}}</td>
-                                    <td class="white-space-100 text-center"><a href="javascript:void(0)" onclick="showDetail({{$product->product_id}})" class="btn btn-link px-2" style="text-decoration:underline;">Chi
+                                    <td class=" text-center white-space-140">{{$product->publish_id}}</td>
+                                    <td class="text-center white-space-130" >{{$product->sku_id}}</td>
+                                    <td title="{{$product->product_name}}" class="white-space-350" >{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
+                                    <td class="text-center white-space-150">{{$product->cate_name}}</td>
+                                    <td class="text-center white-space-150">{{$product->name}}</td>
+                                    <td class="text-center white-space-100">{{$product->in_stock ?? 0}}</td>
+                                    <td class="text-center white-space-100">{{$product->pause_product}}</td>
+                                    <td class="white-space-80 text-center"><a href="javascript:void(0)" onclick="showDetail({{$product->product_id}})" class="btn btn-link px-2 py-0" style="text-decoration:underline;">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach

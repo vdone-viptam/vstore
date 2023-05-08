@@ -50,7 +50,7 @@
                         <thead>
                         <tr>
                             <th class="white-space-100 text-center">Mã V-Shop</th>
-                            <th class="white-space-300 text-center">Tên V-Shop
+                            <th class="text-center">Tên V-Shop
 
                             </th>
                             <th class="white-space-200 text-center">Số sản phẩm tiếp thị
@@ -99,11 +99,11 @@
                             @foreach($vshop as $value)
                                 <tr>
 
-                                    <td class="text-center">{{$value->vshop_id}}</td>
-                                    <td class="td_name">{{$value->nick_name}}</td>
-                                    <td class="text-center">{{number_format($value->amount_product,0,'.','.')}}</td>
-                                    <td class="text-center">{{number_format($value->count_order,0,'.','.') }}</td>
-                                    <td class="text-right">{{number_format($value->doanh_thu,0,'.','.')}} đ</td>
+                                    <td class="text-center white-space-130">{{$value->vshop_id}}</td>
+                                    <td class="td_name white-space-400">{{$value->nick_name}}</td>
+                                    <td class="text-center white-space-200">{{number_format($value->amount_product,0,'.','.')}}</td>
+                                    <td class="text-center white-space-300">{{number_format($value->count_order,0,'.','.') }}</td>
+                                    <td class="text-right white-space-130">{{number_format($value->doanh_thu,0,'.','.')}} đ</td>
                                 </tr>
                             @endforeach
                         @else

@@ -50,7 +50,7 @@
                             <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th class="white-space-150 text-center">Mã yêu cầu
+                                    <th class="white-space-130 text-center">Mã yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'deposits.code')
                                                 @if($type == 'desc')
@@ -63,7 +63,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-200 text-center">Tài khoản yêu cầu
+                                    <th class="white-space-180 text-center">Tài khoản yêu cầu
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'users.account_code')
                                                 @if($type == 'desc')
@@ -76,7 +76,7 @@
                                             @endif
                                         </span>
                                     </th>
-                                    <th class="white-space-150 text-center">Số tiền
+                                    <th class="white-space-140 text-center">Số tiền
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'amount')
                                                 @if($type == 'desc')
@@ -90,16 +90,27 @@
                                         </span>
                                     </th>
                                     <th class="white-space-150 text-center">Số tài khoản</th>
-                                    <th class="white-space-150 text-center">Tên tài khoản</th>
+                                    <th class="white-space-130 text-center">Tên tài khoản</th>
                                     <th class="white-space-120 text-center">Ngân hàng</th>
-                                    <th class="white-space-150 text-center">Nội dung</th>
-                                    <th class="white-space-150 text-center">Thời gian yêu cầu</th>
-                                    <th class="white-space-150 text-center">Trạng thái</th>
+                                    <th >Nội dung</th>
+                                    <th class="white-space-130 text-center">Thời gian yêu cầu</th>
+                                    <th class="white-space-120 text-center">Trạng thái</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($histories as $his)
                                     <tr class="line-clamp3">
+<<<<<<< HEAD
+                                        <td class="white-space-140 text-center">{{$his->code}}</td>
+                                        <td class="white-space-160 text-center">{{$his->account_code}}</td>
+                                        <td class="text-right font-medium white-space-130">{{$his->amount}} đ</td>
+                                        <td class="white-space-150">{{$his->account_number}}</td>
+                                        <td style="text-transform: uppercase;" class="white-space-160">{{$his->name}}</td>
+                                        <td class="white-space-180">{{$his->bank->name}}</td>
+                                        <td class="white-space-250">Yêu cầu rút tiền đến tài khoản {{$his->account_number}}</td>
+                                        <td class="white-space-130 text-center">{{\Carbon\Carbon::parse($his->created_at)->format('d/m/Y H:i')}}</td>
+                                        <td class="white-space-130 text-center">
+=======
                                         <td class="white-space-150 text-center">{{$his->code}}</td>
                                         <td class="white-space-200 text-center">{{$his->account_code}}</td>
                                         <td class="text-right font-medium">
@@ -111,6 +122,7 @@
                                         <td style="min-width: 400px; white-space: pre-wrap;">Yêu cầu rút tiền đến tài khoản {{$his->account_number}}</td>
                                         <td class="white-space-150 text-center">{{\Carbon\Carbon::parse($his->created_at)->format('d/m/Y H:i')}}</td>
                                         <td class="white-space-150 text-center">
+>>>>>>> f222981148f53150684688904361e7dde81fc32c
                                             @if($his->status == 0)
                                             <span class="text-warning font-medium">Chờ xác nhận</span>
                                             @elseif($his->status == 1)

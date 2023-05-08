@@ -101,7 +101,7 @@
                             style="width:100%">
                             <thead>
                                 <tr>
-                                    <th class="white-space-200 text-center">
+                                    <th >
                                        
                                             Tên
                                             <span style="float: right;cursor:pointer">
@@ -149,7 +149,7 @@
                                             </span>
                                      
                                     </th>
-                                    <th class="white-space-200 text-center">
+                                    <th class="white-space-120 text-center">
                                        
                                             Tên công ty
                                             <span style="float: right;cursor:pointer">
@@ -181,9 +181,11 @@
                                             </span>
                                       
                                     </th>
-                                    <th class="white-space-200 text-center">
-                                        
-                                            Id P-Done người đại diện
+                                    <th class="white-space-130 ">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                            Id P-Done <br> người đại diện
+</span>
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'id_vdone')
                                                     @if($type_users == 'desc')
@@ -195,11 +197,13 @@
                                                     <i class="fas fa-sort sort-users" data-sort="id_vdone"></i>
                                                 @endif
                                             </span>
-                                        
+</div>
                                     </th>
-                                    <th class="white-space-150" style="min-width: 160px !important;">
-                                        
-                                            Phân loại tài khoản
+                                    <th class="white-space-100" >
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                            Phân loại <br> tài khoản
+</span>
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'users.role_id')
                                                     @if($type_users == 'desc')
@@ -211,11 +215,13 @@
                                                     <i class="fas fa-sort sort-users" data-sort="users.role_id"></i>
                                                 @endif
                                             </span>
-                                      
+</div>
                                     </th>
-                                    <th class="white-space-150">
-                                        
-                                            Thời gian đăng ký
+                                    <th class="white-space-130">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                            Thời gian <br> đăng ký
+</span>
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'users.created_at')
                                                     @if($type_users == 'desc')
@@ -227,11 +233,13 @@
                                                     <i class="fas fa-sort sort-users" data-sort="users.created_at"></i>
                                                 @endif
                                             </span>
-                                       
+</div>
                                     </th>
-                                    <th class="white-space-150 text-center" style="min-width:170px !important;">
-                                       
-                                            Mã người giới thiệu
+                                    <th class="white-space-120 text-center" >
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                            Mã người <br>giới thiệu
+</span>
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'users.referral_code')
                                                     @if($type_users == 'desc')
@@ -243,9 +251,9 @@
                                                     <i class="fas fa-sort sort-users" data-sort="users.referral_code"></i>
                                                 @endif
                                             </span>
-                                       
+</div>
                                     </th>
-                                    <th class="white-space-100">Thao tác</th>
+                                    <th class="white-space-80">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -254,12 +262,12 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td class="white-space-200">{{$user->name}}</td>
-                                    <td class="white-space-200">{{ Str::limit($user->email, 15) }}</td>
-                                    <td class="text-center ">{{$user->phone_number}}</td>
+                                    <td class="white-space-150">{{ Str::limit($user->email, 15) }}</td>
+                                    <td class="text-center white-space-130">{{$user->phone_number}}</td>
                                     <td class="white-space-200">{{$user->company_name}}</td>
-                                    <td class="text-center ">{{$user->tax_code}}</td>
-                                    <td class="text-center ">{{$user->id_vdone}}</td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-130">{{$user->tax_code}}</td>
+                                    <td class="text-center white-space-130">{{$user->id_vdone}}</td>
+                                    <td class="text-center white-space-100">
                                         @if($user->role_id == 2)
                                             <span class="text-primary font-medium">Nhà cung cấp</span>
                                         @elseif($user->role_id == 1)
@@ -270,8 +278,8 @@
                                             <span class="text-success font-medium">V-Store</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-130">
                                         {{strlen($user->referral_code) > 0 ? $user->referral_code : ''}}
                                     </td>
                                     <td class="text-center white-space-100">
@@ -335,7 +343,7 @@
                             style="width:100%">
                             <thead>
                                 <tr>
-                                    <th class="white-space-150">
+                                    <th class="white-space-120">
                                 
                                             Mã yêu cầu
                                             <span style="float: right;cursor:pointer">
@@ -351,7 +359,7 @@
                                             </span>
                                   
                                     </th>
-                                    <th class="white-space-200 text-center">
+                                    <th >
                                         
                                             Tên sản phẩm
                                             <span style="float: right;cursor:pointer">
@@ -367,7 +375,7 @@
                                             </span>
                                   
                                     </th>
-                                    <th class="white-space-150">
+                                    <th class="white-space-130">
                                   
                                             Ngành hàng
                                             <span style="float: right;cursor:pointer">
@@ -384,7 +392,7 @@
                                     
 
                                     </th>
-                                    <th class="white-space-200 text-center">
+                                    <th class="white-space-130 ">
                                       
                                             Nhà cung cấp
                                             <span style="float: right;cursor:pointer">
@@ -400,9 +408,11 @@
                                             </span>
                                       
                                     </th>
-                                    <th class="white-space-200">
-                                       
-                                            Chiết khấu cho V-Store
+                                    <th class="white-space-130">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                            Chiết khấu cho <br> V-Store
+</span>
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'products.discount')
                                                     @if($type_request == 'desc')
@@ -414,11 +424,13 @@
                                                     <i class="fas fa-sort sort-request" data-sort="products.discount"></i>
                                                 @endif
                                             </span>
-                                       
+</div>
                                     </th>
-                                    <th class="white-space-150 text-center">
-                                        
-                                            V-Store xét duyệt
+                                    <th class="white-space-110 text-center">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                            V-Store <br> xét duyệt
+</span>
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'vstore_name')
                                                     @if($type_request == 'desc')
@@ -430,11 +442,13 @@
                                                     <i class="fas fa-sort sort-request" data-sort="vstore_name"></i>
                                                 @endif
                                             </span>
-                                     
+</div>
                                     </th>
-                                    <th class="white-space-200 text-center">
-                                        
-                                            Chiết khấu cho V-Shop
+                                    <th class="white-space-130 text-center">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                            Chiết khấu cho <br> V-Shop
+</span>
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'requests.discount_vshop')
                                                     @if($type_request == 'desc')
@@ -446,16 +460,16 @@
                                                     <i class="fas fa-sort sort-request" data-sort="requests.discount_vshop"></i>
                                                 @endif
                                             </span>
-                                      
+</div>
                                     </th>
-                                    <th class="white-space-100">Thao tác</th>
+                                    <th class="white-space-80">Thao tác</th>
                                 </tr>
                             </thead>
                             <tbody>
                             @if(count($requests) > 0)
                             @foreach($requests as $request)
                                 <tr>
-                                    <td class="text-center white-space-150">
+                                    <td class="text-center white-space-140">
                                         {{$request->code}}
                                     </td>
                                     <td class="white-space-200">
@@ -464,21 +478,21 @@
                                     <td class="white-space-150 text-center">
                                         {{$request->name}}
                                     </td>
-                                    <td class="white-space-200">
+                                    <td class="white-space-150 text-cennter">
                                         {{$request->user_name}}
                                     </td>
-                                    <td class="text-center white-space-200">
+                                    <td class="text-center white-space-80">
                                         {{$request->discount}}
                                     </td>
-                                    <td class="white-space-150">
+                                    <td class="white-space-80">
                                         {{$request->vstore_name}}
                                     </td>
-                                    <td class="text-center white-space-200">
+                                    <td class="text-center white-space-80">
                                         {{$request->discount_vshop}}
                                     </td>
-                                    <td class="text-center white-space-100">
+                                    <td class="text-center white-space-80">
                                         <a href="javascript:void(0)" data-toggle="modal" data-target="#exampleModal" data-id="{{ $request->id }}"
-                                            class="update-request btn text-primary font-medium px-2" style="text-decoration:underline;">Duyệt</a>
+                                            class="update-request btn text-primary font-medium px-2 py-0" style="text-decoration:underline;">Duyệt</a>
 
                                     </td>
                                     </tr>

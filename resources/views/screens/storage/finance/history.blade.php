@@ -123,7 +123,7 @@
                                 @if(count($histories) > 0)
                                     @foreach($histories as $history)
                                         <tr>
-                                            <td class="text-center">{{$history->code}}</td>
+                                            <td class="text-center white-space-140">{{$history->code}}</td>
 
                                             @if($history->status == 0)
                                                 <td class="text-warning font-medium text-center">
@@ -138,7 +138,7 @@
                                                     Thất bại
                                                 </td>
                                             @endif
-                                            <td class="text-right ">
+                                            <td class="text-right white-space-130">
                                                 {{number_format($history->amount,0,'.','.')}} đ
                                             </td>
                                             <td>
@@ -155,8 +155,8 @@
                                             </td>
 
 
-                                            <td class="text-center">
-                                                {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y  H:i')}}
+                                            <td class="text-center white-space-130">
+                                                {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y')}}
                                             </td>
                                         </tr>
                                     @endforeach

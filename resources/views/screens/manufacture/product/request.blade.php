@@ -90,8 +90,8 @@
                                 </span>
 
                             </th>
-                            <th class="white-space-150 text-center">
-
+                            <th class="white-space-130 text-center">
+                          
                             Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'brand')
@@ -107,8 +107,8 @@
 
                             </th>
 
-                            <th>
-
+                            <th class="white-space-160">
+                    
                             Thời gian yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
@@ -123,8 +123,8 @@
                                 </span>
 
                             </th>
-                            <th>
-
+                            <th class="white-space-150">
+                          
                             V-Store niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
@@ -139,8 +139,8 @@
                                 </span>
 
                             </th>
-                            <th>
-
+                            <th class="white-space-160">
+                         
                             Trạng thái yêu cầu
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.status')
@@ -155,29 +155,29 @@
                                 </span>
 
                             </th>
-                            <th class="white-space-100"></th>
+                            <th class="white-space-80"></th>
                         </tr>
                         </thead>
                         <tbody>
                         @if(count($requests) > 0)
                             @foreach($requests as $request)
                                 <tr>
-                                    <td class="white-space-120">
+                                    <td class="white-space-140">
                                         {{$request->code}}
                                     </td>
-                                    <td class="white-space-400" style="min-width:200px !important;">
+                                    <td class="white-space-250" >
                                         {{$request->product_name}}
                                     </td>
                                     <td class="white-space-150 text-center">
                                         {{$request->name}}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-130">
                                         {{\Carbon\Carbon::parse($request->created_at)->format('d/m/Y H:i')}}
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-150">
                                         {{$request->user_name}}
                                     </td>
-                                    <td class="text-center" style="min-width:150px !important;">
+                                    <td class="text-center white-space-200">
                                         @if($request->status == 0)
                                             <div class="text-warning font-medium"><i class="fas fa-clock mr-2 text-warning"></i>
                                                 Đang chờ xét duyệt lên V-Store
@@ -200,8 +200,8 @@
                                             </div>
                                         @endif
                                     </td>
-                                    <td class="white-space-100 text-center">
-                                        <a href="javascript:void(0)" class="btn btn-link px-2" style="text-decoration:underline"
+                                    <td class="white-space-80 text-center">
+                                        <a href="javascript:void(0)" class="btn btn-link p-0" style="text-decoration:underline"
                                                 onclick="showDetail({{$request->id}})">Chi tiết
                                         </a>
                                     </td>

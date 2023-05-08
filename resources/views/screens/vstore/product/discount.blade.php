@@ -81,8 +81,8 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-200">
-
+                            <th >
+                            
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -111,7 +111,7 @@
                                 </span>
                             </th>
 
-                            <th style="white-space-120 text-center">Thời gian bắt đầu
+                            <th style="white-space-130 text-center">Ngày bắt đầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.start_date')
                                         @if($type == 'desc')
@@ -124,7 +124,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="white-space-120 text-center">Thời gian kết thúc
+                            <th style="white-space-130 text-center">Ngày kết thúc
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.end_date')
                                         @if($type == 'desc')
@@ -150,7 +150,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-200" style="min-width:220px !important;">Thời gian tạo giảm giá
+                            <th class="white-space-180" >Thời gian tạo giảm giá
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.created_at')
                                         @if($type == 'desc')
@@ -172,11 +172,11 @@
                         @if(count($discounts) > 0)
                             @foreach($discounts as $discount)
                                 <tr>
-                                    <td class="white-space-200">{{$discount->name}}</td>
-                                    <td class="text-center">{{$discount->discount}}%</td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-center">
+                                    <td class="white-space-400">{{$discount->name}}</td>
+                                    <td class="text-center white-space-80">{{$discount->discount}}%</td>
+                                    <td class="text-center white-space-130">{{\Carbon\Carbon::parse($discount->start_date)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-120">{{\Carbon\Carbon::parse($discount->end_date)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-130">
                                         @if($discount->status == 0 )
                                             <span class="text-warning font-medium">Chưa áp dụng</span>
                                         @elseif($discount->status == 1)
@@ -185,10 +185,10 @@
                                             <span class="text-danger font-medium">Đã hết hạn</span>
                                         @endif
                                     </td>
-                                    <td class="text-center">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-180">{{\Carbon\Carbon::parse($discount->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center white-space-100"><a
                                             href="javascript:void(0)" data-id="{{$discount->id}}"
-                                            class="btn btn-link more-details"
+                                            class="btn btn-link more-details p-0"
                                             onclick="edit({{$discount->id}})">Sửa</a></td>
                                 </tr>
                             @endforeach

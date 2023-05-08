@@ -78,8 +78,8 @@
                     >
                         <thead>
                         <tr>
-                            <th class="white-space-100 text-center">Mã yêu cầu</th>
-                            <th class="white-space-120 text-center">Nhà cung cấp
+                            <th class="white-space-110">Mã yêu cầu</th>
+                            <th class="white-space-130 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -92,8 +92,8 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-200">
-
+                            <th>
+                         
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -108,7 +108,7 @@
                                 </span>
 
                             </th>
-                            <th class="text-center white-space-120">Ngành hàng
+                            <th class="text-center white-space-110">Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'categories.name')
                                         @if($type == 'desc')
@@ -121,9 +121,11 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-200">
-                                
-                                    Giá sản phẩm chưa VAT
+                            <th class="white-space-130">
+                            <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                    Giá sản phẩm <br> chưa VAT
+</span>
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'products.price')
                                             @if($type == 'desc')
@@ -135,11 +137,14 @@
                                             <i class="fas fa-sort sort" data-sort="products.price"></i>
                                         @endif
                                 </span>
+</div>
                                 
                             </th>
-                            <th class="white-space-200" style="min-width:220px !important;">
-                                
-                                    Chiết khấu từ Nhà cung cấp
+                            <th class="white-space-150">
+                            <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                    Chiết khấu từ <br> Nhà cung cấp
+</span>
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.discount')
                                             @if($type == 'desc')
@@ -151,9 +156,9 @@
                                             <i class="fas fa-sort sort" data-sort="requests.discount"></i>
                                         @endif
                                 </span>
-                               
+</div>
                             </th>
-                            <th class="white-space-120 text-center">Ngày yêu cầu
+                            <th class="white-space-130 text-center">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
                                         @if($type == 'products.price')
@@ -167,7 +172,11 @@
                                 </span>
                             </th>
                             <th class="white-space-100 text-center">Trạng thái</th>
-                            <th class="white-space-150">
+                            <th class="white-space-130">
+                                Thao tác
+                            </th>
+                            <th class="white-space-80">
+
                             </th>
                         </tr>
                         </thead>
@@ -175,33 +184,35 @@
                         @if(count($requests) > 0)
                             @foreach($requests as $product)
                                 <tr>
-                                    <td class="text-center" >
+                                    <td class="text-center white-space-130" >
                                         {{$product->code}}
                                     </td>
-                                    <td>
+                                    <td class="white-space-150 text-center">
                                         {{$product->user_name}}
                                     </td>
-                                    <td class="white-space-200" >
+                                    <td class="white-space-250">
                                         {{$product->name}}
                                     </td>
-                                    <td class="text-center">{{$product->cate_name}}</td>
-                                    <td class="text-right">
+                                    <td class="text-center white-space-150">{{$product->cate_name}}</td>
+                                    <td class="text-right white-space-130">
                                         {{number_format($product->price,0,'.','.')}} đ
                                     </td>
-                                    <td class="text-center">
+                                    <td class="text-center white-space-80">
                                         {{$product->discount}}%
                                     </td>
 
-                                    <td class="text-center">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class=" text-center"><span
+                                    <td class="text-center white-space-130">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class=" text-center white-space-130"><span
                                             class="font-medium ">Yêu cầu mới</span></td>
 
-                                    <td class="text-center">
-                                        <a href="#" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                           class="btn px-2 text-primary font-medium" style="text-decoration:underline">Đồng ý</a>
-                                        <a href="#" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                           class="btn px-2 text-danger font-medium" style="text-decoration:underline">Từ chối</a>
+                                    <td class="text-center white-space-160">
+                                        <a href="javascript:void(0)" onclick="appect({{$product->id}},{{$product->discount}},1)"
+                                           class="btn px-2 py-0 text-success font-medium" style="text-decoration:underline">Đồng ý</a>
+                                        <a href="javascript:void(0)" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
+                                           class="btn px-2  py-0 text-danger font-medium" style="text-decoration:underline">Từ chối</a>
                                     </td>
+                                    <td class="text-center white-space-80"><a href="javascript:void(0)" 
+                                           class="btn px-2 py-0 text-primary" style="text-decoration:underline">Chi tiết</a></td>
                                 </tr>
                             @endforeach
                         @else

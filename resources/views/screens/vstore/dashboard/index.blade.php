@@ -93,11 +93,11 @@
                         <div class="table-responsive">
                             <table id="example" class="table table-striped table-bordered second" style="width:100%">
                                 <thead>
-                                <th class="white-space-100 text-center">
+                                <th class="white-space-90">
                                        Mã yêu cầu
                                     </th>
 
-                                <th class="white-space-120">
+                                <th class="white-space-100">
                                   
                                         Nhà cung cấp
                                         <span style="float: right;cursor:pointer">
@@ -113,9 +113,7 @@
                                         </span>
                                 
                                 </th>
-                                <th class="white-space-200" >
-
-                                 
+                                <th>                           
                                         Tên sản phẩm
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'products.name')
@@ -130,9 +128,7 @@
                                         </span>
                                   
                                 </th>
-                                <th class="white-space-100">
-
-                                    
+                                <th class="white-space-110">
                                         Ngành hàng
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'categories.name')
@@ -147,9 +143,9 @@
                                         </span>
                                    
                                 </th>
-                                    <th class="white-space-200">
+                                    <th class="white-space-130">
                                       
-                                            Giá sản phẩm chưa VAT
+                                            Giá sản phẩm 
                                             <span style="float: right;cursor:pointer">
                                                 @if ($field == 'price')
                                                     @if ($type == 'desc')
@@ -163,10 +159,12 @@
                                             </span>
                                      
                                     </th>
-                                    <th class="white-space-200" style="min-width:220px !important;">
-                                        
-                                            Chiết khấu từ Nhà cung cấp
-                                            <span style="float: right;cursor:pointer">
+                                    <th class="white-space-130">
+                                    <div class="d-flex align-items-center justify-content-around">
+                                <span class="white-space-90">
+                                            Chiết khấu từ <br> Nhà cung cấp
+</span>
+                                            <span style="cursor:pointer">
                                                 @if ($field == 'requests.discount')
                                                     @if ($type == 'desc')
                                                         <i class="fa-solid fa-sort-down sort"
@@ -179,9 +177,9 @@
                                                     <i class="fas fa-sort sort" data-sort="requests.discount"></i>
                                                 @endif
                                             </span>
-                                        
+</div>
                                     </th>
-                                    <th class="white-space-120">
+                                    <th class="white-space-130">
                                         
                                             Ngày yêu cầu
                                             <span style="float: right;cursor:pointer">
@@ -199,7 +197,7 @@
                                             </span>
                                         
                                     </th>
-                                    <th class="white-space-120 text-center">
+                                    <th class="white-space-130">
                                         Trạng thái
                                         <span style="float: right;cursor:pointer">
                                             @if ($field == 'requests.status')
@@ -219,38 +217,38 @@
 
 
 
-                                <th class="white-space-100 text-center">Thao tác</th>
+                                <th class="white-space-100">Thao tác</th>
                                 </thead>
                                 <tbody>
                                     @if (count($data) > 0)
                                         @foreach ($data as $product)
                                             <tr>
-                                                <td class="text-center">
+                                                <td class="white-space-130 text-center">
                                                     {{$product->code}}
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="white-space-150 text-center">
                                                     {{$product->user_name}}
                                                 </td>
-                                                <td class="white-space-200" >
+                                                <td class="white-space-400" >
                                                     {{$product->name}}
                                                 </td>
-                                                <td class="text-center">{{$product->cate_name}}</td>
-                                                <td class="text-right">
+                                                <td class="text-center white-space-150">{{$product->cate_name}}</td>
+                                                <td class="text-right white-space-130">
                                                     {{number_format($product->price,0,'.','.')}} đ
                                                 </td>
-                                                <td class="text-center">
+                                                <td class="text-center white-space-80">
                                                     {{$product->discount}}%
                                                 </td>
 
-                                                <td class="text-center">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                                <td class="text-center"><span class="font-medium" >Sản phẩm mới</span></td>
+                                                <td class="text-center white-space-130">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
+                                                <td class="text-center white-space-100"><span class="font-medium" >Sản phẩm mới</span></td>
 
-                                                <td class="text-center">
+                                                <td class="text-center white-space-160">
                                                     <a href="javascript:void(0)" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                                    class="btn text-primary font-medium px-2" style="text-decoration:underline;">Đồng ý</a>
+                                                    class="btn text-primary font-medium px-2 py-0" style="text-decoration:underline;">Đồng ý</a>
                                                     <a href="javascript:void(0)"
                                                     onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                                    class="btn text-danger font-medium px-2" style="text-decoration:underline;">Từ chối</a>
+                                                    class="btn text-danger font-medium px-2 py-0" style="text-decoration:underline;">Từ chối</a>
                                                 </td>
                                             </tr>
                                         @endforeach
