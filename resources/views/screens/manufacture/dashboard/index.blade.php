@@ -32,10 +32,10 @@
 
                 </div>
                 <div class="modal-footer">
-                    <div class="btnDelete">
+                    {{-- <div class="btnDelete">
                         <button class="btn btn-danger">Xóa sản phẩm</button>
                         <a class="btn btn-warning btnEdit" href="">Sửa sản phẩm</a>
-                    </div>
+                    </div> --}}
                     <button class="btn btn-success add-product-warehouse" href="#myModal2" data-toggle="modal">Thêm sản
                         phẩm vào kho
                     </button>
@@ -112,7 +112,7 @@
                                 <div class="form-group">
                                     <label for="name">Loại kho <span class="text-danger">*</span></label>
                                     <div id="selectType" class="form-group row">
-                                        <p class="text-danger ml-4">Chọn kho để hiện thị thông tin loại kho</p>
+                                        <p class="text-danger ml-4">Chọn kho để hiển thị thông tin loại kho</p>
                                     </div>
                                 </div>
                             </div>
@@ -225,17 +225,17 @@
                                    style="width:100%">
                                 <thead>
                                 <th class="white-space-130">
-                                  
+
                                         Mã sản phẩm
 
                                 </th>
                                 <th >
-                                    
+
                                         Tên sản phẩm
 
                                 </th>
                                 <th class="white-space-130">
-                                    
+
                                         Ngành hàng
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'categories.name')
@@ -268,7 +268,7 @@
                                         </span>
 
                                 </th>
-                                <th class="white-space-150">        
+                                <th class="white-space-150">
                                         V-Store niêm yết
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'vstore_name')
@@ -343,7 +343,7 @@
                                 <th class="white-space-130">
                                 <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
-                                    
+
                                         Số lượng <br> trong kho
                                         </span>
                                         <span style="float: right;cursor:pointer">
@@ -485,14 +485,7 @@
                     htmlData = data.data;
                     $('#modalDetail .md-content').html(htmlData)
                     $('#modalDetail').modal('show');
-                    if (data.availability_status == 1) {
-                        document.querySelector('.btnDestroy').innerHTML =
-                            `<button class="btn btn-danger">Hủy niêm yết</button>`;
-                        $(".btnDelete").html('');
-                    } else {
-                        document.querySelector('.btnDestroy').innerHTML = ``;
-                        $(".btnDelete").html(`<a class="btn btn-warning btnEdit mx-2" href="{{route('screens.manufacture.product.edit')}}/${data.id}">Sửa sản phẩm</a><a href="{{route('screens.manufacture.product.destroy')}}/${data.id}"  class="btn btn-danger">Xóa sản phẩm</a>`);
-                    }
+                    
                 } else {
                     $('#modalDetail').modal('show');
                     $('#modalDetail .md-content').html('Chưa có dữ liệu của sản phẩm!')

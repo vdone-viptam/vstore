@@ -143,7 +143,7 @@
                                 <div class="form-group">
                                     <label for="name">Loại kho <span class="text-danger">*</span></label>
                                     <div id="selectType" class="form-group row">
-                                        <p class="text-danger ml-4">Chọn kho để hiện thị thông tin loại kho</p>
+                                        <p class="text-danger ml-4">Chọn kho để hiển thị thông tin loại kho</p>
                                     </div>
                                 </div>
                             </div>
@@ -214,7 +214,7 @@
                                 <tr>
 <<<<<<< HEAD
                                     <th >
-                                      
+
 =======
                                     <th class="white-space-200 text-center">
 
@@ -252,7 +252,7 @@
                                     </th>
 <<<<<<< HEAD
                                     <th class="white-space-120">
-                                     
+
 =======
                                     <th class="white-space-150">
 
@@ -273,7 +273,7 @@
                                     </th>
 <<<<<<< HEAD
                                     <th >
-                                    
+
 =======
                                     <th class="white-space-200 text-center">
 
@@ -294,7 +294,7 @@
                                     </th>
 <<<<<<< HEAD
                                     <th class="white-space-130">
-                                        
+
 =======
                                     <th class="white-space-150">
 
@@ -443,7 +443,7 @@
                                 </div>
                                     </th>
                                     <th class="white-space-100">
-                                 
+
 =======
 
                                     </th>
