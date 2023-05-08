@@ -120,6 +120,7 @@ class ProductController extends Controller
             if (isset($request->note)) {
                 $currentRequest->note = $request->note;
             }
+            $currentRequest->admin_confirm_date = Carbon::now();
             $currentRequest->save();
             $userLogin = Auth::user();
             $user = User::find($currentRequest->user_id); // id của user mình đã đăng kí ở trên, user này sẻ nhận được thông báo
@@ -220,7 +221,7 @@ class ProductController extends Controller
         $type = $request->type ?? 'asc';
         $this->v['products'] = Category::join('products', 'categories.id', '=', 'products.category_id')->join('users', 'products.user_id', '=', 'users.id')
             ->select('products.publish_id', 'products.category_id', 'products.user_id', 'products.discount', 'products.discount_vShop',
-                'products.amount_product_sold', 'products.vstore_id', 'products.admin_confirm_date', 'users.name', 'products.id', 'categories.name as category_name','products.name as product_name')
+                'products.amount_product_sold', 'products.vstore_id', 'products.admin_confirm_date', 'users.name', 'products.id', 'categories.name as category_name', 'products.name as product_name')
             ->selectSub('select name from users where id =  products.vstore_id', 'vstore_name')
             ->selectSub('select IFNULL(sum(amount - export ),0) from product_warehouses where product_id =  products.id', 'amount')
             ->where('products.status', 2)

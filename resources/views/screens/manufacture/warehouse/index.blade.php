@@ -67,7 +67,7 @@
                                 <div class="form-group">
                                     <label for="name">Loại kho <span class="text-danger">*</span></label>
                                     <div id="selectType" class="form-group row">
-                                        <p class="text-danger ml-4">Chọn kho để hiện thị thông tin loại kho</p>
+                                        <p class="text-danger ml-4">Chọn kho để hiển thị thông tin loại kho</p>
                                     </div>
                                 </div>
                             </div>

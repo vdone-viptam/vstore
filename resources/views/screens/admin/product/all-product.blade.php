@@ -211,6 +211,7 @@
                                 </tr>
                                 </thead>
                                 <tbody>
+                                @if(count($products) > 0)
                                 @foreach($products as $pro)
                                     <tr class="line-clamp3">
                                         <td class="text-center white-space-140">{{$pro->publish_id}}</td>
@@ -236,6 +237,11 @@
 
                                     </tr>
                                 @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="11" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                                    </tr>
+                                @endif
 
 
                                 {{--                                <tr class="line-clamp3">--}}

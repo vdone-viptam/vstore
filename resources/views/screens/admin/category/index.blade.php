@@ -84,7 +84,7 @@
                         <tr>
                             <th >Ngành hàng
                             </th>
-                            <th class="text-center white-space-150">Ảnh hiện thị
+                            <th class="text-center white-space-150">Hình ảnh
                             </th>
                             <th class="text-center white-space-120">
                                 Ngày tạo
@@ -154,8 +154,8 @@
                     </div>
                 </div>
                 </div>
-          
-            
+
+
 
             </div>
 
