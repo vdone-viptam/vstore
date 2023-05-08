@@ -272,7 +272,7 @@
                                                     <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
                                                           stroke-linecap="round"/>
                                                 </svg>
-                                                Hệ thống đồng ý
+                                                Hệ thống đã duyệt
                                             </div>
                                         @else
                                             <div class="bg-danger text-white font-medium "
