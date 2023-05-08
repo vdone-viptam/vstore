@@ -69,7 +69,7 @@
                             <tr>
                                 <th class="white-space-400 text-center">Tên ngân hàng
                                 </th>
-                                <th class="text-center white-space-150">Ảnh hiện thị
+                                <th class="text-center white-space-150">Hình ảnh
                                 </th>
 
                                 <th class="text-center white-space-200">Tên chi tiết ngân hàng
@@ -146,7 +146,7 @@
                     })
                 }
             }).done(function (data) {
-              
+
                 var htmlData = ``;
                 htmlData += data.view;
                 $('.btnSubmit').attr('disabled', true);
