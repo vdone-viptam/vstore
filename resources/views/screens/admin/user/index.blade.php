@@ -388,7 +388,7 @@
                                             Trạng thái
 
                                     </th>
-                                    <th class="white-space-100">Thao tác</th>
+                                    <th class="white-space-80">Thao tác</th>
                                     <th class="white-space-80"></th>
                                 </tr>
                             </thead>
@@ -419,11 +419,11 @@
                                     <td class="text-center white-space-80">
                                         {{strlen($user->referral_code) > 0 ? $user->referral_code : ''}}
                                     </td>
-                                    <td class="text-center white-space-110">
+                                    <td class="text-center white-space-120">
                                         @if(!empty($user->confirm_date))
-                                            <div class=" text-success font-medium " style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã duyệt</div>
+                                            <div class=" text-success  " style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã duyệt</div>
                                         @else
-                                            <div class=" text-warning font-medium " style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i> Chờ duyệt</div>
+                                            <div class=" text-warning  " style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i> Chờ duyệt</div>
                                         @endif
                                     </td>
                                     <td class="text-center white-space-80">

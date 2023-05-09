@@ -106,9 +106,9 @@
                                                     <td class="text-center white-space-130">{{$history->code ?? '-'}}</td>
                                                     <td class="text-center white-space-130">
                                                         @if($history->status == 0)
-                                                            <p class="text-danger font-medium">Thất bại</p>
+                                                            <p class="text-danger">Thất bại</p>
                                                         @else
-                                                            <p class="text-warning font-medium">Đang chờ duyệt</p>
+                                                            <p class="text-warning">Đang chờ duyệt</p>
                                                         @endif
                                                     </td>
                                                     <td class="text-right white-space-130">

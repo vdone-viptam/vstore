@@ -48,8 +48,9 @@ class BankController extends Controller
         ], [
             'name.required' => 'Tên ngân hàng bắt buộc nhập',
             'name.unique' => 'Tên ngân hàng đã tồn tại',
-            'img.required' => 'Ảnh ngân hàng bắt buộc nhập',
-            'img.image' => 'Ảnh ngân hàng không đúng định dạng',
+            'image.required' => 'Ảnh ngân hàng bắt buộc nhập',
+            'image.image' => 'Ảnh ngân hàng không đúng định dạng',
+            'image.mimes' => 'Ảnh ngân hàng không được hỗ trợ (jpeg,png,jpg,gif,svg)',
             'full_name.required' => 'Tên ngân hàng bắt buộc nhập',
             'full_name.unique' => 'Tên ngân hàng  đã tồn tại'
         ]);
@@ -114,6 +115,7 @@ class BankController extends Controller
             'name.unique' => 'Tên ngân hàng đã tồn tại',
             'img.required' => 'Ảnh ngân hàng bắt buộc nhập',
             'img.image' => 'Ảnh ngân hàng không đúng định dạng',
+            'img.mimes' => 'Ảnh ngân hàng không được hỗ trợ (jpeg,png,jpg,gif,svg)',
             'full_name.required' => 'Tên ngân hàng bắt buộc nhập',
             'full_name.unique' => 'Tên ngân hàng  đã tồn tại'
         ]);

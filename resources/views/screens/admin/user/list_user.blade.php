@@ -151,7 +151,7 @@
                                     </span>
                                      
                                     </th>
-                                    <th class="white-space-130">
+                                    <th class="white-space-110">
                         
                                             Mã số thuế
                                             <span style="float: right;cursor: pointer">
@@ -167,9 +167,9 @@
                                     </span>
                                      
                                     </th>
-                                    <th class="white-space-130 ">
+                                    <th class="white-space-120 ">
                                     <div class="d-flex align-items-center justify-content-around">
-                                <span class="white-space-90">
+                                <span class="white-space-80">
                                             Id P-Done <br> người đại diện
 </span>
                                             <span style="float: right;cursor: pointer">
@@ -227,7 +227,7 @@
                                             <td class="white-space-150">{{$user->email}}</td>
                                             <td class="text-center white-space-110">{{$user->phone_number}}</td>
                                             <td class="white-space-130 text-center">{{$user->company_name}}</td>
-                                            <td class="text-center white-space-130">{{$user->tax_code}}</td>
+                                            <td class="text-center white-space-110">{{$user->tax_code}}</td>
                                             <td class="white-space-140 text-center">{{$user->id_vdone}}</td>
                                             <td class="text-center white-space-140">{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
                                             <td class="text-center white-space-100">

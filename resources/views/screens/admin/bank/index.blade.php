@@ -27,13 +27,23 @@
     </div>
 @endsection
 @section('page')
-    <div class="row">
-        <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
-            <div class="page-header">
-                <h2 class="pageheader-title">Quản lý ngân hàng</h2>
+<div class="row">
+            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
+                <div class="page-header">
+                    <h2 class="pageheader-title">Danh sách ngân hàng </h2>
+
+                    <div class="page-breadcrumb">
+                        <nav aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Quản lý tài
+                                        chính</a></li>
+                                <li class="breadcrumb-item active" aria-current="page">Danh sách ngân hàng</li>
+                            </ol>
+                        </nav>
+                    </div>
+                </div>
             </div>
         </div>
-    </div>
 @endsection
 
 
@@ -87,7 +97,7 @@
                                 </td>
                                 <td>{{ $request->full_name }}</td>
                                 <td class="white-space-120 text-center">
-                                    <a href="javascript:void(0)" onclick="edit({{$request->id}})" class="btn btn-primary">Cập
+                                    <a href="javascript:void(0)" onclick="edit({{$request->id}})" class="btn text-primary font-medium p-0" style="text-decoration:underline;">Cập
                                         nhật</a>
                                 </td>
                             </tr>

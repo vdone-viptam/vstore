@@ -230,7 +230,7 @@
                                     <td class="text-center">
                                         @if($product->status == 0)
                                             <div
-                                                class="text-warning d-flex align-items-center font-medium" style="gap:6px;">
+                                                class="text-warning d-flex align-items-center " style="gap:6px;">
                                                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -241,7 +241,7 @@
                                             </div>
                                         @elseif($product->status == 1)
                                             <div
-                                            class="text-warning d-flex align-items-center font-medium" style="gap:6px;">
+                                            class="text-warning d-flex align-items-center " style="gap:6px;">
                                             <div style="width:15px;">
                                             <svg width="14" height="14" viewBox="0 0 14 14" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
@@ -255,7 +255,7 @@
                                             </div>
                                         @elseif($product->status == 2)
                                             <div
-                                            class="text-danger d-flex align-items-center font-medium" style="gap:6px;">
+                                            class="text-danger d-flex align-items-center " style="gap:6px;">
                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path
@@ -266,7 +266,7 @@
                                             </div>
                                         @elseif($product->status == 3)
                                             <div
-                                            class="text-success d-flex align-items-center font-medium" style="gap:6px;">
+                                            class="text-success d-flex align-items-center " style="gap:6px;">
                                                 <svg width="14" height="9" viewBox="0 0 14 9" fill="none"
                                                      xmlns="http://www.w3.org/2000/svg">
                                                     <path d="M1 3.4L5.8 8.2L13 1" stroke="#2ec551"
@@ -275,7 +275,7 @@
                                                 Hệ thống đã duyệt
                                             </div>
                                         @else
-                                            <div class="bg-danger text-white font-medium "
+                                            <div class="bg-danger text-white "
                                                  style="border-radius: 2px;"><i class="fas fa-times mr-2"></i> Hệ thống
                                                 từ chối
                                             </div>
