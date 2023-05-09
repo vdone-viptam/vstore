@@ -125,7 +125,7 @@
                                     <td class="text-center white-space-150"><img src="{{asset($category->img)}}"
                                                                  style="width: 75px;height: 75px" alt="">
                                     </td>
-                                    <td class="text-center white-space-130">{{\Carbon\Carbon::parse($category->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-140">{{\Carbon\Carbon::parse($category->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class="text-center white-space-150">{{number_format($category->count_product,0,'.','.')}}</td>
                                     <td class="white-space-120 text-center">
                                         <a href="javascript:void(0)" onclick="edit({{$category->id}})" class="btn text-primary font-medium p-0" style="text-decoration:underline;">Cập

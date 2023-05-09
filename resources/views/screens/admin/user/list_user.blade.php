@@ -229,7 +229,7 @@
                                             <td class="white-space-130 text-center">{{$user->company_name}}</td>
                                             <td class="text-center white-space-130">{{$user->tax_code}}</td>
                                             <td class="white-space-140 text-center">{{$user->id_vdone}}</td>
-                                            <td class="text-center white-space-130">{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
+                                            <td class="text-center white-space-140">{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
                                             <td class="text-center white-space-100">
                                                 @if($user->role_id==3 && $user->branch !=2 )
                                                     <a
