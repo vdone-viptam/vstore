@@ -68,7 +68,7 @@
             <a href="#" class="item-dash">
                 <div class="card border-3 border-top border-top-primary">
                     <div class="card-body">
-                        <h5 class="text-muted">Yêu cầu cập nhật Mã Số thuế</h5>
+                        <h5 class="text-muted">Yêu cầu cập nhật mã số thuế</h5>
                         <div class="metric-value d-inline-block">
                             <h1 class="mb-1">{{number_format($countRequestTaxCodeToday,0,'.','.')}}</h1>
                         </div>
@@ -102,7 +102,7 @@
                             <thead>
                                 <tr>
                                     <th >
-                                       
+
                                             Tên
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'users.name')
@@ -115,10 +115,10 @@
                                                     <i class="fas fa-sort sort-users" data-sort="users.name"></i>
                                                 @endif
                                             </span>
-                                       
+
                                     </th>
                                     <th class="white-space-200 text-center">
-                                        
+
                                             Email
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'email')
@@ -131,10 +131,10 @@
                                                     <i class="fas fa-sort sort-users" data-sort="email"></i>
                                                 @endif
                                             </span>
-                                       
+
                                     </th>
                                     <th class="white-space-120">
-                                        
+
                                             Số điện thoại
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'phone_number')
@@ -147,10 +147,10 @@
                                                     <i class="fas fa-sort sort-users" data-sort="phone_number"></i>
                                                 @endif
                                             </span>
-                                     
+
                                     </th>
                                     <th class="white-space-120 text-center">
-                                       
+
                                             Tên công ty
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'company_name')
@@ -163,10 +163,10 @@
                                                     <i class="fas fa-sort sort-users" data-sort="company_name"></i>
                                                 @endif
                                             </span>
-                                     
+
                                     </th>
                                     <th class="white-space-120">
-                                        
+
                                             Mã số thuế
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_users == 'tax_code')
@@ -179,7 +179,7 @@
                                                     <i class="fas fa-sort sort-users" data-sort="tax_code"></i>
                                                 @endif
                                             </span>
-                                      
+
                                     </th>
                                     <th class="white-space-130 ">
                                     <div class="d-flex align-items-center justify-content-around">
@@ -344,7 +344,7 @@
                             <thead>
                                 <tr>
                                     <th class="white-space-120">
-                                
+
                                             Mã yêu cầu
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'requests.code')
@@ -357,10 +357,10 @@
                                                     <i class="fas fa-sort sort-request" data-sort="requests.code"></i>
                                                 @endif
                                             </span>
-                                  
+
                                     </th>
                                     <th >
-                                        
+
                                             Tên sản phẩm
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'products.name')
@@ -373,10 +373,10 @@
                                                     <i class="fas fa-sort sort-request" data-sort="products.name"></i>
                                                 @endif
                                             </span>
-                                  
+
                                     </th>
                                     <th class="white-space-130">
-                                  
+
                                             Ngành hàng
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'categories.name')
@@ -389,11 +389,11 @@
                                                     <i class="fas fa-sort sort-request" data-sort="categories.name"></i>
                                                 @endif
                                             </span>
-                                    
+
 
                                     </th>
                                     <th class="white-space-130 ">
-                                      
+
                                             Nhà cung cấp
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'users.name')
@@ -406,7 +406,7 @@
                                                     <i class="fas fa-sort sort-request" data-sort="users.name"></i>
                                                 @endif
                                             </span>
-                                      
+
                                     </th>
                                     <th class="white-space-130">
                                     <div class="d-flex align-items-center justify-content-around">

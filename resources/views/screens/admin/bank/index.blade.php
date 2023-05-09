@@ -18,7 +18,7 @@
                     </div>
                     <div class="modal-footer">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
-                        <button class="btn btn-primary btnSubmit">Lưu thay đổi</button>
+                        <button  class="btn btn-primary btnSubmit" >Lưu thay đổi</button>
 
                     </div>
                 </div>
@@ -74,6 +74,7 @@
 
                                 <th class="text-center white-space-200">Tên chi tiết ngân hàng
                                 </th>
+                                <th></th>
                             </tr>
                         </thead>
                         <tbody>
@@ -149,7 +150,7 @@
 
                 var htmlData = ``;
                 htmlData += data.view;
-                $('.btnSubmit').attr('disabled', true);
+                // $('.btnSubmit').attr('disabled', true);
 
                 $('.btnSubmit').html('Thêm mới');
                 $('.md-content').html(htmlData)
