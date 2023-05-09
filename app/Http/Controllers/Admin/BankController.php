@@ -42,7 +42,7 @@ class BankController extends Controller
     {
 
         Validator::make($request->all(), [
-            'name' => 'required|unique:banks',
+            'name' => 'required|unique:banks|min:1|max:255',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             'full_name' => 'required',
         ], [
@@ -79,8 +79,8 @@ class BankController extends Controller
     {
         if (empty($request->image)) {
             Validator::make($request->all(), [
-                'name' => 'required|unique:banks',
-                'full_name' => 'required',
+                'name' => 'required|unique:banks|min:1|max:255',
+                'full_name' => 'required|min:1|max:255',
             ], [
                 'name.required' => 'Tên ngân hàng bắt buộc nhập',
                 'name.unique' => 'Tên ngân hàng đã tồn tại',
@@ -101,9 +101,9 @@ class BankController extends Controller
             }
         }
         Validator::make($request->all(), [
-            'name' => 'required|unique:banks',
+            'name' => 'required|unique:banks|min:1|max:255',
             'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
-            'full_name' => 'required',
+            'full_name' => 'required|min:1|max:255',
         ], [
             'name.required' => 'Tên ngân hàng bắt buộc nhập',
             'name.unique' => 'Tên ngân hàng đã tồn tại',
