@@ -176,7 +176,7 @@ class ProductController extends Controller
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
         ];
 
-        DB::beginTransaction();
+        
         $validator = Validator::make($request->all(), $error, $message);
 
         if ($validator->fails()) {
