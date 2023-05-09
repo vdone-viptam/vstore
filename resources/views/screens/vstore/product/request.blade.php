@@ -203,7 +203,7 @@
 
                                     <td class="text-center white-space-130">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class=" text-center white-space-130"><span
-                                            class="font-medium ">Yêu cầu mới</span></td>
+                                            class="">Yêu cầu mới</span></td>
 
                                     <td class="text-center white-space-160">
                                         <a href="javascript:void(0)"

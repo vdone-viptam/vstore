@@ -284,13 +284,13 @@
                                     <td class="text-right white-space-130">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>
                                     <td class="text-center white-space-140">
                                         @if($order->status == 1)
-                                            <span class="text-success font-medium"> Đã hoàn thành</span>
+                                            <span class="text-success "> Đã hoàn thành</span>
                                         @elseif($order->status == 3)
-                                            <span class="text-primary font-medium">Chờ xác nhận</span>
+                                            <span class="text-primary ">Chờ xác nhận</span>
                                         @elseif($order->status == 4)
-                                            <span class="text-warning font-medium">Đang giao hàng</span>
+                                            <span class="text-warning ">Đang giao hàng</span>
                                         @else
-                                            <span class="text-danger font-medium">Từ chối</span>
+                                            <span class="text-danger ">Từ chối</span>
                                         @endif
                                     </td>
                                     <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>

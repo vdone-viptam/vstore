@@ -110,11 +110,11 @@
                                         <td class="white-space-130 text-center">{{\Carbon\Carbon::parse($his->created_at)->format('d/m/Y H:i')}}</td>
                                         <td class="white-space-130 text-center">
                                             @if($his->status == 0)
-                                            <span class="text-warning font-medium">Chờ xác nhận</span>
+                                            <span class="text-warning ">Chờ xác nhận</span>
                                             @elseif($his->status == 1)
-                                                <span class="text-success font-medium">Thành công</span>
+                                                <span class="text-success ">Thành công</span>
                                             @elseif($his->status == 2)
-                                                <span class="text-success font-medium">Từ chối</span>
+                                                <span class="text-success ">Từ chối</span>
                                             @endif
 
                                         </td>

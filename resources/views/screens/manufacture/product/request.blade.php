@@ -179,23 +179,23 @@
                                     </td>
                                     <td class="text-center white-space-200">
                                         @if($request->status == 0)
-                                            <div class="text-warning font-medium"><i class="fas fa-clock mr-2 text-warning"></i>
+                                            <div class="text-warning "><i class="fas fa-clock mr-2 text-warning"></i>
                                                 Đang chờ xét duyệt lên V-Store
                                             </div>
                                         @elseif($request->status == 1)
-                                            <div class="text-warning font-medium"><i class="fas fa-clock mr-2 text-warning"></i>Chờ
+                                            <div class="text-warning "><i class="fas fa-clock mr-2 text-warning"></i>Chờ
                                                 V-Store đồng ý - chờ hệ thống duyệt
                                             </div>
                                         @elseif($request->status == 2)
-                                            <div class="text-danger font-medium"><i class="fas fa-times mr-2 text-danger"></i>V-Store từ
+                                            <div class="text-danger "><i class="fas fa-times mr-2 text-danger"></i>V-Store từ
                                                 chối
                                             </div>
                                         @elseif($request->status == 3)
-                                            <div class="text-success font-medium"><i class="fas fa-check mr-2 text-success"></i>Hệ thống
+                                            <div class="text-success "><i class="fas fa-check mr-2 text-success"></i>Hệ thống
                                                 đã duyệt
                                             </div>
                                         @else
-                                            <div class="text-danger font-medium"><i class="fas fa-times mr-2 text-danger"></i>Hệ thống
+                                            <div class="text-danger "><i class="fas fa-times mr-2 text-danger"></i>Hệ thống
                                                 từ chối
                                             </div>
                                         @endif

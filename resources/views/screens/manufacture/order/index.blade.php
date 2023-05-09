@@ -207,19 +207,19 @@
                                     <td class="white-space-250">{{ $order->orderItem[0]->product->name }}</td>
                                     <td class="text-center white-space-140">
                                         @if ($order->export_status == 0)
-                                            <span class="text-warning font-medium">Chờ xác nhận</span>
+                                            <span class="text-warning ">Chờ xác nhận</span>
                                         @elseif($order->export_status == 1)
-                                            <span class="text-primary font-medium">Chờ giao hàng</span>
+                                            <span class="text-primary ">Chờ giao hàng</span>
                                         @elseif($order->export_status == 2)
-                                            <span class="text-primary font-medium">Đang giao hàng</span>
+                                            <span class="text-primary ">Đang giao hàng</span>
                                         @elseif($order->export_status == 3)
-                                            <span class="text-danger font-medium">Kho từ chối</span>
+                                            <span class="text-danger ">Kho từ chối</span>
                                         @elseif($order->export_status == 4)
-                                            <span class="text-success font-medium">Đã giao hàng</span>
+                                            <span class="text-success ">Đã giao hàng</span>
                                         @elseif($order->export_status == 4 && \Carbon\Carbon::parse($order->updated_at)->diffInDays(\Illuminate\Support\Carbon::now()) && \Illuminate\Support\Carbon::now() > $order->updated_at)
-                                            <span class="text-success font-medium">Đã hoàn thành</span>
+                                            <span class="text-success ">Đã hoàn thành</span>
                                         @else
-                                            <span class="text-danger font-medium">Khách từ chối</span>
+                                            <span class="text-danger ">Khách từ chối</span>
                                         @endif
                                     </td>
                                     <td class=" text-right white-space-130">{{ number_format($order->orderItem[0]->price, '0', '.', '.') }}

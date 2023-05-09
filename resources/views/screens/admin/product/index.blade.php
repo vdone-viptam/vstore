@@ -167,18 +167,18 @@
                                             <td class="text-center white-space-100"><span>{{$request->vstore_name}}</span></td>
                                             <td class="text-center white-space-160">
                                                 @if($request->status == 1)
-                                                    <div class="text-warning font-medium "
+                                                    <div class="text-warning  "
                                                          style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i>Chờ
                                                         duyệt
                                                     </div>
                                                 @elseif($request->status == 3)
-                                                    <div class="text-success font-medium "
+                                                    <div class="text-success  "
                                                          style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Hệ
                                                         thống đã
                                                         duyệt
                                                     </div>
                                                 @else
-                                                    <div class="text-danger font-medium"
+                                                    <div class="text-danger "
                                                          style="border-radius: 2px;"><i class="fas fa-times mr-2"></i>Hệ
                                                         thống từ
                                                         chối

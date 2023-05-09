@@ -421,9 +421,9 @@
                                     </td>
                                     <td class="text-center white-space-120">
                                         @if(!empty($user->confirm_date))
-                                            <div class=" text-success font-medium " style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã duyệt</div>
+                                            <div class=" text-success  " style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã duyệt</div>
                                         @else
-                                            <div class=" text-warning font-medium " style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i> Chờ duyệt</div>
+                                            <div class=" text-warning  " style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i> Chờ duyệt</div>
                                         @endif
                                     </td>
                                     <td class="text-center white-space-80">

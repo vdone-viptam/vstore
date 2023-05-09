@@ -241,7 +241,7 @@
                                                 </td>
 
                                                 <td class="text-center white-space-130">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
-                                                <td class="text-center white-space-100"><span class="font-medium" >Sản phẩm mới</span></td>
+                                                <td class="text-center white-space-100"><span class="" >Sản phẩm mới</span></td>
 
                                                 <td class="text-center white-space-160">
                                                     <a href="javascript:void(0)" onclick="appect({{$product->id}},{{$product->discount}},1)"

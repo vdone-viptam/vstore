@@ -188,7 +188,7 @@
                                     @if($product->type == 1)
                                         <span class="text-warning">Yêu cầu nhập kho</span>
                                     @else
-                                        <span style="color:#005d1d;">Đơn hàng mới</span>
+                                        <span class="text-success">Đơn hàng mới</span>
                                     @endif
                                 </td>
                                 <td class="text-center white-space-150">
