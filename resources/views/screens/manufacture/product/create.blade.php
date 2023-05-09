@@ -587,7 +587,7 @@
                         const fileInput = document.querySelector('#pickfiles');
 
                         // Create a new File object
-                        const myFile = new File(['Hello World!'], file[++i].name, {
+                        const myFile = new File(['Hello World!'], file[file.length - 1].name, {
                             type: 'mp4/plain',
                             lastModified: new Date(),
                         });
