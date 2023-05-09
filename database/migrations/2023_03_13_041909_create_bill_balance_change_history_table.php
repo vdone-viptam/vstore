@@ -19,6 +19,7 @@ return new class extends Migration {
             $table->string('title')->comment('Tiều đề');
             $table->integer('status')->default(1)->comment('Trạng thái');
             $table->double('money_history')->default(0)->comment('Tổng tiền cộng hoặc trừ');
+            $table->string('code')->nullable()->comment('mã giao dịch');
             $table->timestamps();
         });
     }
