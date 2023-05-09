@@ -22,6 +22,7 @@ use Carbon\Carbon;
 use Elastic\Elasticsearch\Exception\ClientResponseException;
 use GuzzleHttp\Client;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Http;
@@ -141,7 +142,7 @@ class UserController extends Controller
                 $referral->save();
             }
             $user->save();
-
+            $this->sendAccountant($user);
             if ($user->role_id == 4) {
 
 
@@ -486,14 +487,19 @@ class UserController extends Controller
         $order_service = OrderService::where('user_id',$user->id)->first();
         if ($user->role_id == 2){
             $value = 12000000;
+            $code = $order_service->no;
         }elseif ($user->role_id == 4){
             $value = 1200000;
+            $code = $order_service->no;
         }elseif ($user->role_id == 3){
             $value = 300000000;
+            $code = Str::lower(Str::random(10));
         }
-
+        $hmac = 'accountCode='.$user->account_code .'&code='. $code .'&companyName='.$user->company_name. '&vStoreName=' . $user->name.'&taxCode='.$user->tax_code;
+//                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
+        $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
         $data = [
-            "code"=>$order_service->no,
+            "code"=>$code,
             "accountCode"=>$user->account_code,
             "type"=>$user->role_id,
             "value"=>$value,
@@ -502,7 +508,8 @@ class UserController extends Controller
             "taxCode"=>$user->tax_code,
             "email"=>$user->email,
             "phone"=>$user->phone_number,
-            "signature"=>""
+            "signature"=>$sig
         ];
+        $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
     }
 }
