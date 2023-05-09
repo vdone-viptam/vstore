@@ -243,7 +243,7 @@ class ProductController extends Controller
             $product->save();
 
             DB::commit();
-            return redirect()->back()->with('success', 'Cập nhật sản phẩm thành công');
+            return redirect()->back()->with('success', 'Thêm sản phẩm thành công');
         } catch (\Exception $e) {
 
             DB::rollBack();
