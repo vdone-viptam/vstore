@@ -190,7 +190,7 @@
                                     <td class="text-center white-space-150">
                                         @if($product->type == 1)
                                             @if($product->status == 0)
-                                                <span class="text-secondary">Đang chờ kho duyệt</span>
+                                                <span class="text-warning">Đang chờ kho duyệt</span>
                                             @elseif($product->status == 1)
                                                 <span class="text-success">Đã thêm vào kho</span>
                                             @else
@@ -198,7 +198,7 @@
                                             @endif
                                         @else
                                             @if($product->status == 0)
-                                                <span class="text-secondary">Đang chờ kho duyệt</span>
+                                                <span class="text-warning">Đang chờ kho duyệt</span>
                                             @elseif($product->status == 1)
                                                 <span class="text-success">Đã xuất kho</span>
                                             @else
