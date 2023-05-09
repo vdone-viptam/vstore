@@ -194,7 +194,8 @@
                                         <div class="col-6">
                                             <label for="name">Số tiền (đ)</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
-                                                   value="0 đ" disabled readonly style="pointer-events: none">
+                                                name="sub_moneyv[]" value="{{isset(old('sub_moneyv')[0]) ? old('sub_moneyv')[0] : '0 đ'}}"
+                                                tabindex="-1" readonly style="pointer-events: none">
                                         </div>
                                     </div>
                                 </div>
@@ -244,7 +245,8 @@
                                         <div class="col-6">
                                             <label for="name">Số tiền (đ)</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
-                                                   value="0 đ" disabled readonly style="pointer-events: none">
+                                                name="sub_moneyv[]" value="{{isset(old('sub_moneyv')[1]) ? old('sub_moneyv')[1] : '0 đ'}}"
+                                                tabindex="-1" readonly style="pointer-events: none">
                                         </div>
                                     </div>
                                 </div>
@@ -295,7 +297,8 @@
                                         <div class="col-6">
                                             <label for="name">Số tiền (đ)</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
-                                                   value="0 đ" disabled readonly style="pointer-events: none">
+                                                    name="sub_moneyv[]" value="{{isset(old('sub_moneyv')[2]) ? old('sub_moneyv')[2] : '0 đ'}}"
+                                                    tabindex="-1" readonly style="pointer-events: none">
                                         </div>
                                     </div>
                                 </div>

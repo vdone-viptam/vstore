@@ -29,6 +29,7 @@ class FinanceController extends Controller
 
     public function index()
     {
+
         $this->v['banks'] = DB::table('banks')->select('name', 'full_name', 'image', 'id')->get();
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())->first();
         $this->v['waiting']= Deposit::select(DB::raw('SUM(amount) as amount') )->groupBy('user_id')->where('user_id',Auth::id())->where('status',0)->first()->amount ??0;
@@ -109,7 +110,7 @@ class FinanceController extends Controller
     {
         $type = $request->type ?? 'desc';
         $field = $request->field ?? 'id';
-        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
+        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at','code')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate(10);
@@ -117,12 +118,26 @@ class FinanceController extends Controller
         $this->v['type'] = $type;
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = trim($request->key_search) ?? '';
-
         return view('screens.vstore.finance.revenue', $this->v);
     }
 
     public function deposit(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'bank' => 'required|exists:wallets,id',
+            'money' => 'required|numeric|min:100000',
+        ], [
+            'bank.required' => 'Bạn chưa có ví',
+            'bank.exists' => 'Ví không tồn tại',
+            'money.required' => 'Số tiền rút bắt buộc nhập',
+            'money.numeric' => 'Số tiền rút bắt buộc nhập phải là số',
+            'money.min' => 'Số tiền rút phải lớn hơn 100.000 đ',
+        ]);
+
+        if ($validator->fails()) {
+
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateError',$validator->errors());
+        }
         DB::beginTransaction();
 
         try {

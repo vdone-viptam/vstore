@@ -185,11 +185,12 @@
                                     <div class="form-group">
                                         <label for="val-username">Số tiền cần rút <strong
                                                 class="text-[#FF4D4F]">*</strong></label>
-                                        <input required type="text" class="only-number form-control number"
-                                               name="money" id="money"
-                                               oninvalid="this.setCustomValidity('Giá trị lớn hơn 100.000 và nhỏ hơn {{ number_format(Auth::user()->money, '0', '.', '.') }}')"
-                                               oninput="this.setCustomValidity('')"
-                                               data-value="0" min="100000" placeholder="0đ" max="{{Auth::user()->money}}">
+                                        <input required type="text" class="only-number form-control number-show-vnd"
+                                               data-name="money"
+                                               data-min="100000"
+                                               data-max="{{ round(Auth::user()->money)}}"
+                                               placeholder="0đ"
+                                               >
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column items-start w-100 flex-wrap md:flex-nowrap my-4">
@@ -316,6 +317,10 @@
                 title: 'Tạo yêu cầu rút tiền thất bại !',
                 text: textError,
             })
+            @endif
+            @if(Session::has('validateError'))
+                const textError = '{{ $errors->first() }}';
+                swalNoti('center', 'error', 'Tạo yêu cầu rút tiền thất bại', textError, 500, true, 3000);
             @endif
             @if(Session::has('validateCreate'))
             $('.btn-add-bank').click();

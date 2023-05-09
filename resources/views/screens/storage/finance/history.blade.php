@@ -156,7 +156,7 @@
 
 
                                             <td class="text-center white-space-130">
-                                                {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y')}}
+                                                {{\Illuminate\Support\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                             </td>
                                         </tr>
                                     @endforeach
