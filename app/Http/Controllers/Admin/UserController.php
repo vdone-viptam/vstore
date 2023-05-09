@@ -483,6 +483,26 @@ class UserController extends Controller
     // gửi thông tin tài khoản sang kế toán để làm lịch sử giao dịch
     public function sendAccountant( $user){
 //        accountCode=${dto.accountCode}&code=${dto.code}&companyName=${dto.companyName}&vStoreName=${dto.vStoreName}&taxCode=${dto.taxCode}
+        $order_service = OrderService::where('user_id',$user->id)->first();
+        if ($user->role_id == 2){
+            $value = 12000000;
+        }elseif ($user->role_id == 4){
+            $value = 1200000;
+        }elseif ($user->role_id == 3){
+            $value = 300000000;
+        }
 
+        $data = [
+            "code"=>$order_service->no,
+            "accountCode"=>$user->account_code,
+            "type"=>$user->role_id,
+            "value"=>$value,
+            "vStoreName"=>$user->name,
+            "companyName"=>$user->company_name,
+            "taxCode"=>$user->tax_code,
+            "email"=>$user->email,
+            "phone"=>$user->phone_number,
+            "signature"=>""
+        ];
     }
 }
