@@ -382,7 +382,44 @@ document.querySelectorAll('.only-text').forEach(item => {
         e.target.value = pastedData;
     });
 })
+document.querySelectorAll('.number-show-vnd').forEach(item => {
+    item.addEventListener('input', function(e) {
+        const minValue = item.dataset.min;
+        const maxValue = item.dataset.max;
+        const name = item.dataset.name;
 
+        let value = this.value;
+        value = value.replace(/\D/g, ''); // Loại bỏ các ký tự không phải số
+        const numValue = parseInt(value);
+        value = convertNumberVN(numValue);
+
+        // Kiểm tra giá trị nhập vào có nằm trong khoảng giá trị cho phép hay không
+        if (numValue < minValue) {
+          this.setCustomValidity(`Giá trị nhập vào phải lớn hơn hoặc bằng ${convertNumberVN(minValue)}`);
+        } else if (numValue > maxValue) {
+          this.setCustomValidity(`Giá trị nhập vào phải nhỏ hơn hoặc bằng ${convertNumberVN(maxValue)}`);
+        } else {
+          this.setCustomValidity('');
+        }
+        // Hiển thị giá trị đã định dạng với dấu phẩy trên giao diện
+        this.value = value;
+
+        // xoá hết thẻ input hidden cũ nếu có
+        document.getElementsByName(name).forEach(itemName => {
+            itemName.removeAttribute('name');
+        })
+        // Tạo thẻ input mới
+        const newInput = document.createElement('input');
+        newInput.setAttribute('type', 'hidden');
+        newInput.setAttribute('name', name);
+        newInput.setAttribute('value', numValue);
+        // Chèn thẻ input mới vào cùng cấp với thẻ input cũ
+        if (item) {
+            item.insertAdjacentElement('afterend', newInput);
+        }
+
+    });
+})
 function convertTimeVN(inputTime) {
     // d/m/Y H:i A
     if(!inputTime) return ' ';

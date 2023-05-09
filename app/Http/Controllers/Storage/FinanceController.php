@@ -24,6 +24,7 @@ class FinanceController extends Controller
 
     public function index()
     {
+        
         $this->v['banks'] = DB::table('banks')->select('name', 'full_name', 'image', 'id')->get();
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())
             ->where('type', 1)
@@ -119,6 +120,23 @@ class FinanceController extends Controller
 
     public function deposit(Request $request)
     {
+
+        $validator = Validator::make($request->all(), [
+            'bank' => 'required|exists:wallets,id',
+            'money' => 'required|numeric|min:100000',
+        ], [
+            'bank.required' => 'Bạn chưa có ví',
+            'bank.exists' => 'Ví không tồn tại',
+            'money.required' => 'Số tiền rút bắt buộc nhập',
+            'money.numeric' => 'Số tiền rút bắt buộc nhập phải là số',
+            'money.min' => 'Số tiền rút phải lớn hơn 100.000 đ',
+        ]);
+
+        if ($validator->fails()) {
+
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateError',$validator->errors());
+        }
+
         DB::beginTransaction();
         try {
             $wallet = DB::table('wallets')->where('id', $request->bank)->first();
@@ -133,7 +151,7 @@ class FinanceController extends Controller
             $request->money = str_replace('.', '', $request->money);
 
             if ($request->money > Auth::user()->money) {
-                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.') . ' VNĐ');
+                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.') . ' đ');
             }
             DB::table('deposits')->insert([
                 'name' => $wallet->name,

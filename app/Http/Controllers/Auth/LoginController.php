@@ -1108,16 +1108,23 @@ class LoginController extends Controller
         if ($request->type == 2) {
 
             $response = District::select('district_id as DISTRICT_ID', 'district_name as DISTRICT_NAME', 'district_value as DISTRICT_VALUE', 'province_id as PROVINCE_ID')
-                ->where('province_id', $request->value)->get();
+                ->where('province_id', $request->value)
+                ->orderBy('DISTRICT_NAME','asc')
+                ->get();
 //            return  $response;
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $request->value);
             return $response;
         } elseif ($request->type == 3) {
-            $response = Ward::select('wards_id as WARDS_ID', 'district_id as DISTRICT_ID', 'wards_name as WARDS_NAME')->where('district_id', $request->value)->get();
+            $response = Ward::select('wards_id as WARDS_ID', 'district_id as DISTRICT_ID', 'wards_name as WARDS_NAME')
+                ->where('district_id', $request->value)
+                ->orderBy('WARDS_NAME','asc')
+                ->get();
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listWards?districtId=' . $request->value);
             return $response;
         } else {
-            $response = Province::select('province_id as PROVINCE_ID', 'province_code as PROVINCE_CODE', 'province_name as PROVINCE_NAME')->get();
+            $response = Province::select('province_id as PROVINCE_ID', 'province_code as PROVINCE_CODE', 'province_name as PROVINCE_NAME')
+                ->orderBy('PROVINCE_NAME','asc')
+                ->get();
             return $response;
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');
 //            return $response->json('data');

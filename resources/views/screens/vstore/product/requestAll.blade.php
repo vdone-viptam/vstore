@@ -224,7 +224,7 @@
                                     <td class=" text-center white-space-80">
                                         {{$product->discount}}%
                                     </td>
-                                    <td class="text-center white-space-130">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-140">{{\Carbon\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                     <td class=" text-center white-space-130">{{$product->vstore_confirm_date !== null ?
 \Carbon\Carbon::parse($product->vstore_confirm_date)->format('d/m/Y H:i') : 'Chưa xét duyệt'}}</td>
                                     <td class="text-center">

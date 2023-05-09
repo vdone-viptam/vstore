@@ -91,7 +91,7 @@
                                 <div class="form-group">
                                     <label for="name">Giá sản phẩm chưa VAT(đ):<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg number" id="price"
+                                    <input type="text" class="form-control form-control-lg number only-number" id="price"
                                            name="price"
                                            value="{{old('price')}}" placeholder="0">
                                     @error('price')
@@ -195,7 +195,7 @@
                                     <label for="name">Kích cỡ (Cm) <span class="text-danger">*</span></label>
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-4 col-12">
-                                            <input type="text" class="form-control form-control-lg number" id="length"
+                                            <input type="text" class="form-control form-control-lg number only-number" id="length"
                                                    name="length"
                                                    value="{{old('length')}}"
                                                    placeholder="Nhập chiều dài">
@@ -204,7 +204,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-12 ">
-                                            <input type="text" class="form-control form-control-lg number" id="with"
+                                            <input type="text" class="form-control form-control-lg number only-number" id="with"
                                                    name="with"
                                                    value="{{old('with')}}"
                                                    placeholder="Nhập chiều rộng">
@@ -213,7 +213,7 @@
                                             @enderror
                                         </div>
                                         <div class="col-xl-4  col-lg-4 col-12">
-                                            <input type="text" class="form-control form-control-lg number" id="height"
+                                            <input type="text" class="form-control form-control-lg number only-number" id="height"
                                                    name="height"
                                                    value="{{old('height')}}"
                                                    placeholder="Nhập chiều cao">
@@ -227,7 +227,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Trọng lượng (Gram) <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg number" id="weight"
+                                    <input type="text" class="form-control form-control-lg number only-number" id="weight"
                                            name="weight"
                                            value="{{old('weight')}}"
                                            placeholder="Nhập trọng lượng sản phẩm">
@@ -239,7 +239,7 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Thể tích (Ml)</label>
-                                    <input type="text" class="form-control form-control-lg number" id="volume"
+                                    <input type="text" class="form-control form-control-lg number only-number" id="volume"
                                            name="volume"
                                            value="{{old('volume')}}"
                                            placeholder="Nhập thể tích sản phẩm">

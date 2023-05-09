@@ -358,13 +358,13 @@
 
 
                     <div class="col-12">
-                    <div class="table-responsive">
+                    <div class="table-responsive" style="overflow-y:scroll; max-height:500px;">
 
                         <table id="example" class="table table-striped table-bordered second" style="width:100%">
                             <thead>
                             <tr role="row">
-                                <th class="sorting_asc white-space-250"  >Tên sản phẩm</th>
-                                <th class="white-space-250">Số lượng</th>
+                                <th class="sorting_asc "  >Tên sản phẩm</th>
+                                <th class="white-space-250 ">Số lượng</th>
 
                             </tr>
                             </thead>
@@ -374,8 +374,8 @@
 
                             htmlData += `
 <tr role="row" class="odd">
-                                <td class="text-nowrap" >${value.name}</td>
-                                <td>${ convertNumberVN(value.amount_product)}</td>
+                                <td class="text-nowrap white-space-250" >${value.name}</td>
+                                <td class="white-space-250 text-center">${ convertNumberVN(value.amount_product)}</td>
 
                             </tr>
 

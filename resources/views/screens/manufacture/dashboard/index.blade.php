@@ -371,7 +371,7 @@
                                             <td class="text-right white-space-140">{{number_format($product->price,0,'.','.')}} đ</td>
                                             <td class="text-center white-space-150">{{$product->vstore_name && $product->status == 2 ? $product->vstore_name : 'Sản phẩm chưa niêm yết'}}</td>
                                             <td class="text-center white-space-100">{{$product->discount != null ? $product->discount."%" : 'Chưa niêm yết'}}</td>
-                                            <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
+                                            <td class="text-center white-space-140">{{\Illuminate\Support\Carbon::parse($product->admin_confirm_date)->format('d/m/Y H:i')}}</td>
                                             <td class="text-center white-space-80">{{number_format($product->amount_product_sold,0,'.','.')}}</td>
                                             <td class="text-center white-space-100">{{number_format($product->amount,0,'.','.')}}</td>
                                             <td class="white-space-80 text-center">

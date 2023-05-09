@@ -130,7 +130,7 @@
                                     </span>
                             </th>
                             <th class="white-space-110 text-center">Kho hàng</th>
-                            <th class="white-space-130 text-center">Ngày đặt hàng
+                            <th class="white-space-140 text-center">Ngày đặt hàng
                                 <span style="float: right;cursor: pointer">
                                         @if ($field == 'order.created_at')
                                         @if ($type == 'desc')
@@ -226,8 +226,8 @@
                                         đ
                                     </td>
                                     <td class="text-center white-space-100">{{ $order->orderItem[0]->quantity }}</td>
-                                    <td class="text-center white-space-150">{{ $order->orderItem[0]->warehouse->name }}</td>
-                                    <td class="text-center white-space-130">{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i') }}</td>
+                                    <td class="text-center white-space-140">{{ $order->orderItem[0]->warehouse->name }}</td>
+                                    <td class="text-center white-space-140">{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i') }}</td>
                                     <td class="text-center white-space-130">
                                         @if($order->export_status == 2 || $order->export_status == 4)
                                             {{ \Carbon\Carbon::parse($order->estimated_date)->format('d/m/Y H:i') }}

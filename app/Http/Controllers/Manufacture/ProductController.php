@@ -176,7 +176,7 @@ class ProductController extends Controller
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
         ];
 
-        DB::beginTransaction();
+        
         $validator = Validator::make($request->all(), $error, $message);
 
         if ($validator->fails()) {
@@ -243,7 +243,7 @@ class ProductController extends Controller
             $product->save();
 
             DB::commit();
-            return redirect()->back()->with('success', 'Cập nhật sản phẩm thành công');
+            return redirect()->back()->with('success', 'Thêm sản phẩm thành công');
         } catch (\Exception $e) {
 
             DB::rollBack();
