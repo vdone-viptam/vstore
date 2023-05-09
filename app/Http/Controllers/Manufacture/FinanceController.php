@@ -128,6 +128,22 @@ class FinanceController extends Controller
 
     public function deposit(Request $request)
     {
+        $validator = Validator::make($request->all(), [
+            'bank' => 'required|exists:wallets,id',
+            'money' => 'required|numeric|min:100000',
+        ], [
+            'bank.required' => 'Bạn chưa có ví',
+            'bank.exists' => 'Ví không tồn tại',
+            'money.required' => 'Số tiền rút bắt buộc nhập',
+            'money.numeric' => 'Số tiền rút bắt buộc nhập phải là số',
+            'money.min' => 'Số tiền rút phải lớn hơn 100.000 đ',
+        ]);
+
+        if ($validator->fails()) {
+
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateError',$validator->errors());
+        }
+        
         DB::beginTransaction();
 
         try {
