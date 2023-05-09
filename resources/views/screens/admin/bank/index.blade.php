@@ -180,7 +180,7 @@
                     var error0 = JSON.parse(jqXHR.responseText)
                     Swal.fire({
                         icon: 'error',
-                        title: 'Sửa danh mục thất bại !',
+                        title: 'Sửa ngân hàng thất bại !',
                         text: error0.message,
                     })
                 }

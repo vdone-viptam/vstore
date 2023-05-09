@@ -172,14 +172,7 @@ class FinanceController extends Controller
                 'created_at' => Carbon::now()
             ]);
 
-            DB::table('balance_change_history')->insert([
-                'user_id' => Auth::id(),
-                'type' => 0,
-                'title' => 'Rút tiền về ngân hàng',
-                'status' => 1,
-                'money_history' => (double)$request->money,
-                'created_at' => Carbon::now()
-            ]);
+
             $hmac = 'accountCode='.Auth::user()->account_code .'&code='. $code .'&value='.round($request->money,0). '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
             $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));

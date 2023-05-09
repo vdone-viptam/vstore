@@ -93,8 +93,8 @@
                                 </span>
                             </th>
                             <th>
-                         
-                            Tên sản phẩm
+
+                                Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
                                         @if($type == 'desc')
@@ -122,7 +122,7 @@
                                 </span>
                             </th>
                             <th class="white-space-130">
-                            <div class="d-flex align-items-center justify-content-around">
+                                <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
                                     Giá sản phẩm <br> chưa VAT
 </span>
@@ -137,11 +137,11 @@
                                             <i class="fas fa-sort sort" data-sort="products.price"></i>
                                         @endif
                                 </span>
-</div>
-                                
+                                </div>
+
                             </th>
                             <th class="white-space-150">
-                            <div class="d-flex align-items-center justify-content-around">
+                                <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
                                     Chiết khấu từ <br> Nhà cung cấp
 </span>
@@ -156,7 +156,7 @@
                                             <i class="fas fa-sort sort" data-sort="requests.discount"></i>
                                         @endif
                                 </span>
-</div>
+                                </div>
                             </th>
                             <th class="white-space-130 text-center">Ngày yêu cầu
                                 <span style="float: right;cursor: pointer">
@@ -184,7 +184,7 @@
                         @if(count($requests) > 0)
                             @foreach($requests as $product)
                                 <tr>
-                                    <td class="text-center white-space-130" >
+                                    <td class="text-center white-space-130">
                                         {{$product->code}}
                                     </td>
                                     <td class="white-space-150 text-center">
@@ -206,13 +206,19 @@
                                             class="">Yêu cầu mới</span></td>
 
                                     <td class="text-center white-space-160">
-                                        <a href="javascript:void(0)" onclick="appect({{$product->id}},{{$product->discount}},1)"
-                                           class="btn px-2 py-0 text-success font-medium" style="text-decoration:underline">Đồng ý</a>
-                                        <a href="javascript:void(0)" onclick="unAppect({{$product->id}},{{$product->discount}},2)"
-                                           class="btn px-2  py-0 text-danger font-medium" style="text-decoration:underline">Từ chối</a>
+                                        <a href="javascript:void(0)"
+                                           onclick="appect({{$product->id}},{{$product->discount}},1)"
+                                           class="btn px-2 py-0 text-success font-medium"
+                                           style="text-decoration:underline">Đồng ý</a>
+                                        <a href="javascript:void(0)"
+                                           onclick="unAppect({{$product->id}},{{$product->discount}},2)"
+                                           class="btn px-2  py-0 text-danger font-medium"
+                                           style="text-decoration:underline">Từ chối</a>
                                     </td>
-                                    <td class="text-center white-space-80"><a href="javascript:void(0)" 
-                                           class="btn px-2 py-0 text-primary" style="text-decoration:underline">Chi tiết</a></td>
+                                    <td class="text-center white-space-80"><a href="javascript:void(0)"
+                                                                              class="btn px-2 py-0 text-primary"
+                                                                              style="text-decoration:underline">Chi
+                                            tiết</a></td>
                                 </tr>
                             @endforeach
                         @else
@@ -295,7 +301,7 @@
                         document.getElementById('messageDis').style.display = 'none';
                         document.getElementById('btnConfirm').style.display = 'block';
                     } else {
-                        document.getElementById('messageDis').style.display = 'block';
+                        document.getElementById('messageDis').style.display = 'none';
                         document.getElementById('btnConfirm').style.display = 'none';
                     }
                 } else {
@@ -303,6 +309,20 @@
                     document.getElementById('btnConfirm').style.display = 'none';
                 }
 
+            });
+            $('#appect').on('change', (e) => {
+                if (+$('#discount_vShop').val() < Number(document.getElementById('discount').dataset.discount) && +$('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2) {
+                    if ($('#appect').is(":checked")) {
+                        document.getElementById('messageDis').style.display = 'none';
+                        document.getElementById('btnConfirm').style.display = 'block';
+                    } else {
+                        document.getElementById('messageDis').style.display = 'none';
+                        document.getElementById('btnConfirm').style.display = 'none';
+                    }
+                }else{
+                    document.getElementById('messageDis').style.display = 'block';
+                    document.getElementById('btnConfirm').style.display = 'none';
+                }
             })
             document.getElementsByName('discount_vShop')[0].addEventListener("keypress", (e) => {
                 var regex = new RegExp("^[0-9.]+$");
@@ -316,7 +336,7 @@
 
         }
 
-        function checkHideShow(){
+        function checkHideShow() {
             if (Number(document.getElementById('discount').dataset.discount) &&
                 $('#discount_vShop').val() < Number(document.getElementById('discount').dataset.discount) &&
                 $('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2 &&

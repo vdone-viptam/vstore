@@ -162,16 +162,9 @@ class FinanceController extends Controller
                 'user_id' => Auth::id(),
                 'account_number' => $wallet->account_number,
                 'old_money' => Auth::user()->money - $request->money,
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now(),
             ]);
-            DB::table('balance_change_history')->insert([
-                'user_id' => Auth::id(),
-                'type' => 0,
-                'title' => 'Rút tiền về ngân hàng',
-                'status' => 1,
-                'money_history' => (double)$request->money,
-                'created_at' => Carbon::now()
-            ]);
+
             $bank = Bank::where('id',$wallet->bank_id)->first();
             $hmac = 'userId='.Auth::id() .'&code='. $code .'&value='.round($request->money,0). '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
