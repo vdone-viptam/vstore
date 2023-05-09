@@ -404,12 +404,6 @@ document.querySelectorAll('.number-show-vnd').forEach(item => {
         // Hiển thị giá trị đã định dạng với dấu phẩy trên giao diện
         this.value = value;
 
-
-        // Xoá thuộc tính name của thẻ input
-        if (item) {
-            item.removeAttribute('name');
-        }
-
         // xoá hết thẻ input hidden cũ nếu có
         document.getElementsByName(name).forEach(itemName => {
             itemName.removeAttribute('name');

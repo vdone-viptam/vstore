@@ -191,7 +191,6 @@
                                         <label for="val-username">Số tiền cần rút <strong
                                                 class="text-[#FF4D4F]">*</strong></label>
                                         <input required type="text" class="only-number form-control number-show-vnd"
-                                               name="money"
                                                data-name="money"
                                                data-min="100000"
                                                data-max="{{ round(Auth::user()->money)}}"
