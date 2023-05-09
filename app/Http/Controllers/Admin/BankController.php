@@ -41,9 +41,9 @@ class BankController extends Controller
     public function store(Request $request)
     {
 
-        Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'name' => 'required|unique:banks|min:1|max:255',
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'img' => 'required|image',
             'full_name' => 'required',
         ], [
             'name.required' => 'Tên ngân hàng bắt buộc nhập',
@@ -54,6 +54,11 @@ class BankController extends Controller
             'full_name.required' => 'Tên ngân hàng bắt buộc nhập',
             'full_name.unique' => 'Tên ngân hàng  đã tồn tại'
         ]);
+
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+        }
+
         DB::beginTransaction();
         try {
             $bank = new Bank();
@@ -87,6 +92,7 @@ class BankController extends Controller
                 'full_name.required' => 'Tên ngân hàng bắt buộc nhập',
                 'full_name.unique' => 'Tên ngân hàng  đã tồn tại'
             ]);
+
             DB::beginTransaction();
             try {
                 $bank = Bank::find($id);
@@ -102,7 +108,7 @@ class BankController extends Controller
         }
         Validator::make($request->all(), [
             'name' => 'required|unique:banks|min:1|max:255',
-            'img' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'img' => 'required|image',
             'full_name' => 'required|min:1|max:255',
         ], [
             'name.required' => 'Tên ngân hàng bắt buộc nhập',
