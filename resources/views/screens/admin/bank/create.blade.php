@@ -70,11 +70,12 @@
                 let allowedImageTypes = ["image/jpeg", "image/gif", "image/png"];
                 if (!allowedImageTypes.includes(file.type)) {
                     error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif ]";
+                    $('#image').val('');
                     return false;
                 }
                 if (file.size > 1024 * 1024 * 5) {
                     error.innerHTML = "File ảnh upload không quá 5MB";
-        
+
                     return false;
                 }
             }

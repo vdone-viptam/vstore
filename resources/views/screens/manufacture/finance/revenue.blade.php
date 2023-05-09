@@ -103,7 +103,7 @@
                                         @if(count($histories) > 0)
                                             @foreach($histories as $history)
                                                 <tr>
-                                                    <td class="text-center white-space-130">1{{$histories->code ?? '-'}}</td>
+                                                    <td class="text-center white-space-130">{{$history->code ?? '-'}}</td>
                                                     <td class="text-center white-space-130">
                                                         @if($history->status == 0)
                                                             <p class="text-danger">Thất bại</p>
