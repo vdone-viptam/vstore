@@ -49,7 +49,7 @@
                                    style="width:100%">
                                 <thead>
                                 <tr>
-                                    <th class="text-center white-space-120" >Mã giao dịch</th>
+                                    <th class="text-center white-space-120" >Mã Yêu cầu</th>
                                     <th class="text-center white-space-100" >Trạng thái</th>
                                     <th class="white-space-130 text-center">Số tiền
                                         <span style="float: right;cursor: pointer">
