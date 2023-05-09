@@ -150,17 +150,17 @@
                                     <td>{{$order->orderItem[0]->product->name}}</td>
                                     <td>
                                         @if($order->export_status == 0)
-                                            <span class="text-yellow-400">Chờ xác nhận</span>
+                                            <span class="text-warning">Chờ xác nhận</span>
                                         @elseif($order->export_status == 1)
-                                            <span class="text-blue-600">Chờ giao hàng</span>
+                                            <span class="text-primary">Chờ giao hàng</span>
                                         @elseif($order->export_status == 2)
-                                            <span class="text-blue-600">Đang giao hàng</span>
+                                            <span class="text-primary">Đang giao hàng</span>
                                         @elseif($order->export_status == 3)
-                                            <span class="text-red-500">Kho hủy</span>
+                                            <span class="text-danger">Kho hủy</span>
                                         @elseif($order->export_status == 5)
-                                            <span class="text-red-500">Khách hủy</span>
+                                            <span class="text-danger">Khách hủy</span>
                                         @else
-                                            <span class="text-green-600">Hoàn thành</span>
+                                            <span class="text-success">Hoàn thành</span>
                                         @endif
                                     </td>
                                     <td>{{number_format($order->orderItem[0]->price,'0','.','.')}} đ</td>

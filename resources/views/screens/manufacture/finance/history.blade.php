@@ -126,15 +126,15 @@
                                             <td class="text-center white-space-140">{{$history->code}}</td>
 
                                             @if($history->status == 0)
-                                                <td class="text-warning font-medium text-center white-space-130">
+                                                <td class="text-warning text-center white-space-130">
                                                     Đang chờ duyệt
                                                 </td>
                                             @elseif($history->status == 1)
-                                                <td class="text-success font-medium text-center white-space-130">
+                                                <td class="text-success text-center white-space-130">
                                                     Thành công
                                                 </td>
                                             @else
-                                                <td class="text-danger font-medium text-center white-space-130">
+                                                <td class="text-danger text-center white-space-130">
                                                     Thất bại
                                                 </td>
                                             @endif
