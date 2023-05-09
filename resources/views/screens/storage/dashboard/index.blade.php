@@ -104,7 +104,7 @@
                             <th class="text-center white-space-180">Mã đơn hàng/Mã yêu cầu</th>
                             <th class="white-space-130 text-center">Mã sản phẩm</th>
                             <th >
-                            
+
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -145,7 +145,6 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-100 text-center">Chiết khấu</th>
                             <th class="white-space-120 text-center">Thời gian
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'created_at')
@@ -184,7 +183,6 @@
                                 <td title="{{$product->product_name}}" class="white-space-250">{{\Illuminate\Support\Str::limit($product->product_name,50,'...')}}</td>
                                 <td class="text-center white-space-150">{{$product->ncc_name}}</td>
                                 <td class="text-center white-space-80">{{$product->quantity}}</td>
-                                <td class="text-center white-space-80">0</td>
                                 <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($product->created_at)->format('d/m/Y H:i')}}</td>
                                 <td class="text-center white-space-160">
                                     @if($product->type == 1)
