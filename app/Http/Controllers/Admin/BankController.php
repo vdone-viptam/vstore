@@ -43,14 +43,13 @@ class BankController extends Controller
 
         $validator = Validator::make($request->all(), [
             'name' => 'required|unique:banks|min:1|max:255',
-            'img' => 'required|image',
+            'image' => 'required|image',
             'full_name' => 'required',
         ], [
             'name.required' => 'Tên ngân hàng bắt buộc nhập',
             'name.unique' => 'Tên ngân hàng đã tồn tại',
             'image.required' => 'Ảnh ngân hàng bắt buộc nhập',
             'image.image' => 'Ảnh ngân hàng không đúng định dạng',
-            'image.mimes' => 'Ảnh ngân hàng không được hỗ trợ (jpeg,png,jpg,gif,svg)',
             'full_name.required' => 'Tên ngân hàng bắt buộc nhập',
             'full_name.unique' => 'Tên ngân hàng  đã tồn tại'
         ]);
@@ -108,14 +107,13 @@ class BankController extends Controller
         }
         Validator::make($request->all(), [
             'name' => 'required|unique:banks|min:1|max:255',
-            'img' => 'required|image',
+            'image' => 'required|image',
             'full_name' => 'required|min:1|max:255',
         ], [
             'name.required' => 'Tên ngân hàng bắt buộc nhập',
             'name.unique' => 'Tên ngân hàng đã tồn tại',
-            'img.required' => 'Ảnh ngân hàng bắt buộc nhập',
-            'img.image' => 'Ảnh ngân hàng không đúng định dạng',
-            'img.mimes' => 'Ảnh ngân hàng không được hỗ trợ (jpeg,png,jpg,gif,svg)',
+            'image.required' => 'Ảnh ngân hàng bắt buộc nhập',
+            'image.image' => 'Ảnh ngân hàng không đúng định dạng',
             'full_name.required' => 'Tên ngân hàng bắt buộc nhập',
             'full_name.unique' => 'Tên ngân hàng  đã tồn tại'
         ]);
