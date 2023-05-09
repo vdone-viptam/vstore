@@ -103,8 +103,8 @@
             <div class="form-group">
                 <label for="name">Chiết khấu cho V-Shop</label>
                 <input type="text" class="form-control form-control-lg number-percent"
-                       value="{{$product->discount_vshop != null ? $product->discount_vshop.'%' : ''}}"
-                       {{isset($product->discount_vshop) || $product->status == 2 ? 'disabled' : ''}} name="discount_vShop"
+                       value="{{$product->discount_vshop > 0 ? $product->discount_vshop.'%' : ''}}"
+                       {{$product->discount_vshop > 0 || $product->status == 2 ? 'disabled' : ''}} name="discount_vShop"
                        id="discount_vShop"
                        placeholder="Nhập chiết khẩu cho V-Shop">
                 <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được
