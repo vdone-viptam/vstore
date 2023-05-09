@@ -31,7 +31,7 @@ class AccountingController extends Controller
                 $balance_change_history->title = 'Hoàn tiền do admin từ trối lệnh rút tiền';
                 $balance_change_history->user_id=$deposits->user_id;
                 $balance_change_history->money_history = $user->money;
-
+                $balance_change_history->code=$deposits->code;
                 $user->money += $deposits->amount;
                 $user->save();
 
