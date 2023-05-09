@@ -495,7 +495,18 @@
                         }
                     },
                     UploadComplete: function (up, file) {
-                        // toastr.success('Your File Uploaded Successfully!!', 'Success Alert', {timeOut: 5000});
+                        const fileInput = document.querySelector('#pickfiles');
+
+                        // Create a new File object
+                        const myFile = new File(['Hello World!'], file[file.length - 1].name, {
+                            type: 'mp4/plain',
+                            lastModified: new Date(),
+                        });
+
+                        // Now let's create a DataTransfer to get a FileList
+                        const dataTransfer = new DataTransfer();
+                        dataTransfer.items.add(myFile);
+                        fileInput.files = dataTransfer.files;
                     },
                     Error: function (up, err) {
                         // DO YOUR ERROR HANDLING!

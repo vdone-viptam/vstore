@@ -91,7 +91,8 @@
                                 <div class="form-group">
                                     <label for="name">Giá sản phẩm chưa VAT(đ):<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg number only-number" id="price"
+                                    <input type="text" class="form-control form-control-lg number only-number"
+                                           id="price"
                                            name="price"
                                            value="{{old('price')}}" placeholder="0">
                                     @error('price')
@@ -198,7 +199,8 @@
                                     <label for="name">Kích cỡ (Cm) <span class="text-danger">*</span></label>
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-4 col-12">
-                                            <input type="text" class="form-control form-control-lg number only-number" id="length"
+                                            <input type="text" class="form-control form-control-lg number only-number"
+                                                   id="length"
                                                    name="length"
                                                    value="{{old('length')}}"
                                                    placeholder="Nhập chiều dài">
@@ -207,7 +209,8 @@
                                             @enderror
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-12 ">
-                                            <input type="text" class="form-control form-control-lg number only-number" id="with"
+                                            <input type="text" class="form-control form-control-lg number only-number"
+                                                   id="with"
                                                    name="with"
                                                    value="{{old('with')}}"
                                                    placeholder="Nhập chiều rộng">
@@ -216,7 +219,8 @@
                                             @enderror
                                         </div>
                                         <div class="col-xl-4  col-lg-4 col-12">
-                                            <input type="text" class="form-control form-control-lg number only-number" id="height"
+                                            <input type="text" class="form-control form-control-lg number only-number"
+                                                   id="height"
                                                    name="height"
                                                    value="{{old('height')}}"
                                                    placeholder="Nhập chiều cao">
@@ -230,7 +234,8 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Trọng lượng (Gram) <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg number only-number" id="weight"
+                                    <input type="text" class="form-control form-control-lg number only-number"
+                                           id="weight"
                                            name="weight"
                                            value="{{old('weight')}}"
                                            placeholder="Nhập trọng lượng sản phẩm">
@@ -242,7 +247,8 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Thể tích (Ml)</label>
-                                    <input type="text" class="form-control form-control-lg number only-number" id="volume"
+                                    <input type="text" class="form-control form-control-lg number only-number"
+                                           id="volume"
                                            name="volume"
                                            value="{{old('volume')}}"
                                            placeholder="Nhập thể tích sản phẩm">
@@ -427,6 +433,13 @@
         </script>
     @endif
     <script type="text/javascript">
+        let i = -1;
+        $('#file-input').on('change', (e) => {
+            console.log(1)
+            const fileInput = document.querySelector('#file-input');
+            fileInput.files = e.target.files[0]
+        })
+
         $(document).ready(function () {
             var path = "{{ asset('/plupload/js/') }}";
 
@@ -435,7 +448,7 @@
                 container: document.getElementById('file-input'),
                 url: '{{ route("chunk.store") }}',
                 chunk_size: '1MB', // 1 MB
-                max_retries: 2,
+                max_retries: 1,
                 filters: {
                     max_file_size: '200mb',
                     mime_types: [
@@ -490,7 +503,18 @@
                         }
                     },
                     UploadComplete: function (up, file) {
-                        // toastr.success('Your File Uploaded Successfully!!', 'Success Alert', {timeOut: 5000});
+                        const fileInput = document.querySelector('#pickfiles');
+
+                        // Create a new File object
+                        const myFile = new File(['Hello World!'], file[++i].name, {
+                            type: 'mp4/plain',
+                            lastModified: new Date(),
+                        });
+
+                        // Now let's create a DataTransfer to get a FileList
+                        const dataTransfer = new DataTransfer();
+                        dataTransfer.items.add(myFile);
+                        fileInput.files = dataTransfer.files;
                     },
                     Error: function (up, err) {
                         // DO YOUR ERROR HANDLING!
@@ -509,7 +533,7 @@
         });
 
 
-        document.querySelector('#images').addEventListener('change',(e) => {
+        document.querySelector('#images').addEventListener('change', (e) => {
             let error = document.querySelector("#error");
 
             error.innerHTML = "";
@@ -528,7 +552,6 @@
                         document.querySelector('#btnSave').setAttribute('disabled', 'true');
                         return false;
                     }
-
 
 
                     document.querySelector('#btnSave').removeAttribute('disabled');
