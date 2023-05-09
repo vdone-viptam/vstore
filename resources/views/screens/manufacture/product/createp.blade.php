@@ -134,14 +134,16 @@
                             <div class="mb-3 col-12 col-xl-6">
                                 <label for="formFileMultiple" class="form-label">Hình ảnh sản phẩm<span
                                         class="text-danger">*</span></label>
-                                <input class="form-control form-control-lg" accept=".jpeg.gif,.png" type="file"
-                                       name="images[]"
+                                <input class="form-control form-control-lg" accept=".jpeg.gif,.png,.jpg" type="file" name="images[]"
                                        id="images"
                                        multiple>
                                 <p class="text-danger mt-2 ml-1" id="error"></p>
                                 @error('images')
                                 <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                 @enderror
+                                @if ($errors->has('images.*'))
+                                    <p class="text-danger mt-2 ml-1">{{ $errors->first('images.*')}}</p>
+                                @endif
                             </div>
                             <div class="col-12 mb-3 col-xl-6">
                                 <div class="form-group" id="file-input">
@@ -539,7 +541,7 @@
                 console.log(e.target.files)
                 for (let i = 0; i < e.target.files.length; i++) {
                     let file = e.target.files[i];
-                    let allowedImageTypes = ["image/jpeg", "image/gif", "image/png"];
+                    let allowedImageTypes = ["image/jpeg", "image/gif", "image/png","image/jpg"];
                     if (!allowedImageTypes.includes(file.type)) {
                         error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif ]";
                         document.querySelector('#btnSave').setAttribute('disabled', 'true');
