@@ -478,4 +478,11 @@ class UserController extends Controller
 
         return redirect()->back()->with('success', 'Thay đổi trạng thái giao dịch thành công');
     }
+
+
+    // gửi thông tin tài khoản sang kế toán để làm lịch sử giao dịch
+    public function sendAccountant( $user){
+//        accountCode=${dto.accountCode}&code=${dto.code}&companyName=${dto.companyName}&vStoreName=${dto.vStoreName}&taxCode=${dto.taxCode}
+
+    }
 }
