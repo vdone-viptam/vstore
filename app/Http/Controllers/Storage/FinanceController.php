@@ -144,7 +144,7 @@ class FinanceController extends Controller
                 'user_id' => Auth::id(),
                 'account_number' => $wallet->account_number,
                 'old_money' => Auth::user()->money - $request->money,
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now(),
             ]);
             DB::table('balance_change_history')->insert([
                 'user_id' => Auth::id(),
@@ -152,7 +152,9 @@ class FinanceController extends Controller
                 'title' => 'Rút tiền về ngân hàng',
                 'status' => 1,
                 'money_history' => (double)$request->money,
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now(),
+                'code' => $code,
+
             ]);
             $bank = Bank::where('id',$wallet->bank_id)->first();
             $hmac = 'userId='.Auth::id() .'&code='. $code .'&value='.round($request->money,0). '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;

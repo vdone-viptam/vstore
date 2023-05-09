@@ -162,7 +162,8 @@ class FinanceController extends Controller
                 'title' => 'Rút tiền về ngân hàng',
                 'status' => 1,
                 'money_history' => (double)$request->money,
-                'created_at' => Carbon::now()
+                'created_at' => Carbon::now(),
+                'code' => $code,
             ]);
             $hmac = 'accountCode='.Auth::user()->account_code .'&code='. $code .'&value='.round($request->money,0). '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63

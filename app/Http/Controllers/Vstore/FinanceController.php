@@ -155,7 +155,7 @@ class FinanceController extends Controller
                 'status' => 1,
                 'money_history' => (double)$request->money,
                 'created_at' => Carbon::now(),
-                'code' => $code
+                'code' => 'aaaaaaaa'
             ]);
             $bank = Bank::where('id',$wallet->bank_id)->first();
             $hmac = 'accountCode='.Auth::user()->account_code .'&code='. $code .'&value='.round($request->money,0). '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
