@@ -501,7 +501,6 @@
                         }
                     },
                     UploadComplete: function (up, file) {
-                        console.log(file)
                         const fileInput = document.querySelector('#pickfiles');
 
                         // Create a new File object
