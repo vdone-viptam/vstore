@@ -216,6 +216,7 @@
                                            style="text-decoration:underline">Từ chối</a>
                                     </td>
                                     <td class="text-center white-space-80"><a href="javascript:void(0)"
+                                                                              onclick="showDetail({{$product->id}})"
                                                                               class="btn px-2 py-0 text-primary"
                                                                               style="text-decoration:underline">Chi
                                             tiết</a></td>
@@ -271,6 +272,30 @@
         </script>
     @endif
     <script>
+        async function showDetail(id) {
+            await $.ajax({
+                type: "GET",
+                url: `{{route('screens.vstore.product.detail')}}?id=` + id + '&type=1',
+                dataType: "json",
+                encode: true,
+                error: function (jqXHR, error, errorThrown) {
+                    var error0 = JSON.parse(jqXHR.responseText)
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Xem chi tiết sản phẩm thất bại !',
+                        text: error0.message,
+                    })
+                }
+            }).done(function (data) {
+                var htmlData = `${data.view}`;
+                $('.md-content').html(htmlData)
+                $('#modalDetail').modal('show');
+                document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id)
+            })
+
+
+        }
+
         let limit = document.getElementById('limit');
         document.getElementById('btnConfirm').style.display = 'none';
 
@@ -294,7 +319,7 @@
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
             document.querySelector('#form').setAttribute('name', '_csrf');
-
+            console.log(document.getElementsByName('discount_vShop'))
             document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
                 if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
                     if ($('#appect').is(":checked")) {
@@ -319,7 +344,7 @@
                         document.getElementById('messageDis').style.display = 'none';
                         document.getElementById('btnConfirm').style.display = 'none';
                     }
-                }else{
+                } else {
                     document.getElementById('messageDis').style.display = 'block';
                     document.getElementById('btnConfirm').style.display = 'none';
                 }

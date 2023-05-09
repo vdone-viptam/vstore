@@ -144,7 +144,7 @@
                                     </span>
                             </th>
                             <th class="white-space-180">
-                               
+
                                     Ngày dự kiến giao hàng
                                     <span style="float: right;cursor: pointer">
                                         @if ($field == 'order.estimated_date')
@@ -159,10 +159,10 @@
                                             <i class="fas fa-sort sort" data-sort="order.estimated_date"></i>
                                         @endif
                                     </span>
-                               
+
                             </th>
                             <th class="white-space-160">
-                               
+
                                     Giá trị đơn hàng
                                     <span style="float: right;cursor: pointer">
                                         @if ($field == 'order.total')
@@ -175,13 +175,13 @@
                                             <i class="fas fa-sort sort" data-sort="order.total"></i>
                                         @endif
                                     </span>
-                              
+
                             </th>
                             <th class="white-space-130 text-center">
                                 V-Shop bán hàng
                             </th>
                             <th class="white-space-180">
-                               
+
                                     Giá trị trừ chiết khấu
                                     <span style="float: right;cursor: pointer">
                                         @if ($field == 'money')
@@ -194,7 +194,7 @@
                                             <i class="fas fa-sort sort" data-sort="money"></i>
                                         @endif
                                     </span>
-                               
+
                             </th>
                         </tr>
                         </thead>

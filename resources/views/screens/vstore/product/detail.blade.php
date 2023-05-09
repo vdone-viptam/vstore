@@ -103,7 +103,7 @@
             <div class="form-group">
                 <label for="name">Chiết khấu cho V-Shop</label>
                 <input type="text" class="form-control form-control-lg number-percent"
-                       value="{{$product->discount_vshop.'%' ?? ''}}"
+                       value="{{$product->discount_vshop > 0 ? $product->discount_vshop.'%' : ''}}"
                        {{isset($product->discount_vshop) || $product->status == 2 ? 'disabled' : ''}} name="discount_vShop"
                        id="discount_vShop"
                        placeholder="Nhập chiết khẩu cho V-Shop">
@@ -115,61 +115,79 @@
     @endif
 
 </div>
-<div class="form-group text-left mt-3" id="check" style="display: none">
-    <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0;">
-        <input type="checkbox" id="appect" name="type" value="1" class="custom-control-input"><span
-            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
-    </label>
-</div>
 <div id="note">
 
 </div>
 
+<div class="form-group text-left mt-3 checkAp" id="check">
+    <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0">
+        <input type="checkbox" id="appectAP" name="type" value="1" class="custom-control-input"><span
+            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
+    </label>
+</div>
+
 <script>
-    document.getElementById('btnConfirm').style.display = 'none';
-    document.getElementsByName('discount_vShop')[0].addEventListener("keypress", (e) => {
-        var regex = new RegExp("^[0-9.]+$");
-        var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-        if (!regex.test(key)) {
-            event.preventDefault();
-            return false;
-        }
-    });
+    //     document.getElementById('btnConfirm').style.display = 'none';
+    //     document.getElementsByName('discount_vShop')[0].addEventListener("keypress", (e) => {
+    //         var regex = new RegExp("^[0-9.]+$");
+    //         var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
+    //         if (!regex.test(key)) {
+    //             event.preventDefault();
+    //             return false;
+    //         }
+    //     });
     document.querySelector('#status').addEventListener('change', (e) => {
         if (e.target.value == 2) {
+            $("#discount_vShop").attr('disabled','true')
+            $("#discount_vShop").val('')
             document.getElementById('btnConfirm').style.display = 'block';
             document.querySelector('#note').innerHTML = `
    <label for="name">Lý do từ chối</label>
 <textarea name="note" placeholder="Lý do từ chối"
-                             class="form-control" ></textarea>`
+                             class="form-control" ></textarea>`;
+            $('.checkAp').html(``);
         } else if (e.target.value == 1) {
+            if (+$('#discount_vShop').val() < Number(document.getElementById('discount').dataset.discount) && +$('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2) {
+                document.getElementById('messageDis').style.display = 'none';
+                $('.appectAP').html(` <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0">
+        <input type="checkbox" id="appectAP" name="type" value="1" class="custom-control-input"><span
+            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
+    </label>`);
+                $('#appectAP').on('change', (e) => {
+                    if (e.target.checked && $('#discount_vShop').val() < Number(document.getElementById('discount').dataset.discount) && +$('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2) {
+                        document.getElementById('btnConfirm').style.display = 'block';
+                    } else {
+                        document.getElementById('btnConfirm').style.display = 'none';
+                    }
+                });
+            }
+            $("#discount_vShop").removeAttr('disabled')
+
             document.querySelector('#note').innerHTML = ``;
             document.getElementById('btnConfirm').style.display = 'none';
         } else {
             document.querySelector('#note').innerHTML = ``;
-
         }
     })
-    $('#appect').on('change', (e) => {
-        if (e.target.checked && $('#discount_vShop').val()) {
-            document.getElementById('btnConfirm').style.display = 'block';
-        } else {
-            document.getElementById('btnConfirm').style.display = 'none';
-        }
-    });
+
     if (document.getElementsByName('discount_vShop')[0]) {
         document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
-            document.querySelector('#check').style.dispay = 'block';
+
             if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
                 document.getElementById('messageDis').style.display = 'none';
-                if ($('#appect').is(":checked")) {
-                    document.getElementById('btnConfirm').style.display = 'block';
-                } else {
-                    document.getElementById('btnConfirm').style.display = 'none';
-
-                }
-
+                $('.checkAp').html(` <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0">
+        <input type="checkbox" id="appectAP" name="type" value="1" class="custom-control-input"><span
+            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
+    </label>`);
+                $('#appectAP').on('change', (e) => {
+                    if (e.target.checked && $('#discount_vShop').val() < Number(document.getElementById('discount').dataset.discount) && +$('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2) {
+                        document.getElementById('btnConfirm').style.display = 'block';
+                    } else {
+                        document.getElementById('btnConfirm').style.display = 'none';
+                    }
+                });
             } else {
+
                 document.getElementById('messageDis').style.display = 'block';
                 document.getElementById('btnConfirm').style.display = 'none';
             }
