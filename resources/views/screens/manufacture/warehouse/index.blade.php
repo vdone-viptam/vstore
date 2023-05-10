@@ -221,8 +221,7 @@
                                                        {{in_array(1,$val->type_warehouse) ? 'checked' : 'disabled'}}
                                                        name="type"
 
-                                                       class=""><span
-                                                    class="custom-control-label"></span>
+                                                       class="">
                                             </label>
                                         </td>
                                         <td class="text-center">
@@ -231,8 +230,7 @@
                                                    id="type${index}">
                                                 <input type="checkbox" name="type"
                                                        {{in_array(2,$val->type_warehouse) ? 'checked' : 'disabled'}}
-                                                       class=""><span
-                                                    class="custom-control-label"></span>
+                                                       class="">
                                             </label>
                                         </td>
                                         <td class="text-center">
@@ -240,8 +238,7 @@
                                                    id="type${index}">
                                                 <input type="checkbox" name="type"
                                                        {{in_array(3,$val->type_warehouse) ? 'checked' : 'disabled'}}
-                                                       class=""><span
-                                                    class="custom-control-label"></span>
+                                                       class="">
                                             </label>
                                         </td>
                                         <td class="text-center white-space-80">
@@ -388,7 +385,6 @@
                     })
                 }
             }).done(function (data) {
-                console.log(data)
                 var htmlData = ``;
                 let img = '';
                 data.img.forEach(item => {
