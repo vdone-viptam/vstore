@@ -495,21 +495,36 @@ class UserController extends Controller
             $value = 300000000;
             $code = Str::lower(Str::random(10));
         }
-        $hmac = 'accountCode='.$user->account_code .'&code='. $code .'&companyName='.$user->company_name. '&vStoreName=' . $user->name.'&taxCode='.$user->tax_code;
+
+        if ($user->role_id != 3){
+            $hmac = '&code='. $code .'&companyName='.$user->company_name. '&vStoreName=' . $user->name.'&taxCode='.$user->tax_code;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
-        $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
-        $data = [
-            "code"=>$code,
-            "accountCode"=>$user->account_code,
-            "type"=>$user->role_id,
-            "value"=>$value,
-            "vStoreName"=>$user->name,
-            "companyName"=>$user->company_name,
-            "taxCode"=>$user->tax_code,
-            "email"=>$user->email,
-            "phone"=>$user->phone_number,
-            "signature"=>$sig
-        ];
-        $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
+            $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
+            $data = [
+                "code"=>$code,
+                "accountCode"=>$user->account_code,
+                "type"=>$user->role_id,
+                "value"=>$value,
+                "vStoreName"=>$user->name,
+                "companyName"=>$user->company_name,
+                "taxCode"=>$user->tax_code,
+                "email"=>$user->email,
+                "phone"=>$user->phone_number,
+                "signature"=>$sig
+            ];
+            $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
+        }else{
+            $hmac = '&code='. $code .'&status='. 1 . '&accountCode='. $user->account_code;
+//                    code=${dto.code}&status=${dto.status}&accountCode=${dto.accountCode}
+            $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
+            $data = [
+                "code"=>$user->trading_code,
+                "accountCode"=>$user->account_code,
+                "status"=>1,
+                "signature"=>$sig
+            ];
+            $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
+        }
+
     }
 }

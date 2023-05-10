@@ -92,7 +92,7 @@ class FinanceController extends Controller
 
     public function history(Request $request)
     {
-        $type = $request->type ?? 'asc';
+        $type = $request->type ?? 'desc';
         $field = $request->field ?? 'id';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = $request->key_search ?? '';
