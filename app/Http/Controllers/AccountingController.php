@@ -30,22 +30,14 @@ class AccountingController extends Controller
             $user = User::find($deposits->user_id);
             if ($request->status == 2){
 
-
-                $balance_change_history = new BlanceChange();
-                $balance_change_history->type = 1;
-                $balance_change_history->title = 'Hoàn tiền do admin từ trối lệnh rút tiền';
-                $balance_change_history->user_id=$deposits->user_id;
-                $balance_change_history->money_history = $user->money;
-                $balance_change_history->code=$deposits->code;
-                $balance_change_history->save();
                 $user->money += $deposits->amount;
                 $user->save();
             }elseif ($request->status == 1){
                 $balance_change_history = new BlanceChange();
-                $balance_change_history->type = 1;
+                $balance_change_history->type = 2;
                 $balance_change_history->title = 'Rút tiền về tài khoản ngân hàng';
                 $balance_change_history->user_id=$deposits->user_id;
-                $balance_change_history->money_history = $user->money;
+                $balance_change_history->money_history = $deposits->amount;
                 $balance_change_history->code=$deposits->code;
                 $balance_change_history->save();
             }

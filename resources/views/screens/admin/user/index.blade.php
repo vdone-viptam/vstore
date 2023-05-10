@@ -398,7 +398,7 @@
                             @foreach($users as $user)
                                 <tr>
                                     <td class="white-space-150">{{$user->name}}</td>
-                                    <td class="white-space-100">{{ Str::limit($user->email, 15) }}</td>
+                                    <td class="white-space-100"><div class="lineclamp-1">{{$user->email}}</div></td>
                                     <td class="text-center white-space-110">{{$user->phone_number}}</td>
                                     <td class="white-space-100">{{$user->company_name}}</td>
                                     <td class="text-center white-space-130">{{$user->tax_code}}</td>

@@ -63,7 +63,7 @@ class FinanceController extends Controller
 
     public function transferMoney(Request $request)
     {
-        $type = $request->type ?? 'asc';
+        $type = $request->type ?? 'desc';
         $field = $request->field ?? 'id';
         $limit = $request->limit ?? 10;
         // dd($type,$field);
@@ -106,7 +106,7 @@ class FinanceController extends Controller
 
     public function history(Request $request)
     {
-        $type = $request->type ?? 'asc';
+        $type = $request->type ?? 'desc';
         $field = $request->field ?? 'id';
         $limit = $request->limit ?? 10;
         $key_search = $request->key_search ?? '';
@@ -143,7 +143,7 @@ class FinanceController extends Controller
 
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateError',$validator->errors());
         }
-        
+
         DB::beginTransaction();
 
         try {
