@@ -523,7 +523,7 @@ class UserController extends Controller
                 "status"=>1,
                 "signature"=>$sig
             ];
-            $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
+            $respon =Http::patch(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
         }
 
     }
