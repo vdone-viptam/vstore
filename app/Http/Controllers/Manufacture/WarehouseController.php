@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Controller;
+use App\Models\Order;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\RequestWarehouse;
@@ -16,6 +17,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Termwind\Components\Raw;
 
 class WarehouseController extends Controller
 {
@@ -172,15 +174,27 @@ class WarehouseController extends Controller
         $this->v['products'] = Product::select('id', 'name')->where('user_id', Auth::id())->where('status', 2)->get();
         $this->v['warehouses'] = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,warehouses.id,
             warehouses.phone_number,
-            warehouses.address')
+            warehouses.address,warehouses.user_id')
             ->selectSub('select IFNULL(SUM(amount),0) - IFNULL(SUM(export),0)
 from product_warehouses where ware_id = warehouses.id and product_warehouses.status = 1 group by ware_id', 'amount_product')
             ->selectSub('select IFNULL(COUNT(product_warehouses.product_id),0)
 from product_warehouses where ware_id = warehouses.id and product_warehouses.status = 1  limit 1', 'amount')
+            ->selectSub('select province_name from province where  province_id = warehouses.city_id limit 1', 'province_name')
+            ->selectSub('select district_name from district where  district_id = warehouses.district_id limit 1', 'district_name')
+            ->selectSub('select wards_name from wards where  wards_id = warehouses.ward_id limit 1', 'wards_name')
             ->join('users', 'warehouses.user_id', '=', 'users.id')
             ->orderBy($this->v['field'], $this->v['type'])
             ->whereIn('warehouses.user_id', $warehouse_aff)
             ->paginate($this->v['limit']);
+        foreach ($this->v['warehouses'] as $warehouse) {
+            $type = WarehouseType::select('type')->where('user_id', $warehouse->user_id)->get();
+            $arrType = [];
+            foreach ($type as $t) {
+                $arrType[] = $t->type;
+            }
+
+            $warehouse->type_warehouse = $arrType;
+        }
 
         return view('screens.manufacture.warehouse.index', $this->v);
     }
@@ -224,6 +238,14 @@ from product_warehouses where ware_id = warehouses.id and product_warehouses.sta
     public function detail(Request $request)
     {
         $warehouse_aff = json_decode(Auth::user()->warehouse_aff) ?? [];
+        $warehouses = Warehouses::select('image_storage')
+            ->join('warehouse_type', 'warehouses.user_id', '=', 'warehouse_type.user_id')
+            ->where('warehouses.id', $request->id)->limit(3)->get();
+        $order = Order::select(DB::raw('count(*) as total'), 'export_status')
+            ->groupBy('export_status')
+            ->whereIn('export_status', [5, 4])
+            ->where('warehouse_id', $request->id)
+            ->get();
         $kho = ProductWarehouses::select(
             'products.name as name', 'product_id',
             DB::raw('(amount -export) as amount_product'))
@@ -239,7 +261,7 @@ from product_warehouses where ware_id = warehouses.id and product_warehouses.sta
 
         // dd($kho->toArray());
 
-        return response()->json(['success' => true, 'data' => $kho]);
+        return response()->json(['success' => true, 'data' => $kho, 'img' => $warehouses, 'order' => $order]);
 //        return view('screens.manufacture.warehouse.detail', ['products1' => $kho]);
 
     }

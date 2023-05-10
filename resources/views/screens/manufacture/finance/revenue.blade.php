@@ -46,21 +46,7 @@
                                         <thead>
                                         <tr>
                                             <th class="white-space-130 text-center">Mã giao dịch</th>
-                                            <th class="white-space-120 text-center">
-                                                Trạng thái
-                                                <span style="float: right;cursor: pointer">
-                                                @if($field == 'status')
-                                                    @if($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort"
-                                                            data-sort="status"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort" data-sort="status"></i>
-                                                    @endif
-                                                @else
-                                                    <i class="fas fa-sort sort" data-sort="status"></i>
-                                                @endif
-                                        </span>
-                                            </th>
+
                                             <th class="text-center white-space-150">
                                                 Số tiền
                                                 <span style="float: right;cursor: pointer">
@@ -104,13 +90,7 @@
                                             @foreach($histories as $history)
                                                 <tr>
                                                     <td class="text-center white-space-130">{{$history->code ?? '-'}}</td>
-                                                    <td class="text-center white-space-130">
-                                                        @if($history->status == 0)
-                                                            <p class="text-danger">Thất bại</p>
-                                                        @else
-                                                            <p class="text-warning">Đang chờ duyệt</p>
-                                                        @endif
-                                                    </td>
+
                                                     <td class="text-right white-space-130">
                                                         @if($history->type == 1)
                                                             <p class="text-success">
@@ -121,7 +101,7 @@
                                                                 -{{number_format($history->money_history,0,'.','.')}} đ</p>
                                                         @endif
                                                     </td>
-                                                    <th class="white-space-400">{{$history->title}}</th>
+                                                    <th class="text-left white-space-400">{{$history->title}}</th>
                                                     <td class="text-center white-space-130">
                                                         {{\Carbon\Carbon::parse($history->created_at)->format('d/m/Y H:i')}}
                                                     </td>

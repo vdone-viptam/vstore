@@ -153,21 +153,21 @@
 
                 </div>
                 <div class="card-body">
-                <button class="btn btn-primary my-3" data-toggle="modal" data-target="#exampleModalCenter"
-                                        type="button">
-                                    Thêm sản phẩm vào kho
-                                </button>
+                    <button class="btn btn-primary my-3" data-toggle="modal" data-target="#exampleModalCenter"
+                            type="button">
+                        Thêm sản phẩm vào kho
+                    </button>
                     <div class="table-responsive">
 
                         <table id="example" class="table table-striped table-bordered second" style="width:100%">
                             <thead>
                             <tr>
-                                <th>Tên kho hàng</th>
-                                <th class="text-center white-space-120">Số điện thoại</th>
-                                <th >Địa chỉ
+                                <th rowspan="2">Tên kho hàng</th>
+                                <th rowspan="2" class="text-center white-space-120">Số điện thoại</th>
+                                <th rowspan="2">Địa chỉ
 
                                 </th>
-                                <th class="text-center white-space-200" >Tổng số mặt hàng
+                                <th rowspan="2" class="text-center white-space-200">Tổng số mặt hàng
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'amount')
                                             @if($type == 'desc')
@@ -180,7 +180,7 @@
                                         @endif
                                     </span>
                                 </th>
-                                <th class="th th_quantity text-center white-space-200">Sản phẩm có trong kho
+                                <th rowspan="2" class="th th_quantity text-center white-space-200">Sản phẩm có trong kho
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'amount_product')
                                             @if($type == 'desc')
@@ -192,33 +192,72 @@
                                             <i class="fas fa-sort sort" data-sort="amount_product"></i>
                                         @endif
                                 </span>
-                                </th>
 
-                                <th class="th th_status white-space-80"></th>
+                                </th>
+                                <th colspan="3" class="text-center white-space-90">Loại kho</th>
+                                <th rowspan="2" class="th th_status white-space-80"></th>
+                            </tr>
+                            <tr>
+                                <th class="text-center white-space-30">
+                                    Kho thường
+                                </th>
+                                <th class="text-center white-space-30">Kho lạnh</th>
+                                <th class="text-center white-space-30">Kho bãi</th>
                             </tr>
                             </thead>
                             <tbody>
-                        @if(count($warehouses) > 0)
-                            @foreach($warehouses as $val)
-                                <tr>
-                                    <td class=" white-space-300">{{$val->ware_name}}</td>
-                                    <td class="text-center white-space-120">{{$val->phone_number}}</td>
-                                    <td class="white-space-200">{{$val->address}}</td>
-                                    <td class="text-center white-space-100">{{  $val->amount ? number_format($val->amount, 0, '.', '.') : 0 }}</td>
-                                    <td class="text-center white-space-100">{{  $val->amount_product ? number_format($val->amount_product, 0, '.', '.') : 0 }}</td>
-                                    <td class="text-center white-space-80">
-                                        <a href="javascript:void(0)" style="text-decoration:underline" class="btn btn-link p-0"
-                                                onclick="showDetail({{$val->id}})">Chi tiết
-                                        </a>
+                            @if(count($warehouses) > 0)
+                                @foreach($warehouses as $val)
+                                    <tr>
+                                        <td class=" white-space-300">{{$val->ware_name}}</td>
+                                        <td class="text-center white-space-120">{{$val->phone_number}}</td>
+                                        <td class="white-space-200">{{$val->address.', '.$val->wards_name.', '.$val->district_name.', '.$val->province_name}}</td>
+                                        <td class="text-center white-space-100">{{  $val->amount ? number_format($val->amount, 0, '.', '.') : 0 }}</td>
+                                        <td class="text-center white-space-100">{{  $val->amount_product ? number_format($val->amount_product, 0, '.', '.') : 0 }}</td>
+                                        <td class="text-center">
+                                            <label class="" style="pointer-events: none"
+                                                   id="type${index}">
+                                                <input type="checkbox"
+                                                       {{in_array(1,$val->type_warehouse) ? 'checked' : 'disabled'}}
+                                                       name="type"
 
-                                    </td>
-                                </tr>
-                            @endforeach
+                                                       class=""><span
+                                                    class="custom-control-label"></span>
+                                            </label>
+                                        </td>
+                                        <td class="text-center">
+
+                                            <label class="" style="pointer-events: none"
+                                                   id="type${index}">
+                                                <input type="checkbox" name="type"
+                                                       {{in_array(2,$val->type_warehouse) ? 'checked' : 'disabled'}}
+                                                       class=""><span
+                                                    class="custom-control-label"></span>
+                                            </label>
+                                        </td>
+                                        <td class="text-center">
+                                            <label class="" style="pointer-events: none"
+                                                   id="type${index}">
+                                                <input type="checkbox" name="type"
+                                                       {{in_array(3,$val->type_warehouse) ? 'checked' : 'disabled'}}
+                                                       class=""><span
+                                                    class="custom-control-label"></span>
+                                            </label>
+                                        </td>
+                                        <td class="text-center white-space-80">
+                                            <a href="javascript:void(0)" style="text-decoration:underline"
+                                               class="btn btn-link p-0"
+                                               onclick="showDetail({{$val->id}})">Chi tiết
+                                            </a>
+
+                                        </td>
+                                    </tr>
+                                @endforeach
                             @else
-                            <tr>
-                                <td colspan="8" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
-                            </tr>
-                        @endif
+                                <tr>
+                                    <td colspan="9" class="text-center">Không tìm thấy dữ liệu phù hợp</td>
+                                </tr>
+                            @endif
 
                             </tbody>
                         </table>
@@ -299,7 +338,7 @@
 <label class="custom-control custom-radio custom-control-inline" id="type${index}" style="margin: 0;">
                                                             <input type="radio" name="type" value="${item.type}" ${item.type == data.product_ware || data.ware_type.length == 1 ? 'checked' : 'disabled'}  id="type${index}" class="custom-control-input"><span class="custom-control-label">${name}</span>
                                                         </label>
-</div>k`;
+</div>`;
                 }).join("");
                 $('#selectType').html(html);
             })
@@ -351,9 +390,47 @@
             }).done(function (data) {
                 console.log(data)
                 var htmlData = ``;
-
+                let img = '';
+                data.img.forEach(item => {
+                    img += `<div style="width:200px;height:200px; border-radius:4px;" >
+                        <img src="{{asset('')}}/${JSON.parse(item.image_storage)}" style="width:100%; object-fit:cover; border-radius:4px;" alt="">
+                   </div>`;
+                })
+                let successOrder = 0;
+                let destroyOrder = 0;
+                if (data.order[0] && data.order[0].export_status === 4) {
+                    successOrder = data.order[0].total
+                }
+                if (data.order[1] && data.order[1].export_status === 4) {
+                    successOrder = data.order[1].total
+                }
+                if (data.order[0] && data.order[0].export_status === 5) {
+                    destroyOrder = data.order[0].total
+                }
+                if (data.order[1] && data.order[1].export_status === 5) {
+                    destroyOrder = data.order[1].total
+                }
                 if (data.data) {
                     htmlData += `
+
+
+<div class=" col-12">
+<label>Hình ảnh kho</label>
+                    <div class="w-100 d-flex align-items-center" style="gap:10px;">
+                    ${img}
+
+</div>
+</div>
+<div class="form-group d-flex w-100 align-items-center my-3">
+<div class="col-6">
+    <label>Số đơn hàng giao thành công</label>
+   <input type="text" class="form-control form-control-lg" value="${successOrder}" id="name" name="name" value="" disabled>
+</div>
+<div class="col-6">
+    <label>Số đơn hàng bị hủy</label>
+   <input type="text" class="form-control form-control-lg"  value="${destroyOrder}" id="name" name="name" value="" disabled>
+</div>
+</div>
 
 
 
@@ -364,11 +441,10 @@
                             <thead>
                             <tr role="row">
                                 <th class="sorting_asc "  >Tên sản phẩm</th>
-                                <th class="white-space-120">Hình ảnh kho</th>
+
                                 <th class="white-space-150 ">Số lượng</th>
-                              
-                                <th class="white-space-250">Số đơn hàng giao thành công</th>
-                                <th class="white-space-200">Số đơn hàng bị hủy</th>
+
+
                             </tr>
                             </thead>
                             <tbody>`
@@ -378,10 +454,9 @@
                             htmlData += `
 <tr role="row" class="odd">
                                 <td class="text-nowrap white-space-250" >${value.name}</td>
-                                <td class="white-space-120"></td>
-                                <td class="white-space-150"></td>
-                                <td class="white-space-250"></td>
-                                <td class="white-space-200"></td>
+
+                                <td class="white-space-250 text-center">${new Intl.NumberFormat().format(value.amount_product)}</td>
+
                             </tr>
 
 `
