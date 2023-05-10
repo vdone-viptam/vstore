@@ -495,7 +495,7 @@ class UserController extends Controller
             $value = 300000000;
             $code = Str::lower(Str::random(10));
         }
-        $hmac = 'accountCode='.$user->account_code .'&code='. $code .'&companyName='.$user->company_name. '&vStoreName=' . $user->name.'&taxCode='.$user->tax_code;
+        $hmac = '&code='. $code .'&companyName='.$user->company_name. '&vStoreName=' . $user->name.'&taxCode='.$user->tax_code;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
         $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
         $data = [
