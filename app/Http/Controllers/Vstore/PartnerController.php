@@ -57,7 +57,7 @@ class PartnerController extends Controller
 
     public function vshop(Request $request)
     {
-        $limit = $request->limit ?? 1;
+        $limit = $request->limit ?? 10;
         $field = $request->field ?? 'products.id';
         $key_search = $request->key_search ?? '';
         $type = $request->type ?? 'desc';
@@ -79,7 +79,7 @@ class PartnerController extends Controller
         return view('screens.vstore.partner.vshop', compact('vshop', 'field', 'key_search', 'type', 'limit'));
 
     }
-
+    
     public function ship()
     {
         return view('screens.vstore.partner.ship', $this->v);
