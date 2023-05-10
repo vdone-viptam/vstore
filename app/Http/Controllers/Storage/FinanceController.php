@@ -24,7 +24,7 @@ class FinanceController extends Controller
 
     public function index()
     {
-        
+
         $this->v['banks'] = DB::table('banks')->select('name', 'full_name', 'image', 'id')->get();
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')->where('user_id', Auth::id())
             ->where('type', 1)
@@ -166,7 +166,7 @@ class FinanceController extends Controller
             ]);
 
             $bank = Bank::where('id',$wallet->bank_id)->first();
-            $hmac = 'userId='.Auth::id() .'&code='. $code .'&value='.round($request->money,0). '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
+            $hmac = 'accountCode='.Auth::user()->account_code .'&code='. $code .'&value='.round($request->money,0). '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
             $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
 
@@ -176,12 +176,13 @@ class FinanceController extends Controller
 
             $respon = Http::post(config('domain.domain_vdone') . 'accountant/withdraw/v-shop',[
                 "code"=> $code,
-                "userId"=> Auth::id(),
+                "accountCode"=> Auth::user()->account_code,
                 "bankName"=> $bank->name,
                 "bankLogo"=> $bank->image,
                 "bankHolder"=> $wallet->name,
                 "bankNumber"=> $wallet->account_number,
                 "value"=> round($request->money,0),
+                "type"=>4,
                 "signature"=> $sig
             ]);
             DB::table('users')->where('id', Auth::id())->update(['money' => Auth::user()->money - $request->money]);
