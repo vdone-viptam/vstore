@@ -57,7 +57,7 @@ class PartnerController extends Controller
 
     public function vshop(Request $request)
     {
-        $limit = $request->limit ?? 1;
+        $limit = $request->limit ?? 10;
         $field = $request->field ?? 'products.id';
         $key_search = $request->key_search ?? '';
         $type = $request->type ?? 'desc';
@@ -79,7 +79,7 @@ class PartnerController extends Controller
         return view('screens.vstore.partner.vshop', compact('vshop', 'field', 'key_search', 'type', 'limit'));
 
     }
-
+    
     public function ship()
     {
         return view('screens.vstore.partner.ship', $this->v);
@@ -109,6 +109,7 @@ class PartnerController extends Controller
         $this->v['user'] = User::join('products', 'users.id', '=', 'products.user_id')
             ->select('users.name as name', 'users.phone_number', 'users.account_code', 'users.provinceId', DB::raw('COUNT(products.id) as countProduct'))
             ->selectSub('SELECT province_name from province WHERE province_id = users.provinceId limit 1', 'khu_vuc')
+            ->selectSub('SELECT SUM(amount - export) from product_warehouses JOIN products  on product_warehouses.product_id = products.id  where product_warehouses.status = 1 and products.status = 2 and products.vstore_id = ' . Auth::id(), 'amount')
             ->groupBy('users.id')
             ->where('products.vstore_id', Auth::id())
             ->where('users.id', $request->id)

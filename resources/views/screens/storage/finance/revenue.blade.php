@@ -50,20 +50,7 @@
                                 <thead>
                                 <tr>
                                     <th class="white-space-130 text-center">Mã giao dịch</th>
-                                    <th class="white-space-120 text-center">
-                                        Trạng thái
-                                        <span style="float: right;cursor: pointer">
-                                            @if($field == 'status')
-                                                @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort" data-sort="status"></i>
-                                                @else
-                                                    <i class="fa-solid fa-sort-up sort" data-sort="status" ></i>
-                                                @endif
-                                            @else
-                                                <i class="fas fa-sort sort" data-sort="status"></i>
-                                            @endif
-                                        </span>
-                                    </th>
+                                    
                                     <th class="text-center white-space-130">
                                         Số tiền
                                         <span style="float: right;cursor: pointer">
@@ -103,13 +90,7 @@
                                     @foreach($histories as $history)
                                         <tr>
                                             <td class="text-center white-space-140">{{$history->code ?? '-'}}</td>
-                                            <td class="text-center white-space-130">
-                                                @if($history->status == 0)
-                                                    <p class="text-danger ">Thất bại</p>
-                                                @else
-                                                    <p class="text-success ">Thành công</p>
-                                                @endif
-                                            </td>
+
                                             <td class="text-right white-space-130">
                                                 @if($history->type == 1)
                                                     <p class="text-success">
