@@ -398,16 +398,16 @@
                 })
                 let successOrder = 0;
                 let destroyOrder = 0;
-                if (data.order[0].export_status === 4){
+                if (data.order[0] && data.order[0].export_status === 4) {
                     successOrder = data.order[0].total
                 }
-                if (data.order[1].export_status === 4){
+                if (data.order[1] && data.order[1].export_status === 4) {
                     successOrder = data.order[1].total
                 }
-                if (data.order[0].export_status === 5){
+                if (data.order[0] && data.order[0].export_status === 5) {
                     destroyOrder = data.order[0].total
                 }
-                if (data.order[1].export_status === 5){
+                if (data.order[1] && data.order[1].export_status === 5) {
                     destroyOrder = data.order[1].total
                 }
                 if (data.data) {
