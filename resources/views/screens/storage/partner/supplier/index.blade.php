@@ -219,7 +219,7 @@
                             <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Số loại sản phẩm: </h5>
                         </div>
                         <div class="col-7">
-                            <span style="color:#000">${data.data.count_product}</span>
+                            <span style="color:#000">${convertNumberVN(data.data.count_product)}</span>
                         </div>
             </div>
             <div class="row">
@@ -227,7 +227,7 @@
                             <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Số lượng tồn: </h5>
                         </div>
                         <div class="col-7">
-                            <span style="color:#000">${data.data.amount_product}</span>
+                            <span style="color:#000">${convertNumberVN(data.data.amount_product)}</span>
                         </div>
             </div>
 

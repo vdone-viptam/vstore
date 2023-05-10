@@ -135,12 +135,19 @@
                                 </tbody>
                             </table>
                         </div>
-                        <div id="example_paginate">
-                            <ul class="pagination d-flex justify-content-end align-items-center"
-                                style="gap:8px ;margin-top:10px;margin-right: 10px;">
-                                {{$histories->withQueryString()->links('layouts.custom.paginator')}}
-                            </ul>
+                        <div class="d-flex align-items-center justify-content-end mt-4">
+                            {{$histories->withQueryString()->links('layouts.custom.paginator')}}
+                            <div class=" ml-4">
+                                <div class="form-group">
+                                    <select class="form-control" id="limit">
+                                        <option value="10" {{$limit == 10 ? 'selected' : ''}}>10 hàng / trang</option>
+                                        <option value="25" {{$limit == 25 ? 'selected' : ''}}>25 hàng / trang</option>
+                                        <option value="50" {{$limit == 50 ? 'selected' : ''}}>50 hàng / trang</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
+
                     </div>
                 </div>
             </div>
@@ -158,6 +165,13 @@
             if ($('#check-success').val() == 1) {
                 swalNoti('center', 'success', 'Gửi yêu cầu thay đổi mã số thuế thành công','', 500, true, 2200);
             }
+            let limit = document.getElementById('limit');
+            limit.addEventListener('change', (e) => {
+                setTimeout(() => {
+                    document.location = '{{route('screens.storage.finance.revenue',['key_search' => $key_search])}}&type=' + '{{$type}}' +
+                        '&field=' + '{{$field}}' + '&limit=' + e.target.value
+                }, 200)
+            })
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
                 item.addEventListener('click', () => {
