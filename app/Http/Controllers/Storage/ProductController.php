@@ -475,7 +475,7 @@ class ProductController extends Controller
                     "RECEIVER_ADDRESS" => $order->address,
                     "RECEIVER_PHONE" => $order->phone,
                     "PRODUCT_NAME" => $product->name,
-                    "PRODUCT_DESCRIPTION" => $order_item->quantity . " x " . $product->name,
+                    "PRODUCT_DESCRIPTION" => '',
                     "PRODUCT_QUANTITY" => $order_item->quantity,
                     "PRODUCT_PRICE" => $order->total - $order->shipping,
                     "PRODUCT_WEIGHT" => $product->weight * $order_item->quantity,
