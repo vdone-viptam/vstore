@@ -9,6 +9,7 @@ use App\Models\OrderService;
 use App\Models\District;
 use App\Models\Otp;
 use App\Models\PasswordReset;
+use App\Models\Product;
 use App\Models\Province;
 use App\Models\User;
 use App\Models\Ward;
@@ -19,6 +20,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -558,6 +560,7 @@ class LoginController extends Controller
             $user->referral_code = $referral_code;
             if ($role_id == 3) {
                 $user->branch = 1;
+
             }
             if ($request->id_vdone_diff) {
                 $user->id_vdone_diff = $request->id_vdone_diff;
@@ -721,6 +724,35 @@ class LoginController extends Controller
             if ($role_id == 3) {
 
                 $user->save();
+
+                $value_price = 300000000;
+
+                $trading_code = Str::lower(Str::random(10));
+                $check_trading_code = true;
+                while ($check_trading_code) {
+                    $checktrading = User::where('trading_code', $trading_code)->count();
+                    if (!$checktrading || $checktrading < 1) {
+                        $check_trading_code = false;
+                    }
+                    $trading_code = Str::lower(Str::random(10));
+                }
+
+                $hmac = '&code='. $trading_code .'&companyName='.$user->company_name. '&vStoreName=' . $user->name.'&taxCode='.$user->tax_code;
+//                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
+                $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
+                $data_send = [
+                    "code"=>$trading_code,
+                    "accountCode"=>"",
+                    "type"=>$user->role_id,
+                    "value"=>$value_price,
+                    "vStoreName"=>$user->name,
+                    "companyName"=>$user->company_name,
+                    "taxCode"=>$user->tax_code,
+                    "email"=>$user->email,
+                    "phone"=>$user->phone_number,
+                    "signature"=>$sig
+                ];
+                $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data_send);
 
                 $order = new OrderService();
                 $order->user_id = $user->id;
