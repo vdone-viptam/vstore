@@ -184,7 +184,7 @@ class ProductController extends Controller
             $product->description = trim($request->description);
             $product->brand = $request->brand;
             $product->material = $request->material;
-            $product->weight = str_replace('.', '', $request->weight);
+            $product->weight = str_replace('.', '', $request->weight) * 1000;
             $product->short_content = trim($request->short_content);
             $product->manufacturer_name = $request->manufacturer_name;
             $product->unit_name = $request->unit_name;
@@ -362,6 +362,7 @@ class ProductController extends Controller
 
     public function storeRequest(Request $request)
     {
+
         // dd($request->all());
         DB::beginTransaction();
         try {
@@ -552,7 +553,7 @@ class ProductController extends Controller
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
-            'weight' => 'required|max:13',
+            'weight' => 'required|max:3',
             'length' => 'required|max:13',
             'height' => 'required|max:13',
             'packing_type' => 'required',
@@ -582,7 +583,7 @@ class ProductController extends Controller
             'material.required' => 'Chát liệu sản phẩm bắt buộc nhập',
             'material.max' => 'Chất liệu sản phẩm ít hơn 255 ký tự',
             'weight.required' => 'Trọng lượng sản phẩm bắt buộc nhập',
-            'weight.max' => 'Trọng lượng sản phẩm ít hơn 10.000.000 gram',
+            'weight.max' => 'Trọng lượng sản phẩm ít hơn 100 Kg',
             'length.required' => 'Chiều dài sản phẩm bắt buộc nhập',
             'length.max' => 'Chiều dài sản phẩm ít hơn 10.000.000 cm',
             'height.required' => 'Chiều cao sản phẩm bắt buộc nhập',
@@ -608,7 +609,7 @@ class ProductController extends Controller
             $product->description = $request->description;
             $product->brand = $request->brand;
             $product->material = $request->material;
-            $product->weight = str_replace('.', '', $request->weight);
+            $product->weight = str_replace('.', '', $request->weight)*1000;
             $product->manufacturer_name = $request->manufacturer_name;
             $product->unit_name = $request->unit_name;
             $product->import_date = $request->import_date;
@@ -646,6 +647,7 @@ class ProductController extends Controller
             }
 
             $product->save();
+
             DB::commit();
             return redirect()->back()->with('success', 'Cập nhật thông tin sản phẩm thành công');
         } catch (\Exception $e) {

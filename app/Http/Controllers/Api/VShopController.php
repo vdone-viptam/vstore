@@ -798,7 +798,7 @@ class  VShopController extends Controller
     }
 
     /**
-     * thay dổi thông tin mã giảm giá theo vshop và saản phẩm
+     * thay dổi thông tin mã giảm giá theo vshop và sản phẩm
      *
      * API này lấy chi tiết mã giảm giá theo pdone_id,product_id
      *
@@ -860,9 +860,9 @@ class  VShopController extends Controller
 //                return  $discount ;
                 return response()->json([
                     'status_code' => 400,
-                    'error' => 'Phầm trăm giảm giá nhỏ hơn hoặc bằng' . ($discount_vshop * 0.95),
-                    'discount_limit' => ($discount_vshop * 0.95),
-                    'discount_price_limit' => ($product->price / 100) * ($discount_vshop * 0.95)
+                    'error' => 'Phầm trăm giảm giá nhỏ hơn hoặc bằng' . round(($discount_vshop * 0.95),1) ,
+                    'discount_limit' => round(($discount_vshop * 0.95),1) ,
+                    'discount_price_limit' => round(($product->price / 100) * ($discount_vshop * 0.95),1)
                 ], 400);
 
             } else {
@@ -945,9 +945,9 @@ class  VShopController extends Controller
         } elseif ($request->discount > $discount * 0.95) {
             return response()->json([
                 'status_code' => 400,
-                'error' => 'Phần trăm giảm giá nhỏ hơn hoặc bằng ' . $discount * 0.95,
-                'discount_limit' => $discount * 0.95,
-                'discount_price_limit' => ($product->price / 100) * ($discount * 0.95)
+                'error' => 'Phần trăm giảm giá nhỏ hơn hoặc bằng ' . round($discount * 0.95,1) ,
+                'discount_limit' => round($discount * 0.95,1) ,
+                'discount_price_limit' => round( ($product->price / 100) * ($discount * 0.95),1)
             ], 400);
         } else {
             DB::table('discounts')->insert([
