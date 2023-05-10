@@ -29,7 +29,7 @@ class OrderController extends Controller
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
         $this->v['field'] = $request->field ?? 'order.export_status';
-        $this->v['type'] = $request->type ?? 'desc';
+        $this->v['type'] = $request->type ?? 'asc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['orders'] = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
