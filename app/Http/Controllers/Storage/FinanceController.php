@@ -93,7 +93,7 @@ class FinanceController extends Controller
         $this->v['field'] = $field;
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['type'] = $type;
-        $this->v['histories'] = Deposit::select('name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
+        $this->v['histories'] = Deposit::select('code','name', 'amount', 'id', 'status', 'account_number', 'code', 'old_money', 'bank_id', 'created_at')
             ->selectSub('select name from banks where id = deposits.bank_id', 'bank_name')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
@@ -111,7 +111,7 @@ class FinanceController extends Controller
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['type'] = $type;
 
-        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
+        $this->v['histories'] = BlanceChange::select('code','money_history', 'type', 'title', 'status', 'created_at')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate($this->v['limit']);
