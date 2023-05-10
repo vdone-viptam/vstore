@@ -64,7 +64,7 @@ class AccountingController extends Controller
      * @bodyParam status 1 đồng ý, 2 ừ chối
      * @return JsonResponse
      */
-    public function confirmedVstore(Request $request, $id){
+    public function confirmedVstore(Request $request, $code){
         $validator = Validator::make($request->all(), [
             'status' => 'required|numeric|min:1|max:2',
 
@@ -72,7 +72,7 @@ class AccountingController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         }
-        $user = User::where('id',$id)->where('role_id',3);
+        $user = User::where('trading_code',$code)->where('role_id',3);
         if ($user){
             $user->accountant_confirm= $request->status;
             $user->save();

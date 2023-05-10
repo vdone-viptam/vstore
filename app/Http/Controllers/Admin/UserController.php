@@ -497,7 +497,7 @@ class UserController extends Controller
         }
 
         if ($user->role_id != 3){
-            $hmac = '&code='. $code .'&companyName='.$user->company_name. '&vStoreName=' . $user->name.'&taxCode='.$user->tax_code;
+            $hmac = 'code='. $code .'&companyName='.$user->company_name. '&vStoreName=' . $user->name.'&taxCode='.$user->tax_code;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
             $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
             $data = [
@@ -514,7 +514,7 @@ class UserController extends Controller
             ];
             $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
         }else{
-            $hmac = '&code='. $code .'&status='. 1 . '&accountCode='. $user->account_code;
+            $hmac = 'code='. $code .'&status='. 1 . '&accountCode='. $user->account_code;
 //                    code=${dto.code}&status=${dto.status}&accountCode=${dto.accountCode}
             $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
             $data = [

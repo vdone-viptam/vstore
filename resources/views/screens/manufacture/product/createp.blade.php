@@ -233,12 +233,14 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Trọng lượng (Gram) <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg number only-number"
+                                    <label for="name">Trọng lượng (Kg) <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg only_number"
                                            id="weight"
                                            name="weight"
                                            value="{{old('weight')}}"
-                                           placeholder="Nhập trọng lượng sản phẩm">
+                                           placeholder="Nhập trọng lượng sản phẩm"
+                                           oninput="this.value = this.value.replace(/[^0-9,]/g, '').replace(/(\,,*)\,/g, '$1');"
+                                    >
                                     @error('weight')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                     @enderror
@@ -561,4 +563,25 @@
             }
         })
     </script>
+<script>
+    $('body').on('keypress', '.only_number', function(event) {
+        var character = String.fromCharCode(event.keyCode);
+        return /[0-9,]/.test(character);
+    });
+
+    $('body').on('keyup', '.only_number', function() {
+        if ($(this).val().includes(",")) {
+            var string_before_symbol = $(this).val().slice(0, $(this).val().indexOf(","));
+            var string_after_symbol = $(this).val().slice($(this).val().indexOf(",") + 1);
+
+            if (string_after_symbol.length > 2) {
+                $(this).val(string_before_symbol + ',' + string_after_symbol.slice(0, 2));
+            }
+            var string_final = string_before_symbol + ',' + string_after_symbol.slice(0, 2);
+        } else {
+            var string_final = $(this).val();
+        }
+        return string_final;
+    });
+</script>
 @endsection
