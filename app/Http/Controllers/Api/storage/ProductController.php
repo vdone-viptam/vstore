@@ -452,7 +452,7 @@ class ProductController extends Controller
                     "ORDER_PAYMENT" => $order_payment,
                     "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
                     "ORDER_SERVICE_ADD" => null,
-                    "ORDER_NOTE" => $order_item->quantity . " x " . $product->name,
+                    "ORDER_NOTE" => '',
                     "MONEY_COLLECTION" => $money_colection,
                     "LIST_ITEM" => $list_item,
                 ]);
