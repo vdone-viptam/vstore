@@ -145,11 +145,12 @@
         </div>
         <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
             <h2 class="font-semibold text-lg sm:text-3xl text-[#1D293F]">Cổng thương mại điện tử<strong
-                    class="text-[#1e65ff] font-semibold">V-Store </strong> là gì?</h2>
-            <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">“Cổng thương mại điện tử V-Store” là cổng tiếp nhận đăng kí, kiểm duyệt và đàm phán chiết khấu các sản phẩm, dịch vụ từ nhà cung cấp. Nhà cung cấp muốn kinh doanh sản phẩm của mình trên nền tảng mạng xã hội VDone thì bắt buộc phải khai báo sản phẩm của của mình thông qua các cổng V-Store. Mỗi một V-Store sẽ phụ trách các lĩnh vực sản phẩm khác nhau. Sản phẩm được cổng V-Store kiểm duyệt sẽ được cấp một mã sản phẩm và có thể lưu thông tin trên nền tảng VDone. </span>
+                    class="text-[#1e65ff] font-semibold"> V-Store </strong> là gì?</h2>
+            <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">“Cổng thương mại điện tử V-Store” là cổng tiếp nhận đăng kí, kiểm duyệt và đàm phán chiết khấu các sản phẩm, dịch vụ từ nhà cung cấp. Nhà cung cấp muốn kinh doanh sản phẩm của mình trên nền tảng mạng xã hội VDONE thì bắt buộc phải khai báo sản phẩm của của mình thông qua các cổng V-Store. Mỗi một V-Store sẽ phụ trách các lĩnh vực sản phẩm khác nhau. Sản phẩm được cổng V-Store kiểm duyệt sẽ được cấp một mã sản phẩm và có thể lưu thông tin trên nền tảng VDONE. </span>
         </div>
     </div>
-    <div class="banner flex justify-around items-start w-full md:max-w-[1440px] mx-auto  flex-wrap lg:flex-nowrap">
+    <div class="banner py-10">
+    <div class=" flex justify-around items-start w-full md:max-w-[1440px] mx-auto  flex-wrap lg:flex-nowrap">
         <div class="w-[312px]">
             <div class="w-[311px] h-[316px]">
                 <img src="{{asset('home/img/ql1.png')}}" class="w-full" alt="">
@@ -161,15 +162,17 @@
             </div>
         </div>
         <div class="w-[300px]">
-            <div class="w-[299px] h-[255px]">
+            <div class="w-[299px] h-[305px]">
                 <img src="{{asset('home/img/ql3.png')}}" class="w-full" alt="">
             </div>
         </div>
     </div>
+    </div>
+
     <div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 px-[20px] my-10 relative">
         <h2 class="text-lg sm:text-4xl font-bold text-[#1D293F] text-center ">Quy trình trở thành <strong
                 class="text-[#1e65ff] font-semibold">V-Store </strong></h2>
-        <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">Quy trình đăng kí V-Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Store </span>
+        <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">Quy trình đăng ký V-Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Store </span>
         <div class="w-[533px] h-[507px] absolute left-[-350px] xl:left-[-550px]">
             <img src="{{asset('home/img/circle.png')}}" class="w-full" alt="">
         </div>
@@ -242,8 +245,8 @@
     </div>
     <div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 xl:px-20 px-[20px]">
         <h2 class="text-[16px] sm:text-4xl font-bold text-[#1D293F] text-center">Lợi ích tham gia<strong
-                class="text-[#1e65ff] font-semibold">V-Store </strong></h2>
-        <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">“Cổng thương mại điện tử V-Store” là công cụ được sử dụng để kết nối giữa người dùng với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tài hàng hóa, dịch vụ để thực hiện hoạt động thương mại hóa </span>
+                class="text-[#1e65ff] font-semibold"> V-Store </strong></h2>
+        <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">“Cổng thương mại điện tử V-Store” là công cụ được sử dụng để kết nối giữa người dùng với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tải hàng hóa, dịch vụ để thực hiện hoạt động thương mại hóa </span>
 
     </div>
     <div
@@ -286,7 +289,7 @@
                         </svg>
                     </div>
 
-                    <span class="text-[#4F4F4F] font-medium">Được VDone hỗ trợ kết nối tới các nhà cung cấp. </span>
+                    <span class="text-[#4F4F4F] font-medium">Được VDONE hỗ trợ kết nối tới các nhà cung cấp. </span>
                 </div>
                 <div class="flex justify-start items-start gap-2">
                     <div class="w-[21px]">

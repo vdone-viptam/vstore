@@ -133,7 +133,7 @@
         </div>
         <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
             <h2 class="font-bold text-2xl md:text-4xl text-[#034D82]">Nhà cung cấp là gì?</h2>
-            <span style="text-align: left;" class=" text-[#90A3B4] tracking-[0.3px] ">"Nhà cung cấp" là mắt xích vô cùng quan trọng trong chuỗi hoạt động thương mại điện tử của nền tảng VDONE. Tại VDONE, Các nhà cung cấp là tổ chức bao gồm Doanh nghiệp, Hợp tác xã, Hộ kinh doanh, có đủ nguồn lực cung cấp sản phẩm hoặc dịch vụ cho V-Store, đảm bảo nguồn hàng liên tục cho hoạt động kinh doanh. Mỗi Nhà cung cấp sẽ đăng ký sản phẩm và đưa đến người tiêu dùng thông qua Cổng thương mại điện tử V-Store.</span>
+            <span style="text-align: left;" class=" text-[#90A3B4] tracking-[0.3px] ">"Nhà cung cấp" là mắt xích vô cùng quan trọng trong chuỗi hoạt động thương mại điện tử của nền tảng VDONE. Tại VDONE, các nhà cung cấp là tổ chức bao gồm Doanh nghiệp, Hợp tác xã, Hộ kinh doanh, có đủ nguồn lực cung cấp sản phẩm hoặc dịch vụ cho V-Store, đảm bảo nguồn hàng liên tục cho hoạt động kinh doanh. Mỗi Nhà cung cấp sẽ đăng ký sản phẩm và đưa đến người tiêu dùng thông qua Cổng thương mại điện tử V-Store.</span>
             <a href="{{route('register_ncc')}}"
                class="flex items-center gap-5 font-bold text-[#04AADD] hover:opacity-70 transition-all duration-200">Trở
                 thành Nhà cung cấp
@@ -152,7 +152,7 @@
    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full md:max-w-[1440px] mx-auto place-items-center p-4">
         <div class="flex flex-col gap-6 max-w-[485px]">
             <h2 class="text-[#034D82] font-bold text-2xl md:text-4xl tracking-[0.3px] text-center">Quy trình trở thành <br> Nhà cung cấp</h2>
-            <span class="font-semibold tracking-[0.3px] text-[#90A3B4]">Quy trình đăng kí V-Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của Nhà cung cấp</span>
+            <span class="font-semibold tracking-[0.3px] text-[#90A3B4]">Quy trình đăng ký V-Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của Nhà cung cấp</span>
             <ul class="step">
                 <li><a href="#" class="flex flex-col text-[#FEB30D] font-bold gap-1"><div class="dot"></div> Bước 1: Tạo tài khoản <span class="text-sm text-[#90A3B4] font-semibold">Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin theo hướng dẫn</span></a></li>
                 <li><a href="#" class="flex flex-col text-[#FEB30D] font-bold gap-1"><div class="dot"></div>Bước 2: Đưa sản phẩm lên V-Store<span class="text-sm text-[#90A3B4] font-semibold">Hoàn thiện thông tin sản phẩm trên V-Store theo hướng dẫn</span></a></li>
@@ -174,7 +174,7 @@
                 </div>
             </div>
             <span class="text-sm font-semibold text-[#034D82] text-center">
-            Được quyền hỗ trợ bảo hành nâng cấp hệ thống
+            Được quyền hỗ trợ bảo hành nâng cấp hệ thống.
             </span>
        </div>
        <div class="text-center boxli w-full p-3 mx-auto">
@@ -224,13 +224,13 @@
                 </div>
             </div>
             <span class="text-sm font-semibold text-[#034D82] text-center">
-            Công nghệ hoàn toàn mới
+            Công nghệ hoàn toàn mới.
             </span>
        </div>
     </div>
     <div class="flex flex-col gap-6 text-center md:text-left col-span-4">
         <h2 class="font-bold text-2xl md:text-4xl text-[#034D82]">Lợi ích khi trở thành <br> Nhà cung cấp</h2>
-        <span style="text-align: left;" class=" text-[#90A3B4] tracking-[0.3px] ">Khi trở thành “Nhà cung cấp” bạn sẽ được kết nối với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tài hàng hóa, dịch vụ trên cổng V-Store để thực hiện hoạt động thương mại hóa cho các sản phẩm của doanh nghiệp.</span>
+        <span style="text-align: left;" class=" text-[#90A3B4] tracking-[0.3px] ">Khi trở thành “Nhà cung cấp” bạn sẽ được kết nối với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tải hàng hóa, dịch vụ trên cổng V-Store để thực hiện hoạt động thương mại hóa cho các sản phẩm của doanh nghiệp.</span>
         <a href="#" class="flex items-center gap-5 font-bold text-[#04AADD] hover:opacity-70 transition-all duration-200">Trở thành Nhà cung cấp <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M15.5303 6.53033C15.8232 6.23744 15.8232 5.76256 15.5303 5.46967L10.7574 0.6967C10.4645 0.403807 9.98959 0.403807 9.6967 0.6967C9.40381 0.989593 9.40381 1.46447 9.6967 1.75736L13.9393 6L9.6967 10.2426C9.40381 10.5355 9.40381 11.0104 9.6967 11.3033C9.98959 11.5962 10.4645 11.5962 10.7574 11.3033L15.5303 6.53033ZM-6.55671e-08 6.75L15 6.75L15 5.25L6.55671e-08 5.25L-6.55671e-08 6.75Z" fill="#04AADD"/>
 </svg>

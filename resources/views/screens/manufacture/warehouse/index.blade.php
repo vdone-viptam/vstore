@@ -87,7 +87,7 @@
         id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
         aria-hidden="true">
         <form method="post" action="{{route('screens.manufacture.warehouse.addProduct')}}">
-            <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Sản phẩm trong kho</h5>
@@ -364,8 +364,11 @@
                             <thead>
                             <tr role="row">
                                 <th class="sorting_asc "  >Tên sản phẩm</th>
-                                <th class="white-space-250 ">Số lượng</th>
-
+                                <th class="white-space-120">Hình ảnh kho</th>
+                                <th class="white-space-150 ">Số lượng</th>
+                              
+                                <th class="white-space-250">Số đơn hàng giao thành công</th>
+                                <th class="white-space-200">Số đơn hàng bị hủy</th>
                             </tr>
                             </thead>
                             <tbody>`
@@ -375,8 +378,10 @@
                             htmlData += `
 <tr role="row" class="odd">
                                 <td class="text-nowrap white-space-250" >${value.name}</td>
-                                <td class="white-space-250 text-center">${ convertNumberVN(value.amount_product)}</td>
-
+                                <td class="white-space-120"></td>
+                                <td class="white-space-150"></td>
+                                <td class="white-space-250"></td>
+                                <td class="white-space-200"></td>
                             </tr>
 
 `
