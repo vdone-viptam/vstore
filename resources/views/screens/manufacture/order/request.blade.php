@@ -150,7 +150,7 @@
                                 </span>
                             </th>
                             <th >
-                               
+
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -166,7 +166,7 @@
 
                             </th>
                             <th class="white-space-130">
-                             
+
                                     Giá sản phẩm
                                     <span style="float: right;cursor:pointer">
                                     @if($field == 'price')
@@ -182,7 +182,7 @@
 
                             </th>
                             <th class="white-space-110 ">
-                                
+
                                     Giảm giá
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'pre_order_vshop.discount')
@@ -260,6 +260,7 @@
                                 </span>
 
                             </th>
+                            <th class="white-space-100">Thao tác</th>
                             <th class="white-space-80"></th>
                         </tr>
                         </thead>
@@ -290,6 +291,14 @@
                                         @endif
                                     </td>
                                     <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($order->created_at)->format('d/m/Y H:i')}}</td>
+                                    <td class="text-center white-space-160">
+                                        @if($order->status == 3)
+                                        <a href="javascript:void(0)"
+                                        class="btn text-primary font-medium px-2 py-0 update-request" data-status="4" data-id="{{$order->id}}" style="text-decoration:underline;">Đồng ý</a>
+                                        <a href="javascript:void(0)"
+                                        class="btn text-danger font-medium px-2 py-0 update-request" data-status="5" data-id="{{$order->id}}" style="text-decoration:underline;">Từ chối</a>
+                                        @endif
+                                    </td>
                                     <td class="text-center white-space-80">
                                         <a href="javascript:void(0)" data-toggle="modal"
                                            data-target=".bd-example-modal-lg" data-id="{{$order->id}}"
