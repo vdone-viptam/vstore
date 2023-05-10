@@ -118,7 +118,7 @@
                                         @endif
                                     </td>
                                     <td class="white-space-200">{{$history->name}}</td>
-                                    <td class="white-space-150">{{$history->email}}</td>
+                                    <td class="white-space-150"><div class="lineclamp-1">{{$history->email}}</div></td>
                                     <td class="text-center white-space-110">{{$history->phone_number}}</td>
                                     <td  class="white-space-150 text-center">{{$history->company_name}}</td>
                                     <td  class="text-center white-space-150"><span class="text-success">Thanh toán trước</span></td>

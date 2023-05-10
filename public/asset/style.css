@@ -1189,6 +1189,14 @@ Borders
     color: #ff8d00 !important;
 }
 
+.lineclamp-1{
+    overflow: hidden;
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 1;
+    max-width: 200px;
+}
+
 .text-info {
     color: #25d5f2 !important;
 }
