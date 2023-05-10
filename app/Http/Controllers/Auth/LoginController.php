@@ -752,7 +752,6 @@ class LoginController extends Controller
                     "phone"=>$user->phone_number,
                     "signature"=>$sig
                 ];
-                return $data_send;
                 $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data_send);
                 $order = new OrderService();
                 $order->user_id = $user->id;
