@@ -224,7 +224,7 @@
                                                 @endif
                                             </td>
                                             <td class="white-space-150">{{$user->name}}</td>
-                                            <td class="white-space-150">{{$user->email}}</td>
+                                            <td class="white-space-150"><div class="lineclamp-1">{{$user->email}}</div> </td>
                                             <td class="text-center white-space-110">{{$user->phone_number}}</td>
                                             <td class="white-space-130 text-center">{{$user->company_name}}</td>
                                             <td class="text-center white-space-110">{{$user->tax_code}}</td>

@@ -126,7 +126,7 @@
                                         @endif
                                     </td>
                                     <td class="white-space-200">{{$request->name}}</td>
-                                    <td class="white-space-150">{{$request->email}}</td>
+                                    <td class="white-space-150"><div class="lineclamp-1">{{$request->email}}</div></td>
                                     <td class="white-space-130 text-center">{{$request->id_vdone}}</td>
                                     <td class="white-space-150 text-center">{{$request->company_name}}</td>
                                     <td class="white-space-140 text-center">{{$request->old_tax}}</td>
