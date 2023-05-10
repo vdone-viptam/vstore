@@ -32,6 +32,7 @@ class AccountingController extends Controller
                 $balance_change_history->user_id=$deposits->user_id;
                 $balance_change_history->money_history = $user->money;
                 $balance_change_history->code=$deposits->code;
+                $balance_change_history->save();
                 $user->money += $deposits->amount;
                 $user->save();
 
