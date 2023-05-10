@@ -87,7 +87,7 @@ class FinanceController extends Controller
 
     public function history(Request $request)
     {
-        $type = $request->type ?? 'asc';
+        $type = $request->type ?? 'desc';
         $field = $request->field ?? 'id';
         $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['field'] = $field;
@@ -103,7 +103,7 @@ class FinanceController extends Controller
 
     public function transferMoney(Request $request)
     {
-        $type = $request->type ?? 'asc';
+        $type = $request->type ?? 'desc';
         $field = $request->field ?? 'id';
         $this->v['key_search'] = trim($request->key_search) ?? '';
 

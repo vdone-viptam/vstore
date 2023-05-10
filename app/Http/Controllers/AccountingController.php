@@ -34,7 +34,7 @@ class AccountingController extends Controller
                 $user->save();
             }elseif ($request->status == 1){
                 $balance_change_history = new BlanceChange();
-                $balance_change_history->type = 1;
+                $balance_change_history->type = 2;
                 $balance_change_history->title = 'Rút tiền về tài khoản ngân hàng';
                 $balance_change_history->user_id=$deposits->user_id;
                 $balance_change_history->money_history = $deposits->amount;
