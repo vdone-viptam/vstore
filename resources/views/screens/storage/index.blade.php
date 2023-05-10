@@ -353,7 +353,7 @@ if($order && $user) {
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">KHO là mắt xích quan trọng trong chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của VDone</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">KHO là mắt xích quan trọng trong chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của VDONE</span>
         </div>
         </div>
 
