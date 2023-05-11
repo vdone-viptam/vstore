@@ -67,7 +67,7 @@ class FinanceController extends Controller
         $field = $request->field ?? 'id';
         $limit = $request->limit ?? 10;
         // dd($type,$field);
-        $this->v['histories'] = BlanceChange::select('money_history', 'type', 'title', 'status', 'created_at')
+        $this->v['histories'] = BlanceChange::select('code','money_history', 'type', 'title', 'status', 'created_at')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate($limit);
