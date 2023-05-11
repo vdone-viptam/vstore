@@ -530,6 +530,7 @@ class ProductController extends Controller
 
                 ]);
             }
+            dd($order_item->quantity);
             return response()->json([
                 'success' => true,
                 'message' => 'Cập nhật đơn hàng thành công',
