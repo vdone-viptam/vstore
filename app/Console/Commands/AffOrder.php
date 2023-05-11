@@ -81,6 +81,7 @@ class AffOrder extends Command
                         $new_ncc_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_ncc_blance->status=1;
                         $new_ncc_blance->money_history=$price_ncc;
+                        $new_ncc_blance->code=$code_ncc;
                         $new_ncc_blance->save();
                         $ncc->money +=$price_ncc;
                         $ncc->save();
@@ -98,7 +99,7 @@ class AffOrder extends Command
                         $code_vstore =  Str::lower(Str::random(10));
                         $check = true;
                         while ($check) {
-                            $checkBlance = BlanceChange::where('code', $code_ncc)->count();
+                            $checkBlance = BlanceChange::where('code', $code_vstore)->count();
                             if (!$checkBlance || $checkBlance < 1) {
                                 $check = false;
                             }
@@ -110,6 +111,7 @@ class AffOrder extends Command
                         $new_vstore_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_vstore_blance->status=1;
                         $new_vstore_blance->money_history=$price_vstore;
+                        $new_vstore_blance->code = $code_vstore;
                         $new_vstore_blance->save();
                         $vstore->money += $price_vstore;
                         $vstore->save();
@@ -120,7 +122,7 @@ class AffOrder extends Command
                         $code_vshop =  Str::lower(Str::random(10));
                         $check = true;
                         while ($check) {
-                            $checkBlance = BlanceChange::where('code', $code_ncc)->count();
+                            $checkBlance = BlanceChange::where('code', $code_vshop)->count();
                             if (!$checkBlance || $checkBlance < 1) {
                                 $check = false;
                             }
@@ -134,6 +136,7 @@ class AffOrder extends Command
                         $new_vshop_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_vshop_blance->status=1;
                         $new_vshop_blance->money_history= round($price_vshop,0) * 0.95;
+                        $new_vshop_blance->code = $code_vshop;
                         $new_vshop_blance->save();
 //                    $hmac = 'ukey='.$order->no .'&value='. $price_vshop .'&orderId='.$order->id. '&userId=' . $vshop->pdone_id;
                         $hmac = 'sellerPDoneId='.$vshop->vshop_id .'&buyerId='. $order->user_id .'&ukey='.$order->no. '&value=' . round($price_vshop,0).'&orderId='.$order->id.'&userId='.$vshop->pdone_id;
