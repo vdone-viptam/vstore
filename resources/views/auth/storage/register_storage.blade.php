@@ -865,11 +865,14 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
 <script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
 <script src="{{asset('asset/js/main.js')}}"></script>
 
+@include('auth.layout.oldLocation')
+
     <script>
         const divCity = document.getElementById('city_id');
         const divDistrict = document.getElementById('district_id');
         const divWard = document.getElementById('ward_id');
         const btnSubmit = document.querySelector('.active');
+
 
         fetch('{{route('get_city')}}', {
             mode: 'no-cors',
@@ -1075,25 +1078,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         }
 
     </script>
-    @if(old('city_id') != '')
-        <script>
-            fetch('{{route('get_city')}}?type=2&value={{old('city_id')}}', {
-                mode: 'no-cors',
 
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.length > 0) {
-                        divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" ${item.DISTRICT_ID == '{{old('district_id')}}' ? 'selected' : ''}>${item.DISTRICT_NAME}</option>`);
-
-                    } else {
-                        divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`;
-                    }
-                })
-                .catch(() => divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`
-                );
-        </script>
-    @endif
 @if($isOrder)
         <script>
             const formRegister = document.querySelector('#formRegister-V');
