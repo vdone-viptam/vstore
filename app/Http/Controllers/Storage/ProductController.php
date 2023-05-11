@@ -157,6 +157,15 @@ class ProductController extends Controller
                 $ware->amount = $ware->amount + $requestIm->quantity;
                 $ware->save();
                 $vshop = Vshop::where('pdone_id', 262)->first();
+                if ($vshop){
+                    if (!VshopProduct::where('product_id', $requestIm->product_id)->where('vshop_id', $vshop->id)->whereIn('status', [1, 2])->first()) {
+                        $vshop_product = new VshopProduct();
+                        $vshop_product->vshop_id = $vshop->id;
+                        $vshop_product->product_id = $requestIm->product_id;
+                        $vshop_product->status = 1;
+                        $vshop_product->save();
+                    }
+                }
                 $user = User::find($requestIm->ncc_id);
                 $data_vstore = [
                     'title' => 'Bạn vừa có 1 thông báo mới',
@@ -166,13 +175,7 @@ class ProductController extends Controller
                     'href' => route('screens.manufacture.warehouse.swap', ['key_search' => $requestIm->code])
                 ];
                 $user->notify(new AppNotification($data_vstore));
-                if (!VshopProduct::where('product_id', $requestIm->product_id)->where('vshop_id', $vshop->id)->whereIn('status', [1, 2])->first()) {
-                    $vshop_product = new VshopProduct();
-                    $vshop_product->vshop_id = $vshop->id;
-                    $vshop_product->product_id = $requestIm->product_id;
-                    $vshop_product->status = 1;
-                    $vshop_product->save();
-                }
+
 
                 $product = Product::with(['category'])->where('id', $requestIm->product_id)->where('availability_status', 0)->first();
                 if ($product) {

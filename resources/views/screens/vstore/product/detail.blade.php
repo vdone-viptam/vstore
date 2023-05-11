@@ -51,6 +51,7 @@
         </div>
     @endforeach
 </div>
+
 <div class="form-group">
     <label for="name">Video sản phẩm</label>
     @if(strlen($product->video) > 0)
@@ -61,6 +62,9 @@
         <p>Không có video liên quan đến sản phẩm</p>
     @endif
 
+</div>
+<div class="mb-3 col-12 img-col w-100">
+    <a href="{{asset($product->sl) ?? ''}}" target="_blank">Click vào đây để xem tài liệu sản phẩm</a>
 </div>
 <div class="row">
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -138,7 +142,7 @@
     //     });
     document.querySelector('#status').addEventListener('change', (e) => {
         if (e.target.value == 2) {
-            $("#discount_vShop").attr('disabled','true')
+            $("#discount_vShop").attr('disabled', 'true')
             $("#discount_vShop").val('')
             document.getElementById('btnConfirm').style.display = 'block';
             document.querySelector('#note').innerHTML = `

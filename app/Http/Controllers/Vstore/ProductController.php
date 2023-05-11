@@ -128,6 +128,7 @@ class ProductController extends Controller
                 requests.discount,
                 requests.discount_vshop,
                 requests.status,
+                    requests.images as tl,
                 products.name,
                 products.images,products.video,
                 categories.name as cate_name,
