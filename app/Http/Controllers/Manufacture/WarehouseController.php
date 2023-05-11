@@ -240,7 +240,8 @@ from product_warehouses where ware_id = warehouses.id and product_warehouses.sta
         $warehouse_aff = json_decode(Auth::user()->warehouse_aff) ?? [];
         $warehouses = Warehouses::select('image_storage')
             ->join('warehouse_type', 'warehouses.user_id', '=', 'warehouse_type.user_id')
-            ->where('warehouses.id', $request->id)->limit(3)->get();
+            ->where('warehouses.id', $request->id)
+            ->limit(3)->get();
         $order = Order::select(DB::raw('count(*) as total'), 'export_status')
             ->groupBy('export_status')
             ->whereIn('export_status', [5, 4])
