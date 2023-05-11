@@ -77,19 +77,21 @@ class PartnerController extends Controller
 
     public function detail(Request $request)
     {
-
         $data = Order::join('order_item', 'order_item.order_id', 'order.id')
             ->join('products', 'products.id', 'order_item.product_id')
             ->where('order.export_status', 4)
             ->where('products.user_id', Auth::id())
             ->where('products.vstore_id', $request->vstore_id)
             ->where('products.status', 2)
-            ->select('products.discount', 'order.total')
+            ->select('order_item.price','order_item.quantity','order_item.discount_ncc')
             ->get();
         $money = 0;
         foreach ($data as $key => $value) {
-            $money = $value->discount * $value->total;
+            $total = $value->price * $value->quantity;
+            $moneyDiscountNcc = $total * $value->discount_ncc / 100 ;
+            $money += $total - $moneyDiscountNcc ;
         };
+        $money = round($money);
         return response()->json([
             'money' => $money,
         ]);
