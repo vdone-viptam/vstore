@@ -609,7 +609,7 @@ class ProductController extends Controller
             $product->description = $request->description;
             $product->brand = $request->brand;
             $product->material = $request->material;
-            $product->weight = str_replace('.', '', $request->weight) * 1000;
+            $product->weight = str_replace(',', '.', str_replace('.', '', $request->weight)) * 1000;
             $product->manufacturer_name = $request->manufacturer_name;
             $product->unit_name = $request->unit_name;
             $product->import_date = $request->import_date;
