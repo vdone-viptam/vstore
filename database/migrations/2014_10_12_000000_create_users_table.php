@@ -42,6 +42,8 @@ return new class extends Migration {
             $table->string('code')->nullable()->commen('mã tài khoản phụ');
             $table->string('referral_code')->nullable();
             $table->double('money',20,2)->nullable();
+            $table->tinyInteger('accountant_confirm')->default(0);
+            $table->string('trading_code')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
