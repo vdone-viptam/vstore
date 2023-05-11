@@ -119,13 +119,16 @@
 <div id="note">
 
 </div>
+@if($product->discount_vshop > 0 || $product->status == 2)
+@else
+    <div class="form-group text-left mt-3 checkAp" id="check">
+        <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0">
+            <input type="checkbox" id="appectAP" name="type" value="1" class="custom-control-input"><span
+                class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
+        </label>
+    </div>
+@endif
 
-<div class="form-group text-left mt-3 checkAp" id="check">
-    <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0">
-        <input type="checkbox" id="appectAP" name="type" value="1" class="custom-control-input"><span
-            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
-    </label>
-</div>
 
 <script>
     //     document.getElementById('btnConfirm').style.display = 'none';
