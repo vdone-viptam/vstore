@@ -81,13 +81,13 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Mức chiết khấu (%) <span class="text-danger">*</span></label>
+                                    <label for="name">Mức chiết khấu cho V-Store(%) <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg number discountA" required
                                            id="discountA"
                                            name="discountA"
                                            pattern="^[1-9][0-9]?$|^100$"
                                            title="Giá trị thích hợp từ 1 => 100"
-                                           value="{{old('discountA')}}" placeholder="Mức chiết khấu (%)">
+                                           value="{{old('discountA')}}" placeholder="Mức chiết khấu cho V-Store(%)">
                                     <p data-title="Chiết khấu" class="ml-1 mt-2 messageE text-danger"></p>
                                     @error('discountA')
                                     <p class="text-danger ml-1 mt-2">{{$message}}</p>
