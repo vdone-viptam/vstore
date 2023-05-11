@@ -75,7 +75,7 @@ class ManufactureController extends Controller
     {
         $limit = $request->limit ?? 100;
         $user = User::where('role_id', 2)->where('account_code', '!=', null)
-            ->select('id', 'name', 'avatar')
+            ->select('id', 'name', 'avatar','account_code')
             ->paginate($limit);
 
         if ($user) {
