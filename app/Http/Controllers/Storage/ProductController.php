@@ -458,7 +458,7 @@ class ProductController extends Controller
 
                 $list_item[] = [
                     'PRODUCT_NAME' => $product->name,
-                    'PRODUCT_QUANTITY' => 20,
+                    'PRODUCT_QUANTITY' => $order_item->quantity,
                     'PRODUCT_PRICE' => $priceDiscount,
                     'PRODUCT_WEIGHT' => $product->weight * $order_item->quantity,
                 ];
@@ -477,7 +477,7 @@ class ProductController extends Controller
                     "RECEIVER_PHONE" => $order->phone,
                     "PRODUCT_NAME" => $product->name,
                     "PRODUCT_DESCRIPTION" => Str::limit($product->short_content, 50, '...'),
-                    "PRODUCT_QUANTITY" => $order_item->quantity,
+                    "PRODUCT_QUANTITY" => 20,
                     "PRODUCT_PRICE" => $order->total - $order->shipping,
                     "PRODUCT_WEIGHT" => $product->weight * $order_item->quantity,
                     "PRODUCT_LENGTH" => null,
