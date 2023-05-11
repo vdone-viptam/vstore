@@ -184,7 +184,7 @@ class ProductController extends Controller
             $product->description = trim($request->description);
             $product->brand = $request->brand;
             $product->material = $request->material;
-            $product->weight = str_replace('.', '', $request->weight) * 1000;
+            $product->weight = str_replace(',', '.', str_replace('.', '', $request->weight)) * 1000;
             $product->short_content = trim($request->short_content);
             $product->manufacturer_name = $request->manufacturer_name;
             $product->unit_name = $request->unit_name;
@@ -238,7 +238,7 @@ class ProductController extends Controller
         } catch (\Exception $e) {
 
             DB::rollBack();
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', 'Có lỗi xảy.Vui lòng thử lại');
         }
     }
 
@@ -583,7 +583,7 @@ class ProductController extends Controller
             'material.required' => 'Chát liệu sản phẩm bắt buộc nhập',
             'material.max' => 'Chất liệu sản phẩm ít hơn 255 ký tự',
             'weight.required' => 'Trọng lượng sản phẩm bắt buộc nhập',
-            'weight.max' => 'Trọng lượng sản phẩm ít hơn 100 Kg',
+            'weight.max' => 'Trọng lượng sản phẩm phải ít hơn 100 Kg',
             'length.required' => 'Chiều dài sản phẩm bắt buộc nhập',
             'length.max' => 'Chiều dài sản phẩm ít hơn 10.000.000 cm',
             'height.required' => 'Chiều cao sản phẩm bắt buộc nhập',
@@ -609,7 +609,7 @@ class ProductController extends Controller
             $product->description = $request->description;
             $product->brand = $request->brand;
             $product->material = $request->material;
-            $product->weight = str_replace('.', '', $request->weight)*1000;
+            $product->weight = str_replace(',', '.', str_replace('.', '', $request->weight)) * 1000;
             $product->manufacturer_name = $request->manufacturer_name;
             $product->unit_name = $request->unit_name;
             $product->import_date = $request->import_date;

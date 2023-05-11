@@ -90,7 +90,7 @@
             <div class="modal-dialog modal-xl" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Sản phẩm trong kho</h5>
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Chi tiết kho giao nhận</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -388,9 +388,14 @@
                 var htmlData = ``;
                 let img = '';
                 data.img.forEach(item => {
-                    img += `<div style="width:200px;height:200px; border-radius:4px;" >
-                        <img src="{{asset('')}}/${JSON.parse(item.image_storage)}" style="width:100%; object-fit:cover; border-radius:4px;" alt="">
+                    if (JSON.parse(item.image_storage) != null) {
+                        JSON.parse(item.image_storage).forEach(data => {
+                            img += `<div style="width:200px;height:200px; border-radius:4px;" >
+                        <img src="{{asset('')}}/${data}" style="width:100%; object-fit:cover; border-radius:4px;" alt="">
                    </div>`;
+                        })
+
+                    }
                 })
                 let successOrder = 0;
                 let destroyOrder = 0;

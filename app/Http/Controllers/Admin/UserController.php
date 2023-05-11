@@ -514,7 +514,7 @@ class UserController extends Controller
             ];
             $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
         }else{
-            $hmac = 'code='. $code .'&status='. 1 . '&accountCode='. $user->account_code;
+            $hmac = 'code='. $user->trading_code .'&status='. 1 . '&accountCode='. $user->account_code;
 //                    code=${dto.code}&status=${dto.status}&accountCode=${dto.accountCode}
             $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
             $data = [
@@ -523,7 +523,7 @@ class UserController extends Controller
                 "status"=>1,
                 "signature"=>$sig
             ];
-            $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
+            $respon =Http::patch(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
         }
 
     }

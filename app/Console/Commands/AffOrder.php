@@ -15,6 +15,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class AffOrder extends Command
 {
@@ -63,7 +64,15 @@ class AffOrder extends Command
 //                    chia tiền ncc
 
                     if ($ncc){
-
+                        $code_ncc =  Str::lower(Str::random(10));
+                        $check = true;
+                        while ($check) {
+                            $checkBlance = BlanceChange::where('code', $code_ncc)->count();
+                            if (!$checkBlance || $checkBlance < 1) {
+                                $check = false;
+                            }
+                            $code_ncc =  Str::lower(Str::random(10));
+                        }
                         $price_ncc =$total/100 *(100 - ($product->discount  + $item->discount_ncc)) ;
 //                            tong_tien /100 * (100 - (discount + discount_vShop + diss_ncc))
                         $new_ncc_blance = new BlanceChange();
@@ -72,6 +81,7 @@ class AffOrder extends Command
                         $new_ncc_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_ncc_blance->status=1;
                         $new_ncc_blance->money_history=$price_ncc;
+                        $new_ncc_blance->code=$code_ncc;
                         $new_ncc_blance->save();
                         $ncc->money +=$price_ncc;
                         $ncc->save();
@@ -86,12 +96,22 @@ class AffOrder extends Command
                         }else{
                             $price_vstore=0;
                         }
+                        $code_vstore =  Str::lower(Str::random(10));
+                        $check = true;
+                        while ($check) {
+                            $checkBlance = BlanceChange::where('code', $code_vstore)->count();
+                            if (!$checkBlance || $checkBlance < 1) {
+                                $check = false;
+                            }
+                            $code_vstore =  Str::lower(Str::random(10));
+                        }
                         $new_vstore_blance = new BlanceChange();
                         $new_vstore_blance->user_id=$vstore->id;
                         $new_vstore_blance->type=1;
                         $new_vstore_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_vstore_blance->status=1;
                         $new_vstore_blance->money_history=$price_vstore;
+                        $new_vstore_blance->code = $code_vstore;
                         $new_vstore_blance->save();
                         $vstore->money += $price_vstore;
                         $vstore->save();
@@ -99,7 +119,15 @@ class AffOrder extends Command
 //                        chia vshop
                     $vshop = Vshop::where('id',$item->vshop_id)->first();
                     if ($vshop){
-
+                        $code_vshop =  Str::lower(Str::random(10));
+                        $check = true;
+                        while ($check) {
+                            $checkBlance = BlanceChange::where('code', $code_vshop)->count();
+                            if (!$checkBlance || $checkBlance < 1) {
+                                $check = false;
+                            }
+                            $code_vshop =  Str::lower(Str::random(10));
+                        }
                         $vshop_con_lai = $product->discount_vShop - $item->discount_vshop;
                         $price_vshop = $total /100 * $vshop_con_lai;
                         $new_vshop_blance = new BlanceChange();
@@ -108,6 +136,7 @@ class AffOrder extends Command
                         $new_vshop_blance->title='Công tiền từ mã đơn hàng '.$order->no;
                         $new_vshop_blance->status=1;
                         $new_vshop_blance->money_history= round($price_vshop,0) * 0.95;
+                        $new_vshop_blance->code = $code_vshop;
                         $new_vshop_blance->save();
 //                    $hmac = 'ukey='.$order->no .'&value='. $price_vshop .'&orderId='.$order->id. '&userId=' . $vshop->pdone_id;
                         $hmac = 'sellerPDoneId='.$vshop->vshop_id .'&buyerId='. $order->user_id .'&ukey='.$order->no. '&value=' . round($price_vshop,0).'&orderId='.$order->id.'&userId='.$vshop->pdone_id;
