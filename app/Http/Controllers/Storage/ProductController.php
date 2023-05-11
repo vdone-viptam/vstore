@@ -461,7 +461,6 @@ class ProductController extends Controller
                     'PRODUCT_QUANTITY' => $order_item->quantity,
                     'PRODUCT_PRICE' => $priceDiscount,
                     'PRODUCT_WEIGHT' => $product->weight * $order_item->quantity,
-                    "PRODUCT_DESCRIPTION" => $order_item->quantity . ' x ' . $product->name,
                 ];
                 $taodon = Http::withHeaders(
                     [
@@ -487,7 +486,7 @@ class ProductController extends Controller
                     "ORDER_PAYMENT" => $order_payment,
                     "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
                     "ORDER_SERVICE_ADD" => '',
-                    "ORDER_NOTE" => $order_item->quantity . ' x ' . $product->name,
+                    "ORDER_NOTE" => Str::limit($product->short_content, 25, '...'),
                     "MONEY_COLLECTION" => $money_colection,
                     "LIST_ITEM" => $list_item,
                 ]);
