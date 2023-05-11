@@ -25,6 +25,7 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -439,20 +440,20 @@ class ProductController extends Controller
                     "SENDER_ADDRESS" => $warehouse->address . ',' . $quan_huyen_gui . ',' . $tinh_thanh_gui,
                     "SENDER_PHONE" => $warehouse->phone_number,
                     "RECEIVER_FULLNAME" => $order->fullname,
-                    "RECEIVER_ADDRESS" => $order->address . ',' . $quan_huyen_nhan . ',' . $tinh_thanh_nhan,
+                    "RECEIVER_ADDRESS" => $order->address,
                     "RECEIVER_PHONE" => $order->phone,
                     "PRODUCT_NAME" => $product->name,
-                    "PRODUCT_DESCRIPTION" => '',
+                    "PRODUCT_DESCRIPTION" => Str::limit($product->short_content, 25, '...'),
                     "PRODUCT_QUANTITY" => $order_item->quantity,
                     "PRODUCT_PRICE" => $order->total - $order->shipping,
-                    "PRODUCT_WEIGHT" => $product->weight * $order_item->quantity / 1000,
+                    "PRODUCT_WEIGHT" => $product->weight * $order_item->quantity,
                     "PRODUCT_LENGTH" => null,
                     "PRODUCT_WIDTH" => null,
                     "PRODUCT_HEIGHT" => null,
                     "ORDER_PAYMENT" => $order_payment,
                     "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
                     "ORDER_SERVICE_ADD" => null,
-                    "ORDER_NOTE" => $order_item->quantity . " x " . $product->name,
+                    "ORDER_NOTE" => '',
                     "MONEY_COLLECTION" => $money_colection,
                     "LIST_ITEM" => $list_item,
                 ]);
