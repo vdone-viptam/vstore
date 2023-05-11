@@ -64,7 +64,7 @@
 
 </div>
 <div class="mb-3 col-12 img-col w-100">
-    <a href="{{asset($product->sl) ?? ''}}" target="_blank">Click vào đây để xem tài liệu sản phẩm</a>
+    <a href="{{asset($product->tl) ?? ''}}" target="_blank">Click vào đây để xem tài liệu sản phẩm</a>
 </div>
 <div class="row">
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
