@@ -61,7 +61,7 @@ Route::get('viettel-post-linkin/{order_id}', [\App\Http\Controllers\ViettelpostC
 Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], function () {
 
     Route::post('wallet-update/{code}',[\App\Http\Controllers\AccountingController::class,'confirmed']);
-    Route::post('user-vsotre/{id}',[\App\Http\Controllers\AccountingController::class,'confirmedVstore']);
+    Route::post('user-vstore/{id}',[\App\Http\Controllers\AccountingController::class,'confirmedVstore']);
     Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);
     Route::get('get-district/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getDistrict']);
     Route::get('get-wards/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getWards']);

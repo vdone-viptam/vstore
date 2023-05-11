@@ -356,7 +356,8 @@ aria-hidden="true">
                                 </div>
                             </div>
                             <div class="mx-auto my-4">
-                                <button class="btn btn-secondary" type="button" onclick="location.reload()">Hủy bỏ
+                                <button class="btn btn-secondary" type="button"
+                                        onclick="appectBack(2)">Hủy bỏ
                                 </button>
                                 <button class="btn btn-primary ml-2" id="btnSave">Thêm sản phẩm</button>
                             </div>
@@ -461,6 +462,23 @@ aria-hidden="true">
         </script>
     @endif
     <script type="text/javascript">
+        function appectBack(type) {
+            Swal.fire({
+                title: 'Bạn có chắc muốn hủy bỏ thao tác thêm sản phẩm?',
+                text: "",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Đồng ý',
+                cancelButtonText: 'Hủy bỏ'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.location = '{{route('screens.manufacture.product.index')}}';
+                }
+            })
+        }
+
         let i = -1;
         $('#file-input').on('change', (e) => {
             console.log(1)
@@ -569,7 +587,7 @@ aria-hidden="true">
                 console.log(e.target.files)
                 for (let i = 0; i < e.target.files.length; i++) {
                     let file = e.target.files[i];
-                    let allowedImageTypes = ["image/jpeg", "image/gif", "image/png","image/jpg"];
+                    let allowedImageTypes = ["image/jpeg", "image/gif", "image/png", "image/jpg"];
                     if (!allowedImageTypes.includes(file.type)) {
                         error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif ]";
                         document.querySelector('#btnSave').setAttribute('disabled', 'true');
@@ -589,16 +607,16 @@ aria-hidden="true">
             }
         })
     </script>
-<script>
-    $('body').on('keypress', '.only_number', function(event) {
-        var character = String.fromCharCode(event.keyCode);
-        return /[0-9,]/.test(character);
-    });
+    <script>
+        $('body').on('keypress', '.only_number', function (event) {
+            var character = String.fromCharCode(event.keyCode);
+            return /[0-9,]/.test(character);
+        });
 
-    $('body').on('keyup', '.only_number', function() {
-        if ($(this).val().includes(",")) {
-            var string_before_symbol = $(this).val().slice(0, $(this).val().indexOf(","));
-            var string_after_symbol = $(this).val().slice($(this).val().indexOf(",") + 1);
+        $('body').on('keyup', '.only_number', function () {
+            if ($(this).val().includes(",")) {
+                var string_before_symbol = $(this).val().slice(0, $(this).val().indexOf(","));
+                var string_after_symbol = $(this).val().slice($(this).val().indexOf(",") + 1);
 
             if (string_after_symbol.length > 2) {
                 $(this).val(string_before_symbol + ',' + string_after_symbol.slice(0, 2));

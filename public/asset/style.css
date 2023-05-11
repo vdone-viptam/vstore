@@ -366,7 +366,7 @@ label {
     width           : 100%;
     font-size       : 14px;
     line-height     : 1.42857143;
-    color           : #71748d;
+    color           : #26272a;
     background-color: #fff;
     background-image: none;
     border          : 1px solid #d2d2e4;
@@ -382,7 +382,7 @@ label {
 }
 
 input[type=file] {
-    color           : #71748d;
+    color           : #26272a;
     background-color: #fff;
     border-color    : #a7a7f0;
     outline         : 0;
@@ -402,7 +402,7 @@ button:focus {
 }
 
 select.form-control {
-    color              : #71748d;
+    color              : #26272a;
     -webkit-appearance : none;
     -moz-appearance    : none;
     background-position: 96% 52%;
@@ -416,7 +416,7 @@ select.form-control {
 
 textarea.form-control {
     height          : auto;
-    color           : #71748d;
+    color           : #26272a;
     background-color: #fff;
     background-image: none;
     border          : 1px solid #d2d2e4;
@@ -477,12 +477,12 @@ table thead th{
 }
 .white-space-90{
 
-  
+
     white-space: unset !important;
     min-width: 90px !important;
 }
 .white-space-100{
- 
+
     white-space: unset !important;
 
     min-width: 100px !important;
@@ -526,7 +526,7 @@ table thead th{
     min-width: 250px !important;
 }
 .white-space-300{
-  
+
     white-space: unset !important;
     min-width: 300px !important;
 }
@@ -546,12 +546,12 @@ table thead th{
     min-width: 450px !important;
 }
 .white-space-500{
-  
+
     white-space: unset !important;
     min-width: 500px !important;
 }
 .white-space-600{
-  
+
     white-space: unset !important;
     min-width: 600px !important;
 }

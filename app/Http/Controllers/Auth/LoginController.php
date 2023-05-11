@@ -723,7 +723,7 @@ class LoginController extends Controller
 
             if ($role_id == 3) {
 
-                $user->save();
+
 
                 $value_price = 300000000;
 
@@ -736,7 +736,8 @@ class LoginController extends Controller
                     }
                     $trading_code = Str::lower(Str::random(10));
                 }
-
+                $user->trading_code = $trading_code;
+                $user->save();
                 $hmac = 'code='. $trading_code .'&companyName='.$user->company_name. '&vStoreName=' . $user->name.'&taxCode='.$user->tax_code;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
                 $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));

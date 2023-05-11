@@ -72,7 +72,7 @@ class AccountingController extends Controller
         if ($validator->fails()) {
             return $validator->errors();
         }
-        $user = User::where('trading_code',$code)->where('role_id',3);
+        $user = User::where('trading_code',$code)->where('role_id',3)->first();
         if ($user){
             $user->accountant_confirm= $request->status;
             $user->save();
