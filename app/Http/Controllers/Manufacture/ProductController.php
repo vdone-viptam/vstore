@@ -583,7 +583,7 @@ class ProductController extends Controller
             'material.required' => 'Chát liệu sản phẩm bắt buộc nhập',
             'material.max' => 'Chất liệu sản phẩm ít hơn 255 ký tự',
             'weight.required' => 'Trọng lượng sản phẩm bắt buộc nhập',
-            'weight.max' => 'Trọng lượng sản phẩm ít hơn 100 Kg',
+            'weight.max' => 'Trọng lượng sản phẩm phải ít hơn 100 Kg',
             'length.required' => 'Chiều dài sản phẩm bắt buộc nhập',
             'length.max' => 'Chiều dài sản phẩm ít hơn 10.000.000 cm',
             'height.required' => 'Chiều cao sản phẩm bắt buộc nhập',

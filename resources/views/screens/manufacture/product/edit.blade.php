@@ -91,7 +91,8 @@
                                 <div class="form-group">
                                     <label for="name">Giá sản phẩm chưa VAT(đ):<span
                                             class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg number only-number" id="price"
+                                    <input type="text" class="form-control form-control-lg number only-number"
+                                           id="price"
                                            name="price"
                                            value="{{number_format($product->price,0,'.','.')}}" placeholder="0">
                                     @error('price')
@@ -133,7 +134,8 @@
                             <div class="mb-3 col-12 col-xl-6">
                                 <label for="formFileMultiple" class="form-label">Hình ảnh sản phẩm<span
                                         class="text-danger">*</span></label>
-                                <input class="form-control form-control-lg" accept=".jpeg.gif,.png,.jpg" type="file" name="images[]"
+                                <input class="form-control form-control-lg" accept=".jpeg.gif,.png,.jpg" type="file"
+                                       name="images[]"
                                        id="images"
                                        multiple>
                                 <p class="text-danger mt-2 ml-1" id="error"></p>
@@ -141,9 +143,6 @@
                                 @error('images')
                                 <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                 @enderror
-                                @if ($errors->has('images.*'))
-                                    <p class="text-danger mt-2 ml-1">{{ $errors->first('images.*')}}</p>
-                                @endif
                             </div>
                             <div class="col-12 mb-3 col-xl-6">
                                 <div class="form-group" id="file-input">
@@ -199,7 +198,8 @@
                                     <label for="name">Kích cỡ (Cm) <span class="text-danger">*</span></label>
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-4 col-12">
-                                            <input type="text" class="form-control form-control-lg number only-number" id="length"
+                                            <input type="text" class="form-control form-control-lg number only-number"
+                                                   id="length"
                                                    name="length"
                                                    value="{{number_format($product->length,0,'.','.')}}"
                                                    placeholder="Nhập chiều dài (Cm)">
@@ -208,7 +208,8 @@
                                             @enderror
                                         </div>
                                         <div class="col-xl-4 col-lg-4 col-12 ">
-                                            <input type="text" class="form-control form-control-lg number only-number" id="with"
+                                            <input type="text" class="form-control form-control-lg number only-number"
+                                                   id="with"
                                                    name="with"
                                                    value="{{number_format($product->with,0,'.','.')}}"
                                                    placeholder="Nhập chiều rộng (Cm)">
@@ -217,7 +218,8 @@
                                             @enderror
                                         </div>
                                         <div class="col-xl-4  col-lg-4 col-12">
-                                            <input type="text" class="form-control form-control-lg number only-number" id="height"
+                                            <input type="text" class="form-control form-control-lg number only-number"
+                                                   id="height"
                                                    name="height"
                                                    value="{{number_format($product->height,0,'.','.')}}"
                                                    placeholder="Nhập chiều cao (Cm)">
@@ -231,9 +233,10 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Trọng lượng (Gram) <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg number only-number" id="weight"
+                                    <input type="text" class="form-control form-control-lg number only-number"
+                                           id="weight"
                                            name="weight"
-                                           value="{{number_format($product->weight,0,'.','.')}}"
+                                           value="{{number_format($product->weight / 1000,0,'.','.')}}"
                                            placeholder="Nhập trọng lượng sản phẩm (Gram)">
                                     @error('weight')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
@@ -243,7 +246,8 @@
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="name">Thể tích (Ml)</label>
-                                    <input type="text" class="form-control form-control-lg number only-number" id="volume"
+                                    <input type="text" class="form-control form-control-lg number only-number"
+                                           id="volume"
                                            name="volume"
                                            value="{{number_format($product->volume,0,'.','.')}}"
                                            placeholder="Nhập thể tích sản phẩm">
@@ -531,7 +535,7 @@
                 console.log(e.target.files)
                 for (let i = 0; i < e.target.files.length; i++) {
                     let file = e.target.files[i];
-                    let allowedImageTypes = ["image/jpeg", "image/gif", "image/png","image/jpg"];
+                    let allowedImageTypes = ["image/jpeg", "image/gif", "image/png", "image/jpg"];
                     if (!allowedImageTypes.includes(file.type)) {
                         error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif ]";
                         document.querySelector('#btnSave').setAttribute('disabled', 'true');
