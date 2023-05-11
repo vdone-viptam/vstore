@@ -4,6 +4,14 @@
 
 
 @section('modal')
+<div class="modal fade" id="modalDetailImg" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+aria-hidden="true">
+<div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="img-zoom-full w-100 h-100">
+
+    </div>
+</div>
+</div>
     <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
         <div class="modal-dialog" role="document">
@@ -145,11 +153,11 @@
                                     <p class="text-danger mt-2 ml-1">{{ $errors->first('images.*')}}</p>
                                 @endif -->
                                 <div class="images-product">
-                                   <div class="img-item hidden">
+                                   <div class="img-item" id="images">
 
                                    </div>
                                     <input type="hidden" class="input-image">
-                                    <div class="img-event">
+                                    <div class="img-event img-event-update">
                                             <div class=" add-img-SP">
                                                 <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
                                                         xmlns="http://www.w3.org/2000/svg">
@@ -162,6 +170,7 @@
                                             </div>
                                       
                                     </div>
+                                    <p class="text-danger mt-2 ml-1" id="error"></p>
                                 </div>
                             </div>
                             <div class="col-12 mb-3 col-xl-6">
@@ -565,37 +574,14 @@
             });
             uploader.init();
         });
-        document.querySelector('#images').addEventListener('change', (e) => {
-            let error = document.querySelector("#error");
-
-            error.innerHTML = "";
-            if (e.target.files) {
-                console.log(e.target.files)
-                for (let i = 0; i < e.target.files.length; i++) {
-                    let file = e.target.files[i];
-                    let allowedImageTypes = ["image/jpeg", "image/gif", "image/png", "image/jpg"];
-                    if (!allowedImageTypes.includes(file.type)) {
-                        error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif ]";
-                        document.querySelector('#btnSave').setAttribute('disabled', 'true');
-                        return false;
-                    }
-                    if (file.size > 1024 * 1024 * 5) {
-                        error.innerHTML = "File ảnh upload không quá 5MB";
-                        document.querySelector('#btnSave').setAttribute('disabled', 'true');
-                        return false;
-                    }
-
-
-                    document.querySelector('#btnSave').removeAttribute('disabled');
-
-                }
-
-            }
-        })
+    
         var arrImage = [];
-        
-        function render(arrImg, imgEvent){
-        var htmlImgData = ""
+
+        function render(arrImg){
+            if (arrImage.length >= 5) {
+            $(this).addClass("hidden");
+        }
+        var htmlImgData = "";
          arrImg.map((item, index) =>{
             htmlImgData += `<div class="item" key="${index}">
             <img style="width:100%; object-fit:cover; border-radius:4px;" src="${item}" />
@@ -615,7 +601,7 @@
         }else{
             $('.img-item').append(htmlImgData)
         }
-       
+      
        
     }
 
@@ -624,13 +610,37 @@
     $('#modalDetailImg').modal('show');
     }
 
-$('.img-event').on('click', function(){
+$('.img-event-update').on('click', function(){
  
     let input = document.createElement('input');
         input.type = 'file';
         input.multiple = 'multiple'
         input.onchange = _ => {
             var files = Array.from(input.files);
+            let error = document.querySelector("#error");
+
+error.innerHTML = "";
+if (input.files) {
+    for (let i = 0; i < input.files.length; i++) {
+        let file = input.files[i];
+        let allowedImageTypes = ["image/jpeg", "image/gif", "image/png", "image/jpg"];
+        if (!allowedImageTypes.includes(file.type)) {
+            error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif ]";
+            document.querySelector('#btnSave').setAttribute('disabled', 'true');
+            return;
+        }
+        if (file.size > 1024 * 1024 * 5) {
+            error.innerHTML = "File ảnh upload không quá 5MB";
+            document.querySelector('#btnSave').setAttribute('disabled', 'true');
+            return;
+        }
+
+
+        document.querySelector('#btnSave').removeAttribute('disabled');
+
+    }
+
+}
             files.map((file)=>{
                 const reader = new FileReader();
          
@@ -638,11 +648,8 @@ $('.img-event').on('click', function(){
              reader.onload = ev => {
                  resolve(ev.target.result)
                 arrImage.push(ev.target.result)
-                if (arrImage.length >= 5) {
-                    $(this).addClass("hidden");
-                }
                 $('.img-item').removeClass('hidden')
-                render(arrImage,$(this));
+                render(arrImage);
                 
         }
                 reader.readAsDataURL(file)    
