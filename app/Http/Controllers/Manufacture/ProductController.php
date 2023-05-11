@@ -114,9 +114,7 @@ class ProductController extends Controller
             'description' => 'required',
             'short_content' => 'required|max:500',
 
-            'images' => 'required|array|max:5',
-            'images.*' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
-
+            'images' => 'required',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
@@ -133,11 +131,7 @@ class ProductController extends Controller
         $message = [
             'name.max' => 'Tên sản phẩm ít hơn 255 ký tự',
 
-            'images.required' => 'Ảnh bắt buộc upload',
-            'images.max' => 'Tối đa chọn 5 ảnh!',
-            'images.*.max' => 'Kích thước ảnh tối đa 5MB',
-            'images.*' => 'Không đúng định dạng ảnh !',
-
+            'images.required' => 'Ảnh bắt buộc tải lên',
             'name.required' => 'Tên sản phẩm bắt buộc nhập',
             'category_id.required' => 'Ngành hàng bắt buộc chọn',
             'price.required' => 'Giá sản phẩm bắt buộc nhập',
@@ -166,7 +160,6 @@ class ProductController extends Controller
             'import_unit.max' => 'Tên nhà nhập khẩu ít hơn 255 ký tự',
             'import_address.max' => 'Địa chỉ nhà nhập khẩu ít hơn 255 ký tự',
         ];
-
 
         $validator = Validator::make($request->all(), $error, $message);
 
@@ -211,22 +204,14 @@ class ProductController extends Controller
                 }
             }
             $photo_gallery = [];
-            if ($request->hasFile('images')) {
-                foreach ($request->file('images') as $image) {
-                    $filenameWithExt = $image->getClientOriginalName();
-                    //Get just filename
-                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                    // Get just ext
-                    $extension = $image->getClientOriginalExtension();
-                    // Filename to store
-                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-                    $path = $image->storeAs('public/products', $fileNameToStore);
-
-                    $path = str_replace('public/', '', $path);
-
-                    $photo_gallery[] = 'storage/' . $path;
+            if (json_decode($request->images)) {
+                if (json_decode($request->images)) {
+                    foreach (json_decode($request->images) as $image) {
+                        $path = $this->saveImgBase64($image, 'products');
+                        $photo_gallery[] = 'storage/products/' . $path;
+                    }
+                    $product->images = json_encode($photo_gallery);
                 }
-                $product->images = json_encode($photo_gallery);
             }
 
 
@@ -523,26 +508,6 @@ class ProductController extends Controller
 
     public function update($id, Request $request)
     {
-        $imageRules = array(
-            'images' => 'image|mimes:jpeg,png,jpg,gif,svg|max:5000',
-        );
-        $imageMessage = array(
-            'images.image' => 'Upload file không đúng định dạng',
-            'images.mimes' => 'Định dạng ảnh không được hỗ trợ (định dạng hỗ trợ jpeg,png,jpg,gif,svg)',
-            'images.max' => 'Kích cỡ ảnh upload không quá 5 MB',
-        );
-        if (isset($request->images)) {
-            foreach ($request->images as $image) {
-                $image = array('images' => $image);
-
-                $imageValidator = Validator::make($image, $imageRules, $imageMessage);
-
-                if ($imageValidator->fails()) {
-                    return redirect()->back()->withErrors($imageValidator->errors())->withInput($request->all())->with('validate', 'failed');
-                }
-            }
-        }
-
         $error = [
             'name' => 'required|max:255',
             'category_id' => 'required',
@@ -550,10 +515,12 @@ class ProductController extends Controller
             'sku_id' => 'required|max:255|unique:products,sku_id,' . $id,
             'description' => 'required',
             'short_content' => 'required|max:500',
+
+            'images' => 'required',
             'brand' => 'required|max:255',
             'origin' => 'required|max:255',
             'material' => 'required|max:255',
-            'weight' => 'required|max:3',
+            'weight' => 'required|max:13',
             'length' => 'required|max:13',
             'height' => 'required|max:13',
             'packing_type' => 'required',
@@ -565,7 +532,8 @@ class ProductController extends Controller
 
         $message = [
             'name.max' => 'Tên sản phẩm ít hơn 255 ký tự',
-            'images.required' => 'Ảnh bắt buôc upload',
+
+            'images.required' => 'Ảnh bắt buộc tải lên',
             'name.required' => 'Tên sản phẩm bắt buộc nhập',
             'category_id.required' => 'Ngành hàng bắt buộc chọn',
             'price.required' => 'Giá sản phẩm bắt buộc nhập',
@@ -583,7 +551,7 @@ class ProductController extends Controller
             'material.required' => 'Chát liệu sản phẩm bắt buộc nhập',
             'material.max' => 'Chất liệu sản phẩm ít hơn 255 ký tự',
             'weight.required' => 'Trọng lượng sản phẩm bắt buộc nhập',
-            'weight.max' => 'Trọng lượng sản phẩm phải ít hơn 100 Kg',
+            'weight.max' => 'Trọng lượng sản phẩm ít hơn 10.000.000 gram',
             'length.required' => 'Chiều dài sản phẩm bắt buộc nhập',
             'length.max' => 'Chiều dài sản phẩm ít hơn 10.000.000 cm',
             'height.required' => 'Chiều cao sản phẩm bắt buộc nhập',
@@ -627,23 +595,19 @@ class ProductController extends Controller
             $product->video = $request->video;
 
 
-            if ($request->hasFile('images') && count($request->file('images')) > 0) {
-                $photo_gallery = [];
-                foreach ($request->file('images') as $image) {
-                    $filenameWithExt = $image->getClientOriginalName();
-                    //Get just filename
-                    $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-                    // Get just ext
-                    $extension = $image->getClientOriginalExtension();
-                    // Filename to store
-                    $fileNameToStore = $filename . '_' . time() . '.' . $extension;
-                    $path = $image->storeAs('public/products', $fileNameToStore);
-
-                    $path = str_replace('public/', '', $path);
-
-                    $photo_gallery[] = 'storage/' . $path;
+            $photo_gallery = [];
+            if (json_decode($request->images)) {
+                if (json_decode($request->images)) {
+                    foreach (json_decode($request->images) as $image) {
+                        if (strpos($image,'data:image') !== false) {
+                            $path = $this->saveImgBase64($image, 'products');
+                            $photo_gallery[] = 'storage/products/' . $path;
+                        } else {
+                            $photo_gallery[] = $image;
+                        }
+                    }
+                    $product->images = json_encode($photo_gallery);
                 }
-                $product->images = json_encode($photo_gallery);
             }
 
             $product->save();
