@@ -15,6 +15,7 @@ use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Str;
 
 class AffOrder extends Command
 {
@@ -63,7 +64,15 @@ class AffOrder extends Command
 //                    chia tiền ncc
 
                     if ($ncc){
-
+                        $code_ncc =  Str::lower(Str::random(10));
+                        $check = true;
+                        while ($check) {
+                            $checkBlance = BlanceChange::where('code', $code_ncc)->count();
+                            if (!$checkBlance || $checkBlance < 1) {
+                                $check = false;
+                            }
+                            $code_ncc =  Str::lower(Str::random(10));
+                        }
                         $price_ncc =$total/100 *(100 - ($product->discount  + $item->discount_ncc)) ;
 //                            tong_tien /100 * (100 - (discount + discount_vShop + diss_ncc))
                         $new_ncc_blance = new BlanceChange();
@@ -86,6 +95,15 @@ class AffOrder extends Command
                         }else{
                             $price_vstore=0;
                         }
+                        $code_vstore =  Str::lower(Str::random(10));
+                        $check = true;
+                        while ($check) {
+                            $checkBlance = BlanceChange::where('code', $code_ncc)->count();
+                            if (!$checkBlance || $checkBlance < 1) {
+                                $check = false;
+                            }
+                            $code_vstore =  Str::lower(Str::random(10));
+                        }
                         $new_vstore_blance = new BlanceChange();
                         $new_vstore_blance->user_id=$vstore->id;
                         $new_vstore_blance->type=1;
@@ -99,7 +117,15 @@ class AffOrder extends Command
 //                        chia vshop
                     $vshop = Vshop::where('id',$item->vshop_id)->first();
                     if ($vshop){
-
+                        $code_vshop =  Str::lower(Str::random(10));
+                        $check = true;
+                        while ($check) {
+                            $checkBlance = BlanceChange::where('code', $code_ncc)->count();
+                            if (!$checkBlance || $checkBlance < 1) {
+                                $check = false;
+                            }
+                            $code_vshop =  Str::lower(Str::random(10));
+                        }
                         $vshop_con_lai = $product->discount_vShop - $item->discount_vshop;
                         $price_vshop = $total /100 * $vshop_con_lai;
                         $new_vshop_blance = new BlanceChange();
