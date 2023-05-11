@@ -332,7 +332,7 @@
                             </div>
                             <div class="mx-auto my-4">
                                 <button class="btn btn-secondary" type="button"
-                                 onclick="appectBack(2)">Hủy bỏ
+                                        onclick="appectBack(2)">Hủy bỏ
                                 </button>
                                 <button class="btn btn-primary ml-2" id="btnSave">Thêm sản phẩm</button>
                             </div>
@@ -439,7 +439,7 @@
     <script type="text/javascript">
         function appectBack(type) {
             Swal.fire({
-                title: 'Bạn có chắc muốn hủy bỏ thao tác ' + type === 1 ? 'sửa' : 'thêm' + ' sản phẩm?',
+                title: 'Bạn có chắc muốn hủy bỏ thao tác thêm sản phẩm?',
                 text: "",
                 icon: 'question',
                 showCancelButton: true,
@@ -453,6 +453,7 @@
                 }
             })
         }
+
         let i = -1;
         $('#file-input').on('change', (e) => {
             console.log(1)

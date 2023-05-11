@@ -439,7 +439,7 @@
     <script type="text/javascript">
         function appectBack(type) {
             Swal.fire({
-                title: 'Bạn có chắc muốn hủy bỏ thao tác ' + type === 1 ? 'sửa' : 'thêm' + ' sản phẩm?',
+                title: 'Bạn có chắc muốn hủy bỏ thao tác sửa sản phẩm?',
                 text: "",
                 icon: 'question',
                 showCancelButton: true,
