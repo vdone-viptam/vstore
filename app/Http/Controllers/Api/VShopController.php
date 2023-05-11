@@ -860,7 +860,7 @@ class  VShopController extends Controller
 //                return  $discount ;
                 return response()->json([
                     'status_code' => 400,
-                    'error' => 'Phầm trăm giảm giá nhỏ hơn hoặc bằng' . round(($discount_vshop * 0.95),1) ,
+                    'error' => 'Phầm trăm giảm giá nhỏ hơn hoặc bằng ' . round(($discount_vshop * 0.95),1) ,
                     'discount_limit' => round(($discount_vshop * 0.95),1) ,
                     'discount_price_limit' => round(($product->price / 100) * ($discount_vshop * 0.95),1)
                 ], 400);

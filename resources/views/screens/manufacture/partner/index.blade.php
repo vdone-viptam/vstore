@@ -76,7 +76,7 @@
                                 </span>
                             </th>
                             <th class="white-space-250 text-center">
-                                
+
                                     Tổng số sản phẩm niêm yết trên V-Store
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'total_product')
@@ -89,10 +89,10 @@
                                             <i class="fas fa-sort sort" data-sort="total_product"></i>
                                         @endif
                                     </span>
-                           
+
                             </th>
                             <th class="white-space-200 text-center">
-                            
+
                                     Số loại sản phẩm niêm yết
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'users.id')
@@ -105,7 +105,7 @@
                                             <i class="fas fa-sort sort" data-sort="users.id"></i>
                                         @endif
                                     </span>
-                               
+
                             </th>
                             <th class="white-space-80">
                             </th>
@@ -284,7 +284,7 @@
                                 $("#address").val(item.dataset.address);
                                 $("#total-product").val(parseInt(item.dataset.total_product));
                                 $("#total-category").val(item.dataset.total_category);
-                                $("#total-money-discount").val(convertVND(result.money));
+                                $("#total-money-discount").val(convertNumberVN(result.money));
                             }
                         },
                     });
