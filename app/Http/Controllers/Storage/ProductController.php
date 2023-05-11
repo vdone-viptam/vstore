@@ -458,7 +458,7 @@ class ProductController extends Controller
 
                 $list_item[] = [
                     'PRODUCT_NAME' => $product->name,
-                    'PRODUCT_QUANTITY' => $order_item->quantity,
+                    'PRODUCT_QUANTITY' => 20,
                     'PRODUCT_PRICE' => $priceDiscount,
                     'PRODUCT_WEIGHT' => $product->weight * $order_item->quantity,
                 ];
