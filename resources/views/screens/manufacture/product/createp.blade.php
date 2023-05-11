@@ -55,7 +55,8 @@
 
 
 @section('content')
-    <form action="{{route('screens.manufacture.product.store')}}" method="POST" enctype="multipart/form-data">
+    <form action="{{route('screens.manufacture.product.store')}}" id="form-create" method="POST"
+          enctype="multipart/form-data">
         @csrf
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="card">
@@ -141,12 +142,12 @@
                             <div class="mb-3 col-12 col-xl-6">
                                 <label for="formFileMultiple" class="form-label">Hình ảnh sản phẩm<span
                                         class="text-danger">*</span></label>
-                                <input type="hidden" name="images" id="images">
+                                <input type="hidden" name="images" id="images" value="{{old('images')}}">
                                 @error('images')
                                 <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                 @enderror
                                 <div class="images-product">
-                                    <div class="img-item hidden">
+                                    <div class="img-item hidden slist">
 
                                     </div>
                                     <input type="hidden" class="input-image">
@@ -355,7 +356,7 @@
                                 <button class="btn btn-secondary" type="button"
                                         onclick="appectBack(2)">Hủy bỏ
                                 </button>
-                                <button class="btn btn-primary ml-2" id="btnSave">Thêm sản phẩm</button>
+                                <button class="btn btn-primary ml-2" id="btnSave" type="button">Thêm sản phẩm</button>
                             </div>
 
                         </div>
@@ -458,6 +459,7 @@
         </script>
     @endif
     <script type="text/javascript">
+
         function appectBack(type) {
             Swal.fire({
                 title: 'Bạn có chắc muốn hủy bỏ thao tác thêm sản phẩm?',
@@ -574,40 +576,17 @@
             uploader.init();
         });
 
-
-        // document.querySelector('#images').addEventListener('change', (e) => {
-        //     let error = document.querySelector("#error");
-        //
-        //     error.innerHTML = "";
-        //     if (e.target.files) {
-        //         console.log(e.target.files)
-        //         for (let i = 0; i < e.target.files.length; i++) {
-        //             let file = e.target.files[i];
-        //             let allowedImageTypes = ["image/jpeg", "image/gif", "image/png", "image/jpg"];
-        //             if (!allowedImageTypes.includes(file.type)) {
-        //                 error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif ]";
-        //                 document.querySelector('#btnSave').setAttribute('disabled', 'true');
-        //                 return false;
-        //             }
-        //             if (file.size > 1024 * 1024 * 5) {
-        //                 error.innerHTML = "File ảnh upload không quá 5MB";
-        //                 document.querySelector('#btnSave').setAttribute('disabled', 'true');
-        //                 return false;
-        //             }
-        //
-        //
-        //             document.querySelector('#btnSave').removeAttribute('disabled');
-        //
-        //         }
-        //
-        //     }
-        // })
     </script>
-    <script>
+    <script type="module">
+
         $('body').on('keypress', '.only_number', function (event) {
             var character = String.fromCharCode(event.keyCode);
             return /[0-9,]/.test(character);
         });
+        var arrImage = $('#images').val().length > 0 && JSON.parse($('#images').val()) ? JSON.parse($('#images').val()) : [];
+        if (arrImage.length > 0) {
+            render(arrImage, '');
+        }
 
         $('body').on('keyup', '.only_number', function () {
             if ($(this).val().includes(",")) {
@@ -623,7 +602,7 @@
             }
             return string_final;
         });
-        var arrImage = [];
+
 
         function render(arrImg, imgEvent) {
             if (arrImg.length >= 5) {
@@ -636,7 +615,7 @@
             var htmlImgData = ""
             arrImg.map((item, index) => {
                 htmlImgData += `<div class="item" key="${index}">
-            <img style="width:100%; object-fit:cover; border-radius:4px;" src="${item}" />
+            <img class="img-pro" style="width:100%; object-fit:cover; border-radius:4px;" src="${item}" />
             <div class="over-lay-img"></div>
                     <div class="d-flex justify-content-center align-items-center deleteImg" style="gap:10px">
                     <svg width="20" height="20" class="zoom-img" onclick="zoomImg('${item}')" style="cursor-pointer" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -656,6 +635,8 @@
                 } else {
                     $('.img-item').append(htmlImgData)
                 }
+                var sortable = Sortable.create(document.querySelector('.img-item'));
+
                 const btnDelete = document.querySelectorAll('.delete-one-image');
                 btnDelete.forEach(item => {
                     const {index} = item.dataset;
@@ -670,8 +651,6 @@
                 $('.img-item').addClass('hidden')
 
             }
-
-
         }
 
         function zoomImg(img) {
@@ -733,6 +712,16 @@
             };
             input.click();
 
+        })
+
+        $('#btnSave').on('click', () => {
+            const imgs = document.querySelectorAll('.img-pro');
+            let arr = [];
+            imgs.forEach(item => {
+                arr.push(item.src);
+            })
+            $('#images').val(JSON.stringify(arr));
+            $('#form-create').submit();
         })
 
 

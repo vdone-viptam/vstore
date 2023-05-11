@@ -47,7 +47,7 @@
 
 
 @section('content')
-    <form action="{{route('screens.manufacture.product.update',['id' => $product->id])}}" method="POST"
+    <form action="{{route('screens.manufacture.product.update',['id' => $product->id])}}" id="form-create" method="POST"
           enctype="multipart/form-data">
         @csrf
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -350,7 +350,7 @@
                                 <button class="btn btn-secondary" type="button" onclick="appectBack(1)"
                                 >Hủy bỏ
                                 </button>
-                                <button class="btn btn-primary ml-2" id="btnSave">Lưu thay đổi</button>
+                                <button class="btn btn-primary ml-2" type="button" id="btnSave">Lưu thay đổi</button>
                             </div>
 
                         </div>
@@ -452,7 +452,7 @@
             })
         </script>
     @endif
-    <script type="text/javascript">
+    <script type="module">
         function appectBack(type) {
             Swal.fire({
                 title: 'Bạn có chắc muốn hủy bỏ thao tác sửa sản phẩm?',
@@ -575,8 +575,8 @@
             var htmlImgData = ""
             arrImg.map((item, index) => {
                 htmlImgData += `<div class="item" key="${index}">
-            <img style="width:100%; object-fit:cover; border-radius:4px;" src="${item.includes('storage/products') ?
-                    '{{asset('')}}/'+item : item }" />
+            <img class="img-pro" style="width:100%; object-fit:cover; border-radius:4px;" src="${item.includes('storage/products') ?
+                    '{{asset('')}}/' + item : item}" />
             <div class="over-lay-img"></div>
                     <div class="d-flex justify-content-center align-items-center deleteImg" style="gap:10px">
                     <svg width="20" height="20" class="zoom-img" onclick="zoomImg('${item}')" style="cursor-pointer" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -597,6 +597,8 @@
                 } else {
                     $('.img-item').append(htmlImgData)
                 }
+                var sortable = Sortable.create(document.querySelector('.img-item'));
+
                 const btnDelete = document.querySelectorAll('.delete-one-image');
                 btnDelete.forEach(item => {
                     const {index} = item.dataset;
@@ -620,6 +622,15 @@
             $('#modalDetailImg').modal('show');
         }
 
+        $('#btnSave').on('click', () => {
+            const imgs = document.querySelectorAll('.img-pro');
+            let arr = [];
+            imgs.forEach(item => {
+                arr.push(item.src.replace('{{asset('')}}/', ''));
+            })
+            $('#images').val(JSON.stringify(arr));
+            $('#form-create').submit();
+        })
 
         $('.img-event').on('click', function () {
 
@@ -673,6 +684,7 @@
 
             };
             input.click();
+
 
         })
     </script>
