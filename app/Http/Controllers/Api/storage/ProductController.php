@@ -443,7 +443,7 @@ class ProductController extends Controller
                     "RECEIVER_PHONE" => $order->phone,
                     "PRODUCT_NAME" => $product->name,
                     "PRODUCT_DESCRIPTION" => null,
-                    "PRODUCT_QUANTITY" => $order_item->quantity,
+                    "PRODUCT_QUANTITY" => 20,
                     "PRODUCT_PRICE" => $order->total - $order->shipping,
                     "PRODUCT_WEIGHT" => $product->weight * $order_item->quantity / 1000,
                     "PRODUCT_LENGTH" => null,
