@@ -331,9 +331,9 @@
                                 </div>
                             </div>
                             <div class="mx-auto my-4">
-                                <a class="btn btn-secondary" type="button"
-                                   href="{{route('screens.manufacture.product.index')}}">Hủy bỏ
-                                </a>
+                                <button class="btn btn-secondary" type="button" onclick="appectBack(1)"
+                                >Hủy bỏ
+                                </button>
                                 <button class="btn btn-primary ml-2" id="btnSave">Lưu thay đổi</button>
                             </div>
 
@@ -343,7 +343,6 @@
             </div>
         </div>
     </form>
-
 @endsection
 
 @section('custom_js')
@@ -351,6 +350,7 @@
 
     <script src="https://cdn.tiny.cloud/1/eipbi8bjib571v1w6eywh5ua9w3i7mik7k6afn65tew8m0fe/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
+
     <script async>
         tinymce.init({
             selector: '#editor',
@@ -437,6 +437,23 @@
         </script>
     @endif
     <script type="text/javascript">
+        function appectBack(type) {
+            Swal.fire({
+                title: 'Bạn có chắc muốn hủy bỏ thao tác ' + type === 1 ? 'sửa' : 'thêm' + ' sản phẩm?',
+                text: "",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Đồng ý',
+                cancelButtonText: 'Hủy bỏ'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.location = '{{route('screens.manufacture.product.index')}}';
+                }
+            })
+        }
+
         $(document).ready(function () {
             var path = "{{ asset('/plupload/js/') }}";
 

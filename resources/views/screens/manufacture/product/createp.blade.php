@@ -331,9 +331,9 @@
                                 </div>
                             </div>
                             <div class="mx-auto my-4">
-                                <a class="btn btn-secondary" type="button"
-                                   href="{{route('screens.manufacture.product.index')}}">Hủy bỏ
-                                </a>
+                                <button class="btn btn-secondary" type="button"
+                                 onclick="appectBack(2)">Hủy bỏ
+                                </button>
                                 <button class="btn btn-primary ml-2" id="btnSave">Thêm sản phẩm</button>
                             </div>
 
@@ -437,6 +437,22 @@
         </script>
     @endif
     <script type="text/javascript">
+        function appectBack(type) {
+            Swal.fire({
+                title: 'Bạn có chắc muốn hủy bỏ thao tác ' + type === 1 ? 'sửa' : 'thêm' + ' sản phẩm?',
+                text: "",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Đồng ý',
+                cancelButtonText: 'Hủy bỏ'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    document.location = '{{route('screens.manufacture.product.index')}}';
+                }
+            })
+        }
         let i = -1;
         $('#file-input').on('change', (e) => {
             console.log(1)
