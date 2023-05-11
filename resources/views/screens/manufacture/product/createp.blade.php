@@ -134,7 +134,8 @@
                             <div class="mb-3 col-12 col-xl-6">
                                 <label for="formFileMultiple" class="form-label">Hình ảnh sản phẩm<span
                                         class="text-danger">*</span></label>
-                                <input class="form-control form-control-lg" accept=".jpeg.gif,.png,.jpg" type="file" name="images[]"
+                                <input class="form-control form-control-lg" accept=".jpeg.gif,.png,.jpg" type="file"
+                                       name="images[]"
                                        id="images"
                                        multiple>
                                 <p class="text-danger mt-2 ml-1" id="error"></p>
@@ -330,8 +331,9 @@
                                 </div>
                             </div>
                             <div class="mx-auto my-4">
-                                <button class="btn btn-secondary" type="button" onclick="location.reload()">Hủy bỏ
-                                </button>
+                                <a class="btn btn-secondary" type="button"
+                                   href="{{route('screens.manufacture.product.index')}}">Hủy bỏ
+                                </a>
                                 <button class="btn btn-primary ml-2" id="btnSave">Thêm sản phẩm</button>
                             </div>
 
@@ -543,7 +545,7 @@
                 console.log(e.target.files)
                 for (let i = 0; i < e.target.files.length; i++) {
                     let file = e.target.files[i];
-                    let allowedImageTypes = ["image/jpeg", "image/gif", "image/png","image/jpg"];
+                    let allowedImageTypes = ["image/jpeg", "image/gif", "image/png", "image/jpg"];
                     if (!allowedImageTypes.includes(file.type)) {
                         error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif ]";
                         document.querySelector('#btnSave').setAttribute('disabled', 'true');
@@ -563,25 +565,25 @@
             }
         })
     </script>
-<script>
-    $('body').on('keypress', '.only_number', function(event) {
-        var character = String.fromCharCode(event.keyCode);
-        return /[0-9,]/.test(character);
-    });
+    <script>
+        $('body').on('keypress', '.only_number', function (event) {
+            var character = String.fromCharCode(event.keyCode);
+            return /[0-9,]/.test(character);
+        });
 
-    $('body').on('keyup', '.only_number', function() {
-        if ($(this).val().includes(",")) {
-            var string_before_symbol = $(this).val().slice(0, $(this).val().indexOf(","));
-            var string_after_symbol = $(this).val().slice($(this).val().indexOf(",") + 1);
+        $('body').on('keyup', '.only_number', function () {
+            if ($(this).val().includes(",")) {
+                var string_before_symbol = $(this).val().slice(0, $(this).val().indexOf(","));
+                var string_after_symbol = $(this).val().slice($(this).val().indexOf(",") + 1);
 
-            if (string_after_symbol.length > 2) {
-                $(this).val(string_before_symbol + ',' + string_after_symbol.slice(0, 2));
+                if (string_after_symbol.length > 2) {
+                    $(this).val(string_before_symbol + ',' + string_after_symbol.slice(0, 2));
+                }
+                var string_final = string_before_symbol + ',' + string_after_symbol.slice(0, 2);
+            } else {
+                var string_final = $(this).val();
             }
-            var string_final = string_before_symbol + ',' + string_after_symbol.slice(0, 2);
-        } else {
-            var string_final = $(this).val();
-        }
-        return string_final;
-    });
-</script>
+            return string_final;
+        });
+    </script>
 @endsection

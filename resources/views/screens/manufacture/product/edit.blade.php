@@ -331,8 +331,9 @@
                                 </div>
                             </div>
                             <div class="mx-auto my-4">
-                                <button class="btn btn-secondary" type="button" onclick="location.reload()">Hủy bỏ
-                                </button>
+                                <a class="btn btn-secondary" type="button"
+                                   href="{{route('screens.manufacture.product.index')}}">Hủy bỏ
+                                </a>
                                 <button class="btn btn-primary ml-2" id="btnSave">Lưu thay đổi</button>
                             </div>
 
