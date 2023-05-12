@@ -594,7 +594,7 @@ class ProductController extends Controller
             'Authorization: Signature Algorithm=HS256,Credential=' . $merchantKey . ',SignedHeaders=,Signature=' . $signature
         );
         $payment = new PaymentMethod9PayController();
-        $response = $payment->callAPI('POST', $return_url, false, $headers);
+        $response = $payment->callAPI('POST', $merchantEndPoint . '/v2/refunds/create', $data, $headers);
 
         return $response;
 
