@@ -5,7 +5,79 @@
 @section('custom_css')
 
     <link rel="stylesheet" href="{{asset('asset/dist/output.css')}}">
+    <style>
 
+.dropdown-finance {
+  width: 100%;
+  display: inline-block;
+  background-color: #fff;
+  border-radius: 2px;
+  box-shadow: 0 0 2px rgb(204, 204, 204);
+  transition: all .5s ease;
+  position: relative;
+  font-size: 14px;
+  color: #474747;
+  height: 100%;
+  text-align: left
+}
+.dropdown-finance .select {
+    cursor: pointer;
+    display: block;
+    padding: 10px
+}
+.dropdown-finance .select > i {
+    font-size: 13px;
+    color: #888;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    float: right;
+    line-height: 20px
+}
+.dropdown-finance:hover {
+    box-shadow: 0 0 4px rgb(204, 204, 204)
+}
+.dropdown-finance:active {
+    background-color: #f8f8f8
+}
+.dropdown-finance.active:hover,
+.dropdown-finance.active {
+    box-shadow: 0 0 4px rgb(204, 204, 204);
+    border-radius: 2px 2px 0 0;
+    background-color: #f8f8f8
+}
+.dropdown-finance.active .select > i {
+    transform: rotate(-90deg)
+}
+.dropdown-finance .dropdown-menu-finan {
+    position: absolute;
+    background-color: #fff;
+    width: 100%;
+    left: 0;
+    margin-top: 1px;
+    box-shadow: 0 1px 2px rgb(204, 204, 204);
+    border-radius: 0 1px 2px 2px;
+    overflow: hidden;
+    display: none;
+    max-height: 144px;
+    overflow-y: auto;
+    z-index: 9
+}
+.dropdown-finance .dropdown-menu-finan li {
+    padding: 10px;
+    transition: all .2s ease-in-out;
+    cursor: pointer
+} 
+.dropdown-finance .dropdown-menu-finan {
+    padding: 0;
+    list-style: none
+}
+.dropdown-finance .dropdown-menu-finan li:hover {
+    background-color: #f2f2f2
+}
+.dropdown-finance .dropdown-menu-finan li:active {
+    background-color: #e2e2e2
+}
+</style>
 @endsection
 @section('modal')
 
@@ -101,14 +173,26 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Tên ngân hàng:</label>
-                                    <select name="bank_id" required
+                                    <div class="dropdown-finance">
+                                        <div class="select">
+                                        <span>Lựa chọn ngân hàng</span>
+                                        <i class="fa fa-chevron-left"></i>
+                                        </div>
+                                        <input type="hidden" name="gender">
+                                        <ul class="dropdown-menu-finan">
+                                        @foreach($banks as $bank)
+                                        <li id="{{$bank->id}}"><div class="d-flex align-items-center" style="gap:10px"><div style="width:121px !important;"><div style="width:120px; !important; height:40px!important;"><img style="width:100%; height:100%; object-fit:contain !important;" src="{{$bank->image}}"></div></div> {{$bank->name.' - '.$bank->full_name}} </div></li>
+                                        @endforeach
+                                        </ul>
+                                    </div>
+                                    <!-- <select name="bank_id" required
                                             class="form-control nameBank0">
-                                        <option hidden value="">Lựa chọn ngân hàng</option>
+                                        <option hidden value=""><div class="d-flex align-items-center" style="gap:10px"><div style="width:200px !important; height:50px!important;"><img style="width:100%; object-fit-cover;" ></div>Lựa chọn ngân hàng</div></option>
                                         @foreach($banks as $bank)
                                             <option
-                                                value="{{$bank->id}}">{{$bank->full_name}}</option>
+                                                value="{{$bank->id}}"><div class="d-flex align-items-center" style="gap:10px"><div style="width:200px !important; height:50px!important;"><img style="width:100%; object-fit-cover;"></div> {{$bank->name.' - '.$bank->full_name}} </div></option>
                                         @endforeach
-                                    </select>
+                                    </select> -->
                                     @error('bank_id')
                                     <p class="text-red-600 mt-2">{{$message}}</p>
                                     @enderror
@@ -290,6 +374,22 @@
 @endsection
 @section('custom_js')
     <script src="{{asset('asset/js/main.js')}}"></script>
+    <script>
+        $('.dropdown-finance').click(function () {
+        $(this).attr('tabindex', 1).focus();
+        $(this).toggleClass('active');
+        $(this).find('.dropdown-menu-finan').slideToggle(300);
+    });
+    $('.dropdown-finance').focusout(function () {
+        $(this).removeClass('active');
+        $(this).find('.dropdown-menu-finan').slideUp(300);
+    });
+    $('.dropdown-finance .dropdown-menu-finan li').click(function () {
+        $(this).parents('.dropdown-finance').find('span').text($(this).text());
+        $(this).parents('.dropdown-finance').find('input').attr('value', $(this).attr('id'));
+    });
+
+    </script>
     <script>
         document.getElementsByName('name').forEach(item => {
             item.addEventListener("keypress", (e) => {
