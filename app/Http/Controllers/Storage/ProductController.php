@@ -370,7 +370,7 @@ class ProductController extends Controller
     public function updateRequestOut(Request $request, $status = null)
     {
 
-
+    DB::beginTransaction();
         try {
 
             $order = Order::where('id', $request->id)->first();
@@ -548,6 +548,7 @@ class ProductController extends Controller
 
 
             }
+            DB::commit();
             return response()->json([
                 'success' => true,
                 'message' => 'Cập nhật đơn hàng thành công',
@@ -556,6 +557,7 @@ class ProductController extends Controller
 
 
         } catch (\Exception $e) {
+            DB::rollBack();
             return response()->json([
                 'success' => false,
                 'message' => $e->getMessage(),
