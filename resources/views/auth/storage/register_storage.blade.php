@@ -81,11 +81,11 @@
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between">
             <div>
-                <h3 class="mb-1">Đăng ký</h3>
+                <h1 class="mb-1" style="font-size:34px;">Đăng ký</h1>
                 <p>Vui lòng nhập thông tin để đăng ký tài khoản.</p>
             </div>
 
-            <img src="{{asset('asset/images/titleK.png')}}" style="object-fit: contain; height: 40px;" alt="Logo">
+            <img src="{{asset('asset/images/titleK.png')}}" style="object-fit: contain; height: 40px !important;" alt="Logo">
         </div>
         <div class="card-body">
             <div class="row">
