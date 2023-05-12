@@ -79,7 +79,7 @@ class PartnerController extends Controller
         return view('screens.vstore.partner.vshop', compact('vshop', 'field', 'key_search', 'type', 'limit'));
 
     }
-    
+
     public function ship()
     {
         return view('screens.vstore.partner.ship', $this->v);
