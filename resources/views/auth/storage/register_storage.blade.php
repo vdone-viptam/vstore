@@ -865,16 +865,16 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
 <script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
 <script src="{{asset('asset/js/main.js')}}"></script>
 
+@include('auth.layout.oldLocation')
+
     <script>
         const divCity = document.getElementById('city_id');
         const divDistrict = document.getElementById('district_id');
         const divWard = document.getElementById('ward_id');
         const btnSubmit = document.querySelector('.active');
 
-        fetch('{{route('get_city')}}', {
-            mode: 'no-cors',
 
-        })
+        fetch('{{route('get_city')}}')
             .then((response) => response.json())
             .then((data) => {
                 document.getElementById('city_id').innerHTML = `<option value="" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{old('city_id')}}' ? 'selected' : ''}>${item.PROVINCE_NAME}</option>`);
@@ -882,21 +882,13 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
             .catch(console.error);
 
         divCity.addEventListener('change', (e) => {
-            fetch('{{route('get_city')}}?type=2&value=' + e.target.value, {
-                mode: 'no-cors',
-
-            })
+            fetch('{{route('get_city')}}?type=2&value=' + e.target.value)
                 .then((response) => response.json())
-
                 .then((data) => {
                     if (data.length > 0) {
-
                         btnSubmit.setAttribute('disabled', 'true');
                         btnSubmit.classList.add('btn-secondary');
-
                         divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
-
-
                     } else {
                         divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`;
                     }
@@ -906,11 +898,8 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 )
         });
         divDistrict.addEventListener('change', (e) => {
-            fetch('{{route('get_city')}}?type=3&value=' + e.target.value, {
-                mode: 'no-cors',
-
-            })
-                .then((response) => response.json())
+            fetch('{{route('get_city')}}?type=3&value=' + e.target.value)
+                .then((response) => response.json() )
                 .then((data) => {
                     if (data.length > 0) {
                         btnSubmit.setAttribute('disabled', 'true');
@@ -921,8 +910,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                         divWard.innerHTML = `<option value="">Lựa chọn phường (xã)</option>`;
                     }
                 })
-                .catch(() => divWard.innerHTML = `<option value="">Lựa chọn phường (xã)</option>`
-                )
+                .catch(() => divWard.innerHTML = `<option value="">Lựa chọn phường (xã)</option>`)
         });
 
         function checkEmpty(inputs) {
@@ -1049,51 +1037,8 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         checkThreeInputStorage('#warehouse', '#acreage_warehouse');
 
 
-
-        //lưu chiều dài, rộng, cao vào session storage vì nó ko đc lưu ở ĐB mà lại cần show lại ~~
-        setSessionStorageThreeType();
-
-        function setSessionStorageThreeType() {
-            let length = document.getElementById("length");
-            if (length) {
-                length.addEventListener("change", function (evt) {
-                    sessionStorage.setItem("length_storage", length.value);
-                });
-            }
-            let width = document.getElementById("width");
-            if (width) {
-                width.addEventListener("change", function (evt) {
-                    sessionStorage.setItem("width_storage", width.value);
-                });
-            }
-            let height = document.getElementById("height");
-            if (height) {
-                height.addEventListener("change", function (evt) {
-                    sessionStorage.setItem("height_storage", height.value);
-                });
-            }
-        }
-
     </script>
-    @if(old('city_id') != '')
-        <script>
-            fetch('{{route('get_city')}}?type=2&value={{old('city_id')}}', {
-                mode: 'no-cors',
 
-            })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.length > 0) {
-                        divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" ${item.DISTRICT_ID == '{{old('district_id')}}' ? 'selected' : ''}>${item.DISTRICT_NAME}</option>`);
-
-                    } else {
-                        divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`;
-                    }
-                })
-                .catch(() => divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`
-                );
-        </script>
-    @endif
 @if($isOrder)
         <script>
             const formRegister = document.querySelector('#formRegister-V');
@@ -1128,15 +1073,15 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 loadAddress(infoNCC.provinceId, infoNCC.district_id, infoNCC.ward_id);
 
                 // info storage
-                let storage_information = infoNCC.storage_information;
-                if (storage_information) {
-                    storage_information = JSON.parse(storage_information);
-                    setValueById("floor_area", storage_information.floor_area);
-                    setValueById("volume", storage_information.volume);
-                    setValueById("cold_storage", storage_information.cold_storage);
-                    setValueById("warehouse", storage_information.warehouse);
-                    setValueById("normal_storage", storage_information.normal_storage);
-                }
+                // let storage_information = infoNCC.storage_information;
+                // if (storage_information) {
+                //     storage_information = JSON.parse(storage_information);
+                //     setValueById("floor_area", storage_information.floor_area);
+                //     setValueById("volume", storage_information.volume);
+                //     setValueById("cold_storage", storage_information.cold_storage);
+                //     setValueById("warehouse", storage_information.warehouse);
+                //     setValueById("normal_storage", storage_information.normal_storage);
+                // }
 
             }
 
@@ -1177,17 +1122,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     );
             }
 
-            getDataStorageThreeType();
 
-            function getDataStorageThreeType() {
-                let length = sessionStorage.getItem("length_storage");
-                let width = sessionStorage.getItem("width_storage");
-                let height = sessionStorage.getItem("height_storage");
-
-                setValueById("length", length);
-                setValueById("width", width);
-                setValueById("height", height);
-            }
 
     </script>
 @endif

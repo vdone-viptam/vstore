@@ -564,7 +564,7 @@
                         swalNoti('center', 'success', 'Duyệt sản phẩm thành công','', 500, true, 2200);
                         setInterval(function () {
                             location.reload();
-                        }, 1500);
+                        }, 1000);
                     },
                 });
             }

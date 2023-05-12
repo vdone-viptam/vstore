@@ -303,27 +303,9 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
 
     <script src="{{ asset('asset/js/main.js') }}"></script>
     <script src="{{ asset('asset/js/bootstrap.bundle.js') }}"></script>
-    @if (old('city_id') != '')
-        <script>
-            fetch('{{ route('get_city') }}?type=2&value={{ old('city_id') }}', {
-                    mode: 'no-cors',
 
-                })
-                .then((response) => response.json())
-                .then((data) => {
-                    if (data.length > 0) {
-                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>` + data
-                            .map(item =>
-                                `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" ${item.DISTRICT_ID == '{{ old('district_id') }}' ? 'selected' : ''}>${item.DISTRICT_NAME}</option>`
-                            );
+    @include('auth.layout.oldLocation')
 
-                    } else {
-                        divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`;
-                    }
-                })
-                .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`);
-        </script>
-    @endif
     @if ($isOrder)
         <script type="text/javascript">
             $(window).on('load', function() {
