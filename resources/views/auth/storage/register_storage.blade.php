@@ -874,10 +874,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         const btnSubmit = document.querySelector('.active');
 
 
-        fetch('{{route('get_city')}}', {
-            mode: 'no-cors',
-
-        })
+        fetch('{{route('get_city')}}')
             .then((response) => response.json())
             .then((data) => {
                 document.getElementById('city_id').innerHTML = `<option value="" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item => `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{old('city_id')}}' ? 'selected' : ''}>${item.PROVINCE_NAME}</option>`);
@@ -885,21 +882,13 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
             .catch(console.error);
 
         divCity.addEventListener('change', (e) => {
-            fetch('{{route('get_city')}}?type=2&value=' + e.target.value, {
-                mode: 'no-cors',
-
-            })
+            fetch('{{route('get_city')}}?type=2&value=' + e.target.value)
                 .then((response) => response.json())
-
                 .then((data) => {
                     if (data.length > 0) {
-
                         btnSubmit.setAttribute('disabled', 'true');
                         btnSubmit.classList.add('btn-secondary');
-
                         divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>` + data.map(item => `<option data-name="${item.DISTRICT_NAME}" value="${item.DISTRICT_ID}" >${item.DISTRICT_NAME}</option>`);
-
-
                     } else {
                         divDistrict.innerHTML = `<option value="" disabled selected>Lựa chọn quận (huyện)</option>`;
                     }
@@ -909,11 +898,8 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 )
         });
         divDistrict.addEventListener('change', (e) => {
-            fetch('{{route('get_city')}}?type=3&value=' + e.target.value, {
-                mode: 'no-cors',
-
-            })
-                .then((response) => response.json())
+            fetch('{{route('get_city')}}?type=3&value=' + e.target.value)
+                .then((response) => response.json() )
                 .then((data) => {
                     if (data.length > 0) {
                         btnSubmit.setAttribute('disabled', 'true');
@@ -924,8 +910,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                         divWard.innerHTML = `<option value="">Lựa chọn phường (xã)</option>`;
                     }
                 })
-                .catch(() => divWard.innerHTML = `<option value="">Lựa chọn phường (xã)</option>`
-                )
+                .catch(() => divWard.innerHTML = `<option value="">Lựa chọn phường (xã)</option>`)
         });
 
         function checkEmpty(inputs) {
