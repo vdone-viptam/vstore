@@ -591,7 +591,7 @@
             uploader.init();
         });
         let arrImage = JSON.parse($('#images').val());
-        render(arrImage, 'edit')
+        render(arrImage, 1)
 
         function render(arrImg, imgEvent) {
             if (arrImg.length >= 5) {
@@ -618,31 +618,32 @@
             </div>`
             })
 
-            if (arrImage.length > 0) {
-                $('.img-item').removeClass('hidden')
+            $('.img-item').removeClass('hidden')
 
-                if (arrImg.length > 1 || imgEvent == 1) {
-                    $('.img-item').html(htmlImgData)
-                } else {
-                    $('.img-item').append(htmlImgData)
-                }
-                var sortable = Sortable.create(document.querySelector('.img-item'));
-
-                const btnDelete = document.querySelectorAll('.delete-one-image');
-                btnDelete.forEach(item => {
-                    const {index} = item.dataset;
-                    item.addEventListener('click', (e) => {
-                        arrImage = arrImage.filter((item, key) => +index !== key);
-                        $('#images').val(JSON.stringify(arrImage));
-                        render(arrImage, 1);
-
-                    });
-                })
+            if (arrImg.length > 1 || imgEvent === 1) {
+                $('.img-item').html(htmlImgData)
             } else {
-                $('.img-item').addClass('hidden')
-
+                $('.img-item').append(htmlImgData)
             }
+            var sortable = Sortable.create(document.querySelector('.img-item'));
 
+            const btnDelete = document.querySelectorAll('.delete-one-image');
+            btnDelete.forEach(item => {
+                const {index} = item.dataset;
+                item.addEventListener('click', (e) => {
+                    arrImage = arrImage.filter((item, key) => +index !== key);
+                    $('#images').val(JSON.stringify(arrImage));
+                    if (arrImage.length > 0) {
+                        render(arrImage, 1);
+                    } else {
+                        render([], 1)
+                    }
+
+                });
+            })
+            if (arrImg == 0) {
+                $('.img-item').addClass('hidden')
+            }
 
         }
 
@@ -704,7 +705,7 @@
                                 $('.img-event').removeClass("hidden");
 
                             }
-                            render(arrImage, '');
+                            render(arrImage, 2);
 
                         }
                         reader.readAsDataURL(file)
