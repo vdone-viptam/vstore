@@ -4,12 +4,17 @@ namespace App\Http\Controllers\Storage;
 
 use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PaymentMethod9PayController;
+use App\Http\Lib9Pay\HMACSignature;
+use App\Http\Lib9Pay\MessageBuilder;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\Category;
 use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\OrderService;
+use App\Models\PaymentHistory;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\Province;
@@ -157,7 +162,7 @@ class ProductController extends Controller
                 $ware->amount = $ware->amount + $requestIm->quantity;
                 $ware->save();
                 $vshop = Vshop::where('pdone_id', 262)->first();
-                if ($vshop){
+                if ($vshop) {
                     if (!VshopProduct::where('product_id', $requestIm->product_id)->where('vshop_id', $vshop->id)->whereIn('status', [1, 2])->first()) {
                         $vshop_product = new VshopProduct();
                         $vshop_product->vshop_id = $vshop->id;
@@ -532,6 +537,16 @@ class ProductController extends Controller
                     'NOTE' => "Hủy đơn do kho",
 
                 ]);
+                try {
+                    if ($order->method_payment != 'COD') {
+                        $result = $this->backMoney($order->no);
+                        dd($result);
+                    }
+                } catch (\Exception $exception) {
+                    dd($exception->getMessage());
+                }
+
+
             }
             return response()->json([
                 'success' => true,
@@ -547,5 +562,39 @@ class ProductController extends Controller
             ], 400);
 
         };
+    }
+
+
+    public function backMoney($order_no)
+    {
+        $checkPayment = PaymentHistory::where('invoice_no', $order_no)->first();
+        $return_url = "https://sand-payment.9pay.vn/v2/refunds/create";
+        $merchantKey = config('payment9Pay.merchantKey');
+        $merchantKeySecret = config('payment9Pay.merchantKeySecret');
+        $merchantEndPoint = config('payment9Pay.merchantEndPoint');
+
+        $time = time();
+        $data = [
+            'request_id' => $order_no,
+            'payment_no' => $checkPayment->payment_no,
+            'amount' => $checkPayment->amount,
+            'description' => 'Hoàn tiền đơn hàng hủy - ' . $order_no
+        ];
+        $message = MessageBuilder::instance()
+            ->with($time, $merchantEndPoint . '/v2/refunds/create', 'POST')
+            ->withParams($data)
+            ->build();
+        $hmacs = new HMACSignature();
+        $signature = $hmacs->sign($message, $merchantKeySecret);
+
+        $headers = array(
+            'Date: ' . $time,
+            'Authorization: Signature Algorithm=HS256,Credential=' . $merchantKey . ',SignedHeaders=,Signature=' . $signature
+        );
+        $payment = new PaymentMethod9PayController();
+        $response = $payment->callAPI('POST', $return_url, false, $headers);
+
+        return $response;
+
     }
 }
