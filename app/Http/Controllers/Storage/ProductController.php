@@ -30,6 +30,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -370,7 +371,7 @@ class ProductController extends Controller
     public function updateRequestOut(Request $request, $status = null)
     {
 
-    DB::beginTransaction();
+        DB::beginTransaction();
         try {
 
             $order = Order::where('id', $request->id)->first();
@@ -537,16 +538,9 @@ class ProductController extends Controller
                     'NOTE' => "Hủy đơn do kho",
 
                 ]);
-                try {
-                    if ($order->method_payment != 'COD') {
-                        $result = $this->backMoney($order->no);
-                        dd($result);
-                    }
-                } catch (\Exception $exception) {
-                    dd($exception->getMessage());
+                if ($order->method_payment != 'COD') {
+                    $result = $this->backMoney($order->no);
                 }
-
-
             }
             DB::commit();
             return response()->json([
@@ -558,9 +552,10 @@ class ProductController extends Controller
 
         } catch (\Exception $e) {
             DB::rollBack();
+            Log::error($e->getMessage(), []);
             return response()->json([
                 'success' => false,
-                'message' => $e->getMessage(),
+                'message' => 'Có lỗi xảy ra.Vui lòng thử lại',
             ], 400);
 
         };
