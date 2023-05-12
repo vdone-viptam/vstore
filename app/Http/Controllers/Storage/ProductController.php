@@ -556,7 +556,7 @@ class ProductController extends Controller
             return response()->json([
                 'success' => false,
                 'message' => 'Có lỗi xảy ra.Vui lòng thử lại',
-            ], 400);
+            ], 500);
 
         };
     }
