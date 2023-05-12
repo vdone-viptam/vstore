@@ -233,7 +233,7 @@
                             @foreach ($products as $product)
                                 <tr>
                                     <td class="text-center white-space-140">{{ $product->publish_id }}</td>
-                                    <td class="text-center white-space-100"><img style="height: 100px !important;width: 100px !important;"
+                                    <td class="text-center white-space-100"><img class="img-fluid"
                                                                  src="{{ strlen(json_decode($product->images)[0]) > 0 ? asset(json_decode($product->images)[0]) : 'https://www.charlotteathleticclub.com/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png' }}"/>
                                     </td>
                                     <td class="white-space-250">{{ $product->name }}</td>
