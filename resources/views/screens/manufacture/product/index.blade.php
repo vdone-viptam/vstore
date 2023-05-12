@@ -82,9 +82,9 @@
                             <th class="white-space-130 text-center">Mã sản phẩm</th>
                             <th class="text-center white-space-100">Hình ảnh</th>
                             <th>
-                             
+
                                     Tên sản phẩm
-                              
+
                             </th>
                             <th class="white-space-120 text-center">Ngành hàng
                                 <span style="float: right;cursor: pointer">
@@ -100,7 +100,7 @@
                                 </span>
                             </th>
                             <th class="white-space-100">
-                               
+
                                     Giá bán
                                     <span style="float: right;cursor:pointer">
                                             @if ($field == 'price')
@@ -113,7 +113,7 @@
                                             <i class="fas fa-sort sort" data-sort="price"></i>
                                         @endif
                                         </span>
-                             
+
 
                             </th>
                             <th class="white-space-130">
@@ -135,7 +135,7 @@
 </div>
                             </th>
                             <th class="white-space-120">
-                                
+
                                     Trạng thái
                                     <span style="float: right;cursor:pointer">
                                             @if ($field == 'status')
@@ -148,11 +148,11 @@
                                             <i class="fas fa-sort sort" data-sort="status"></i>
                                         @endif
                                         </span>
-                               
+
                             </th>
 
                             <th class="white-space-140">
-                          
+
                                     V-Store niêm yết
                                     <span style="float: right;cursor: pointer">
                                             @if ($field == 'vstore_name')
@@ -165,7 +165,7 @@
                                             <i class="fas fa-sort sort" data-sort="vstore_name"></i>
                                         @endif
                                         </span>
-                            
+
                             </th>
                             <th class="white-space-130">
                             <div class="d-flex align-items-center justify-content-around">
@@ -359,7 +359,7 @@
                     htmlData = data.data;
                     $('.md-content').html(htmlData)
                     $('#modalDetail').modal('show');
-                    if (data.status == 2) {
+                    if (data.status == 2 || data.status == 1) {
                         $(".btnDelete").html('');
                     } else {
                         document.querySelector('.btnDestroy').innerHTML = ``;
