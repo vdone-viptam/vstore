@@ -19,13 +19,15 @@ interface ChartRepositoryInterface
     public function registerYear();
     public function requestProductMonth();
     public function requestProductYear();
+
+    // vstore
     // cho biểu doanh số today
     public function revenueToday();
     public function orderToday();
     public function orderSuccessToday();
 
     // cho ncc
-    public function revenue30Day();
+    public function revenueInMonthNow();
     public function productRunningOut();
     public function unapprovedOrder();
 }
