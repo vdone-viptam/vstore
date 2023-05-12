@@ -265,7 +265,9 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
                     <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(154, 154, 204, 0.22);">
                         <label class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" name="normal_storage" value="normal_storage" id="normal_storage"><span
+                            <input type="checkbox"
+                                {{ old('normal_storage') ? 'checked' : '' }}
+                                class="custom-control-input" name="normal_storage" value="normal_storage" id="normal_storage"><span
                                 class="custom-control-label">Kho thường</span>
                         </label>
                         @error('normal_storage')
@@ -279,6 +281,7 @@
                                                 class="text-danger">*</span>Diện tích kho
                                             (m2)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="acreage_normal_storage" id="acreage_normal_storage"
+                                            value="{{ old('acreage_normal_storage') }}"
                                             placeholder="Nhập diện tích (m2)">
                                         @error('acreage_normal_storage')
                                         <p class="text-red-600">{{$message}}</p>
@@ -293,6 +296,7 @@
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="length_normal_storage" id="length_normal_storage"
+                                                    value="{{ old('length_normal_storage') }}"
                                                     placeholder="Chiều dài">
                                                 @error('length_normal_storage')
                                                 <p class="text-red-600">{{$message}}</p>
@@ -302,6 +306,7 @@
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="width_normal_storage" id="width_normal_storage"
+                                                    value="{{ old('width_normal_storage') }}"
                                                     placeholder="Chiều rộng">
                                                 @error('width_normal_storage')
                                                 <p class="text-red-600">{{$message}}</p>
@@ -311,6 +316,7 @@
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="height_normal_storage" id="height_normal_storage"
+                                                    value="{{ old('height_normal_storage') }}"
                                                     placeholder="Chiều cao">
                                                 @error('height_normal_storage')
                                                 <p class="text-red-600">{{$message}}</p>
@@ -326,6 +332,7 @@
                                         <label style="font-weight: 600;" for="volume_normal_storage">Thể tích kho
                                             (m3)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="volume_normal_storage" id="volume_normal_storage"
+                                            value="{{ old('volume_normal_storage') }}"
                                             placeholder="Nhập thể tích (m3)">
                                             @error('volume_normal_storage')
                                             <p class="text-red-600">{{$message}}</p>
@@ -365,7 +372,9 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
                     <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(168, 168, 207, 0.22);">
                         <label class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="custom-control-input" name="cold_storage" value="cold_storage" id="cold_storage"><span
+                            <input type="checkbox"
+                                {{ old('cold_storage') ? 'checked' : '' }}
+                                class="custom-control-input" name="cold_storage" value="cold_storage" id="cold_storage"><span
                                 class="custom-control-label">Kho lạnh</span>
                         </label>
                         @error('cold_storage')
@@ -379,6 +388,7 @@
                                                 class="text-danger">*</span>Diện tích kho
                                             (m2)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="acreage_cold_storage" id="acreage_cold_storage"
+                                            value="{{ old('acreage_cold_storage') }}"
                                             placeholder="Nhập diện tích (m2)">
                                         @error('acreage_cold_storage')
                                         <p class="text-red-600">{{$message}}</p>
@@ -393,6 +403,7 @@
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="length_cold_storage" id="length_cold_storage"
+                                                    value="{{ old('length_cold_storage') }}"
                                                     placeholder="Chiều dài">
                                                 @error('length_cold_storage')
                                                 <p class="text-red-600">{{$message}}</p>
@@ -402,6 +413,7 @@
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="width_cold_storage" id="width_cold_storage"
+                                                    value="{{ old('width_cold_storage') }}"
                                                     placeholder="Chiều rộng">
                                                 @error('width_cold_storage')
                                                 <p class="text-red-600">{{$message}}</p>
@@ -411,6 +423,7 @@
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="height_cold_storage" id="height_cold_storage"
+                                                    value="{{ old('height_cold_storage') }}"
                                                     placeholder="Chiều cao">
                                                 @error('height_cold_storage')
                                                 <p class="text-red-600">{{$message}}</p>
@@ -426,6 +439,7 @@
                                         <label style="font-weight: 600;" for="tts">Thể tích kho
                                             (m3)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="volume_cold_storage" id="volume_cold_storage"
+                                            value="{{ old('volume_cold_storage') }}"
                                             placeholder="Nhập thể tích (m3)">
                                             @error('volume_cold_storage')
                                             <p class="text-red-600">{{$message}}</p>
@@ -467,7 +481,9 @@
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
                     <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(154, 154, 204, 0.22);">
                         <label class="custom-control custom-checkbox custom-control-inline">
-                            <input type="checkbox" class="only-number custom-control-input" name="warehouse" value="warehouse" id="warehouse"><span
+                            <input type="checkbox"
+                                {{ old('warehouse') ? 'checked' : '' }}
+                                class="only-number custom-control-input" name="warehouse" value="warehouse" id="warehouse"><span
                                 class="custom-control-label">Kho bãi</span>
                         </label>
                         @error('warehouse')
@@ -481,6 +497,7 @@
                                                 class="text-danger">*</span>Diện tích kho
                                             (m2)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="acreage_warehouse" id="acreage_warehouse"
+                                            value="{{ old('acreage_warehouse') }}"
                                             placeholder="Nhập diện tích (m2)">
                                         @error('acreage_warehouse')
                                         <p class="text-red-600">{{$message}}</p>
@@ -495,6 +512,7 @@
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="length_warehouse" id="length_warehouse"
+                                                    value="{{ old('length_warehouse') }}"
                                                     placeholder="Chiều dài">
                                                 @error('length_warehouse')
                                                 <p class="text-red-600">{{$message}}</p>
@@ -504,6 +522,7 @@
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="width_warehouse" id="width_warehouse"
+                                                    value="{{ old('width_warehouse') }}"
                                                     placeholder="Chiều rộng">
                                                 @error('width_warehouse')
                                                 <p class="text-red-600">{{$message}}</p>
@@ -513,6 +532,7 @@
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
                                                 <input class="only-number form-control form-control-lg" type="text" name="height_warehouse" id="height_warehouse"
+                                                    value="{{ old('height_warehouse') }}"
                                                     placeholder="Chiều cao">
                                                 @error('height_warehouse')
                                                 <p class="text-red-600">{{$message}}</p>
@@ -528,6 +548,7 @@
                                         <label style="font-weight: 600;" for="tts">Thể tích kho
                                             (m3)</label>
                                         <input class="only-number form-control form-control-lg" type="text" name="volume_warehouse" id="volume_warehouse"
+                                            value="{{ old('volume_warehouse') }}"
                                             placeholder="Nhập thể tích (m3)">
                                             @error('volume_warehouse')
                                             <p class="text-red-600">{{$message}}</p>
@@ -923,7 +944,6 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     if ( !item1.checked ){
                         check1 = false;
                     }
-
                 }
             });
 

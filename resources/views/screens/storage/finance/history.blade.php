@@ -131,7 +131,7 @@
                                                 </td>
                                             @elseif($history->status == 1)
                                                 <td class="text-success text-center">
-                                                    Đã duyệt
+                                                    Thành công
                                                 </td>
                                             @else
                                                 <td class="text-danger text-center">

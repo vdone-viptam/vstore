@@ -39,8 +39,7 @@
                     href="{{ $paginator->url($paginator->lastPage()) }}">{{ $paginator->lastPage() }}</a></li>
         @endif
         @if ($paginator->hasMorePages())
-            <li class="disabled"><span>»</span>
-            </li>
+            <li><a href="{{ $paginator->nextPageUrl() }}" rel="next">»</a></li>
         @else
             <li class="disabled" @if($paginator->currentPage() == $paginator->lastPage() - 1) style="cursor: default" @endif><span>»</span>
             </li>

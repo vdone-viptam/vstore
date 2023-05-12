@@ -30,7 +30,7 @@ class FinanceController extends Controller
         $this->v['wallet'] = Wallet::select('bank_id', 'id', 'account_number', 'name')
             ->where('type', 1)
             ->where('user_id', Auth::id())->first();
-        $this->v['waiting']= Deposit::select(DB::raw('SUM(amount) as amount') )->groupBy('user_id')->where('user_id',Auth::id())->where('status',0)->first()->amount ??0;
+        $this->v['waiting'] = Deposit::select(DB::raw('SUM(amount) as amount'))->groupBy('user_id')->where('user_id', Auth::id())->where('status', 0)->first()->amount ?? 0;
         return view('screens.manufacture.finance.index', $this->v);
     }
 
@@ -67,7 +67,7 @@ class FinanceController extends Controller
         $field = $request->field ?? 'id';
         $limit = $request->limit ?? 10;
         // dd($type,$field);
-        $this->v['histories'] = BlanceChange::select('code','money_history', 'type', 'title', 'status', 'created_at')
+        $this->v['histories'] = BlanceChange::select('code', 'money_history', 'type', 'title', 'status', 'created_at')
             ->where('user_id', Auth::id())
             ->orderBy($field, $type)
             ->paginate($limit);
@@ -141,7 +141,7 @@ class FinanceController extends Controller
 
         if ($validator->fails()) {
 
-            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateError',$validator->errors());
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validateError', $validator->errors());
         }
 
         DB::beginTransaction();
@@ -157,9 +157,9 @@ class FinanceController extends Controller
                 }
             }
             if ($request->money > Auth::user()->money) {
-                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.').' VNĐ');
+                return redirect()->back()->with('error', 'Số tiền rút tối đa là ' . number_format(Auth::user()->money, 0, '.', '.') . ' VNĐ');
             }
-            $bank = Bank::where('id',$wallet->bank_id)->first();
+            $bank = Bank::where('id', $wallet->bank_id)->first();
             DB::table('deposits')->insert([
                 'name' => $wallet->name,
                 'code' => $code,
@@ -173,24 +173,24 @@ class FinanceController extends Controller
             ]);
 
 
-            $hmac = 'accountCode='.Auth::user()->account_code .'&code='. $code .'&value='.round($request->money,0). '&bankNumber=' . $wallet->account_number.'&bankHolder='.$wallet->name;
+            $hmac = 'accountCode=' . Auth::user()->account_code . '&code=' . $code . '&value=' . round($request->money, 0) . '&bankNumber=' . $wallet->account_number . '&bankHolder=' . $wallet->name;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
-            $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
+            $sig = hash_hmac('sha256', $hmac, config('domain.key_split'));
 
 
 //
 //            userId=${dto.userId}&code=${dto.code}&value=${dto.value}&bankNumber=${dto.bankNumber}&bankHolder=${dto.bankHolder}
 
-            $respon = Http::post(config('domain.domain_vdone') . 'accountant/withdraw/v-shop',[
-                "code"=> $code,
-                "accountCode"=> Auth::user()->account_code,
-                "bankName"=> $bank->name,
-                "bankLogo"=> $bank->image,
-                "bankHolder"=> $wallet->name,
-                "bankNumber"=> $wallet->account_number,
-                "value"=> round($request->money,0),
-                "type"=>2,
-                "signature"=> $sig
+            $respon = Http::post(config('domain.domain_vdone') . 'accountant/withdraw/v-shop', [
+                "code" => $code,
+                "accountCode" => Auth::user()->account_code,
+                "bankName" => $bank->name,
+                "bankLogo" => $bank->image,
+                "bankHolder" => $wallet->name,
+                "bankNumber" => $wallet->account_number,
+                "value" => round($request->money, 0),
+                "type" => 2,
+                "signature" => $sig
             ]);
 
 

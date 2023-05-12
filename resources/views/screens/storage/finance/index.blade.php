@@ -46,7 +46,7 @@
                                                 name="bank_id">
                                             @foreach($banks as $bank)
                                                 <option
-                                                    {{$wallet->bank_id == $bank->id ? 'selected' : ''}} value="{{$bank->id}}">{{$bank->name.' - '.$bank->full_name}}</option>
+                                                    {{$wallet->bank_id == $bank->id ? 'selected' : ''}} value="{{$bank->id}}">{{$bank->full_name}}</option>
                                             @endforeach
                                         </select>
                                         @error('bank_id')
@@ -106,7 +106,7 @@
                                         <option hidden value="">Lựa chọn ngân hàng</option>
                                         @foreach($banks as $bank)
                                             <option
-                                                value="{{$bank->id}}">{{$bank->name.' - '.$bank->full_name}}</option>
+                                                value="{{$bank->id}}">{{$bank->full_name}}</option>
                                         @endforeach
                                     </select>
                                     @error('bank_id')
@@ -212,7 +212,7 @@
                                                          style="max-width:100%; width:100%; height:100%; object-fit:contain">
                                                 </div>
                                                 <div>
-                                                    <h4 class="m-0">{{$wallet->bank->name}}</h4>
+                                                    <h4 class="m-0">{{$wallet->bank->full_name}}</h4>
                                                     <span style="font-size: 12px; line-height: 14px">
                                             @for($i = 0;$i < strlen($wallet->account_number) - 4;$i++)
                                                             *

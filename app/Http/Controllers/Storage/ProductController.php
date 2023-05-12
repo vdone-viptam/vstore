@@ -4,12 +4,17 @@ namespace App\Http\Controllers\Storage;
 
 use App\Http\Controllers\Api\ElasticsearchController;
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\PaymentMethod9PayController;
+use App\Http\Lib9Pay\HMACSignature;
+use App\Http\Lib9Pay\MessageBuilder;
 use App\Models\BillDetail;
 use App\Models\BillProduct;
 use App\Models\Category;
 use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\OrderService;
+use App\Models\PaymentHistory;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
 use App\Models\Province;
@@ -25,6 +30,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 
 class ProductController extends Controller
@@ -157,7 +163,7 @@ class ProductController extends Controller
                 $ware->amount = $ware->amount + $requestIm->quantity;
                 $ware->save();
                 $vshop = Vshop::where('pdone_id', 262)->first();
-                if ($vshop){
+                if ($vshop) {
                     if (!VshopProduct::where('product_id', $requestIm->product_id)->where('vshop_id', $vshop->id)->whereIn('status', [1, 2])->first()) {
                         $vshop_product = new VshopProduct();
                         $vshop_product->vshop_id = $vshop->id;
@@ -365,7 +371,7 @@ class ProductController extends Controller
     public function updateRequestOut(Request $request, $status = null)
     {
 
-
+        DB::beginTransaction();
         try {
 
             $order = Order::where('id', $request->id)->first();
@@ -532,7 +538,11 @@ class ProductController extends Controller
                     'NOTE' => "Hủy đơn do kho",
 
                 ]);
+                if ($order->method_payment != 'COD') {
+                    $result = $this->backMoney($order->no);
+                }
             }
+            DB::commit();
             return response()->json([
                 'success' => true,
                 'message' => 'Cập nhật đơn hàng thành công',
@@ -541,11 +551,47 @@ class ProductController extends Controller
 
 
         } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage(), []);
             return response()->json([
                 'success' => false,
-                'message' => $e->getMessage(),
-            ], 400);
+                'message' => 'Có lỗi xảy ra.Vui lòng thử lại',
+            ], 500);
 
         };
+    }
+
+
+    public function backMoney($order_no)
+    {
+        $checkPayment = PaymentHistory::where('invoice_no', $order_no)->first();
+        $return_url = "https://sand-payment.9pay.vn/v2/refunds/create";
+        $merchantKey = config('payment9Pay.merchantKey');
+        $merchantKeySecret = config('payment9Pay.merchantKeySecret');
+        $merchantEndPoint = config('payment9Pay.merchantEndPoint');
+
+        $time = time();
+        $data = [
+            'request_id' => $order_no,
+            'payment_no' => $checkPayment->payment_no,
+            'amount' => $checkPayment->amount,
+            'description' => 'Hoàn tiền đơn hàng hủy - ' . $order_no
+        ];
+        $message = MessageBuilder::instance()
+            ->with($time, $merchantEndPoint . '/v2/refunds/create', 'POST')
+            ->withParams($data)
+            ->build();
+        $hmacs = new HMACSignature();
+        $signature = $hmacs->sign($message, $merchantKeySecret);
+
+        $headers = array(
+            'Date: ' . $time,
+            'Authorization: Signature Algorithm=HS256,Credential=' . $merchantKey . ',SignedHeaders=,Signature=' . $signature
+        );
+        $payment = new PaymentMethod9PayController();
+        $response = $payment->callAPI('POST', $merchantEndPoint . '/v2/refunds/create', $data, $headers);
+
+        return $response;
+
     }
 }

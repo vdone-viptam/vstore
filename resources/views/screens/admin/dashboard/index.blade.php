@@ -286,7 +286,7 @@
                                         @if($user->confirm_date)
 
                                         @else
-                                        <a href="javascript:void(0)" data-abc="{{$loop->iteration - 1}}" href="{{route('screens.admin.user.confirm',['id' => $user->id])}}" class="duyet btn text-primary font-medium px-2" style="text-decoration:underline;">Duyệt</a>
+                                        <a  data-abc="{{$loop->iteration - 1}}" href="{{route('screens.admin.user.confirm',['id' => $user->id])}}" class="duyet btn text-primary font-medium px-2" style="text-decoration:underline;">Duyệt</a>
                                         @endif
                                     </td>
                                 </tr>

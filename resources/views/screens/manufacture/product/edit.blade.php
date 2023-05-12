@@ -248,12 +248,13 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Trọng lượng (Gram) <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg number only-number"
+                                    <label for="name">Trọng lượng (Kg) <span class="text-danger">*</span></label>
+                                    <input type="text" class="form-control form-control-lg only_number"
                                            id="weight"
                                            name="weight"
-                                           value="{{number_format($product->weight / 1000,0,'.','.')}}"
-                                           placeholder="Nhập trọng lượng sản phẩm (Gram)">
+                                           value="{{number_format($product->weight / 1000,2,',','.')}}"
+                                           oninput="this.value = this.value.replace(/[^0-9,]/g, '').replace(/(\,,*)\,/g, '$1');"
+                                           placeholder="Nhập trọng lượng sản phẩm (Kg)">
                                     @error('weight')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                     @enderror
@@ -453,6 +454,26 @@
         </script>
     @endif
     <script type="module">
+        $('body').on('keypress', '.only_number', function (event) {
+            var character = String.fromCharCode(event.keyCode);
+            return /[0-9,]/.test(character);
+        });
+
+        $('body').on('keyup', '.only_number', function () {
+            if ($(this).val().includes(",")) {
+                var string_before_symbol = $(this).val().slice(0, $(this).val().indexOf(","));
+                var string_after_symbol = $(this).val().slice($(this).val().indexOf(",") + 1);
+
+                if (string_after_symbol.length > 2) {
+                    $(this).val(string_before_symbol + ',' + string_after_symbol.slice(0, 2));
+                }
+                var string_final = string_before_symbol + ',' + string_after_symbol.slice(0, 2);
+            } else {
+                var string_final = $(this).val();
+            }
+            return string_final;
+        });
+
         function appectBack(type) {
             Swal.fire({
                 title: 'Bạn có chắc muốn hủy bỏ thao tác sửa sản phẩm?',
@@ -471,6 +492,14 @@
         }
 
         $(document).ready(function () {
+            function validateInput(input) {
+                const regex = /^\d{1,}(,\d{0,2})?$/;
+                const isValid = regex.test(input.value);
+                if (!isValid) {
+                    input.value = input.value.replace(/[^0-9,]/g, '');
+                    // hoặc thêm thông báo lỗi
+                }
+            }
             var path = "{{ asset('/plupload/js/') }}";
 
             var uploader = new plupload.Uploader({
@@ -562,7 +591,7 @@
             uploader.init();
         });
         let arrImage = JSON.parse($('#images').val());
-        render(arrImage, 'edit')
+        render(arrImage, 1)
 
         function render(arrImg, imgEvent) {
             if (arrImg.length >= 5) {
@@ -589,31 +618,32 @@
             </div>`
             })
 
-            if (arrImage.length > 0) {
-                $('.img-item').removeClass('hidden')
+            $('.img-item').removeClass('hidden')
 
-                if (arrImg.length > 1 || imgEvent == 1) {
-                    $('.img-item').html(htmlImgData)
-                } else {
-                    $('.img-item').append(htmlImgData)
-                }
-                var sortable = Sortable.create(document.querySelector('.img-item'));
-
-                const btnDelete = document.querySelectorAll('.delete-one-image');
-                btnDelete.forEach(item => {
-                    const {index} = item.dataset;
-                    item.addEventListener('click', (e) => {
-                        arrImage = arrImage.filter((item, key) => +index !== key);
-                        $('#images').val(JSON.stringify(arrImage));
-                        render(arrImage, 1);
-
-                    });
-                })
+            if (arrImg.length > 1 || imgEvent === 1) {
+                $('.img-item').html(htmlImgData)
             } else {
-                $('.img-item').addClass('hidden')
-
+                $('.img-item').append(htmlImgData)
             }
+            var sortable = Sortable.create(document.querySelector('.img-item'));
 
+            const btnDelete = document.querySelectorAll('.delete-one-image');
+            btnDelete.forEach(item => {
+                const {index} = item.dataset;
+                item.addEventListener('click', (e) => {
+                    arrImage = arrImage.filter((item, key) => +index !== key);
+                    $('#images').val(JSON.stringify(arrImage));
+                    if (arrImage.length > 0) {
+                        render(arrImage, 1);
+                    } else {
+                        render([], 1)
+                    }
+
+                });
+            })
+            if (arrImg == 0) {
+                $('.img-item').addClass('hidden')
+            }
 
         }
 
@@ -675,7 +705,7 @@
                                 $('.img-event').removeClass("hidden");
 
                             }
-                            render(arrImage, '');
+                            render(arrImage, 2);
 
                         }
                         reader.readAsDataURL(file)

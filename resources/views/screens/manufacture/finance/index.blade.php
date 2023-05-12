@@ -118,7 +118,7 @@
                                                 name="bank_id">
                                             @foreach($banks as $bank)
                                                 <option
-                                                    {{$wallet->bank_id == $bank->id ? 'selected' : ''}} value="{{$bank->id}}">{{$bank->name.' - '.$bank->full_name}}</option>
+                                                    {{$wallet->bank_id == $bank->id ? 'selected' : ''}} value="{{$bank->id}}">{{$bank->full_name}}</option>
                                             @endforeach
                                         </select>
                                         @error('bank_id')
@@ -250,7 +250,8 @@
                                     đ</h3>
                                 <span style="color: black; font-size: 14px;">Tổng số dư</span>
                             </div>
-                            <div class="number-cost" style="border-left: 1px solid #d2d2e4; border-right: 1px solid #d2d2e4;">
+                            <div class="number-cost"
+                                 style="border-left: 1px solid #d2d2e4; border-right: 1px solid #d2d2e4;">
                                 <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format(\Illuminate\Support\Facades\Auth::user()->money,0,',','.')}}
                                     đ</h3>
                                 <span style="color: black; font-size: 14px;">Số dư khả dụng</span>
@@ -279,7 +280,7 @@
                                                data-min="100000"
                                                data-max="{{ round(Auth::user()->money)}}"
                                                placeholder="0đ"
-                                               >
+                                        >
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column items-start w-100 flex-wrap md:flex-nowrap my-4">
@@ -301,7 +302,7 @@
                                                          style="max-width:100%; width:100%; height:100%; object-fit:contain">
                                                 </div>
                                                 <div>
-                                                    <h4 class="m-0">{{$wallet->bank->name}}</h4>
+                                                    <h4 class="m-0">{{$wallet->bank->full_name}}</h4>
                                                     <span style="font-size: 12px; line-height: 14px">
                                             @for($i = 0;$i < strlen($wallet->account_number) - 4;$i++)
                                                             *
@@ -425,8 +426,8 @@
             })
             @endif
             @if(Session::has('validateError'))
-                const textError = '{{ $errors->first() }}';
-                swalNoti('center', 'error', 'Tạo yêu cầu rút tiền thất bại', textError, 500, true, 3000);
+            const textError = '{{ $errors->first() }}';
+            swalNoti('center', 'error', 'Tạo yêu cầu rút tiền thất bại', textError, 500, true, 3000);
             @endif
             @if(Session::has('validateCreate'))
             $('.btn-add-bank').click();
