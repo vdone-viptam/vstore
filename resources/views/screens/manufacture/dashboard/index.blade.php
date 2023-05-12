@@ -162,7 +162,7 @@
                         <div class="card-body">
                             <h5 class="text-muted">Doanh thu trong tháng</h5>
                             <div class="metric-value d-inline-block">
-                                <h1 class="mb-1">{{number_format($revenue30Day,0,'.','.')}}</h1>
+                                <h1 class="mb-1">{{number_format($revenueInMonthNow ,0,'.','.')}}</h1>
                             </div>
                         </div>
                     </div>
@@ -485,7 +485,7 @@
                     htmlData = data.data;
                     $('#modalDetail .md-content').html(htmlData)
                     $('#modalDetail').modal('show');
-                    
+
                 } else {
                     $('#modalDetail').modal('show');
                     $('#modalDetail .md-content').html('Chưa có dữ liệu của sản phẩm!')

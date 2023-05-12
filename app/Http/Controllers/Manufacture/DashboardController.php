@@ -64,7 +64,7 @@ class DashboardController extends Controller
         // $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
         // $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
 
-        $revenue30Day = $this->chartRepository->revenue30Day();
+        $revenueInMonthNow = $this->chartRepository->revenueInMonthNow();
         $productRunningOut = $this->chartRepository->productRunningOut();
         $unapprovedOrder = $this->chartRepository->unapprovedOrder();
 
@@ -81,7 +81,7 @@ class DashboardController extends Controller
             // 'dataOrderChartMonth' => $dataOrderChartMonth,
             // 'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
 
-            'revenue30Day' => $revenue30Day,
+            'revenueInMonthNow' => $revenueInMonthNow,
             'productRunningOut' => $productRunningOut,
             'unapprovedOrder' => $unapprovedOrder,
         ]);

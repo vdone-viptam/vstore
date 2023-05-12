@@ -255,20 +255,26 @@ class ChartRepository implements ChartRepositoryInterface
     public function revenueToday()
     {
         $checkRole = User::where('id', Auth::id())->first()->role_id;
-        $data = BlanceChange::where('type', 1)->where('status', 1);
-        if ($checkRole != 1) {
-            $data = $data->where('user_id', Auth::id());
+
+        $data = Order::whereNotIn('order.export_status', [3,5])
+            ->whereDate('order.created_at', date('Y-m-d'))
+            ->join('order_item', 'order_item.order_id', 'order.id')
+            ->join('products', 'products.id', 'order_item.product_id');
+        if ($checkRole == 2) {
+            $data = $data->where('products.user_id', Auth::id());
+        } else if ($checkRole == 3) {
+            $data = $data->where('products.vstore_id', Auth::id());
         }
-        $data = $data->whereDate('created_at', date('Y-m-d'))
-            ->sum('money_history');
+        $data = $data->select(DB::raw('COALESCE(SUM(order_item.price * order_item.quantity),0) as total'))->value('total');
+
         return $data;
     }
 
     public function orderToday()
     {
         $checkRole = User::where('id', Auth::id())->first()->role_id;
-
-        $data = Order::where('order.status', 1)
+        // dd($checkRole);
+        $data = Order::whereNotIn('order.export_status', [3,5])
             ->whereDate('order.created_at', date('Y-m-d'))
             ->join('order_item', 'order_item.order_id', 'order.id')
             ->join('products', 'products.id', 'order_item.product_id');
@@ -521,15 +527,28 @@ class ChartRepository implements ChartRepositoryInterface
 
         return $dashboardChart;
     }
-    public function revenue30Day(){
+    public function revenueInMonthNow(){
+
+
+        $currentMonth = Carbon::now()->month;
+        $currentYear = Carbon::now()->year;
+
         $checkRole = User::where('id', Auth::id())->first()->role_id;
-        $data = BlanceChange::where('type', 1)->where('status', 1);
-        if ($checkRole != 1) {
-            $data = $data->where('user_id', Auth::id());
+
+        $data = Order::whereNotIn('order.export_status', [3,5])
+            ->whereMonth('order.created_at', '=', $currentMonth)
+            ->whereYear('order.created_at', '=', $currentYear)
+            ->join('order_item', 'order_item.order_id', 'order.id')
+            ->join('products', 'products.id', 'order_item.product_id');
+        if ($checkRole == 2) {
+            $data = $data->where('products.user_id', Auth::id());
+        } else if ($checkRole == 3) {
+            $data = $data->where('products.vstore_id', Auth::id());
         }
-        $data = $data->where('created_at', '>=', Carbon::now()->subDays(30))
-                ->sum('money_history');
+        $data = $data->select(DB::raw('COALESCE(SUM(order_item.price * order_item.quantity),0) as total'))->value('total');
+
         return $data;
+
     }
     public function productRunningOut(){
         $data = ProductWarehouses::query()
