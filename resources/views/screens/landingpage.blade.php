@@ -382,7 +382,7 @@
                                     {{number_format($pro->order_price,0,'.','.')}}đ
                                 </p>
                                 <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
-                                    {{number_format($pro->price,0,'.','.')}}đđ</p>
+                                    {{number_format($pro->price,0,'.','.')}}đ</p>
                             </div>
                         </div>
                     </div>
