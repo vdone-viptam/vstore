@@ -58,7 +58,7 @@ class  VShopController extends Controller
         $user = Vshop::whereIn('id', $res)
             ->select('pdone_id as id', 'nick_name', 'avatar');
 
-        $user = $user->paginate($limit);
+        $user = $user->where('nick_name', '!=', null)->paginate($limit);
         if ($user) {
             foreach ($user as $value) {
                 if ($value->avatar == "") {
@@ -575,7 +575,7 @@ class  VShopController extends Controller
     public function index(Request $request)
     {
         $limit = $request->limit ?? 10;
-        $vshop = Vshop::select('id', 'pdone_id', 'phone_number', 'vshop_name as name', 'products_sold', 'avatar', 'description', 'products_sold', 'address', 'vshop_id', 'nick_name')->paginate($limit);
+        $vshop = Vshop::select('id', 'pdone_id', 'phone_number', 'vshop_name as name', 'products_sold', 'avatar', 'description', 'products_sold', 'address', 'vshop_id', 'nick_name')->where('nick_name', '!=', null)->paginate($limit);
         foreach ($vshop as $val) {
             if ($val->avatar == null) {
                 $val->avatar = asset('home/img/vshop-vuong.png');
@@ -860,9 +860,9 @@ class  VShopController extends Controller
 //                return  $discount ;
                 return response()->json([
                     'status_code' => 400,
-                    'error' => 'Phầm trăm giảm giá nhỏ hơn hoặc bằng ' . round(($discount_vshop * 0.95),1) ,
-                    'discount_limit' => round(($discount_vshop * 0.95),1) ,
-                    'discount_price_limit' => round(($product->price / 100) * ($discount_vshop * 0.95),1)
+                    'error' => 'Phầm trăm giảm giá nhỏ hơn hoặc bằng ' . round(($discount_vshop * 0.95), 1),
+                    'discount_limit' => round(($discount_vshop * 0.95), 1),
+                    'discount_price_limit' => round(($product->price / 100) * ($discount_vshop * 0.95), 1)
                 ], 400);
 
             } else {
@@ -945,9 +945,9 @@ class  VShopController extends Controller
         } elseif ($request->discount > $discount * 0.95) {
             return response()->json([
                 'status_code' => 400,
-                'error' => 'Phần trăm giảm giá nhỏ hơn hoặc bằng ' . round($discount * 0.95,1) ,
-                'discount_limit' => round($discount * 0.95,1) ,
-                'discount_price_limit' => round( ($product->price / 100) * ($discount * 0.95),1)
+                'error' => 'Phần trăm giảm giá nhỏ hơn hoặc bằng ' . round($discount * 0.95, 1),
+                'discount_limit' => round($discount * 0.95, 1),
+                'discount_price_limit' => round(($product->price / 100) * ($discount * 0.95), 1)
             ], 400);
         } else {
             DB::table('discounts')->insert([
