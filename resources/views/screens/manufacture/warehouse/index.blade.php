@@ -463,7 +463,7 @@
 
 
                     <div class="col-12">
-                    <div class="table-responsive" style="overflow-y:scroll; max-height:500px;">
+                    <div class="table-responsive" style="overflow-y:scroll; max-height:450px;">
 
                         <table id="example" class="table table-striped table-bordered second" style="width:100%">
                             <thead>
