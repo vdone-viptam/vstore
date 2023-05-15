@@ -88,9 +88,11 @@
         .slider .slick-slide {
             display: flex;
         }
-        .slider3  .slick-track{
+
+        .slider3 .slick-track {
             width: 100% !important;
         }
+
         .slider2 .slick-slide {
             display: flex;
             margin: 0 10px;
@@ -162,8 +164,9 @@
         class=" flex justify-between gap-2 items-center py-5 mx-auto xl:px-0 px-5 md:max-w-[710px] lg:max-w-[1000px] xl:max-w-[1200px] 2xl:max-w-[1440px]">
         <div class="max-w-[118px]">
             <div class="w-full h-[50px]">
-                <a href="{{route('landingpagevstore')}}"><img src="{{asset('home/img/NCC.png')}}" class="w-full object-contain"
-                                 style="height: 50px" alt=""></a>
+                <a href="{{route('landingpagevstore')}}"><img src="{{asset('home/img/NCC.png')}}"
+                                                              class="w-full object-contain"
+                                                              style="height: 50px" alt=""></a>
             </div>
         </div>
         <div class="hidden md:flex gap-6 lg:gap-10 justify-center items-center menu">
@@ -307,8 +310,9 @@
                 <div class="flex gap-4 items-center slider3">
                     @if(count($fiveImage) > 0)
                         @foreach($fiveImage as $image)
-                            <img class="mx-2 w-[82.5px] h-[82.5px] md:min-w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80]"
-                                 src="{{asset(json_decode($image->images)[0])}}" alt="">
+                            <img
+                                class="mx-2 w-[82.5px] h-[82.5px] md:min-w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80]"
+                                src="{{asset(json_decode($image->images)[0])}}" alt="">
                         @endforeach
                     @endif
                 </div>
@@ -356,14 +360,19 @@
                             <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
                         </div>
                         <div class="w-full bg-white border-b border-[#1e90ff80] rounded-tl-lg rounded-tr-lg">
-                            <img class="h-[146px] w-full object-cover rounded-tl-lg rounded-tr-lg"
-                                 src="{{asset(json_decode($pro->images)[0])}}" alt="">
+                            <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
+                                <img class="h-[146px] w-full object-cover rounded-tl-lg rounded-tr-lg"
+                                     src="{{asset(json_decode($pro->images)[0])}}" alt="">
+                            </a>
+
                         </div>
                         <div
                             class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
-                            <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
-                               title="{{$pro->name}}">
-                                {{\Illuminate\Support\Str::limit($pro->name,50,'...')}}</p>
+                            <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
+                                <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
+                                   title="{{$pro->name}}">
+                                    {{\Illuminate\Support\Str::limit($pro->name,50,'...')}}</p>
+                            </a>
                             <div class="flex gap-1 items-center">
                                 @for($i = 1; $i <= 5;$i++)
                                     @if($pro->vote > 1)
@@ -404,12 +413,16 @@
                         <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
                     </div>
                 @endif
-                <img class="h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff]"
-                     src="{{asset(json_decode($product->images)[0])}}" alt="">
+                    <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
+                        <img class="h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff]"
+                             src="{{asset(json_decode($product->images)[0])}}" alt="">
+                    </a>
                 <div class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
-                    <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
-                       title="{{$product->name}}">
-                        {{\Illuminate\Support\Str::limit($product->name,50,'...')}}</p>
+                    <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
+                        <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
+                           title="{{$product->name}}">
+                            {{\Illuminate\Support\Str::limit($product->name,50,'...')}}</p>
+                    </a>
                     <div class="flex gap-1 items-center">
                         @for($i = 1; $i <= 5;$i++)
                             @if($product->vote > 1)
@@ -424,11 +437,13 @@
                     </div>
                     <div class="flex items-center justify-between gap-2">
                         @if($product->discount_sale > 0)
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}
+                                đ</p>
                             <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
                                 {{number_format($product->price,0,'.','.')}}đ</p>
                         @else
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}
+                                đ</p>
                         @endif
 
                     </div>
@@ -451,10 +466,12 @@
                     <div class="max-w-[120px]" style="margin: auto">
                         @if($vsto->avatar =='')
                             <img src="{{asset('home/img/vstore-vuong.png')}}"
-                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt="" style="object-fit: contain;margin: auto">
+                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                 style="object-fit: contain;margin: auto">
                         @else
                             <img src="{{asset('image/users/'. $vsto->avatar)}}"
-                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt="" style="object-fit: contain;margin: auto">
+                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                 style="object-fit: contain;margin: auto">
                         @endif
                     </div>
                     <span
@@ -516,7 +533,6 @@
         autoplaySpeed: 1500,
         slidesToScroll: 8,
         slidesToShow: 8,
-        autoplaySpeed: 3000,
         pauseOnFocus: true,
         dots: true,
         // the magic
@@ -548,7 +564,6 @@
         focusOnSelect: true,
         infinite: true,
         autoplay: false,
-        autoplaySpeed: 3000,
         pauseOnFocus: true,
         slidesToScroll: 5,
         slidesToShow: 5,
@@ -590,7 +605,6 @@
         focusOnSelect: true,
         infinite: false,
         autoplay: true,
-        autoplaySpeed: 3000,
         slidesToShow: 6,
         slidesToScroll: 6,
         autoplaySpeed: 3000,
