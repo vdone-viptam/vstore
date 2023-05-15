@@ -7,6 +7,7 @@ use App\Models\BillDetail;
 use App\Models\Discount;
 use App\Models\Order;
 use App\Models\OrderItem;
+use App\Models\User;
 use App\Models\Warehouses;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -30,6 +31,7 @@ class OrderController extends Controller
         $this->v['orders'] = Order::join('order_item', 'order.id', '=', 'order_item.order_id')
             ->join('products', 'order_item.product_id', '=', 'products.id')
             ->join('categories', 'products.category_id', '=', 'categories.id')
+            ->where('products.vstore_id', Auth::id()) // lọc theo vstore
             ->select('no', 'products.name', 'categories.name as cate_name', 'order.id',
                 'order_item.price', 'quantity', 'total', 'order.created_at',
                 'estimated_date', 'products.discount', 'export_status', DB::raw('products.discount * (order_item.price * order_item.quantity) as money'))->where('order.status', '!=', 2);
