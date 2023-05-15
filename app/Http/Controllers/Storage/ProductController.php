@@ -485,7 +485,7 @@ class ProductController extends Controller
                     "RECEIVER_ADDRESS" => $order->address,
                     "RECEIVER_PHONE" => $order->phone,
                     "PRODUCT_NAME" => $product->name,
-                    "PRODUCT_DESCRIPTION" => Str::limit($product->short_content, 50, '...'),
+                    "PRODUCT_DESCRIPTION" => null,
                     "PRODUCT_QUANTITY" => $order_item->quantity,
                     "PRODUCT_PRICE" => $order->total - $order->shipping,
                     "PRODUCT_WEIGHT" => $product->weight * $order_item->quantity,
@@ -495,7 +495,7 @@ class ProductController extends Controller
                     "ORDER_PAYMENT" => $order_payment,
                     "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
                     "ORDER_SERVICE_ADD" => '',
-                    "ORDER_NOTE" => Str::limit($product->short_content, 50, '...'),
+                    "ORDER_NOTE" => null,
                     "MONEY_COLLECTION" => $money_colection,
                     "LIST_ITEM" => $list_item,
                 ]);
