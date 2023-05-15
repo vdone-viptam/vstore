@@ -83,13 +83,13 @@ class PartnerController extends Controller
             ->where('products.user_id', Auth::id())
             ->where('products.vstore_id', $request->vstore_id)
             ->where('products.status', 2)
-            ->select('order_item.price','order_item.quantity','order_item.discount_ncc')
+            ->select('order_item.price','order_item.quantity','order_item.discount_ncc','products.discount')
             ->get();
         $money = 0;
         foreach ($data as $key => $value) {
             $total = $value->price * $value->quantity;
-            $moneyDiscountNcc = $total * $value->discount_ncc / 100 ;
-            $money += $total - $moneyDiscountNcc ;
+            $moneyDiscountNcc = $total * $value->discount / 100 ;
+            $money += $moneyDiscountNcc ;
         };
         $money = round($money);
         return response()->json([

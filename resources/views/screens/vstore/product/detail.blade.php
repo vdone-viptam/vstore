@@ -42,7 +42,7 @@
 <div class="col-12">
     <label for="name">Hình ảnh sản phẩm</label>
 </div>
-<div class="mb-3 col-12 d-flex flex-lg-wrap flex-xl-nowrap w-100">
+<div class="mb-3 col-12 img-col w-100">
 
     @foreach(json_decode($product->images) as $image)
         <div class="col-xl-4 col-sm-6 ">
@@ -51,6 +51,7 @@
         </div>
     @endforeach
 </div>
+
 <div class="form-group">
     <label for="name">Video sản phẩm</label>
     @if(strlen($product->video) > 0)
@@ -118,13 +119,16 @@
 <div id="note">
 
 </div>
+@if($product->discount_vshop > 0 || $product->status == 2)
+@else
+    <div class="form-group text-left mt-3 checkAp" id="check">
+        <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0">
+            <input type="checkbox" id="appectAP" name="type" value="1" class="custom-control-input"><span
+                class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
+        </label>
+    </div>
+@endif
 
-<div class="form-group text-left mt-3 checkAp" id="check">
-    <label class="custom-control custom-checkbox custom-control-inline" id="appect" style="margin: 0">
-        <input type="checkbox" id="appectAP" name="type" value="1" class="custom-control-input"><span
-            class="custom-control-label">Chúng tôi đã kiểm định thông tin sản phẩm</span>
-    </label>
-</div>
 
 <script>
     //     document.getElementById('btnConfirm').style.display = 'none';
@@ -138,7 +142,7 @@
     //     });
     document.querySelector('#status').addEventListener('change', (e) => {
         if (e.target.value == 2) {
-            $("#discount_vShop").attr('disabled','true')
+            $("#discount_vShop").attr('disabled', 'true')
             $("#discount_vShop").val('')
             document.getElementById('btnConfirm').style.display = 'block';
             document.querySelector('#note').innerHTML = `

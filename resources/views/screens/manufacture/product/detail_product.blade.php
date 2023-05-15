@@ -50,7 +50,7 @@
             <div class="col-12">
                 <label for="name">Hình ảnh sản phẩm</label>
             </div>
-            <div class="mb-3 col-12 d-flex flex-lg-wrap flex-xl-nowrap w-100">
+            <div class="mb-3 col-12 img-col w-100">
 
                 @foreach(json_decode($product->images) as $image)
                     <div class="col-xl-4 col-sm-6 ">

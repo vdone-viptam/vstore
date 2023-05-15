@@ -5,7 +5,93 @@
 @section('custom_css')
 
     <link rel="stylesheet" href="{{asset('asset/dist/output.css')}}">
+    <style>
 
+        .dropdown-finance {
+            width: 100%;
+            display: inline-block;
+            background-color: #fff;
+            border-radius: 2px;
+            box-shadow: 0 0 2px rgb(204, 204, 204);
+            transition: all .5s ease;
+            position: relative;
+            font-size: 14px;
+            color: #474747;
+            height: 100%;
+            text-align: left;
+            outline: none;
+        }
+
+        .dropdown-finance .select {
+            cursor: pointer;
+            display: block;
+            padding: 10px;
+
+        }
+
+        .dropdown-finance .select > i {
+            font-size: 13px;
+            color: #888;
+            cursor: pointer;
+            transition: all .3s ease-in-out;
+            float: right;
+            line-height: 20px
+        }
+
+        .dropdown-finance:hover {
+            box-shadow: 0 0 4px rgb(204, 204, 204)
+        }
+
+        .dropdown-finance:active {
+            background-color: #f8f8f8
+        }
+
+        .dropdown-finance.active:hover,
+        .dropdown-finance.active {
+            box-shadow: 0 0 4px rgb(204, 204, 204);
+            border-radius: 2px 2px 0 0;
+            background-color: #f8f8f8
+        }
+
+        .dropdown-finance.active .select > i {
+            transform: rotate(-90deg)
+        }
+
+        .dropdown-finance .dropdown-menu-finan {
+            position: absolute;
+            background-color: #fff;
+            width: 100%;
+            left: 0;
+            margin-top: 1px;
+            box-shadow: 0 1px 2px rgb(204, 204, 204);
+            border-radius: 0 1px 2px 2px;
+            overflow: hidden;
+            display: none;
+            max-height: 120px;
+            overflow-y: auto;
+            z-index: 9
+        }
+
+        .dropdown-finance .dropdown-menu-finan li {
+            padding: 10px;
+
+            transition: all .2s ease-in-out;
+            cursor: pointer
+        }
+
+        .dropdown-finance .dropdown-menu-finan {
+            padding: 0;
+            list-style: none
+        }
+
+        .dropdown-finance .dropdown-menu-finan li:hover {
+            background-color: #f2f2f2
+        }
+
+        .dropdown-finance .dropdown-menu-finan li:active {
+            background-color: #e2e2e2
+        }
+    </style>
 @endsection
 @section('modal')
 
@@ -41,14 +127,48 @@
 
                                     </div>
                                     <div class="form-group">
-                                        <label for="exampleFormControlSelect1">Tên ngân hàng:</label>
-                                        <select required class="form-control nameBank" id="exampleFormControlSelect1"
-                                                name="bank_id">
-                                            @foreach($banks as $bank)
-                                                <option
-                                                    {{$wallet->bank_id == $bank->id ? 'selected' : ''}} value="{{$bank->id}}">{{$bank->name.' - '.$bank->full_name}}</option>
-                                            @endforeach
-                                        </select>
+                                        <label>Tên ngân hàng:</label>
+                                        <div class="dropdown-finance">
+                                            <div class="select">
+                                                <ul id="current">
+                                                    <li id="{{$wallet->bank->id}}">
+                                                        <div class="item-nh d-flex align-items-center" style="gap:10px">
+                                                            <div style="width:121px !important;">
+                                                                <div
+                                                                    style="width:120px; !important; height:40px!important;">
+                                                                    <img
+                                                                        style="width:100%; height:100%; object-fit:contain !important;"
+                                                                        src="{{$wallet->bank->image}}"></div>
+                                                            </div> {{$wallet->bank->full_name}} </div>
+                                                    </li>
+                                                </ul>
+                                            </div>
+                                            <input type="hidden" name="bank_id">
+                                            <ul class="dropdown-menu-finan">
+                                                @foreach($banks as $bank)
+                                                    <li id="{{$bank->id}}">
+                                                        <div class="item-nh d-flex align-items-center" style="gap:10px">
+                                                            <div style="width:121px !important;">
+                                                                <div
+                                                                    style="width:120px; !important; height:40px!important;">
+                                                                    <img
+                                                                        style="width:100%; height:100%; object-fit:contain !important;"
+                                                                        src="{{$bank->image}}"></div>
+                                                            </div> {{$bank->full_name}} </div>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                        <!-- <select name="bank_id" required
+                                            class="form-control nameBank0">
+                                        <option hidden value=""><div class="d-flex align-items-center" style="gap:10px"><div style="width:200px !important; height:50px!important;"><img style="width:100%; object-fit-cover;" ></div>Lựa chọn ngân hàng</div></option>
+                                        @foreach($banks as $bank)
+                                            <option
+                                                value="{{$bank->id}}"><div class="d-flex align-items-center" style="gap:10px"><div style="width:200px !important; height:50px!important;"><img style="width:100%; object-fit-cover;"></div> {{$bank->name.' - '.$bank->full_name}} </div></option>
+
+
+                                        @endforeach
+                                        </select> -->
                                         @error('bank_id')
                                         <p class="text-red-600 mt-2">{{$message}}</p>
                                         @enderror
@@ -101,14 +221,37 @@
                                 </div>
                                 <div class="form-group">
                                     <label>Tên ngân hàng:</label>
-                                    <select name="bank_id" required
+                                    <div class="dropdown-finance">
+                                        <div class="select">
+                                            <span>Lựa chọn ngân hàng</span>
+                                            <i class="fa fa-chevron-left"></i>
+                                        </div>
+                                        <input type="hidden" name="bank_id">
+                                        <ul class="dropdown-menu-finan">
+                                            @foreach($banks as $bank)
+                                                <li id="{{$bank->id}}">
+                                                    <div class="item-nh d-flex align-items-center" style="gap:10px">
+                                                        <div style="width:121px !important;">
+                                                            <div
+                                                                style="width:120px; !important; height:40px!important;">
+                                                                <img
+                                                                    style="width:100%; height:100%; object-fit:contain !important;"
+                                                                    src="{{$bank->image}}"></div>
+                                                        </div> {{$bank->name.' - '.$bank->full_name}} </div>
+                                                </li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                    <!-- <select name="bank_id" required
                                             class="form-control nameBank0">
-                                        <option hidden value="">Lựa chọn ngân hàng</option>
+                                        <option hidden value=""><div class="d-flex align-items-center" style="gap:10px"><div style="width:200px !important; height:50px!important;"><img style="width:100%; object-fit-cover;" ></div>Lựa chọn ngân hàng</div></option>
                                         @foreach($banks as $bank)
-                                            <option
-                                                value="{{$bank->id}}">{{$bank->name.' - '.$bank->full_name}}</option>
-                                        @endforeach
-                                    </select>
+                                        <option
+                                            value="{{$bank->id}}"><div class="d-flex align-items-center" style="gap:10px"><div style="width:200px !important; height:50px!important;"><img style="width:100%; object-fit-cover;"></div> {{$bank->name.' - '.$bank->full_name}} </div></option>
+
+
+                                    @endforeach
+                                    </select> -->
                                     @error('bank_id')
                                     <p class="text-red-600 mt-2">{{$message}}</p>
                                     @enderror
@@ -166,7 +309,8 @@
                                     đ</h3>
                                 <span style="color: black; font-size: 14px;">Tổng số dư</span>
                             </div>
-                            <div class="number-cost" style="border-left: 1px solid #d2d2e4; border-right: 1px solid #d2d2e4;">
+                            <div class="number-cost"
+                                 style="border-left: 1px solid #d2d2e4; border-right: 1px solid #d2d2e4;">
                                 <h3 style="font-weight: 600; color: #1890FF; font-size: 20px;">{{number_format(\Illuminate\Support\Facades\Auth::user()->money,0,',','.')}}
                                     đ</h3>
                                 <span style="color: black; font-size: 14px;">Số dư khả dụng</span>
@@ -195,7 +339,7 @@
                                                data-min="100000"
                                                data-max="{{ round(Auth::user()->money)}}"
                                                placeholder="0đ"
-                                               >
+                                        >
                                     </div>
                                 </div>
                                 <div class="d-flex flex-column items-start w-100 flex-wrap md:flex-nowrap my-4">
@@ -212,19 +356,23 @@
                                                      style="gap: 10px;">
                                                 </div>
                                                 <input type="hidden" name="bank" value="{{$wallet->id}}">
-                                                <div type="button" style="width:200px;height:30px; cursor: pointer;">
-                                                    <img class="img_bank" src="{{$wallet->bank->image}}" alt=""
-                                                         style="max-width:100%; width:100%; height:100%; object-fit:contain">
-                                                </div>
-                                                <div>
-                                                    <h4 class="m-0">{{$wallet->bank->name}}</h4>
-                                                    <span style="font-size: 12px; line-height: 14px">
+                                                <div class="d-flex align-items-center" style="gap:10px;">
+                                                    <div type="button"
+                                                         style="width:150px;height:50px; cursor: pointer;">
+                                                        <img class="img_bank" src="{{$wallet->bank->image}}" alt=""
+                                                             style="max-width:100%; width:100%; height:100%; object-fit:contain">
+                                                    </div>
+                                                    <div>
+                                                        <h4 class="m-0">{{$wallet->bank->full_name}}</h4>
+                                                        <span style="font-size: 12px; line-height: 14px">
                                             @for($i = 0;$i < strlen($wallet->account_number) - 4;$i++)
-                                                            *
-                                                        @endfor
-                                                        {{substr($wallet->account_number,strlen($wallet->account_number) - 4)}}
+                                                                *
+                                                            @endfor
+                                                            {{substr($wallet->account_number,strlen($wallet->account_number) - 4)}}
                                         </span>
+                                                    </div>
                                                 </div>
+
                                             </div>
                                         </div>
                                     @else
@@ -289,6 +437,45 @@
 @endsection
 @section('custom_js')
     <script src="{{asset('asset/js/main.js')}}"></script>
+    @if($wallet)
+        <script>
+            $('.dropdown-finance').click(function () {
+                $(this).attr('tabindex', 1).focus();
+                $(this).toggleClass('active');
+                $(this).find('.dropdown-menu-finan').slideToggle(300);
+            });
+            $('.dropdown-finance').focusout(function () {
+                $(this).removeClass('active');
+                $(this).find('.dropdown-menu-finan').slideUp(300);
+            });
+            $('.dropdown-finance .dropdown-menu-finan li').click(function () {
+                if ($('#current')) {
+                    $('#current').html($(this).html());
+                }
+                $(this).parents('.dropdown-finance').find('input').attr('value', $(this).attr('id'));
+            });
+
+        </script>
+    @else
+        <script>
+            $('.dropdown-finance').click(function () {
+                $(this).attr('tabindex', 1).focus();
+                $(this).toggleClass('active');
+                $(this).find('.dropdown-menu-finan').slideToggle(300);
+            });
+            $('.dropdown-finance').focusout(function () {
+                $(this).removeClass('active');
+                $(this).find('.dropdown-menu-finan').slideUp(300);
+            });
+            $('.dropdown-finance .dropdown-menu-finan li').click(function () {
+                $(this).parents('.dropdown-finance').find('span').html($(this).html());
+                $(this).parents('.dropdown-finance').find('input').attr('value', $(this).attr('id'));
+                console.log($(this).text())
+            });
+
+        </script>
+    @endif
+
     <script>
         document.getElementsByName('name').forEach(item => {
             item.addEventListener("keypress", (e) => {
@@ -325,8 +512,8 @@
             })
             @endif
             @if(Session::has('validateError'))
-                const textError = '{{ $errors->first() }}';
-                swalNoti('center', 'error', 'Tạo yêu cầu rút tiền thất bại', textError, 500, true, 3000);
+            const textError = '{{ $errors->first() }}';
+            swalNoti('center', 'error', 'Tạo yêu cầu rút tiền thất bại', textError, 500, true, 3000);
             @endif
             @if(Session::has('validateCreate'))
             $('.btn-add-bank').click();

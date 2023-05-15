@@ -284,7 +284,7 @@
                                 $("#address").val(item.dataset.address);
                                 $("#total-product").val(parseInt(item.dataset.total_product));
                                 $("#total-category").val(item.dataset.total_category);
-                                $("#total-money-discount").val(convertNumberVN(result.money));
+                                $("#total-money-discount").val(convertNumberVN(result.money)+ ' đ');
                             }
                         },
                     });

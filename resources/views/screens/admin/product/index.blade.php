@@ -8,7 +8,7 @@
             <div class="modal-dialog modal-lg" role="document">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                        <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Chi tiết yêu cầu</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -90,7 +90,7 @@
                                     <th class="white-space-130 text-center">Nhà cung cấp</th>
                                     <th class="white-space-130">
                                     <div class="d-flex align-items-center justify-content-around">
-                                <span class="white-space-90">    
+                                <span class="white-space-90">
                                     Chiết khấu cho <br> V-Store
 </span>
                                         <span style="float: right;cursor: pointer">
@@ -110,7 +110,7 @@
                                     </th>
 
                                     <th class="white-space-130">     <div class="d-flex align-items-center justify-content-around">
-                                <span class="white-space-90">    
+                                <span class="white-space-90">
                                     Chiết khấu cho <br> V-Shop
 </span>
                                         <span style="float: right;cursor: pointer">
@@ -130,7 +130,7 @@
                                     </th>
                                     <th class="white-space-100">
                                     <div class="d-flex align-items-center justify-content-around">
-                                <span class="white-space-90">        
+                                <span class="white-space-90">
                                     V-Store xét duyệt
 </span>
                                 </th>
