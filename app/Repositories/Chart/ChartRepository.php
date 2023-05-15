@@ -259,14 +259,14 @@ class ChartRepository implements ChartRepositoryInterface
         $data = Order::whereNotIn('order.export_status', [3,5])
             ->whereDate('order.created_at', date('Y-m-d'))
             ->join('order_item', 'order_item.order_id', 'order.id')
+            ->where('order.status', '!=', '2')
             ->join('products', 'products.id', 'order_item.product_id');
         if ($checkRole == 2) {
             $data = $data->where('products.user_id', Auth::id());
         } else if ($checkRole == 3) {
             $data = $data->where('products.vstore_id', Auth::id());
         }
-        $data = $data->select(DB::raw('COALESCE(SUM(order_item.price * order_item.quantity),0) as total'))->value('total');
-
+        $data = $data->select(DB::raw('SUM(order_item.price * order_item.quantity) as total'))->value('total');
         return $data;
     }
 
@@ -274,10 +274,12 @@ class ChartRepository implements ChartRepositoryInterface
     {
         $checkRole = User::where('id', Auth::id())->first()->role_id;
         // dd($checkRole);
-        $data = Order::whereNotIn('order.export_status', [3,5])
-            ->whereDate('order.created_at', date('Y-m-d'))
+        $data = Order::query()
             ->join('order_item', 'order_item.order_id', 'order.id')
-            ->join('products', 'products.id', 'order_item.product_id');
+            ->join('products', 'products.id', 'order_item.product_id')
+            ->whereNotIn('order.export_status', [3,5])
+            ->where('order.status', '!=', '2')
+            ->whereDate('order.created_at', date('Y-m-d'));
         if ($checkRole == 2) {
             $data = $data->where('products.user_id', Auth::id());
         } else if ($checkRole == 3) {
@@ -538,6 +540,7 @@ class ChartRepository implements ChartRepositoryInterface
         $data = Order::whereNotIn('order.export_status', [3,5])
             ->whereMonth('order.created_at', '=', $currentMonth)
             ->whereYear('order.created_at', '=', $currentYear)
+            ->where('order.status', '!=', '2')
             ->join('order_item', 'order_item.order_id', 'order.id')
             ->join('products', 'products.id', 'order_item.product_id');
         if ($checkRole == 2) {
