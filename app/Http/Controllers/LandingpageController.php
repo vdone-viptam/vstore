@@ -27,7 +27,7 @@ class LandingpageController extends Controller
             $logo = !empty($user->avatar) ? $user->avatar : '';
             $banner = !empty($user->banner) ? $user->banner : '';
             $name = $user->name ?? '';
-            $category = Product::select("category_id")->where('products.user_id', $user->id)->where('availability_status', 1)->groupBy('category_id')->get();
+            $category = Product::select("category_id")->where('products.user_id', $user->id)->where('availability_status', 1)->where('status', 2)->groupBy('category_id')->get();
 //            $category= Category::all();
 //            return $category;
             $arrCategory = [];
@@ -145,7 +145,7 @@ class LandingpageController extends Controller
             $logo = !empty($user->avatar) ? $user->avatar : '';
             $banner = !empty($user->banner) ? $user->banner : '';
             $name = $user->name ?? '';
-            $category = Product::select("category_id")->where('products.vstore_id', $user->id)->where('availability_status', 1)->groupBy('category_id')->get();
+            $category = Product::select("category_id")->where('products.vstore_id', $user->id)->where('availability_status', 1)->where('status', 2)->groupBy('category_id')->get();
 //            $category= Category::all();
 //            return $category;
             $arrCategory = [];
