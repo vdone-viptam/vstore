@@ -214,8 +214,8 @@
                                                 </div>
                                                 <div class="form-group">
                                                     <label for="link_website">
-                                                        Slug: <a target="_blank" href="{{route('intro',['slug'=> $infoAccount->slug])}}"
-                                                                 style="text-decoration:underline;">{{route('intro',['slug'=> $infoAccount->slug])}}</a>
+                                                        Slug: <a target="_blank" href="{{route('intro_vstore',['slug'=> $infoAccount->slug])}}"
+                                                                 style="text-decoration:underline;">{{route('intro_vstore',['slug'=> $infoAccount->slug])}}</a>
                                                     </label>
                                                     <input type="text" class="form-control form-control-lg"
                                                            id="link_website" name="link_website"
