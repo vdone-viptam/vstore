@@ -43,8 +43,11 @@ class AccountController extends Controller
         $this->v['infoWarehouse'] = WarehouseType::select('type', 'acreage', 'volume', 'length', 'width', 'height', 'image_storage', 'image_pccc')
             ->where('user_id', Auth::id())->get();
         // dd(Auth::id());
+        $arrRawImg = [];
+
         if (!empty($this->v['infoWarehouse'])) {
             foreach ($this->v['infoWarehouse'] as $key => $value) {
+
                 if (!empty($value->image_storage)) {
                     $imageStorage = json_decode($value->image_storage);
                     $arrImgStorage = [];
@@ -53,7 +56,16 @@ class AccountController extends Controller
                             $arrImgStorage[] = asset($valueImg);
                         }
                     }
-                    $this->v['infoWarehouse'][$key]['image_storage'] = $arrImgStorage;
+                    $this->v['infoWarehouse'][$key]['image_storage'] =json_encode($arrImgStorage);
+                    // if($value->type == 1 ){
+                    //     $arrRawImg['normalImageStorage'] = json_encode($arrImgStorage);
+                    // }else if($value->type == 2 ){
+                    //     $arrRawImg['coldImageStorage'] = json_encode($arrImgStorage);
+                    // }else if($value->type == 3 ){
+                    //     $arrRawImg['warehouseImageStorageInput'] = json_encode($arrImgStorage);
+                    // }
+                }else{
+                    $this->v['infoWarehouse'][$key]['image_storage'] = json_encode([]);
                 }
                 if (!empty($value->image_pccc)) {
                     $imageStorage = json_decode($value->image_pccc);
@@ -63,11 +75,23 @@ class AccountController extends Controller
                             $arrImgStorage[] = asset($valueImg);
                         }
                     }
-                    $this->v['infoWarehouse'][$key]['image_pccc'] = $arrImgStorage;
+                    $this->v['infoWarehouse'][$key]['image_pccc'] = json_encode($arrImgStorage);
+                    // if($value->type == 1 ){
+                    //     $arrRawImg['normalImagePccc'] = json_encode($arrImgStorage);
+                    // }else if($value->type == 2 ){
+                    //     $arrRawImg['coldImagePccc'] = json_encode($arrImgStorage);
+                    // }else if($value->type == 3 ){
+                    //     $arrRawImg['warehouseImagePccc'] = json_encode($arrImgStorage);
+                    // }
+                }else{
+                    $this->v['infoWarehouse'][$key]['image_pccc'] = json_encode([]);
                 }
             }
         }
-        // dd($this->v);
+        // $this->v['allImage'] = $arrRawImg;
+        // dd(
+        //     $this->v,
+        //     ) ;
         return view('screens.storage.account.profile-warehouse', $this->v);
     }
 
@@ -88,6 +112,7 @@ class AccountController extends Controller
         if ($validator->fails()) {
             // dd($validator->errors());
             // return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
+            dd($validator->errors());
             return redirect()->back()->with('error', 'Ảnh kho chưa có');
         }
         try {
@@ -108,39 +133,71 @@ class AccountController extends Controller
             $arrWarehouseImagePccc = [];
 
             if (!empty($request->normalImageStorage)) {
-                Storage::deleteDirectory('public/'.$pathNormalImageStorage);
+                // Storage::deleteDirectory('public/'.$pathNormalImageStorage);
                 foreach (json_decode($request->normalImageStorage) as $image) {
-                    $arrNormalImageStorage[] = $this->saveImgBase64($image, $pathNormalImageStorage);
+                    // $arrNormalImageStorage[] = $this->saveImgBase64($image, $pathNormalImageStorage);
+                    if (strpos($image,'data:image') !== false) {
+                        $arrNormalImageStorage[] = $this->saveImgBase64($image, $pathNormalImageStorage);
+                    } else {
+                        $arrNormalImageStorage[] = $image;
+                    }
                 }
             }
             if (!empty($request->normalImagePccc)) {
-                Storage::deleteDirectory('public/'.$pathNormalImagePccc);
+                // Storage::deleteDirectory('public/'.$pathNormalImagePccc);
                 foreach (json_decode($request->normalImagePccc) as $image) {
-                    $arrNormalImagePccc[] = $this->saveImgBase64($image, $pathNormalImagePccc);
+
+                    if (strpos($image,'data:image') !== false) {
+                        $arrNormalImagePccc[] = $this->saveImgBase64($image, $pathNormalImagePccc);
+                    } else {
+                        $arrNormalImagePccc[] = $image;
+                    }
                 }
             }
             if (!empty($request->coldImageStorage)) {
-                Storage::deleteDirectory('public/'.$pathColdImageStorage);
+                // Storage::deleteDirectory('public/'.$pathColdImageStorage);
                 foreach (json_decode($request->coldImageStorage) as $image) {
-                    $arrColdImageStorage[] = $this->saveImgBase64($image, $pathColdImageStorage);
+                    if (strpos($image,'data:image') !== false) {
+                        $arrColdImageStorage[] = $this->saveImgBase64($image, $pathColdImageStorage);
+                    } else {
+                        $arrColdImageStorage[] = $image;
+                    }
+                    // dd($image);
+                    // $arrColdImageStorage[] = $this->saveImgBase64($image, $pathColdImageStorage);
                 }
             }
             if (!empty($request->coldImagePccc)) {
-                Storage::deleteDirectory('public/'.$pathColdImagePccc);
+                // Storage::deleteDirectory('public/'.$pathColdImagePccc);
                 foreach (json_decode($request->coldImagePccc) as $image) {
-                    $arrColdImagePccc[] = $this->saveImgBase64($image, $pathColdImagePccc);
+
+                    if (strpos($image,'data:image') !== false) {
+                        $arrColdImagePccc[] = $this->saveImgBase64($image, $pathColdImagePccc);
+                    } else {
+                        $arrColdImagePccc[] = $image;
+                    }
                 }
             }
+
             if (!empty($request->warehouseImageStorage)) {
-                Storage::deleteDirectory('public/'.$pathWarehouseImageStorage);
+                // Storage::deleteDirectory('public/'.$pathWarehouseImageStorage);
                 foreach (json_decode($request->warehouseImageStorage) as $image) {
-                    $arrWarehouseImageStorage[] = $this->saveImgBase64($image, $pathWarehouseImageStorage);
+
+                    if (strpos($image,'data:image') !== false) {
+                        $arrWarehouseImageStorage[] = $this->saveImgBase64($image, $pathWarehouseImageStorage);
+                    } else {
+                        $arrWarehouseImageStorage[] = $image;
+                    }
                 }
             }
             if (!empty($request->warehouseImagePccc)) {
-                Storage::deleteDirectory('public/'.$pathWarehouseImagePccc);
+                // Storage::deleteDirectory('public/'.$pathWarehouseImagePccc);
                 foreach (json_decode($request->warehouseImagePccc) as $image) {
-                    $arrWarehouseImagePccc[] = $this->saveImgBase64($image, $pathWarehouseImagePccc);
+
+                    if (strpos($image,'data:image') !== false) {
+                        $arrWarehouseImagePccc[] = $this->saveImgBase64($image, $pathWarehouseImagePccc);
+                    } else {
+                        $arrWarehouseImagePccc[] = $image;
+                    }
                 }
             }
 

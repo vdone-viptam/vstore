@@ -48,7 +48,7 @@ class UserController extends Controller
         $this->v['key_search'] = trim($request->key_search) ?? '';
 
         $this->v['users'] = User::select('users.name', 'users.id', 'email', 'id_vdone', 'company_name',
-            'phone_number', 'tax_code', 'address', 'users.created_at', 'confirm_date', 'users.referral_code', 'users.role_id');
+            'phone_number', 'tax_code', 'address', 'users.created_at', 'confirm_date', 'users.referral_code', 'users.role_id','accountant_confirm');
         $limit = $request->limit ?? 10;
         if (strlen($this->v['key_search']) > 0) {
             $this->v['users'] = $this->v['users']

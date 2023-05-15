@@ -437,26 +437,45 @@
 @endsection
 @section('custom_js')
     <script src="{{asset('asset/js/main.js')}}"></script>
-    <script>
-        $('.dropdown-finance').click(function () {
-            $(this).attr('tabindex', 1).focus();
-            $(this).toggleClass('active');
-            $(this).find('.dropdown-menu-finan').slideToggle(300);
-        });
-        $('.dropdown-finance').focusout(function () {
-            $(this).removeClass('active');
-            $(this).find('.dropdown-menu-finan').slideUp(300);
-        });
-        $('.dropdown-finance .dropdown-menu-finan li').click(function () {
-            $(this).parents('.dropdown-finance').find('span').text($(this).text());
-            if ($('#current')) {
-                $('#current').html($(this).html());
-            }
-            $(this).parents('.dropdown-finance').find('input').attr('value', $(this).attr('id'));
-            console.log($(this).text())
-        });
+    @if($wallet)
+        <script>
+            $('.dropdown-finance').click(function () {
+                $(this).attr('tabindex', 1).focus();
+                $(this).toggleClass('active');
+                $(this).find('.dropdown-menu-finan').slideToggle(300);
+            });
+            $('.dropdown-finance').focusout(function () {
+                $(this).removeClass('active');
+                $(this).find('.dropdown-menu-finan').slideUp(300);
+            });
+            $('.dropdown-finance .dropdown-menu-finan li').click(function () {
+                if ($('#current')) {
+                    $('#current').html($(this).html());
+                }
+                $(this).parents('.dropdown-finance').find('input').attr('value', $(this).attr('id'));
+            });
 
-    </script>
+        </script>
+    @else
+        <script>
+            $('.dropdown-finance').click(function () {
+                $(this).attr('tabindex', 1).focus();
+                $(this).toggleClass('active');
+                $(this).find('.dropdown-menu-finan').slideToggle(300);
+            });
+            $('.dropdown-finance').focusout(function () {
+                $(this).removeClass('active');
+                $(this).find('.dropdown-menu-finan').slideUp(300);
+            });
+            $('.dropdown-finance .dropdown-menu-finan li').click(function () {
+                $(this).parents('.dropdown-finance').find('span').html($(this).html());
+                $(this).parents('.dropdown-finance').find('input').attr('value', $(this).attr('id'));
+                console.log($(this).text())
+            });
+
+        </script>
+    @endif
+
     <script>
         document.getElementsByName('name').forEach(item => {
             item.addEventListener("keypress", (e) => {
