@@ -94,7 +94,7 @@
 
     /*  */
     .gg {
-        background-image: url('./src/assets/img/img5.png');
+        background-image: url('{{asset('landingpage/images/img5.png')}}');
         background-repeat: no-repeat;
         background-size: cover;
     }
