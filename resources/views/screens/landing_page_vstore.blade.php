@@ -95,7 +95,13 @@
             display: flex;
             margin: 0 10px;
         }
-
+        /*.slider3  .slick-track{*/
+        /*    width: 100% !important;*/
+        /*}*/
+        /*.slider3  .slick-track img{*/
+        /*    */
+        /*    width: 82px !important;*/
+        /*}*/
         /*  */
         .gg {
             background-image: url('{{asset('landingpage/images/img5.png')}}');
@@ -309,10 +315,10 @@
             <div class="md:border-l md:border-[#258AFF80] md:pl-6 flex flex-col gap-5">
                 <span class="font-semibold text-xl"> Giới thiệu</span>
                 <p class="text-[#696984] text-sm md:text-base xl:text-lg">{{$user->description != null ? $user->description : 'Chưa có thông tin mô tả'}}</p>
-                <div class="flex gap-4 items-center slider3">
+                <div class="flex gap-4 items-center justify-center slider3">
                     @if(count($fiveImage) > 0)
                         @foreach($fiveImage as $image)
-                            <img class="mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px]"
+                            <img class="mx-2 w-[82.5px] h-[82.5px] md:min-w-[102px] md:h-[102px]"
                                  src="{{asset(json_decode($image->images)[0])}}" alt="">
                         @endforeach
                     @endif
@@ -595,11 +601,10 @@
         arrows: false,
         focusOnSelect: true,
         infinite: false,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 3000,
         slidesToShow: 6,
         slidesToScroll: 6,
-        autoplaySpeed: 3000,
         pauseOnFocus: true,
         dots: false,
         // the magic
@@ -640,6 +645,7 @@
             },
             {
                 breakpoint: 444,
+                a
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
