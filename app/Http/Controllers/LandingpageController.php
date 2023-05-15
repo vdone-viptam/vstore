@@ -42,9 +42,9 @@ class LandingpageController extends Controller
         }
         $big_sale = DB::table('products')
             ->where('availability_status', 1);
-        $selected = [DB::raw('SUM(discounts.discount) as discount'), 'vote', 'images', 'publish_id', 'price', 'products.name', DB::raw("price - (price * IFNULL((SELECT SUM(discount /100) as dis
+        $selected = [DB::raw('SUM(discounts.discount) as discount'),  'images', 'publish_id', 'price', 'products.name', DB::raw("price - (price * IFNULL((SELECT SUM(discount /100) as dis
                         FROM discounts WHERE start_date <= '" . \Illuminate\Support\Carbon::now() . "' and end_date >= '" . Carbon::now() . "'
-                                        AND product_id = products.id AND type != 3 GROUP BY product_id ),0)) as order_price")];
+                                        AND product_id = products.id AND type != 3 GROUP BY product_id ),0)) as order_price"), DB::raw("(SELECT ROUND( IFNULL(AVG(point_evaluation),0),1) FROM points WHERE product_id = products.id) as vote")];
         $big_sale = $big_sale->select($selected)->join('discounts', 'products.id', '=', 'discounts.product_id')
             ->where('start_date', '<=', Carbon::now())
             ->where('end_date', '>=', Carbon::now())
@@ -56,7 +56,7 @@ class LandingpageController extends Controller
             ->get();
         $hot_products = DB::table('products')
             ->where('availability_status', 1);
-        $selected = ['vote', 'images', 'publish_id', 'price', 'products.name'];
+        $selected = [ 'images', 'publish_id', 'price', 'products.name', DB::raw("(SELECT ROUND( IFNULL(AVG(point_evaluation),0),1) FROM points WHERE product_id = products.id) as vote")];
         $hot_products = $hot_products->select($selected)
             ->selectSub("SELECT SUM(discount)
                         FROM discounts WHERE start_date <= '" . \Illuminate\Support\Carbon::now() . "' and end_date >= '" . \Illuminate\Support\Carbon::now() . "'
@@ -159,9 +159,9 @@ class LandingpageController extends Controller
         }
         $big_sale = DB::table('products')
             ->where('availability_status', 1);
-        $selected = [DB::raw('SUM(discounts.discount) as discount'), 'vote', 'images', 'publish_id', 'price', 'products.name', DB::raw("price - (price * IFNULL((SELECT SUM(discount /100) as dis
+        $selected = [DB::raw('SUM(discounts.discount) as discount'),  'images', 'publish_id', 'price', 'products.name', DB::raw("price - (price * IFNULL((SELECT SUM(discount /100) as dis
                         FROM discounts WHERE start_date <= '" . \Illuminate\Support\Carbon::now() . "' and end_date >= '" . Carbon::now() . "'
-                                        AND product_id = products.id AND type != 3 GROUP BY product_id ),0)) as order_price")];
+                                        AND product_id = products.id AND type != 3 GROUP BY product_id ),0)) as order_price"), DB::raw("(SELECT ROUND( IFNULL(AVG(point_evaluation),0),1) FROM points WHERE product_id = products.id) as vote")];
         $big_sale = $big_sale->select($selected)->join('discounts', 'products.id', '=', 'discounts.product_id')
             ->where('start_date', '<=', Carbon::now())
             ->where('end_date', '>=', Carbon::now())
@@ -173,7 +173,7 @@ class LandingpageController extends Controller
             ->get();
         $hot_products = DB::table('products')
             ->where('availability_status', 1);
-        $selected = ['vote', 'images', 'publish_id', 'price', 'products.name'];
+        $selected = ['images', 'publish_id', 'price', 'products.name', DB::raw("(SELECT ROUND( IFNULL(AVG(point_evaluation),0),1) FROM points WHERE product_id = products.id) as vote")];
         $hot_products = $hot_products->select($selected)
             ->selectSub("SELECT SUM(discount)
                         FROM discounts WHERE start_date <= '" . \Illuminate\Support\Carbon::now() . "' and end_date >= '" . \Illuminate\Support\Carbon::now() . "'

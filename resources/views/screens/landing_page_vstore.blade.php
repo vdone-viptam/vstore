@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Trang chủ</title>
-    <link rel="stylesheet" href="{{asset('landingpage/style.css')}}">
+
     <link rel="stylesheet" href="{{asset('landingpage/output.css')}}">
     <link rel="icon" type="image/x-icon" href="{{asset('asset/images/Frame 1321315296.ico')}}">
     {{--    <link rel="stylesheet" href="../dist/output.css">--}}
@@ -427,8 +427,7 @@
                     </div>
                     <div class="flex items-center justify-between gap-2">
                         @if($product->discount_sale > 0)
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}
-                                đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}đ</p>
                             <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
                                 {{number_format($product->price,0,'.','.')}}đ</p>
                         @else
