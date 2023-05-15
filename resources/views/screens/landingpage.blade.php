@@ -90,7 +90,6 @@
         }
 
 
-
         .slider2 .slick-slide {
             display: flex;
             margin: 0 10px;
@@ -305,14 +304,26 @@
             <div class="md:border-l md:border-[#258AFF80] md:pl-6 flex flex-col gap-5">
                 <span class="font-semibold text-xl"> Giới thiệu</span>
                 <p class="text-[#696984] text-sm md:text-base xl:text-lg">{{$user->description}}</p>
-                <div class="flex gap-4 items-center slider3">
+                @if(count($fiveImage) > 5)
+                    <div class="flex gap-4 items-center slider3">
                         @foreach($fiveImage as $image)
-                        <img
-                            class="mx-2 w-[82.5px] h-[82.5px] md:min-w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80]"
-                            src="{{asset(json_decode($image->images)[0])}}" alt="">
+                            <img
+                                class="mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-contain !shadow-lg border border-[#1e90ff80]"
+                                src="{{asset(json_decode($image->images)[0])}}" alt="">
                         @endforeach
 
-                </div>
+                    </div>
+                @else
+                    <div class="flex gap-4 items-center">
+                        @foreach($fiveImage as $image)
+                            <img
+                                class="mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80]"
+                                src="{{asset(json_decode($image->images)[0])}}" alt="">
+                        @endforeach
+
+                    </div>
+                @endif
+
             </div>
         </div>
     </div>
@@ -323,24 +334,46 @@
         MỤC
     </p>
     <div class="w-[37px] mx-auto"></div>
-    <div class="slider py-[30px] md:py-[50px]">
-        @foreach($arrCategory as $cate)
-            <div class="flex flex-col gap-4 items-center cursor-pointer">
-                <div
-                    class="bg-white md:w-[100px] md:h-[100px] w-[60px] h-[60px] flex items-center justify-center rounded-full shadow-md">
-                    @if($cate->img !=null)
-                        <img src="{{asset($cate->img)}}" class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
-                    @else
-                        <img src="{{asset('landingpage/images/wm.png')}}"
-                             class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
+    @if(count($arrCategory) > 5)
+        <div class="slider py-[30px] md:py-[50px]">
+            @foreach($arrCategory as $cate)
+                <div class="flex flex-col gap-4 items-center cursor-pointer">
+                    <div
+                        class="bg-white md:w-[100px] md:h-[100px] w-[60px] h-[60px] flex items-center justify-center rounded-full shadow-md">
+                        @if($cate->img !=null)
+                            <img src="{{asset($cate->img)}}" class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
+                        @else
+                            <img src="{{asset('landingpage/images/wm.png')}}"
+                                 class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
 
-                    @endif
+                        @endif
+                    </div>
+                    <p class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{$cate->name}}</p>
                 </div>
-                <p class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{$cate->name}}</p>
-            </div>
-        @endforeach
+            @endforeach
 
-    </div>
+        </div>
+    @else
+        <div class="py-[30px] md:py-[50px] flex justify-center gap-4">
+            @foreach($arrCategory as $cate)
+                <div class="flex flex-col gap-4 items-center cursor-pointer">
+                    <div
+                        class="bg-white md:w-[100px] md:h-[100px] w-[60px] h-[60px] flex items-center justify-center rounded-full shadow-md">
+                        @if($cate->img !=null)
+                            <img src="{{asset($cate->img)}}" class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
+                        @else
+                            <img src="{{asset('landingpage/images/wm.png')}}"
+                                 class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
+
+                        @endif
+                    </div>
+                    <p class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{$cate->name}}</p>
+                </div>
+            @endforeach
+
+        </div>
+    @endif
+
     <!--  -->
     <div class="mt-[68px] mb-[60px] section" id="bs">
         <img class="w-full object-contain rounded-tl-2xl rounded-tr-2xl" src="{{asset('landingpage/images/bg2.png')}}"
@@ -349,50 +382,98 @@
             class="md:min-h-[434px] rounded-bl-2xl rounded-br-2xl pt-[30px] md:pt-[60px] px-[10px] md:pb-[60px] pb-[20px]"
             style="background: linear-gradient(180deg, #258AFF 0%, #99D7FF 100%);">
             <!-- slider2 -->
-            <div class="slider2">
-                @foreach($big_sale as $pro)
-                    <div class="w-[256px] flex flex-col relative cursor-pointer">
-                        <div class="text-center gg w-[51px] h-[52px] absolute left-[15px] top-0">
-                            <p class="text-white text-sm md:text-[17px] font-bold">{{$pro->discount}}%</p>
-                            <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
-                        </div>
-                        <div class="w-full bg-white border-b border-[#1e90ff80] rounded-tl-lg rounded-tr-lg">
-                            <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
-                                <img class="h-[146px] w-full object-cover rounded-tl-lg rounded-tr-lg"
-                                     src="{{asset(json_decode($pro->images)[0])}}" alt="">
-                            </a>
+            @if(count($big_sale) > 5)
+                <div class="slider2">
+                    @foreach($big_sale as $pro)
+                        <div class="w-[256px] flex flex-col relative cursor-pointer">
+                            <div class="text-center gg w-[51px] h-[52px] absolute left-[15px] top-0">
+                                <p class="text-white text-sm md:text-[17px] font-bold">{{$pro->discount}}%</p>
+                                <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
+                            </div>
+                            <div class="w-full bg-white border-b border-[#1e90ff80] rounded-tl-lg rounded-tr-lg">
+                                <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
+                                    <img class="h-[146px] w-full object-cover rounded-tl-lg rounded-tr-lg"
+                                         src="{{asset(json_decode($pro->images)[0])}}" alt="">
+                                </a>
 
-                        </div>
-                        <div
-                            class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
-                            <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
-                                <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
-                                   title="{{$pro->name}}">
-                                    {{\Illuminate\Support\Str::limit($pro->name,50,'...')}}</p>
-                            </a>
-                            <div class="flex gap-1 items-center">
-                                @for($i = 1; $i <= 5;$i++)
-                                    @if($pro->vote > 1)
-                                        <img src="{{asset('landingpage/images/star_full.png')}}" alt="">
-                                    @elseif($pro->vote > 0 && $pro->vote < 1)
-                                        <img src="{{asset('landingpage/images/star_half.png')}}" alt="">
-                                    @else
-                                        <img src="{{asset('landingpage/images/star_white.png')}}" alt="">
-                                    @endif
-                                    @php $pro->vote =  $pro->vote > 0 ? $pro->vote - 1 : $pro->vote @endphp
-                                @endfor
                             </div>
-                            <div class="flex items-center justify-between gap-2">
-                                <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">
-                                    {{number_format($pro->order_price,0,'.','.')}}đ
-                                </p>
-                                <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
-                                    {{number_format($pro->price,0,'.','.')}}đ</p>
+                            <div
+                                class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
+                                <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
+                                    <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
+                                       title="{{$pro->name}}">
+                                        {{\Illuminate\Support\Str::limit($pro->name,50,'...')}}</p>
+                                </a>
+                                <div class="flex gap-1 items-center">
+                                    @for($i = 1; $i <= 5;$i++)
+                                        @if($pro->vote > 1)
+                                            <img src="{{asset('landingpage/images/star_full.png')}}" alt="">
+                                        @elseif($pro->vote > 0 && $pro->vote < 1)
+                                            <img src="{{asset('landingpage/images/star_half.png')}}" alt="">
+                                        @else
+                                            <img src="{{asset('landingpage/images/star_white.png')}}" alt="">
+                                        @endif
+                                        @php $pro->vote =  $pro->vote > 0 ? $pro->vote - 1 : $pro->vote @endphp
+                                    @endfor
+                                </div>
+                                <div class="flex items-center justify-between gap-2">
+                                    <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">
+                                        {{number_format($pro->order_price,0,'.','.')}}đ
+                                    </p>
+                                    <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
+                                        {{number_format($pro->price,0,'.','.')}}đ</p>
+                                </div>
                             </div>
                         </div>
-                    </div>
-                @endforeach
-            </div>
+                    @endforeach
+                </div>
+            @else
+                <div class="flex justify-center gap-4">
+                    @foreach($big_sale as $pro)
+                        <div class="w-[256px] flex flex-col relative cursor-pointer">
+                            <div class="text-center gg w-[51px] h-[52px] absolute left-[15px] top-0">
+                                <p class="text-white text-sm md:text-[17px] font-bold">{{$pro->discount}}%</p>
+                                <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
+                            </div>
+                            <div class="w-full bg-white border-b border-[#1e90ff80] rounded-tl-lg rounded-tr-lg">
+                                <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
+                                    <img class="h-[146px] w-full object-cover rounded-tl-lg rounded-tr-lg"
+                                         src="{{asset(json_decode($pro->images)[0])}}" alt="">
+                                </a>
+
+                            </div>
+                            <div
+                                class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
+                                <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
+                                    <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
+                                       title="{{$pro->name}}">
+                                        {{\Illuminate\Support\Str::limit($pro->name,50,'...')}}</p>
+                                </a>
+                                <div class="flex gap-1 items-center">
+                                    @for($i = 1; $i <= 5;$i++)
+                                        @if($pro->vote > 1)
+                                            <img src="{{asset('landingpage/images/star_full.png')}}" alt="">
+                                        @elseif($pro->vote > 0 && $pro->vote < 1)
+                                            <img src="{{asset('landingpage/images/star_half.png')}}" alt="">
+                                        @else
+                                            <img src="{{asset('landingpage/images/star_white.png')}}" alt="">
+                                        @endif
+                                        @php $pro->vote =  $pro->vote > 0 ? $pro->vote - 1 : $pro->vote @endphp
+                                    @endfor
+                                </div>
+                                <div class="flex items-center justify-between gap-2">
+                                    <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">
+                                        {{number_format($pro->order_price,0,'.','.')}}đ
+                                    </p>
+                                    <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
+                                        {{number_format($pro->price,0,'.','.')}}đ</p>
+                                </div>
+                            </div>
+                        </div>
+                    @endforeach
+                </div>
+            @endif
+
         </div>
     </div>
     <p class="uppercase text-[#258AFF] text-[20px] md:text-[30px] font-bold text-center mt-[30px] md:mt-[60px] section"
@@ -410,10 +491,10 @@
                         <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
                     </div>
                 @endif
-                    <a href="{{config('domain.big_store').'products/'.$product->id}}" target="_blank">
-                        <img class="h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff]"
-                             src="{{asset(json_decode($product->images)[0])}}" alt="">
-                    </a>
+                <a href="{{config('domain.big_store').'products/'.$product->id}}" target="_blank">
+                    <img class="h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff]"
+                         src="{{asset(json_decode($product->images)[0])}}" alt="">
+                </a>
                 <div class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
                     <a href="{{config('domain.big_store').'products/'.$product->id}}" target="_blank">
                         <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
@@ -434,11 +515,13 @@
                     </div>
                     <div class="flex items-center justify-between gap-2">
                         @if($product->discount_sale > 0)
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}
+                                đ</p>
                             <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
                                 {{number_format($product->price,0,'.','.')}}đ</p>
                         @else
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}
+                                đ</p>
                         @endif
 
                     </div>
@@ -454,27 +537,52 @@
         V-Store liên kết
     </p>
     <div class="w-[37px] mx-auto mb-[60px]"></div>
-    <div class="slider mb-[30px] md:pb-[50px] text-center">
-        @foreach($vstore as $vsto)
-            <div class="flex flex-col gap-4 items-center cursor-pointer">
-                <a href="{{route("intro_vstore",['slug'=>$vsto->slug])}}" target="_blank">
-                    <div class="max-w-[120px]" style="margin: auto">
-                        @if($vsto->avatar =='')
-                            <img src="{{asset('home/img/vstore-vuong.png')}}"
-                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
-                                 style="object-fit: contain;margin: auto">
-                        @else
-                            <img src="{{asset('image/users/'. $vsto->avatar)}}"
-                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
-                                 style="object-fit: contain;margin: auto">
-                        @endif
-                    </div>
-                    <span
-                        class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,30,'...')}}</span>
-                </a>
-            </div>
-        @endforeach
-    </div>
+    @if(count($vstore) > 5)
+        <div class="slider mb-[30px] md:pb-[50px] text-center">
+            @foreach($vstore as $vsto)
+                <div class="flex flex-col gap-4 items-center cursor-pointer">
+                    <a href="{{route("intro_vstore",['slug'=>$vsto->slug])}}" target="_blank">
+                        <div class="max-w-[120px]" style="margin: auto">
+                            @if($vsto->avatar =='')
+                                <img src="{{asset('home/img/vstore-vuong.png')}}"
+                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                     style="object-fit: contain;margin: auto">
+                            @else
+                                <img src="{{asset('image/users/'. $vsto->avatar)}}"
+                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                     style="object-fit: contain;margin: auto">
+                            @endif
+                        </div>
+                        <span
+                            class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,30,'...')}}</span>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    @else
+        <div class="mb-[30px] md:pb-[50px] text-center">
+            @foreach($vstore as $vsto)
+                <div class="flex flex-col gap-4 items-center cursor-pointer">
+                    <a href="{{route("intro_vstore",['slug'=>$vsto->slug])}}" target="_blank">
+                        <div class="max-w-[120px]" style="margin: auto">
+                            @if($vsto->avatar =='')
+                                <img src="{{asset('home/img/vstore-vuong.png')}}"
+                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                     style="object-fit: contain;margin: auto">
+                            @else
+                                <img src="{{asset('image/users/'. $vsto->avatar)}}"
+                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                     style="object-fit: contain;margin: auto">
+                            @endif
+                        </div>
+                        <span
+                            class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,30,'...')}}</span>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    @endif
+
 </div>
 <div class="h-[63px] pt-[22px] bg-[#1E90FF] mt-[56px]">
     <div
@@ -520,142 +628,150 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <!--  -->
 <script>
-    $(".slider").slick({
-        arrows: false,
-        focusOnSelect: true,
-        infinite: true,
-        autoplay: true,
-        autoplaySpeed: 1500,
-        slidesToScroll: 8,
-        slidesToShow: 8,
-        pauseOnFocus: true,
-        dots: true,
-        // the magic
-        responsive: [{
-            breakpoint: 1024,
-            settings: {
-                slidesToShow: 6,
-                slidesToScroll: 6,
-                infinite: true
-            }
-        }, {
-            breakpoint: 600,
-            settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
-                dots: true
-            }
-        }, {
-            breakpoint: 490,
-            settings: {
-                slidesToShow: 2,
-                slidesToScroll: 2,
-                dots: true
-            }
-        }]
-    });
-    $(".slider2").slick({
-        arrows: false,
-        focusOnSelect: true,
-        infinite: true,
-        autoplay: false,
-        pauseOnFocus: true,
-        slidesToScroll: 5,
-        slidesToShow: 5,
-        autoplaySpeed: 3000,
-        rows: 1,
-
-        dots: true,
-        // the magic
-        responsive: [{
-            breakpoint: 1280,
-            settings: {
-                slidesToShow: 4,
-                slidesToScroll: 4,
-            }
-        },
-            {
-                breakpoint: 1000,
+    if ($(".slider")){
+        $(".slider").slick({
+            arrows: false,
+            focusOnSelect: true,
+            infinite: true,
+            autoplay: true,
+            autoplaySpeed: 1500,
+            slidesToScroll: 8,
+            slidesToShow: 8,
+            pauseOnFocus: true,
+            dots: true,
+            // the magic
+            responsive: [{
+                breakpoint: 1024,
                 settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
+                    slidesToShow: 6,
+                    slidesToScroll: 6,
+                    infinite: true
                 }
             }, {
-                breakpoint: 768,
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 4,
+                    slidesToScroll: 4,
+                    dots: true
+                }
+            }, {
+                breakpoint: 490,
                 settings: {
                     slidesToShow: 2,
                     slidesToScroll: 2,
-
-                }
-            }, {
-                breakpoint: 376,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1,
+                    dots: true
                 }
             }]
-    });
-    $(".slider3").slick({
-        arrows: false,
-        focusOnSelect: true,
-        infinite: false,
-        autoplay: true,
-        slidesToShow: {{count($arrCategory) >= 5 ? 5 : count($arrCategory)}},
-        slidesToScroll: {{count($arrCategory) >= 5 ? 5 : count($arrCategory)}},
-        autoplaySpeed: 3000,
-        pauseOnFocus: true,
-        dots: false,
-        // the magic
-        responsive: [{
-            breakpoint: 1536,
-            settings: {
-                slidesToShow: 5,
-                slidesToScroll: 5,
-            }
-        },
-            {
-                breakpoint: 1279,
+        });
+    }
+
+    if ($(".slider2")) {
+        $(".slider2").slick({
+            arrows: false,
+            focusOnSelect: true,
+            infinite: true,
+            autoplay: false,
+            pauseOnFocus: true,
+            slidesToScroll: 5,
+            slidesToShow: 5,
+            autoplaySpeed: 3000,
+            rows: 1,
+
+            dots: true,
+            // the magic
+            responsive: [{
+                breakpoint: 1280,
                 settings: {
                     slidesToShow: 4,
                     slidesToScroll: 4,
                 }
             },
-            {
-                breakpoint: 1023,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                }
-            },
-            {
-                breakpoint: 768,
+                {
+                    breakpoint: 1000,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                    }
+                }, {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 2,
+
+                    }
+                }, {
+                    breakpoint: 376,
+                    settings: {
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                    }
+                }]
+        });
+    }
+    if ($(".slider3")) {
+        $(".slider3").slick({
+            arrows: false,
+            focusOnSelect: true,
+            infinite: false,
+            autoplay: true,
+            slidesToShow: 5,
+            slidesToScroll: 5,
+            autoplaySpeed: 3000,
+            pauseOnFocus: true,
+            dots: false,
+            // the magic
+            responsive: [{
+                breakpoint: 1536,
                 settings: {
                     slidesToShow: 5,
-                    slidesToScroll: 4,
+                    slidesToScroll: 5,
                 }
             },
-            {
-                breakpoint: 545,
-                settings: {
-                    slidesToShow: 4,
-                    slidesToScroll: 4,
-                }
-            },
-            {
-                breakpoint: 444,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 3,
-                }
-            },
-            {
-                breakpoint: 320,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1,
-                }
-            }]
-    });
+                {
+                    breakpoint: 1279,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
+                    }
+                },
+                {
+                    breakpoint: 1023,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                    }
+                },
+                {
+                    breakpoint: 768,
+                    settings: {
+                        slidesToShow: 5,
+                        slidesToScroll: 4,
+                    }
+                },
+                {
+                    breakpoint: 545,
+                    settings: {
+                        slidesToShow: 4,
+                        slidesToScroll: 4,
+                    }
+                },
+                {
+                    breakpoint: 444,
+                    settings: {
+                        slidesToShow: 3,
+                        slidesToScroll: 3,
+                    }
+                },
+                {
+                    breakpoint: 320,
+                    settings: {
+                        slidesToShow: 2,
+                        slidesToScroll: 1,
+                    }
+                }]
+        });
+    }
+
     // menu mobile
     $(".btn-menu").on("click", () => {
         $('.menu-show').addClass("show")
