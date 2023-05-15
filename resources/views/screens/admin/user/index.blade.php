@@ -422,12 +422,25 @@
                                     <td class="text-center white-space-120">
                                         @if(!empty($user->confirm_date))
                                             <div class=" text-success  " style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã duyệt</div>
+                                        @elseif($user->accountant_confirm == 2 )
+                                            <span class="text-danger">
+                                                 <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
+                                                      xmlns="http://www.w3.org/2000/svg">
+                                                <path
+                                                    d="M1.2 12L0 10.8L4.8 6L0 1.2L1.2 0L6 4.8L10.8 0L12 1.2L7.2 6L12 10.8L10.8 12L6 7.2L1.2 12Z"
+                                                    fill="#ef172c"/>
+                                            </svg>
+                                                Từ chối
+                                            </span>
+
+
                                         @else
+
                                             <div class=" text-warning  " style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i> Chờ duyệt</div>
                                         @endif
                                     </td>
                                     <td class="text-center white-space-80">
-                                        @if(!$user->confirm_date)
+                                        @if(!$user->confirm_date && $user->accountant_confirm ==1)
                                             <a data-abc="{{$loop->iteration - 1}}"
                                             href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
                                             class="duyet btn text-primary font-medium px-2 py-0" style="text-decoration:underline;"
