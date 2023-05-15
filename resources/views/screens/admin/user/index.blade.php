@@ -440,7 +440,7 @@
                                         @endif
                                     </td>
                                     <td class="text-center white-space-80">
-                                        @if(!$user->confirm_date && $user->accountant_confirm ==1)
+                                        @if((!$user->confirm_date && $user->role_id != 3) || (!$user->confirm_date && $user->accountant_confirm ==1 && $user->role_id == 3))
                                             <a data-abc="{{$loop->iteration - 1}}"
                                             href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
                                             class="duyet btn text-primary font-medium px-2 py-0" style="text-decoration:underline;"
