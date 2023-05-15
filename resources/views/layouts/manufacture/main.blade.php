@@ -23,7 +23,9 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
           integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
           crossorigin="anonymous" referrerpolicy="no-referrer"/>
-    {{--    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.13/css/select2.min.css" integrity="sha512-nMNlpuaDPrqlEls3IX/Q56H36qvBASwb3ipuo3MxeWbsQB1881ox0cRv7UPTgBlriqoynt35KjEwgGUeUXIPnw==" crossorigin="anonymous" referrerpolicy="no-referrer">--}}
+          <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick-theme.css"/>
+
     @include('layouts.storage.css')
     @yield('custom_css')
     <style>
@@ -53,6 +55,13 @@
 
         th {
             min-width: 150px;
+        }
+        .slider-storage .slick-slide{
+            width:200px !important; 
+            padding: 0 10px!important;
+        }
+        .slick-prev:before, .slick-next:before{
+            color: #020202 !important;
         }
     </style>
 
@@ -199,6 +208,7 @@
 <script src="{{asset('asset/assets/vendor/charts/c3charts/c3.min.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/charts/c3charts/d3-5.4.0.min.js')}}"></script>
 <script src="{{asset('asset/assets/vendor/charts/c3charts/C3chartjs.js')}}"></script>
+
 @yield('custom_js')
 
 <script>

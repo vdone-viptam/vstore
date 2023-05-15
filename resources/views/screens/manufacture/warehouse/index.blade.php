@@ -1,5 +1,26 @@
 @extends('layouts.manufacture.main')
 
+@section('custom_css')
+<style>
+    .loading{
+        margin: 0 auto;
+        border: 3px solid hsla(185, 100%, 62%, 0.2);
+        border-top-color: #3cefff;
+        border-radius: 50%;
+        width: 3em;
+        height: 3em;
+        animation: spin 1s linear infinite;
+    }
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+</style>
+@endsection
+
 @section('modal')
     <div
         class="modal fade"
@@ -342,6 +363,10 @@
 
         </script>
     @endif
+
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
+
     <script>
         $('#appect').on('change', (e) => {
             if (e.target.checked && $('#discount_vShop').val()) {
@@ -390,7 +415,7 @@
                 data.img.forEach(item => {
                     if (JSON.parse(item.image_storage) != null) {
                         JSON.parse(item.image_storage).forEach(data => {
-                            img += `<div style="width:200px;height:200px; border-radius:4px;" >
+                            img += `<div style="width:200px!important; height:200px; border-radius:4px;" >
                         <img src="{{asset('')}}/${data}" style="width:100%; object-fit:cover; border-radius:4px;" alt="">
                    </div>`;
                         })
@@ -417,7 +442,9 @@
 
 <div class=" col-12">
 <label>Hình ảnh kho</label>
-                    <div class="w-100 d-flex align-items-center" style="gap:10px;">
+<div class="loading"></div>
+
+                    <div class="slider-storage w-100">
                     ${img}
 
 </div>
@@ -473,7 +500,51 @@
 </div>
    `;
                     ;
-                    $('.md-content1').html(htmlData)
+                    $('.md-content1').html(htmlData);
+                    $('.slider-storage').hide();
+                    $('.loading').show();
+                    setTimeout(() => {
+                        $('.slider-storage').slick({
+                            autoplay:true,
+                            autoplaySpeed:2000,
+                            infinite:true,
+                            arrows:true,
+                            slidesToShow:5,
+                            slidesToScroll:1,
+                            dots: false,
+                            responsive: [
+                                {
+                                breakpoint: 1024,
+                                settings: {
+                                    slidesToShow: 3,
+                                    slidesToScroll: 1,
+                                    infinite: true,
+                                    // dots: true
+                                }
+                                },
+                                {
+                                breakpoint: 600,
+                                settings: {
+                                    slidesToShow: 2,
+                                    slidesToScroll: 1
+                                }
+                                },
+                                {
+                                breakpoint: 480,
+                                settings: {
+                                    slidesToShow: 1,
+                                    slidesToScroll: 1
+                                }
+                                }
+                                // You can unslick at a given breakpoint now by adding:
+                                // settings: "unslick"
+                                // instead of a settings object
+                            ]
+                        });
+                        $('.loading').hide();
+                        $('.slider-storage').show();
+                    }, 1500);
+
                     $('#modalDetail').modal('show');
                 } else {
 
@@ -523,7 +594,7 @@
                         } else {
                             checked = 'disabled';
                         }
-                        console.log(checked);
+
 
                         return `
 <div class="col-4">
@@ -574,7 +645,7 @@
                     } else {
                         checked = 'disabled';
                     }
-                    console.log(checked);
+
                     return `
 <div class="col-4">
 <label class="custom-control custom-radio custom-control-inline" id="type${index}" style="margin: 0;">
@@ -644,7 +715,9 @@
                     }, 200)
                 });
             });
+
         });
+
     </script>
 @endsection
 
