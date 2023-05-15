@@ -307,7 +307,7 @@
                 <div class="flex gap-4 items-center slider3">
                     @if(count($fiveImage) > 0)
                         @foreach($fiveImage as $image)
-                            <img class="mx-2 w-[82.5px] h-[82.5px] md:min-w-[102px] md:h-[102px] object-cover !shadow-lg"
+                            <img class="mx-2 w-[82.5px] h-[82.5px] md:min-w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80]"
                                  src="{{asset(json_decode($image->images)[0])}}" alt="">
                         @endforeach
                     @endif
