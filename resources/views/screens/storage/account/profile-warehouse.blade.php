@@ -736,7 +736,7 @@ aria-hidden="true">
     // let arrImageRaw6 = JSON.parse($('.rawImg6').val());
     render(arrImage1, $('#normalImageStorageInput') , 1);
     render(arrImage2, $('#normalImagePcccInput') , 1);
-    render(arrImage3, $('#coldImageStorageInput'), 2);
+    render(arrImage3, $('#coldImageStorageInput'), 1);
     render(arrImage4, $('#coldImagePcccInput'), 1);
     render(arrImage5, $('#warehouseImageStorageInput'), 1);
     render(arrImage6, $('#warehouseImagePcccInput'), 1);
