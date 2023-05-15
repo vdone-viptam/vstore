@@ -360,8 +360,10 @@
                             <p class="text-white text-sm md:text-[17px] font-bold">{{$pro->discount}}%</p>
                             <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
                         </div>
-                        <img class="h-[146px] w-full rounded-tl-lg rounded-tr-lg border-b border-[#f0f8ff]"
-                             src="{{asset(json_decode($pro->images)[0])}}" alt="">
+                        <div class="w-full bg-white border-b border-[#1e90ff80] rounded-tl-lg rounded-tr-lg">
+                            <img class="h-[146px] w-full object-cover"
+                                 src="{{asset(json_decode($pro->images)[0])}}" alt="">
+                        </div>
                         <div
                             class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
                             <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
@@ -407,7 +409,7 @@
                         <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
                     </div>
                 @endif
-                <img class="h-[146px] w-full rounded-tl-lg rounded-tr-lg border-b border-[#f0f8ff]"
+                <img class="h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff]"
                      src="{{asset(json_decode($product->images)[0])}}" alt="">
                 <div class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
                     <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
@@ -550,7 +552,7 @@
         arrows: false,
         focusOnSelect: true,
         infinite: true,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 3000,
         pauseOnFocus: true,
         slidesToScroll: 5,

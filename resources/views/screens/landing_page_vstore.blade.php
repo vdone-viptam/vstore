@@ -90,18 +90,14 @@
         .slider .slick-slide {
             display: flex;
         }
-
+        .slider3  .slick-track{
+            width: 100% !important;
+        }
         .slider2 .slick-slide {
             display: flex;
             margin: 0 10px;
         }
-        /*.slider3  .slick-track{*/
-        /*    width: 100% !important;*/
-        /*}*/
-        /*.slider3  .slick-track img{*/
-        /*    */
-        /*    width: 82px !important;*/
-        /*}*/
+
         /*  */
         .gg {
             background-image: url('{{asset('landingpage/images/img5.png')}}');
@@ -366,8 +362,10 @@
                             <p class="text-white text-sm md:text-[17px] font-bold">{{$pro->discount}}%</p>
                             <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
                         </div>
-                        <img class="h-[146px] w-full rounded-tl-lg rounded-tr-lg border-b border-[#f0f8ff]"
-                             src="{{asset(json_decode($pro->images)[0])}}" alt="">
+                        <div class="w-full bg-white border-b border-[#1e90ff80] rounded-tl-lg rounded-tr-lg">
+                            <img class="h-[146px] w-full object-cover"
+                                 src="{{asset(json_decode($pro->images)[0])}}" alt="">
+                        </div>
                         <div
                             class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
                             <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
@@ -413,7 +411,7 @@
                         <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
                     </div>
                 @endif
-                <img class="h-[146px] w-full rounded-tl-lg rounded-tr-lg border-b border-[#f0f8ff]"
+                <img class="h-[146px] w-full object-cover rounded-tl-lg rounded-tr-lg border-b border-[#f0f8ff]"
                      src="{{asset(json_decode($product->images)[0])}}" alt="">
                 <div class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
                     <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
@@ -528,7 +526,7 @@
         autoplaySpeed: 1500,
         slidesToScroll: 8,
         slidesToShow: 8,
-        autoplaySpeed: 3000,
+
         pauseOnFocus: true,
         dots: true,
         // the magic
@@ -559,12 +557,11 @@
         arrows: false,
         focusOnSelect: true,
         infinite: true,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 3000,
         pauseOnFocus: true,
         slidesToScroll: 5,
         slidesToShow: 5,
-        autoplaySpeed: 3000,
         rows: 1,
 
         dots: true,
@@ -645,7 +642,6 @@
             },
             {
                 breakpoint: 444,
-                a
                 settings: {
                     slidesToShow: 3,
                     slidesToScroll: 3,
