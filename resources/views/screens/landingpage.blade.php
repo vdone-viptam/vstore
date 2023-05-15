@@ -152,6 +152,87 @@
         .page-active a {
             color: white;
         }
+        .placeholder-content {
+	 height: 146px;
+	 overflow: hidden;
+	 background: #000;
+	 position: relative;
+	 animation-duration: 1.7s;
+	 animation-fill-mode: forwards;
+	 animation-iteration-count: infinite;
+	 animation-timing-function: linear;
+	 animation-name: placeholderAnimate;
+	 background: #f6f7f8;
+	 background: linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%);
+	 background-size: 1300px;
+}
+ .placeholder-content_item {
+	 width: 100%;
+	 height: 10px;
+	 position: absolute;
+	 background: #fff;
+	 z-index: 2;
+}
+ .placeholder-content_item:after, .placeholder-content_item:before {
+	 width: inherit;
+	 height: inherit;
+	 content: '';
+	 position: absolute;
+}
+ .placeholder-content_item:nth-child(1) {
+    top: 10px;
+	width: 100%;
+    height: 10px;
+}
+ .placeholder-content_item:nth-child(2) {
+	top: 30px;
+	width: 100%;
+    height: 10px;
+	
+}
+ .placeholder-content_item:nth-child(3) {
+    top: 50px;
+	width: 100%;
+    height: 10px;
+}
+ .placeholder-content_item:nth-child(4) {
+    top: 70px;
+	width: 100%;
+    height: 10px;
+}
+ .placeholder-content_item:nth-child(5) {
+	top: 90px;
+	width: 100%;
+    height: 10px;
+}
+ .placeholder-content_item:nth-child(6) {
+	top: 110px;
+	width: 100%;
+    height: 10px;
+}
+.placeholder-content_item:nth-child(7) {
+	top: 100px;
+	width: 30%;
+    right: 0;
+    height: 10px;
+}
+
+
+ @keyframes placeholderAnimate {
+	 0% {
+		 background-position: -650px 0;
+	}
+	 100% {
+		 background-position: 650px 0;
+	}
+}
+
+.img-center{
+    top:50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align:center;
+}
     </style>
 
 <body class="bg-[#F1F8FF] section" id="home">
@@ -528,6 +609,29 @@
                 </div>
             </div>
         @endforeach
+
+        <div class="bg-[#FFF] w-[220px] flex flex-col relative cursor-pointer shadow-md">
+                <div class="placeholder-content h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff] relative">
+                    <div class="img-center w-full w-[60px] mx-auto h-[60px] z-[4] absolute">
+                        <img src="{{asset('landingpage/images/image-xxl.png')}}" class="w-full h-full object-cover" alt="">
+                    </div>
+                </div>
+                <div class=" pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
+                <div class="placeholder-content" style="height:120px!important;">
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                <div class="placeholder-content_item"></div>
+                </div>
+                </div>
+            </div>
     </div>
     {{$hot_products->withQueryString()->links('layouts.custom.pagi_landing')}}
 
