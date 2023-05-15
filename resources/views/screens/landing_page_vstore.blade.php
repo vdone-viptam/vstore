@@ -162,15 +162,10 @@
 <div class="fixed top-0 left-0 w-full bg-[#F1F8FF] z-[20] shadow-md">
     <div
         class=" flex justify-between gap-2 items-center py-5 mx-auto xl:px-0 px-5 md:max-w-[710px] lg:max-w-[1000px] xl:max-w-[1200px] 2xl:max-w-[1440px]">
-        <div class="max-w-[118px]">
+        <div class="max-w-[138px]">
             <div class="w-full h-[50px]">
-                @if($user->avatar == '')
-                    <a href="#"><img src="{{asset('home/img/NCC.png')}}" class="w-full object-contain "
-                                     style="height: 50px" alt=""></a>
-                @else
-                    <a href="#"><img src="{{asset('/image/users/'.$user->avatar)}}" style="height: 50px"
-                                     class="w-full object-contain" alt=""></a>
-                @endif
+                <a href="{{route('landingpagevstore')}}"><img src="{{asset('home/img/Logo.png')}}" class="w-full object-contain "
+                                 style="height: 50px" alt=""></a>
             </div>
         </div>
         <div class="hidden md:flex gap-6 lg:gap-10 justify-center items-center menu">
@@ -310,11 +305,11 @@
             </div>
             <div class="md:border-l md:border-[#258AFF80] md:pl-6 flex flex-col gap-5">
                 <span class="font-semibold text-xl"> Giới thiệu</span>
-                <p class="text-[#696984] text-sm md:text-base xl:text-lg">{{$user->description != null ? $user->description : 'Chưa có thông tin mô tả'}}</p>
-                <div class="flex gap-4 items-center justify-center slider3">
+                <p class="text-[#696984] text-sm md:text-base xl:text-lg">{{$user->description}}</p>
+                <div class="flex gap-4 items-center slider3">
                     @if(count($fiveImage) > 0)
                         @foreach($fiveImage as $image)
-                            <img class="mx-2 w-[82.5px] h-[82.5px] md:min-w-[102px] md:h-[102px]"
+                            <img class="mx-2 w-[82.5px] h-[82.5px] md:min-w-[102px] md:h-[102px] object-cover !shadow-lg"
                                  src="{{asset(json_decode($image->images)[0])}}" alt="">
                         @endforeach
                     @endif
@@ -333,7 +328,7 @@
         @foreach($arrCategory as $cate)
             <div class="flex flex-col gap-4 items-center cursor-pointer">
                 <div
-                    class="bg-white md:w-[100px] md:h-[100px] w-[60px] h-[60px] flex items-center justify-center rounded-full">
+                    class="bg-white md:w-[100px] md:h-[100px] w-[60px] h-[60px] flex items-center justify-center rounded-full shadow-md">
                     @if($cate->img !=null)
                         <img src="{{asset($cate->img)}}" class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
                     @else
@@ -363,7 +358,7 @@
                             <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
                         </div>
                         <div class="w-full bg-white border-b border-[#1e90ff80] rounded-tl-lg rounded-tr-lg">
-                            <img class="h-[146px] w-full object-cover"
+                            <img class="h-[146px] w-full object-cover rounded-tl-lg rounded-tr-lg"
                                  src="{{asset(json_decode($pro->images)[0])}}" alt="">
                         </div>
                         <div
@@ -459,11 +454,11 @@
                     <div class="max-w-[120px]" style="margin: auto">
                         @if($vsto->avatar =='')
                             <img src="{{asset('home/img/ncc-vuong.png')}}"
-                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full" alt=""
+                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
                                  style="object-fit: contain;margin: auto">
                         @else
                             <img src="{{asset('image/users/'. $vsto->avatar)}}"
-                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full" alt=""
+                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
                                  style="object-fit: contain;margin: auto">
                         @endif
                     </div>
