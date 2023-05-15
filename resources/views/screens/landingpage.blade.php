@@ -89,9 +89,7 @@
             display: flex;
         }
 
-        .slider3 .slick-track {
-            width: 100% !important;
-        }
+
 
         .slider2 .slick-slide {
             display: flex;
@@ -308,13 +306,12 @@
                 <span class="font-semibold text-xl"> Giới thiệu</span>
                 <p class="text-[#696984] text-sm md:text-base xl:text-lg">{{$user->description}}</p>
                 <div class="flex gap-4 items-center slider3">
-                    @if(count($fiveImage) > 0)
                         @foreach($fiveImage as $image)
-                            <img
-                                class="mx-2 w-[82.5px] h-[82.5px] md:min-w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80]"
-                                src="{{asset(json_decode($image->images)[0])}}" alt="">
+                        <img
+                            class="mx-2 w-[82.5px] h-[82.5px] md:min-w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80]"
+                            src="{{asset(json_decode($image->images)[0])}}" alt="">
                         @endforeach
-                    @endif
+
                 </div>
             </div>
         </div>
@@ -437,13 +434,11 @@
                     </div>
                     <div class="flex items-center justify-between gap-2">
                         @if($product->discount_sale > 0)
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}
-                                đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}đ</p>
                             <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
                                 {{number_format($product->price,0,'.','.')}}đ</p>
                         @else
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}
-                                đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}đ</p>
                         @endif
 
                     </div>
@@ -605,8 +600,8 @@
         focusOnSelect: true,
         infinite: false,
         autoplay: true,
-        slidesToShow: 6,
-        slidesToScroll: 6,
+        slidesToShow: 5,
+        slidesToScroll: 5,
         autoplaySpeed: 3000,
         pauseOnFocus: true,
         dots: false,

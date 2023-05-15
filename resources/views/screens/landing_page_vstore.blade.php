@@ -91,10 +91,6 @@
             display: flex;
         }
 
-        .slider3 .slick-track {
-            width: 100% !important;
-        }
-
         .slider2 .slick-slide {
             display: flex;
             margin: 0 10px;
@@ -389,7 +385,7 @@
                                     {{number_format($pro->order_price,0,'.','.')}}đ
                                 </p>
                                 <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
-                                    {{number_format($pro->price,0,'.','.')}}đđ</p>
+                                    {{number_format($pro->price,0,'.','.')}}đ</p>
                             </div>
                         </div>
                     </div>
@@ -436,13 +432,11 @@
                     </div>
                     <div class="flex items-center justify-between gap-2">
                         @if($product->discount_sale > 0)
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}
-                                đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}đ</p>
                             <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
                                 {{number_format($product->price,0,'.','.')}}đ</p>
                         @else
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}
-                                đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}đ</p>
                         @endif
 
                     </div>
@@ -606,8 +600,8 @@
         infinite: false,
         autoplay: false,
         autoplaySpeed: 3000,
-        slidesToShow: 6,
-        slidesToScroll: 6,
+        slidesToShow: 5,
+        slidesToScroll: 5,
         pauseOnFocus: true,
         dots: false,
         // the magic
