@@ -269,7 +269,7 @@
     <div class="mt-[40px] md:mt-[90px] section">
         <p class="uppercase text-[#258AFF] text-[20px] md:text-[30px] font-bold text-center" id="gt">GIỚi THIỆU
         </p>
-        <div class="w-[37px] mx-auto border-b-[#258AFF] border-b-[3px]"></div>
+        <div class="w-[37px] mx-auto"></div>
 
         <div
             class="w-[90vw] md:w-[710px] lg:w-[1000px] xl:w-[1200px] 2xl:w-[1440px] mx-auto grid grid-cols-1 gap-4 md:gap-0 md:grid-cols-2 justify-between py-[30px] md:py-[40px] lg:py-[60px] bg-[#E8F7FF]">
@@ -322,7 +322,7 @@
        id="dm">DANH
         MỤC
     </p>
-    <div class="w-[37px] mx-auto border-b-[#258AFF] border-b-[3px]"></div>
+    <div class="w-[37px] mx-auto"></div>
     <div class="slider py-[30px] md:py-[50px]">
         @foreach($arrCategory as $cate)
             <div class="flex flex-col gap-4 items-center cursor-pointer">
@@ -399,7 +399,7 @@
        id="sp">SẢN
         PHẨM NỔI BẬT
     </p>
-    <div class="w-[37px] mx-auto border-b-[#258AFF] border-b-[3px] mb-[60px]"></div>
+    <div class="w-[37px] mx-auto mb-[60px]"></div>
     <div
         class="grid grid-cols-2 gap-4 lg:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 place-items-center grid-shop">
         @foreach($hot_products as $product)
@@ -453,7 +453,7 @@
        id="vs">
         V-Store liên kết
     </p>
-    <div class="w-[37px] mx-auto border-b-[#258AFF] border-b-[3px] mb-[60px]"></div>
+    <div class="w-[37px] mx-auto mb-[60px]"></div>
     <div class="slider mb-[30px] md:pb-[50px] text-center">
         @foreach($vstore as $vsto)
             <div class="flex flex-col gap-4 items-center cursor-pointer">
@@ -600,8 +600,8 @@
         focusOnSelect: true,
         infinite: false,
         autoplay: true,
-        slidesToShow: @if(count($arrCategory) >= 5) 5 @else count($arrCategory) @endif,
-        slidesToScroll: @if(count($arrCategory) >= 5) 5 @else count($arrCategory) @endif,
+        slidesToShow: {{count($arrCategory) >= 5 ? 5 : count($arrCategory)}},
+        slidesToScroll: {{count($arrCategory) >= 5 ? 5 : count($arrCategory)}},
         autoplaySpeed: 3000,
         pauseOnFocus: true,
         dots: false,
