@@ -413,12 +413,12 @@
                         <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
                     </div>
                 @endif
-                    <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
+                    <a href="{{config('domain.big_store').'products/'.$product->id}}" target="_blank">
                         <img class="h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff]"
                              src="{{asset(json_decode($product->images)[0])}}" alt="">
                     </a>
                 <div class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
-                    <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
+                    <a href="{{config('domain.big_store').'products/'.$product->id}}" target="_blank">
                         <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
                            title="{{$product->name}}">
                             {{\Illuminate\Support\Str::limit($product->name,50,'...')}}</p>
