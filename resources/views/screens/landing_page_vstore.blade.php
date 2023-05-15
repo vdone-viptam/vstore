@@ -528,27 +528,52 @@
         Nhà cung cấp liên kết
     </p>
     <div class="w-[37px] mx-auto mb-[60px]"></div>
-    <div class="slider mb-[30px] md:pb-[50px] text-center">
-        @foreach($vstore as $vsto)
-            <div class="flex flex-col gap-4 items-center cursor-pointer">
-                <a href="{{route("intro",['slug'=>$vsto->slug])}}" target="_blank">
-                    <div class="max-w-[120px]" style="margin: auto">
-                        @if($vsto->avatar =='')
-                            <img src="{{asset('home/img/ncc-vuong.png')}}"
-                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
-                                 style="object-fit: contain;margin: auto">
-                        @else
-                            <img src="{{asset('image/users/'. $vsto->avatar)}}"
-                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
-                                 style="object-fit: contain;margin: auto">
-                        @endif
-                    </div>
-                    <span
-                        class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,30,'...')}}</span>
-                </a>
-            </div>
-        @endforeach
-    </div>
+    @if(count($vstore) > 5)
+        <div class="slider mb-[30px] md:pb-[50px] text-center">
+            @foreach($vstore as $vsto)
+                <div class="flex flex-col gap-4 items-center cursor-pointer">
+                    <a href="{{route("intro",['slug'=>$vsto->slug])}}" target="_blank">
+                        <div class="max-w-[120px]" style="margin: auto">
+                            @if($vsto->avatar =='')
+                                <img src="{{asset('home/img/ncc-vuong.png')}}"
+                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                     style="object-fit: contain;margin: auto">
+                            @else
+                                <img src="{{asset('image/users/'. $vsto->avatar)}}"
+                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                     style="object-fit: contain;margin: auto">
+                            @endif
+                        </div>
+                        <span
+                            class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,30,'...')}}</span>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    @else
+        <div class="flex justify-center gap-4 mb-[30px] md:pb-[50px] text-center">
+            @foreach($vstore as $vsto)
+                <div class="flex flex-col gap-4 items-center cursor-pointer">
+                    <a href="{{route("intro",['slug'=>$vsto->slug])}}" target="_blank">
+                        <div class="max-w-[120px]" style="margin: auto">
+                            @if($vsto->avatar =='')
+                                <img src="{{asset('home/img/ncc-vuong.png')}}"
+                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                     style="object-fit: contain;margin: auto">
+                            @else
+                                <img src="{{asset('image/users/'. $vsto->avatar)}}"
+                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                     style="object-fit: contain;margin: auto">
+                            @endif
+                        </div>
+                        <span
+                            class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,30,'...')}}</span>
+                    </a>
+                </div>
+            @endforeach
+        </div>
+    @endif
+
 </div>
 <div class="h-[63px] pt-[22px] bg-[#1E90FF] mt-[56px]">
     <div

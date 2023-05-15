@@ -560,7 +560,7 @@
             @endforeach
         </div>
     @else
-        <div class="mb-[30px] md:pb-[50px] text-center">
+        <div class="mb-[30px] md:pb-[50px] text-center flex justify-center gap-4">
             @foreach($vstore as $vsto)
                 <div class="flex flex-col gap-4 items-center cursor-pointer">
                     <a href="{{route("intro_vstore",['slug'=>$vsto->slug])}}" target="_blank">
@@ -628,7 +628,7 @@
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>
 <!--  -->
 <script>
-    if ($(".slider")){
+    if ($(".slider")) {
         $(".slider").slick({
             arrows: false,
             focusOnSelect: true,
