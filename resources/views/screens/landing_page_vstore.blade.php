@@ -432,11 +432,13 @@
                     </div>
                     <div class="flex items-center justify-between gap-2">
                         @if($product->discount_sale > 0)
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}
+                                đ</p>
                             <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
                                 {{number_format($product->price,0,'.','.')}}đ</p>
                         @else
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}
+                                đ</p>
                         @endif
 
                     </div>
@@ -600,8 +602,8 @@
         infinite: false,
         autoplay: false,
         autoplaySpeed: 3000,
-        slidesToShow: 5,
-        slidesToScroll: 5,
+        slidesToShow: @if(count($arrCategory) >= 5) 5 @else count($arrCategory) @endif,
+        slidesToScroll: @if(count($arrCategory) >= 5) 5 @else count($arrCategory) @endif,
         pauseOnFocus: true,
         dots: false,
         // the magic
