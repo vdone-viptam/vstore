@@ -38,7 +38,7 @@ class ViettelpostController extends Controller
             if ($order->order_status == 501) {
                 $order->export_status = 4;
                 $order->updated_at = Carbon::now();
-
+                $order->estimated_date = Carbon::now();
                 $order_item = OrderItem::where('order_id', $order->id)->first();
                 if ($order_item) {
 
