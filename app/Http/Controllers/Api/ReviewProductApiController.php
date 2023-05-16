@@ -231,7 +231,7 @@ class ReviewProductApiController extends Controller
     }
 
     /**
-     * xem danh sách đánh giá tất sản phẩm trên Vdone
+     * xem danh sách đánh giá tất cả sản phẩm trên Vdone
      *
      * API dùng xem danh sách đánh giá sản phẩm trên Vdone
      *

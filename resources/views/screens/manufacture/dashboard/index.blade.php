@@ -131,7 +131,7 @@
 @endsection
 
 @section('content')
-    <div class="container-fluid dashboard-content ">
+    <div class="container-fluid dashboard-content pt-0">
         <!-- ============================================================== -->
         <!-- pageheader  -->
         <!-- ============================================================== -->
