@@ -649,7 +649,7 @@
         @foreach($vstore as $vsto)
             <div class="flex flex-col gap-4 items-center cursor-pointer mx-4">
                 <a href="{{route("intro_vstore",['slug'=>$vsto->slug])}}" target="_blank">
-                    <div class="max-w-[120px]" style="margin: auto">
+                    <div class="max-w-[120px]" style="margin: 0px auto 10px auto">
                         @if($vsto->avatar =='')
                             <img src="{{asset('home/img/vstore-vuong.png')}}"
                                  class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
@@ -661,7 +661,7 @@
                         @endif
                     </div>
                     <span
-                        class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,30,'...')}}</span>
+                        class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{ Str::limit($vsto->name,30,'...')}}</span>
                 </a>
             </div>
         @endforeach

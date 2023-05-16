@@ -642,7 +642,7 @@
         @foreach($vstore as $vsto)
             <div class="flex flex-col gap-4 items-center cursor-pointer">
                 <a href="{{route("intro",['slug'=>$vsto->slug])}}" target="_blank">
-                    <div class="max-w-[120px]" style="margin: auto">
+                    <div class="max-w-[120px]" style="margin: 0px auto 10px auto">
                         @if($vsto->avatar =='')
                             <img src="{{asset('home/img/ncc-vuong.png')}}"
                                  class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
