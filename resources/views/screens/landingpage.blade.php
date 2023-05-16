@@ -253,7 +253,7 @@
         <div class="max-w-[118px]">
             <div class="w-full h-[50px]">
                 <a href="{{route('landingpagevstore')}}"><img src="{{asset('home/img/NCC.png')}}"
-                                                              class="w-full object-cover"
+                                                              class="w-full object-contain"
                                                               style="height: 50px" alt=""></a>
             </div>
         </div>
