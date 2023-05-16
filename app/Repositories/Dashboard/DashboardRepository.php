@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Repositories\Chart;
+namespace App\Repositories\Dashboard;
 
-use App\Interfaces\Chart\ChartRepositoryInterface;
+use App\Interfaces\Dashboard\DashboardRepositoryInterface;
 use App\Models\BlanceChange;
 use App\Models\Order;
 use App\Models\PreOrderVshop;
@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 
-class ChartRepository implements ChartRepositoryInterface
+class DashboardRepository implements DashboardRepositoryInterface
 {
     public function revenueRangeTimeMonth()
     {

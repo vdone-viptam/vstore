@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Interfaces\Chart;
+namespace App\Interfaces\Dashboard;
 
-interface ChartRepositoryInterface
+interface DashboardRepositoryInterface
 {
     // cho biểu đồ
     public function revenueRangeTimeMonth();

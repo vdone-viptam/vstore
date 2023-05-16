@@ -4,7 +4,7 @@
 {{-- <link rel="stylesheet" href="{{asset('asset/css/style.css')}}"> --}}
 <style>
 
-.add-img-SP{
+.add-imgSP{
     cursor: pointer;
     width: 80px;
     height: 80px;
@@ -176,22 +176,10 @@ aria-hidden="true">
                                                         <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                             <div class="file-sp img-sp">
                                                                 <input type="hidden" value="{{ $value['image_storage'] }}" class="rawImg1">
-                                                                {{-- @if(!empty($value['image_storage']))
-                                                                @foreach ($value['image_storage'] as $key => $img)
-                                                                <div class="item" key={{$key}}>
-                                                                    <div class="over-lay-img"></div>
-                                                                    <div class="d-flex justify-content-center align-items-center deleteImg" style="gap:10px;">
-                                                                    <svg width="16" height="16" class="zoom-img" onclick="zoomImg('{{$img}}')" style="cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M15.6822 7.5404C13.9894 3.97433 11.4305 2.17969 8.0001 2.17969C4.56796 2.17969 2.01082 3.97433 0.31796 7.54219C0.250059 7.68597 0.214844 7.843 0.214844 8.00201C0.214844 8.16102 0.250059 8.31805 0.31796 8.46183C2.01082 12.0279 4.56975 13.8225 8.0001 13.8225C11.4322 13.8225 13.9894 12.0279 15.6822 8.46005C15.8197 8.17076 15.8197 7.83505 15.6822 7.5404V7.5404ZM8.0001 12.5368C5.11975 12.5368 3.01082 11.0761 1.52332 8.00112C3.01082 4.92612 5.11975 3.4654 8.0001 3.4654C10.8805 3.4654 12.9894 4.92612 14.4769 8.00112C12.9912 11.0761 10.8822 12.5368 8.0001 12.5368ZM7.92867 4.85826C6.19296 4.85826 4.78582 6.2654 4.78582 8.00112C4.78582 9.73683 6.19296 11.144 7.92867 11.144C9.66439 11.144 11.0715 9.73683 11.0715 8.00112C11.0715 6.2654 9.66439 4.85826 7.92867 4.85826ZM7.92867 10.0011C6.82332 10.0011 5.92867 9.10647 5.92867 8.00112C5.92867 6.89576 6.82332 6.00112 7.92867 6.00112C9.03403 6.00112 9.92868 6.89576 9.92868 8.00112C9.92868 9.10647 9.03403 10.0011 7.92867 10.0011Z" fill="white" ></path>
-                                                                    </svg>
-                                                                    </div>
-                                                                    <img src="{{$img}}" class="w-100 img-old img-old-1"/>
-                                                                </div>
-                                                                @endforeach
-                                                                @endif --}}
+                                                                {{-- hiển thị ảnh cũ ở đây ảnh cũ --}}
                                                             </div>
                                                             <input type="hidden" class="input-image" name="normalImageStorage">
-                                                            <div class=" add-img-SP add-imgSP" data-arrImg="1" id="normalImageStorageInput">
+                                                            <div class="add-imgSP" data-arrImg="1" id="normalImageStorageInput">
                                                                 <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
                                                                         xmlns="http://www.w3.org/2000/svg">
                                                                     <path
@@ -199,8 +187,7 @@ aria-hidden="true">
                                                                         fill="black" fill-opacity="0.85"/>
                                                                 </svg>
                                                                 <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                                <span class="countImage" style="font-size: 12px;"> {{ $value['image_storage'] ? count(json_decode($value['image_storage'])) : 0 }}/5</span>
-                                                                {{-- <span class="countImage" style="font-size: 12px;"> {{ $value['image_storage'] ? count($value['image_storage']) : 0 }}/5</span> --}}
+                                                                <span class="count-image" style="font-size: 12px;"></span>
                                                             </div>
                                                         </div>
 
@@ -214,22 +201,10 @@ aria-hidden="true">
                                                         <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                             <div class="file-sp img-sp">
                                                                 <input type="hidden" value="{{ $value['image_pccc'] }}" class="rawImg2">
-                                                                {{-- @if(!empty($value['image_pccc']))
-                                                                @foreach ($value['image_pccc'] as $key => $img)
-                                                                <div class="item" key={{$key}}>
-                                                                    <div class="over-lay-img"></div>
-                                                                    <div class="d-flex justify-content-center align-items-center deleteImg" style="gap:10px;">
-                                                                    <svg width="16" height="16" class="zoom-img" onclick="zoomImg('{{$img}}')" style="cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M15.6822 7.5404C13.9894 3.97433 11.4305 2.17969 8.0001 2.17969C4.56796 2.17969 2.01082 3.97433 0.31796 7.54219C0.250059 7.68597 0.214844 7.843 0.214844 8.00201C0.214844 8.16102 0.250059 8.31805 0.31796 8.46183C2.01082 12.0279 4.56975 13.8225 8.0001 13.8225C11.4322 13.8225 13.9894 12.0279 15.6822 8.46005C15.8197 8.17076 15.8197 7.83505 15.6822 7.5404V7.5404ZM8.0001 12.5368C5.11975 12.5368 3.01082 11.0761 1.52332 8.00112C3.01082 4.92612 5.11975 3.4654 8.0001 3.4654C10.8805 3.4654 12.9894 4.92612 14.4769 8.00112C12.9912 11.0761 10.8822 12.5368 8.0001 12.5368ZM7.92867 4.85826C6.19296 4.85826 4.78582 6.2654 4.78582 8.00112C4.78582 9.73683 6.19296 11.144 7.92867 11.144C9.66439 11.144 11.0715 9.73683 11.0715 8.00112C11.0715 6.2654 9.66439 4.85826 7.92867 4.85826ZM7.92867 10.0011C6.82332 10.0011 5.92867 9.10647 5.92867 8.00112C5.92867 6.89576 6.82332 6.00112 7.92867 6.00112C9.03403 6.00112 9.92868 6.89576 9.92868 8.00112C9.92868 9.10647 9.03403 10.0011 7.92867 10.0011Z" fill="white" ></path>
-                                                                    </svg>
-                                                                    </div>
-                                                                    <img src="{{$img}}" class="w-100 img-old img-old-2"/>
-                                                                </div>
-                                                                @endforeach
-                                                                @endif --}}
+                                                                {{-- hiển thị ảnh cũ ở đây ảnh cũ --}}
                                                             </div>
                                                             <input type="hidden" class="input-image" name="normalImagePccc">
-                                                            <div class=" add-img-SP add-imgSP" data-arrImg="2" id="normalImagePcccInput">
+                                                            <div class="add-imgSP" data-arrImg="2" id="normalImagePcccInput">
                                                                 <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
                                                                         xmlns="http://www.w3.org/2000/svg">
                                                                     <path
@@ -237,7 +212,7 @@ aria-hidden="true">
                                                                         fill="black" fill-opacity="0.85"/>
                                                                 </svg>
                                                                 <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                                <span class="countImage" style="font-size: 12px;"> {{ $value['image_pccc'] ? count(json_decode($value['image_pccc'])) : 0 }}/5</span>
+                                                                <span class="count-image" style="font-size: 12px;"></span>
                                                             </div>
                                                         </div>
                                                 </div>
@@ -324,22 +299,10 @@ aria-hidden="true">
                                                     <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                         <div class="file-sp img-sp">
                                                             <input type="hidden" value="{{$value['image_storage']}}" class="rawImg3">
-                                                            {{-- @if(!empty($value['image_storage']))
-                                                            @foreach ($value['image_storage'] as $key => $img)
-                                                                <div class="item" key={{$key}}>
-                                                                    <div class="over-lay-img"></div>
-                                                                    <div class="d-flex justify-content-center align-items-center deleteImg" style="gap:10px;">
-                                                                    <svg width="16" height="16" class="zoom-img" onclick="zoomImg('{{$img}}')" style="cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M15.6822 7.5404C13.9894 3.97433 11.4305 2.17969 8.0001 2.17969C4.56796 2.17969 2.01082 3.97433 0.31796 7.54219C0.250059 7.68597 0.214844 7.843 0.214844 8.00201C0.214844 8.16102 0.250059 8.31805 0.31796 8.46183C2.01082 12.0279 4.56975 13.8225 8.0001 13.8225C11.4322 13.8225 13.9894 12.0279 15.6822 8.46005C15.8197 8.17076 15.8197 7.83505 15.6822 7.5404V7.5404ZM8.0001 12.5368C5.11975 12.5368 3.01082 11.0761 1.52332 8.00112C3.01082 4.92612 5.11975 3.4654 8.0001 3.4654C10.8805 3.4654 12.9894 4.92612 14.4769 8.00112C12.9912 11.0761 10.8822 12.5368 8.0001 12.5368ZM7.92867 4.85826C6.19296 4.85826 4.78582 6.2654 4.78582 8.00112C4.78582 9.73683 6.19296 11.144 7.92867 11.144C9.66439 11.144 11.0715 9.73683 11.0715 8.00112C11.0715 6.2654 9.66439 4.85826 7.92867 4.85826ZM7.92867 10.0011C6.82332 10.0011 5.92867 9.10647 5.92867 8.00112C5.92867 6.89576 6.82332 6.00112 7.92867 6.00112C9.03403 6.00112 9.92868 6.89576 9.92868 8.00112C9.92868 9.10647 9.03403 10.0011 7.92867 10.0011Z" fill="white" ></path>
-                                                                    </svg>
-                                                                    </div>
-                                                                    <img src="{{$img}}" class="w-100 img-old img-old-3"/>
-                                                                </div>
-                                                            @endforeach
-                                                            @endif --}}
+                                                            {{-- hiển thị ảnh cũ ở đây ảnh cũ --}}
                                                         </div>
                                                         <input type="hidden" class="input-image" name="coldImageStorage">
-                                                        <div class=" add-img-SP add-imgSP" data-arrImg="3" id="coldImageStorageInput">
+                                                        <div class="add-imgSP" data-arrImg="3" id="coldImageStorageInput">
                                                             <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg">
                                                                 <path
@@ -347,7 +310,7 @@ aria-hidden="true">
                                                                     fill="black" fill-opacity="0.85"/>
                                                             </svg>
                                                             <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                            <span class="countImage" style="font-size: 12px;"> {{ $value['image_storage'] ? count(json_decode($value['image_storage'])) : 0 }}/5</span>
+                                                            <span class="count-image" style="font-size: 12px;"></span>
                                                         </div>
                                                     </div>
 
@@ -361,22 +324,10 @@ aria-hidden="true">
                                                     <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                         <div class="file-sp img-sp">
                                                             <input type="hidden" value="{{$value['image_pccc']}}" class="rawImg4">
-                                                            {{-- @if(!empty($value['image_pccc']))
-                                                            @foreach ($value['image_pccc'] as $key => $img)
-                                                                <div class="item" key={{$key}}>
-                                                                    <div class="over-lay-img"></div>
-                                                                    <div class="d-flex justify-content-center align-items-center deleteImg" style="gap:10px;">
-                                                                    <svg width="16" height="16" class="zoom-img" onclick="zoomImg('{{$img}}')" style="cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M15.6822 7.5404C13.9894 3.97433 11.4305 2.17969 8.0001 2.17969C4.56796 2.17969 2.01082 3.97433 0.31796 7.54219C0.250059 7.68597 0.214844 7.843 0.214844 8.00201C0.214844 8.16102 0.250059 8.31805 0.31796 8.46183C2.01082 12.0279 4.56975 13.8225 8.0001 13.8225C11.4322 13.8225 13.9894 12.0279 15.6822 8.46005C15.8197 8.17076 15.8197 7.83505 15.6822 7.5404V7.5404ZM8.0001 12.5368C5.11975 12.5368 3.01082 11.0761 1.52332 8.00112C3.01082 4.92612 5.11975 3.4654 8.0001 3.4654C10.8805 3.4654 12.9894 4.92612 14.4769 8.00112C12.9912 11.0761 10.8822 12.5368 8.0001 12.5368ZM7.92867 4.85826C6.19296 4.85826 4.78582 6.2654 4.78582 8.00112C4.78582 9.73683 6.19296 11.144 7.92867 11.144C9.66439 11.144 11.0715 9.73683 11.0715 8.00112C11.0715 6.2654 9.66439 4.85826 7.92867 4.85826ZM7.92867 10.0011C6.82332 10.0011 5.92867 9.10647 5.92867 8.00112C5.92867 6.89576 6.82332 6.00112 7.92867 6.00112C9.03403 6.00112 9.92868 6.89576 9.92868 8.00112C9.92868 9.10647 9.03403 10.0011 7.92867 10.0011Z" fill="white" ></path>
-                                                                    </svg>
-                                                                    </div>
-                                                                    <img src="{{$img}}" class="w-100 img-old img-old-4"/>
-                                                                </div>
-                                                            @endforeach
-                                                            @endif --}}
+                                                            {{-- hiển thị ảnh cũ ở đây ảnh cũ --}}
                                                         </div>
                                                         <input type="hidden" class="input-image" name="coldImagePccc">
-                                                        <div class=" add-img-SP add-imgSP" data-arrImg="4" id="coldImagePcccInput">
+                                                        <div class="add-imgSP" data-arrImg="4" id="coldImagePcccInput">
                                                             <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg">
                                                                 <path
@@ -384,7 +335,7 @@ aria-hidden="true">
                                                                     fill="black" fill-opacity="0.85"/>
                                                             </svg>
                                                             <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                            <span class="countImage" style="font-size: 12px;"> {{ $value['image_pccc'] ? count(json_decode($value['image_pccc'])) : 0 }}/5</span>
+                                                            <span class="count-image" style="font-size: 12px;"></span>
                                                         </div>
                                                     </div>
                                             </div>
@@ -471,22 +422,10 @@ aria-hidden="true">
                                                     <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                         <div class="file-sp img-sp">
                                                             <input type="hidden" value="{{$value['image_storage']}}" class="rawImg5">
-                                                            {{-- @if(!empty($value['image_storage']))
-                                                            @foreach ($value['image_storage'] as $key => $img)
-                                                                <div class="item" key={{$key}}>
-                                                                    <div class="over-lay-img"></div>
-                                                                    <div class="d-flex justify-content-center align-items-center deleteImg" style="gap:10px;">
-                                                                    <svg width="16" height="16" class="zoom-img" onclick="zoomImg('{{$img}}')" style="cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M15.6822 7.5404C13.9894 3.97433 11.4305 2.17969 8.0001 2.17969C4.56796 2.17969 2.01082 3.97433 0.31796 7.54219C0.250059 7.68597 0.214844 7.843 0.214844 8.00201C0.214844 8.16102 0.250059 8.31805 0.31796 8.46183C2.01082 12.0279 4.56975 13.8225 8.0001 13.8225C11.4322 13.8225 13.9894 12.0279 15.6822 8.46005C15.8197 8.17076 15.8197 7.83505 15.6822 7.5404V7.5404ZM8.0001 12.5368C5.11975 12.5368 3.01082 11.0761 1.52332 8.00112C3.01082 4.92612 5.11975 3.4654 8.0001 3.4654C10.8805 3.4654 12.9894 4.92612 14.4769 8.00112C12.9912 11.0761 10.8822 12.5368 8.0001 12.5368ZM7.92867 4.85826C6.19296 4.85826 4.78582 6.2654 4.78582 8.00112C4.78582 9.73683 6.19296 11.144 7.92867 11.144C9.66439 11.144 11.0715 9.73683 11.0715 8.00112C11.0715 6.2654 9.66439 4.85826 7.92867 4.85826ZM7.92867 10.0011C6.82332 10.0011 5.92867 9.10647 5.92867 8.00112C5.92867 6.89576 6.82332 6.00112 7.92867 6.00112C9.03403 6.00112 9.92868 6.89576 9.92868 8.00112C9.92868 9.10647 9.03403 10.0011 7.92867 10.0011Z" fill="white" ></path>
-                                                                    </svg>
-                                                                    </div>
-                                                                    <img src="{{$img}}" class="w-100 img-old img-old-5"/>
-                                                                </div>
-                                                            @endforeach
-                                                            @endif --}}
+                                                            {{-- hiển thị ảnh cũ ở đây ảnh cũ --}}
                                                         </div>
                                                         <input type="hidden" class="input-image" name="warehouseImageStorage">
-                                                        <div class=" add-img-SP add-imgSP" data-arrImg="5" id="warehouseImageStorageInput">
+                                                        <div class="add-imgSP" data-arrImg="5" id="warehouseImageStorageInput">
                                                             <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg">
                                                                 <path
@@ -494,7 +433,7 @@ aria-hidden="true">
                                                                     fill="black" fill-opacity="0.85"/>
                                                             </svg>
                                                             <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                            <span class="countImage" style="font-size: 12px;"> {{ $value['image_storage'] ? count(json_decode($value['image_storage'])) : 0 }}/5</span>
+                                                            <span class="count-image" style="font-size: 12px;"></span>
                                                         </div>
                                                     </div>
 
@@ -508,22 +447,10 @@ aria-hidden="true">
                                                     <div class="d-flex align-items-start flex-wrap" style="gap: 16px;">
                                                         <div class="file-sp img-sp">
                                                             <input type="hidden" value="{{$value['image_pccc']}}" class="rawImg6">
-                                                            {{-- @if(!empty($value['image_pccc']))
-                                                            @foreach ($value['image_pccc'] as $key => $img)
-                                                                <div class="item" key={{$key}}>
-                                                                    <div class="over-lay-img"></div>
-                                                                    <div class="d-flex justify-content-center align-items-center deleteImg" style="gap:10px;">
-                                                                    <svg width="16" height="16" class="zoom-img" onclick="zoomImg('{{$img}}')" style="cursor-pointer" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                                                        <path d="M15.6822 7.5404C13.9894 3.97433 11.4305 2.17969 8.0001 2.17969C4.56796 2.17969 2.01082 3.97433 0.31796 7.54219C0.250059 7.68597 0.214844 7.843 0.214844 8.00201C0.214844 8.16102 0.250059 8.31805 0.31796 8.46183C2.01082 12.0279 4.56975 13.8225 8.0001 13.8225C11.4322 13.8225 13.9894 12.0279 15.6822 8.46005C15.8197 8.17076 15.8197 7.83505 15.6822 7.5404V7.5404ZM8.0001 12.5368C5.11975 12.5368 3.01082 11.0761 1.52332 8.00112C3.01082 4.92612 5.11975 3.4654 8.0001 3.4654C10.8805 3.4654 12.9894 4.92612 14.4769 8.00112C12.9912 11.0761 10.8822 12.5368 8.0001 12.5368ZM7.92867 4.85826C6.19296 4.85826 4.78582 6.2654 4.78582 8.00112C4.78582 9.73683 6.19296 11.144 7.92867 11.144C9.66439 11.144 11.0715 9.73683 11.0715 8.00112C11.0715 6.2654 9.66439 4.85826 7.92867 4.85826ZM7.92867 10.0011C6.82332 10.0011 5.92867 9.10647 5.92867 8.00112C5.92867 6.89576 6.82332 6.00112 7.92867 6.00112C9.03403 6.00112 9.92868 6.89576 9.92868 8.00112C9.92868 9.10647 9.03403 10.0011 7.92867 10.0011Z" fill="white" ></path>
-                                                                    </svg>
-                                                                    </div>
-                                                                    <img src="{{$img}}" class="w-100 img-old img-old-6"/>
-                                                                </div>
-                                                            @endforeach
-                                                            @endif --}}
+
                                                         </div>
                                                         <input type="hidden" class="input-image" name="warehouseImagePccc">
-                                                        <div class=" add-img-SP add-imgSP" data-arrImg="6" id="warehouseImagePcccInput">
+                                                        <div class="add-imgSP" data-arrImg="6" id="warehouseImagePcccInput">
                                                             <svg width="14" height="14" class="cursor-pointer" viewBox="0 0 14 14" fill="none"
                                                                     xmlns="http://www.w3.org/2000/svg">
                                                                 <path
@@ -531,7 +458,7 @@ aria-hidden="true">
                                                                     fill="black" fill-opacity="0.85"/>
                                                             </svg>
                                                             <span style="font-size: 12px;">Tải hình ảnh</span>
-                                                            <span class="countImage" style="font-size: 12px;"> {{ $value['image_pccc'] ? count(json_decode($value['image_pccc'])) : 0 }}/5</span>
+                                                            <span class="count-image" style="font-size: 12px;"></span>
                                                         </div>
                                                     </div>
                                             </div>
@@ -670,7 +597,7 @@ aria-hidden="true">
         }
         elementInput.siblings('.img-sp').html(html);
 
-        elementInput.find('.countImage').html( data.length +'/5');
+        elementInput.find('.count-image').html( data.length +'/5');
         elementInput.siblings('.input-image').val(JSON.stringify(data));
 
         let checkArr = elementInput.attr('data-arrImg');
