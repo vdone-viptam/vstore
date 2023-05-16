@@ -451,7 +451,7 @@ class OrderController extends Controller
                     $order->is_complete = false;
                 }
                 if ($order->export_status == 4) {
-                    if (!($order->estimated_date <= Carbon::now() && Carbon::now()->diffInDays($order->estimated_date)  > 7)) {
+                    if ($order->estimated_date <= Carbon::now()) {
                         $order->export_status = 2;
                     }
                 }
@@ -638,7 +638,7 @@ class OrderController extends Controller
                     $order->is_complete = false;
                 }
                 if ($order->export_status == 4) {
-                    if (!($order->estimated_date <= Carbon::now() && Carbon::now()->diffInDays($order->estimated_date)  > 7)) {
+                    if ($order->estimated_date <= Carbon::now()) {
                         $order->export_status = 2;
                     }
                 }
