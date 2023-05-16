@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Vstore;
 
 use App\Http\Controllers\Controller;
-use App\Interfaces\Chart\ChartRepositoryInterface;
+use App\Interfaces\Dashboard\DashboardRepositoryInterface;
 use App\Models\Product;
 use App\Models\Vshop;
 use Illuminate\Http\Request;
@@ -12,11 +12,11 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    private ChartRepositoryInterface $chartRepository;
+    private DashboardRepositoryInterface $dashboardRepository;
 
-    public function __construct(ChartRepositoryInterface $chartRepository)
+    public function __construct(DashboardRepositoryInterface $dashboardRepository)
     {
-        $this->chartRepository = $chartRepository;
+        $this->dashboardRepository = $dashboardRepository;
     }
 
     public function index(Request $request)
@@ -55,16 +55,8 @@ class DashboardController extends Controller
 
         $vshop = [];
 
-
-        // $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
-        // $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
-        // $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
-        // $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
-
-        $dataRevenueToday = $this->chartRepository->revenueToday();
-        $dataOrderToday = $this->chartRepository->orderToday();
-        // $dataOrderSuccessToday = $this->chartRepository->orderSuccessToday();
-
+        $dataRevenueToday = $this->dashboardRepository->revenueToday();
+        $dataOrderToday = $this->dashboardRepository->orderToday();
         return view('screens.vstore.dashboard.index',
             [
                 'data' => $data,
@@ -74,10 +66,6 @@ class DashboardController extends Controller
                 'key_search' => $this->v['key_search'],
 
                 'vshop' => $vshop,
-                // 'dataRevenueChartMonth' => $dataRevenueChartMonth,
-                // 'dataRevenueChartYear' => $dataRevenueChartYear,
-                // 'dataOrderChartMonth' => $dataOrderChartMonth,
-                // 'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
 
                 'dataRevenueToday' => $dataRevenueToday,
                 'dataOrderToday' => $dataOrderToday,

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use App\Interfaces\Chart\ChartRepositoryInterface;
+use App\Interfaces\Dashboard\DashboardRepositoryInterface;
 use App\Models\RequestChangeTaxCode;
 use App\Models\User;
 use Carbon\Carbon;
@@ -13,12 +13,12 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    private ChartRepositoryInterface $chartRepository;
+    private DashboardRepositoryInterface $dashboardRepository;
     private $v;
 
-    public function __construct(ChartRepositoryInterface $chartRepository)
+    public function __construct(DashboardRepositoryInterface $dashboardRepository)
     {
-        $this->chartRepository = $chartRepository;
+        $this->dashboardRepository = $dashboardRepository;
         $this->v = [];
     }
 
@@ -97,7 +97,7 @@ class DashboardController extends Controller
         $this->v['params'] = $request->all();
 
 
-        $countRequestTaxCodeToday = $this->chartRepository->requestTaxCodeToday();
+        $countRequestTaxCodeToday = $this->dashboardRepository->requestTaxCodeToday();
 
 
         $this->v['countRequestTaxCodeToday'] = $countRequestTaxCodeToday;

@@ -3,7 +3,7 @@
 namespace App\Http\Controllers\Manufacture;
 
 use App\Http\Controllers\Controller;
-use App\Interfaces\Chart\ChartRepositoryInterface;
+use App\Interfaces\Dashboard\DashboardRepositoryInterface;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -11,10 +11,10 @@ use Illuminate\Support\Facades\DB;
 
 class DashboardController extends Controller
 {
-    private ChartRepositoryInterface $chartRepository;
-    public function __construct(ChartRepositoryInterface $chartRepository)
+    private DashboardRepositoryInterface $dashboardRepository;
+    public function __construct(DashboardRepositoryInterface $dashboardRepository)
     {
-        $this->chartRepository = $chartRepository;
+        $this->dashboardRepository = $dashboardRepository;
     }
     public function index(Request $request)
     {
@@ -59,14 +59,10 @@ class DashboardController extends Controller
             ->whereIn('warehouses.user_id', $warehouse_aff)
             ->paginate(10);
 
-        // $dataRevenueChartMonth = $this->chartRepository->revenueRangeTimeMonth();
-        // $dataRevenueChartYear = $this->chartRepository->revenueRangeTimeYear();
-        // $dataOrderChartMonth = $this->chartRepository->orderRangeTimeMonth();
-        // $dataOrderRangeTimeYear = $this->chartRepository->orderRangeTimeYear();
 
-        $revenueInMonthNow = $this->chartRepository->revenueInMonthNow();
-        $productRunningOut = $this->chartRepository->productRunningOut();
-        $unapprovedOrder = $this->chartRepository->unapprovedOrder();
+        $revenueInMonthNow = $this->dashboardRepository->revenueInMonthNow();
+        $productRunningOut = $this->dashboardRepository->productRunningOut();
+        $unapprovedOrder = $this->dashboardRepository->unapprovedOrder();
 
         return view('screens.manufacture.dashboard.index', [
             'data' => $data,
@@ -75,11 +71,6 @@ class DashboardController extends Controller
             'type' => $this->v['type'],
             'key_search' => $this->v['key_search'],
             'warehouses' => $warehouses,
-
-            // 'dataRevenueChartMonth' => $dataRevenueChartMonth,
-            // 'dataRevenueChartYear' => $dataRevenueChartYear,
-            // 'dataOrderChartMonth' => $dataOrderChartMonth,
-            // 'dataOrderRangeTimeYear' => $dataOrderRangeTimeYear,
 
             'revenueInMonthNow' => $revenueInMonthNow,
             'productRunningOut' => $productRunningOut,
