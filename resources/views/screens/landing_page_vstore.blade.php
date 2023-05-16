@@ -600,8 +600,8 @@
                 </div>
             </div>
         @endforeach
-        @if(count($hot_products) < 6)
-            @for($i = 0;$i < 6 - count($hot_products);$i++)
+            @if($hot_products->total() < 6)
+                @for($i = 0;$i < 6 - count($hot_products);$i++)
                 <div class="bg-[#FFF] w-[220px] flex flex-col relative cursor-pointer shadow-md">
                     <div
                         class="placeholder-content h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff] relative">

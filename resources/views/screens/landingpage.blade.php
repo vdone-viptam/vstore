@@ -441,8 +441,8 @@
                 <p class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{$cate->name}}</p>
             </div>
         @endforeach
-        @if(count($arrCategory) < 5)
-            @for($i = 0;$i < 5 - count($arrCategory);$i++)
+        @if(count($arrCategory) < 8)
+            @for($i = 0;$i < 8 - count($arrCategory);$i++)
                 <div class="flex flex-col gap-4 items-center cursor-pointer">
                     <div class="max-w-[120px]" style="margin: auto">
                         <div
@@ -603,7 +603,7 @@
                     </div>
                 </div>
             </div>
-            @if(count($hot_products) < 6)
+            @if($hot_products->total() < 6)
                 @for($i = 0;$i < 6 - count($hot_products);$i++)
                     <div class="bg-[#FFF] w-[220px] flex flex-col relative cursor-pointer shadow-md">
                         <div
@@ -680,7 +680,7 @@
 
                     </div>
                     <div
-                        class="w-full py-2 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
+                        class="w-[120px] py-2 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
                         <div class="placeholder-content" style="height:10px;">
                             <div class="placeholder-content_item"></div>
                         </div>
@@ -743,8 +743,8 @@
             infinite: true,
             autoplay: true,
             autoplaySpeed: 1500,
-            slidesToScroll: 5,
-            slidesToShow: 5,
+            slidesToScroll: 8,
+            slidesToShow: 8,
             pauseOnFocus: true,
             dots: true,
             // the magic
