@@ -1,5 +1,8 @@
 <?php
 
+use App\Http\Controllers\Api\ElasticsearchController;
+use Elastic\Elasticsearch\Exception\ClientResponseException;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -15,14 +18,27 @@ use Illuminate\Support\Facades\Route;
 
 
 Route::get('/create', function () {
-    $users = \App\Models\User::select('id')->where('role_id', 4)->where('account_code', '!=', null)->get();
-    foreach ($users as $user)
-        for ($i = 0; $i < 3; $i++) {
-            \Illuminate\Support\Facades\DB::table('warehouse_type')->insert(
-                ['user_id' => $user->id, 'type' => $i + 1, 'acreage' => 1, 'volume' => 1, 'length' => 1, 'width' => 1, 'height' => 1, 'image_storage' => 1, 'image_pccc' => 1]
-            );
-        }
-
+    $elasticsearchController = new ElasticsearchController();
+    try {
+        $res = $elasticsearchController
+            ->createDocProduct((string)3,
+                "ENDOST- XƯƠNG KHỚP (Lọ 60 viên)", "Tác dụng sản phẩm:
+Người bị đau nhức xương khớp, đau mỏi cơ nhục, tê nhức chân tay, đau dây thần kinh, dây chằng, tê mỏi xương sống.
+Người bị chấn thương sưng đau, gãy xương, bong gân, đứt gân.", "Sức khỏe", "vnsqswjp9et9x");
+        $res = $elasticsearchController
+            ->createDocProduct((string)4,
+                "ENDOST- VAI GÁY (Hộp 60 viên)", "Tác dụng sản phẩm:
+Giúp lưu thông khí huyết, mạnh gân cốt, hỗ trợ làm giảm các triệu chứng đau đầu, đau nhức cơ, xương khớp, đau mỏi vai gáy, tê bì chân tay do máu lưu thông kém.", "Sức khỏe", "vnsu3biduqamd");
+        $res = $elasticsearchController
+            ->createDocProduct((string)5,
+                "CONER AN CUNG - Hộp 60 viên", "TỪ PHƯƠNG THUỐC QUÝ NAY PHÁT TRIỂN THÀNH SẢN PHẨM CONER AN CUNG
+HỖ TRỢ GIẢM TẮC MẠCH, CO CỨNG CƠ GIẢM NGUY CƠ TAI BIẾN MẠCH MÁU NÃO", "Sức khỏe", "vnsalnuk54bks");
+    } catch (ClientResponseException $exception) {
+        return response()->json([
+            'success' => false,
+            'message' => 'Có lỗi xảy ra vui lòng thử lại',
+        ], 500);
+    }
 });
 
 Route::get('/els', [\App\Http\Controllers\Api\ProductController::class, 'indexProduct']);
