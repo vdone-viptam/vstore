@@ -407,7 +407,7 @@
                             <div
                                 class="placeholder-content mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-contain !shadow-lg border border-[#1e90ff80] relative">
                                 <div class="img-center w-full w-[20px] mx-auto h-[20px] z-[4] absolute">
-                                    <img src="{{asset('landingpage/images/image-xxl.png')}}"
+                                    <img src="{{asset('landingpage/images/icone-photo-grise.png')}}"
                                          class="w-full h-full object-cover" alt="">
                                 </div>
                             </div>
@@ -447,7 +447,7 @@
                         <div
                             class="placeholder-content md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full object-cover relative">
                             <div class="img-center w-full w-[30px] mx-auto h-[30px] z-[4] absolute rounded-full">
-                                <img src="{{asset('landingpage/images/image-xxl.png')}}"
+                                <img src="{{asset('landingpage/images/icone-photo-grise.png')}}"
                                      style="object-fit: contain;margin: auto" class="w-full rounded-full shadow-md"
                                      alt="">
                             </div>
@@ -520,7 +520,7 @@
                             <div
                                 class="placeholder-content h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff] relative">
                                 <div class="img-center w-full w-[40px] mx-auto h-[40px] z-[4] absolute">
-                                    <img src="{{asset('landingpage/images/image-xxl.png')}}"
+                                    <img src="{{asset('landingpage/images/icone-photo-grise.png')}}"
                                          class="w-full h-full object-cover" alt="">
                                 </div>
                             </div>
@@ -606,7 +606,7 @@
                     <div
                         class="placeholder-content h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff] relative">
                         <div class="img-center w-full w-[40px] mx-auto h-[40px] z-[4] absolute">
-                            <img src="{{asset('landingpage/images/image-xxl.png')}}"
+                            <img src="{{asset('landingpage/images/icone-photo-grise.png')}}"
                                  class="w-full h-full object-cover" alt="">
                         </div>
                     </div>
@@ -665,7 +665,7 @@
                         <div
                             class="placeholder-content md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full object-cover relative">
                             <div class="img-center w-full w-[30px] mx-auto h-[30px] z-[4] absolute rounded-full">
-                                <img src="{{asset('landingpage/images/image-xxl.png')}}"
+                                <img src="{{asset('landingpage/images/icone-photo-grise.png')}}"
                                      style="object-fit: contain;margin: auto" class="w-full rounded-full shadow-md"
                                      alt="">
                             </div>

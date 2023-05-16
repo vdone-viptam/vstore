@@ -425,7 +425,7 @@ class OrderController extends Controller
         try {
             $status = $request->status ?? 10;
             $limit = $request->limit ?? 5;
-            $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number');
+            $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number', 'estimated_date');
 
             if ($status != 10 && $status != 4 && $status != 5) {
                 $orders = $orders->where('export_status', $status);
@@ -445,10 +445,15 @@ class OrderController extends Controller
                 ->where('user_id', $id)->paginate($limit);
 
             foreach ($orders as $order) {
-                if ($status == 5) {
+                if ($status == 5 || ($order->export_status == 4 && $order->estimated_date <= Carbon::now() && Carbon::now()->diffInDays($order->estimated_date) > 7)) {
                     $order->is_complete = true;
                 } else {
                     $order->is_complete = false;
+                }
+                if ($order->export_status == 4) {
+                    if (!($order->estimated_date <= Carbon::now() && Carbon::now()->diffInDays($order->estimated_date)  > 7)) {
+                        $order->export_status = 2;
+                    }
                 }
                 $order->orderItem = $order->orderItem()
                     ->select(
@@ -602,7 +607,8 @@ class OrderController extends Controller
                 'discount_ncc',
                 'discount_vstore',
                 'quantity', 'order_item.order_id', 'product_id', 'export_status', 'order.updated_at',
-                'order.total'
+                'order.total',
+                'estimated_date'
             );
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
@@ -615,8 +621,7 @@ class OrderController extends Controller
             if ($status == 4) {
                 $orders = $orders->where('export_status', 4)
                     ->whereDate('order.estimated_date', '<=', Carbon::now())
-                    ->whereDate('order.estimated_date', '>', Carbon::now()->addDays(-7))
-                ;
+                    ->whereDate('order.estimated_date', '>', Carbon::now()->addDays(-7));
             }
             if ($status == 5) {
                 $orders = $orders->where('export_status', 4)
@@ -627,10 +632,15 @@ class OrderController extends Controller
             $orders = $orders->paginate($limit);
 //            return $orders;
             foreach ($orders as $order) {
-                if ($status == 5) {
+                if ($status == 5 || ($order->export_status == 4 && $order->estimated_date <= Carbon::now() && Carbon::now()->diffInDays($order->estimated_date) > 7)) {
                     $order->is_complete = true;
                 } else {
                     $order->is_complete = false;
+                }
+                if ($order->export_status == 4) {
+                    if (!($order->estimated_date <= Carbon::now() && Carbon::now()->diffInDays($order->estimated_date)  > 7)) {
+                        $order->export_status = 2;
+                    }
                 }
                 $product = $order->product()->select('name', 'images')->first();
                 $order->productInfo = null;
