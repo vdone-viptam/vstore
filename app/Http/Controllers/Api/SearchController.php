@@ -73,7 +73,7 @@ class SearchController extends Controller
         if ($request->type_pay) {
             $products = $products->where('type_pay', $request->type_pay);
         }
-        $products = $products->get();
+        $products = $products->orderBy('products.id', 'desc')->get();
         foreach ($products as $pro) {
             $pro->images = asset(json_decode($pro->images)[0]);
             $pro->discount = round(DB::table('discounts')->selectRaw('sum(discount) as sum')->where('product_id', $pro->id)
