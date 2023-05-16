@@ -254,7 +254,7 @@
         <div class="max-w-[138px]">
             <div class="w-full h-[50px]">
                 <a href="{{route('landingpagevstore')}}"><img src="{{asset('home/img/Logo.png')}}"
-                                                              class="w-full object-contain "
+                                                              class="w-full object-cover "
                                                               style="height: 50px" alt=""></a>
             </div>
         </div>
@@ -399,13 +399,13 @@
                 <div class="flex gap-4 items-center slider3">
                     @foreach($fiveImage as $image)
                         <img
-                            class="mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-contain !shadow-lg border border-[#1e90ff80]"
+                            class="mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80]"
                             src="{{asset(json_decode($image->images)[0])}}" alt="">
                     @endforeach
                     @if(count($fiveImage) < 5)
                         @for($i = 0;$i < 5 - count($fiveImage);$i++)
                             <div
-                                class="placeholder-content mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-contain !shadow-lg border border-[#1e90ff80] relative">
+                                class="placeholder-content mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80] relative">
                                 <div class="img-center w-full w-[20px] mx-auto h-[20px] z-[4] absolute">
                                     <img src="{{asset('landingpage/images/icone-photo-grise.png')}}"
                                          class="w-full h-full object-cover" alt="">
@@ -468,7 +468,7 @@
 
     <!--  -->
     <div class="mt-[68px] mb-[60px] section" id="bs">
-        <img class="w-full object-contain rounded-tl-2xl rounded-tr-2xl" src="{{asset('landingpage/images/bg2.png')}}"
+        <img class="w-full object-cover rounded-tl-2xl rounded-tr-2xl" src="{{asset('landingpage/images/bg2.png')}}"
              alt="">
         <div
             class="md:min-h-[434px] rounded-bl-2xl rounded-br-2xl pt-[30px] md:pt-[60px] px-[10px] md:pb-[60px] pb-[20px]"
@@ -588,7 +588,7 @@
                     <div class="flex items-center justify-between gap-2">
                         @if($product->discount_sale > 0)
                             <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.').'đ'}}
-                                </p>
+                            </p>
                             <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
                                 {{number_format($product->price,0,'.','.').'đ'}}</p>
                         @else
@@ -600,8 +600,8 @@
                 </div>
             </div>
         @endforeach
-            @if($hot_products->total() < 6)
-                @for($i = 0;$i < 6 - count($hot_products);$i++)
+        @if($hot_products->total() < 6)
+            @for($i = 0;$i < 6 - count($hot_products);$i++)
                 <div class="bg-[#FFF] w-[220px] flex flex-col relative cursor-pointer shadow-md">
                     <div
                         class="placeholder-content h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff] relative">

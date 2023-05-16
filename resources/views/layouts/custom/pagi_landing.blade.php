@@ -15,7 +15,7 @@
                     </a>
                 </div>
             @elseif($paginator->currentPage() == 1 && $paginator->onFirstPage())
-                <div class="px-2 md:px-4 py-1 hover:bg-[#006FFD]   btn-prev  rounded-tl-lg rounded-bl-lg" style="cursor: default">
+                <div class="px-2 md:px-4 py-1     rounded-tl-lg rounded-bl-lg" style="cursor: default">
                     <svg width=" 29" height="30" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M17.4463 12.6308L15.7546 14.6044L17.4463 16.5781" stroke="#3A57E8"
                               stroke-width="1.5"
@@ -26,7 +26,7 @@
                     </svg>
                 </div>
             @else
-                <div class="px-2 md:px-4 py-1 cursor-pointer btn-prev   hover:bg-[#006FFD] rounded-tl-lg rounded-bl-lg">
+                <div class="px-2 md:px-4 py-1 cursor-pointer  btn-prev hover:bg-[#006FFD]   rounded-tl-lg rounded-bl-lg">
                     <a href="{{ $paginator->previousPageUrl() }}#sp">
                         <svg width=" 29" height="30" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M17.4463 12.6308L15.7546 14.6044L17.4463 16.5781" stroke="#3A57E8"
@@ -99,7 +99,7 @@
                     </div>
             @endif
             @if ($paginator->hasMorePages())
-                    <div class="px-2 md:px-4 py-1 cursor-pointer btn-prev hover:bg-[#006FFD] rounded-tr-lg rounded-br-lg">
+                    <div class="px-2 md:px-4 py-1 cursor-pointer  btn-prev hover:bg-[#006FFD]  rounded-tr-lg rounded-br-lg">
                         <a href="{{ $paginator->nextPageUrl() }}#sp" rel="next">
                             <svg width="29" height="30" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M11.9209 12.6308L13.6126 14.6044L11.9209 16.5781" stroke="#3A57E8" stroke-width="1.5"
@@ -110,7 +110,7 @@
                         </a>
                     </div>
             @else
-                    <div class="px-2 md:px-4 py-1  btn-prev hover:bg-[#006FFD] rounded-tr-lg rounded-br-lg">
+                    <div class="px-2 md:px-4 py-1 rounded-tr-lg rounded-br-lg">
                         <svg width="29" height="30" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M11.9209 12.6308L13.6126 14.6044L11.9209 16.5781" stroke="#3A57E8" stroke-width="1.5"
                                   stroke-linecap="round" stroke-linejoin="round"/>

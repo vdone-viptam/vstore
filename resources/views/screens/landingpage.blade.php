@@ -253,7 +253,7 @@
         <div class="max-w-[118px]">
             <div class="w-full h-[50px]">
                 <a href="{{route('landingpagevstore')}}"><img src="{{asset('home/img/NCC.png')}}"
-                                                              class="w-full object-contain"
+                                                              class="w-full object-cover"
                                                               style="height: 50px" alt=""></a>
             </div>
         </div>
@@ -398,13 +398,13 @@
                 <div class="flex gap-4 items-center slider3">
                     @foreach($fiveImage as $image)
                         <img
-                            class="mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-contain !shadow-lg border border-[#1e90ff80]"
+                            class="mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80]"
                             src="{{asset(json_decode($image->images)[0])}}" alt="">
                     @endforeach
                     @if(count($fiveImage) < 5)
                         @for($i = 0;$i < 5 - count($fiveImage);$i++)
                             <div
-                                class="placeholder-content mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-contain !shadow-lg border border-[#1e90ff80] relative">
+                                class="placeholder-content mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80] relative">
                                 <div class="img-center w-full w-[20px] mx-auto h-[20px] z-[4] absolute">
                                     <img src="{{asset('landingpage/images/icone-photo-grise.png')}}"
                                          class="w-full h-full object-cover" alt="">
@@ -447,9 +447,9 @@
                     <div class="max-w-[120px]" style="margin: auto">
                         <div
                             class="placeholder-content md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full object-cover relative">
-                            <div class="img-center w-full w-[30px] mx-auto h-[30px] z-[4] absolute rounded-full">
+                            <div class="img-center w-full w-[30px] mx-auto h-[30px] z-[4] absolute">
                                 <img src="{{asset('landingpage/images/icone-photo-grise.png')}}"
-                                     style="object-fit: contain;margin: auto" class="w-full rounded-full shadow-md"
+                                     style="object-fit: contain;margin: auto" class="w-full "
                                      alt="">
                             </div>
                         </div>
@@ -469,7 +469,7 @@
 
     <!--  -->
     <div class="mt-[68px] mb-[60px] section" id="bs">
-        <img class="w-full object-contain rounded-tl-2xl rounded-tr-2xl" src="{{asset('landingpage/images/bg2.png')}}"
+        <img class="w-full object-cover rounded-tl-2xl rounded-tr-2xl" src="{{asset('landingpage/images/bg2.png')}}"
              alt="">
         <div
             class="md:min-h-[434px] rounded-bl-2xl rounded-br-2xl pt-[30px] md:pt-[60px] px-[10px] md:pb-[60px] pb-[20px]"
@@ -671,9 +671,9 @@
                     <div class="max-w-[120px]" style="margin: auto">
                         <div
                             class="placeholder-content md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full object-cover relative">
-                            <div class="img-center w-full w-[30px] mx-auto h-[30px] z-[4] absolute rounded-full">
+                            <div class="img-center w-full w-[30px] mx-auto h-[30px] z-[4] absolute ">
                                 <img src="{{asset('landingpage/images/icone-photo-grise.png')}}"
-                                     style="object-fit: contain;margin: auto" class="w-full rounded-full shadow-md"
+                                     style="object-fit: contain;margin: auto" class="w-full "
                                      alt="">
                             </div>
                         </div>
