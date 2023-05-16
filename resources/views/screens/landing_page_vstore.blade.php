@@ -153,6 +153,97 @@
         .page-active a {
             color: white;
         }
+
+        .placeholder-content {
+
+            overflow: hidden;
+            background: #000;
+            position: relative;
+            animation-duration: 1.7s;
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-name: placeholderAnimate;
+            background: #f6f7f8;
+            background: linear-gradient(to right, #eee 2%, #ddd 18%, #eee 33%);
+            background-size: 1300px;
+        }
+
+        .placeholder-content_item {
+            width: 100%;
+            height: 10px;
+            position: absolute;
+            background: #fff;
+            z-index: 2;
+        }
+
+        .placeholder-content_item:after, .placeholder-content_item:before {
+            width: inherit;
+            height: inherit;
+            content: '';
+            position: absolute;
+        }
+
+        .placeholder-content_item:nth-child(1) {
+            top: 10px;
+            width: 100%;
+            height: 10px;
+        }
+
+        .placeholder-content_item:nth-child(2) {
+            top: 30px;
+            width: 100%;
+            height: 10px;
+
+        }
+
+        .placeholder-content_item:nth-child(3) {
+            top: 50px;
+            width: 100%;
+            height: 10px;
+        }
+
+        .placeholder-content_item:nth-child(4) {
+            top: 70px;
+            width: 100%;
+            height: 10px;
+        }
+
+        .placeholder-content_item:nth-child(5) {
+            top: 90px;
+            width: 100%;
+            height: 10px;
+        }
+
+        .placeholder-content_item:nth-child(6) {
+            top: 110px;
+            width: 100%;
+            height: 10px;
+        }
+
+        .placeholder-content_item:nth-child(7) {
+            top: 100px;
+            width: 30%;
+            right: 0;
+            height: 10px;
+        }
+
+
+        @keyframes placeholderAnimate {
+            0% {
+                background-position: -650px 0;
+            }
+            100% {
+                background-position: 650px 0;
+            }
+        }
+
+        .img-center {
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
     </style>
 </head>
 <body class="bg-[#F1F8FF] section" id="home">
@@ -305,24 +396,24 @@
             <div class="md:border-l md:border-[#258AFF80] md:pl-6 flex flex-col gap-5">
                 <span class="font-semibold text-xl"> Giới thiệu</span>
                 <p class="text-[#696984] text-sm md:text-base xl:text-lg">{{$user->description}}</p>
-                @if(count($fiveImage) > 5)
-                    <div class="flex gap-4 items-center slider3">
-                        @foreach($fiveImage as $image)
-                            <img
-                                class="mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-contain !shadow-lg border border-[#1e90ff80]"
-                                src="{{asset(json_decode($image->images)[0])}}" alt="">
-                        @endforeach
-                    </div>
-                @else
-                    <div class="flex gap-4 items-center">
-                        @foreach($fiveImage as $image)
-                            <img
-                                class="mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-cover !shadow-lg border border-[#1e90ff80]"
-                                src="{{asset(json_decode($image->images)[0])}}" alt="">
-                        @endforeach
-
-                    </div>
-                @endif
+                <div class="flex gap-4 items-center slider3">
+                    @foreach($fiveImage as $image)
+                        <img
+                            class="mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-contain !shadow-lg border border-[#1e90ff80]"
+                            src="{{asset(json_decode($image->images)[0])}}" alt="">
+                    @endforeach
+                    @if(count($fiveImage) < 5)
+                        @for($i = 0;$i < 5 - count($fiveImage);$i++)
+                            <div
+                                class="placeholder-content mx-2 w-[82.5px] h-[82.5px] md:w-[102px] md:h-[102px] object-contain !shadow-lg border border-[#1e90ff80] relative">
+                                <div class="img-center w-full w-[20px] mx-auto h-[20px] z-[4] absolute">
+                                    <img src="{{asset('landingpage/images/image-xxl.png')}}"
+                                         class="w-full h-full object-cover" alt="">
+                                </div>
+                            </div>
+                        @endfor
+                    @endif
+                </div>
             </div>
         </div>
     </div>
@@ -333,45 +424,47 @@
         MỤC
     </p>
     <div class="w-[37px] mx-auto"></div>
-    @if(count($arrCategory) > 5)
-        <div class="slider py-[30px] md:py-[50px]">
-            @foreach($arrCategory as $cate)
-                <div class="flex flex-col gap-4 items-center cursor-pointer">
-                    <div
-                        class="bg-white md:w-[100px] md:h-[100px] w-[60px] h-[60px] flex items-center justify-center rounded-full shadow-md">
-                        @if($cate->img !=null)
-                            <img src="{{asset($cate->img)}}" class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
-                        @else
-                            <img src="{{asset('landingpage/images/wm.png')}}"
-                                 class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
+    <div class="slider py-[30px] md:py-[50px]">
+        @foreach($arrCategory as $cate)
+            <div class="flex flex-col gap-4 items-center cursor-pointer">
+                <div
+                    class="bg-white md:w-[100px] md:h-[100px] w-[60px] h-[60px] flex items-center justify-center rounded-full shadow-md">
+                    @if($cate->img !=null)
+                        <img src="{{asset($cate->img)}}" class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
+                    @else
+                        <img src="{{asset('landingpage/images/wm.png')}}"
+                             class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
 
-                        @endif
-                    </div>
-                    <p class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{$cate->name}}</p>
+                    @endif
                 </div>
-            @endforeach
-
-        </div>
-    @else
-        <div class="slider py-[30px] md:py-[50px]">
-            @foreach($arrCategory as $cate)
+                <p class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{$cate->name}}</p>
+            </div>
+        @endforeach
+        @if(count($arrCategory) < 8)
+            @for($i = 0;$i < 8 - count($arrCategory);$i++)
                 <div class="flex flex-col gap-4 items-center cursor-pointer">
-                    <div
-                        class="bg-white md:w-[100px] md:h-[100px] w-[60px] h-[60px] flex items-center justify-center rounded-full shadow-md">
-                        @if($cate->img !=null)
-                            <img src="{{asset($cate->img)}}" class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
-                        @else
-                            <img src="{{asset('landingpage/images/wm.png')}}"
-                                 class="md:w-[50px] md:h-[50px] w-[40px] h-[40px]" alt="">
+                    <div class="max-w-[120px]" style="margin: auto">
+                        <div
+                            class="placeholder-content md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full object-cover relative">
+                            <div class="img-center w-full w-[30px] mx-auto h-[30px] z-[4] absolute rounded-full">
+                                <img src="{{asset('landingpage/images/image-xxl.png')}}"
+                                     style="object-fit: contain;margin: auto" class="w-full rounded-full shadow-md"
+                                     alt="">
+                            </div>
+                        </div>
 
-                        @endif
                     </div>
-                    <p class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{$cate->name}}</p>
-                </div>
-            @endforeach
+                    <div
+                        class="w-[120px] py-2 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
+                        <div class="placeholder-content" style="height:10px;">
+                            <div class="placeholder-content_item"></div>
+                        </div>
+                    </div>
 
-        </div>
-    @endif
+                </div>
+            @endfor
+        @endif
+    </div>
 
     <!--  -->
     <div class="mt-[68px] mb-[60px] section" id="bs">
@@ -381,91 +474,77 @@
             class="md:min-h-[434px] rounded-bl-2xl rounded-br-2xl pt-[30px] md:pt-[60px] px-[10px] md:pb-[60px] pb-[20px]"
             style="background: linear-gradient(180deg, #258AFF 0%, #99D7FF 100%);">
             <!-- slider2 -->
-            @if(count($big_sale) > 5)
-                <div class="slider2">
-                    @foreach($big_sale as $pro)
-                        <div class="w-[256px] flex flex-col relative cursor-pointer">
-                            <div class="text-center gg w-[51px] h-[52px] absolute left-[15px] top-0">
-                                <p class="text-white text-sm md:text-[17px] font-bold">{{$pro->discount}}%</p>
-                                <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
-                            </div>
+            <div class="slider2">
+                @foreach($big_sale as $pro)
+                    <div class="w-[256px] flex flex-col relative cursor-pointer">
+                        <div class="text-center gg w-[51px] h-[52px] absolute left-[15px] top-0">
+                            <p class="text-white text-sm md:text-[17px] font-bold">{{$pro->discount}}%</p>
+                            <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
+                        </div>
+                        <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
+                            <img class="h-[146px] w-full object-cover rounded-tl-lg rounded-tr-lg"
+                                 src="{{asset(json_decode($pro->images)[0])}}" alt="">
+                        </a>
+                        <div
+                            class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
                             <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
-                                <img class="h-[146px] w-full object-cover rounded-tl-lg rounded-tr-lg"
-                                     src="{{asset(json_decode($pro->images)[0])}}" alt="">
+                                <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
+                                   title="{{$pro->name}}">
+                                    {{\Illuminate\Support\Str::limit($pro->name,50,'...')}}</p>
                             </a>
+                            <div class="flex gap-1 items-center">
+                                @for($i = 1; $i <= 5;$i++)
+                                    @if($pro->vote > 1)
+                                        <img src="{{asset('landingpage/images/star_full.png')}}" alt="">
+                                    @elseif($pro->vote > 0 && $pro->vote < 1)
+                                        <img src="{{asset('landingpage/images/star_half.png')}}" alt="">
+                                    @else
+                                        <img src="{{asset('landingpage/images/star_white.png')}}" alt="">
+                                    @endif
+                                    @php $pro->vote =  $pro->vote > 0 ? $pro->vote - 1 : $pro->vote @endphp
+                                @endfor
+                            </div>
+                            <div class="flex items-center justify-between gap-2">
+                                <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">
+                                    {{number_format($pro->order_price,0,'.','.').'đ'}}
+                                </p>
+                                <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
+                                    {{number_format($pro->price,0,'.','.').'đ'}}</p>
+                            </div>
+                        </div>
+                    </div>
+                @endforeach
+                @if(count($big_sale) < 6)
+                    @for($i = 0;$i < 6 - count($big_sale);$i++)
+                        <div class="w-[256px] flex flex-col relative cursor-pointer bg-[#FFF]">
                             <div
-                                class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
-                                <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
-                                    <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
-                                       title="{{$pro->name}}">
-                                        {{\Illuminate\Support\Str::limit($pro->name,50,'...')}}</p>
-                                </a>
-                                <div class="flex gap-1 items-center">
-                                    @for($i = 1; $i <= 5;$i++)
-                                        @if($pro->vote > 1)
-                                            <img src="{{asset('landingpage/images/star_full.png')}}" alt="">
-                                        @elseif($pro->vote > 0 && $pro->vote < 1)
-                                            <img src="{{asset('landingpage/images/star_half.png')}}" alt="">
-                                        @else
-                                            <img src="{{asset('landingpage/images/star_white.png')}}" alt="">
-                                        @endif
-                                        @php $pro->vote =  $pro->vote > 0 ? $pro->vote - 1 : $pro->vote @endphp
-                                    @endfor
+                                class="placeholder-content h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff] relative">
+                                <div class="img-center w-full w-[40px] mx-auto h-[40px] z-[4] absolute">
+                                    <img src="{{asset('landingpage/images/image-xxl.png')}}"
+                                         class="w-full h-full object-cover" alt="">
                                 </div>
-                                <div class="flex items-center justify-between gap-2">
-                                    <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">
-                                        {{number_format($pro->order_price,0,'.','.')}}đ
-                                    </p>
-                                    <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
-                                        {{number_format($pro->price,0,'.','.')}}đ</p>
+                            </div>
+                            <div
+                                class=" pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
+                                <div class="placeholder-content" style="height:120px!important;">
+                                    <div class="placeholder-content_item"></div>
+                                    <div class="placeholder-content_item"></div>
+                                    <div class="placeholder-content_item"></div>
+                                    <div class="placeholder-content_item"></div>
+                                    <div class="placeholder-content_item"></div>
+                                    <div class="placeholder-content_item"></div>
+                                    <div class="placeholder-content_item"></div>
+                                    <div class="placeholder-content_item"></div>
+                                    <div class="placeholder-content_item"></div>
+                                    <div class="placeholder-content_item"></div>
+                                    <div class="placeholder-content_item"></div>
                                 </div>
                             </div>
                         </div>
-                    @endforeach
-                </div>
-            @else
-                <div class="flex gap-4 justify-center">
-                    @foreach($big_sale as $pro)
-                        <div class="w-[256px] flex flex-col relative cursor-pointer">
-                            <div class="text-center gg w-[51px] h-[52px] absolute left-[15px] top-0">
-                                <p class="text-white text-sm md:text-[17px] font-bold">{{$pro->discount}}%</p>
-                                <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
-                            </div>
-                            <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
-                                <img class="h-[146px] w-full object-cover rounded-tl-lg rounded-tr-lg"
-                                     src="{{asset(json_decode($pro->images)[0])}}" alt="">
-                            </a>
-                            <div
-                                class="pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
-                                <a href="{{config('domain.big_store').'products/'.$pro->id}}" target="_blank">
-                                    <p class="text-[#2C2C37] text-sm md:text-lg leading-[22px] line-clamp-2 min-h-[56px]"
-                                       title="{{$pro->name}}">
-                                        {{\Illuminate\Support\Str::limit($pro->name,50,'...')}}</p>
-                                </a>
-                                <div class="flex gap-1 items-center">
-                                    @for($i = 1; $i <= 5;$i++)
-                                        @if($pro->vote > 1)
-                                            <img src="{{asset('landingpage/images/star_full.png')}}" alt="">
-                                        @elseif($pro->vote > 0 && $pro->vote < 1)
-                                            <img src="{{asset('landingpage/images/star_half.png')}}" alt="">
-                                        @else
-                                            <img src="{{asset('landingpage/images/star_white.png')}}" alt="">
-                                        @endif
-                                        @php $pro->vote =  $pro->vote > 0 ? $pro->vote - 1 : $pro->vote @endphp
-                                    @endfor
-                                </div>
-                                <div class="flex items-center justify-between gap-2">
-                                    <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">
-                                        {{number_format($pro->order_price,0,'.','.')}}đ
-                                    </p>
-                                    <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
-                                        {{number_format($pro->price,0,'.','.')}}đ</p>
-                                </div>
-                            </div>
-                        </div>
-                    @endforeach
-                </div>
-            @endif
+                    @endfor
+                @endif
+            </div>
+
 
         </div>
     </div>
@@ -508,17 +587,48 @@
                     </div>
                     <div class="flex items-center justify-between gap-2">
                         @if($product->discount_sale > 0)
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.')}}đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price - ($product->price * $product->discount_sale / 100),0,'.','.').'đ'}}
+                                </p>
                             <p class="text-[#696984] text-xs md:text-sm leading-[38px] line-through truncate">
-                                {{number_format($product->price,0,'.','.')}}đ</p>
+                                {{number_format($product->price,0,'.','.').'đ'}}</p>
                         @else
-                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}đ</p>
+                            <p class="text-[#FF3750] text-sm md:text-lg font-semibold leading-[22px]">{{number_format($product->price,0,'.','.')}}
+                                đ</p>
                         @endif
 
                     </div>
                 </div>
             </div>
         @endforeach
+        @if(count($hot_products) < 6)
+            @for($i = 0;$i < 6 - count($hot_products);$i++)
+                <div class="bg-[#FFF] w-[220px] flex flex-col relative cursor-pointer shadow-md">
+                    <div
+                        class="placeholder-content h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff] relative">
+                        <div class="img-center w-full w-[40px] mx-auto h-[40px] z-[4] absolute">
+                            <img src="{{asset('landingpage/images/image-xxl.png')}}"
+                                 class="w-full h-full object-cover" alt="">
+                        </div>
+                    </div>
+                    <div
+                        class=" pt-2 pb-4 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
+                        <div class="placeholder-content" style="height:120px!important;">
+                            <div class="placeholder-content_item"></div>
+                            <div class="placeholder-content_item"></div>
+                            <div class="placeholder-content_item"></div>
+                            <div class="placeholder-content_item"></div>
+                            <div class="placeholder-content_item"></div>
+                            <div class="placeholder-content_item"></div>
+                            <div class="placeholder-content_item"></div>
+                            <div class="placeholder-content_item"></div>
+                            <div class="placeholder-content_item"></div>
+                            <div class="placeholder-content_item"></div>
+                            <div class="placeholder-content_item"></div>
+                        </div>
+                    </div>
+                </div>
+            @endfor
+        @endif
     </div>
     {{$hot_products->withQueryString()->links('layouts.custom.pagi_landing')}}
 
@@ -528,51 +638,51 @@
         Nhà cung cấp liên kết
     </p>
     <div class="w-[37px] mx-auto mb-[60px]"></div>
-    @if(count($vstore) > 5)
-        <div class="slider mb-[30px] md:pb-[50px] text-center">
-            @foreach($vstore as $vsto)
+    <div class="slider mb-[30px] md:pb-[50px] text-center">
+        @foreach($vstore as $vsto)
+            <div class="flex flex-col gap-4 items-center cursor-pointer">
+                <a href="{{route("intro",['slug'=>$vsto->slug])}}" target="_blank">
+                    <div class="max-w-[120px]" style="margin: auto">
+                        @if($vsto->avatar =='')
+                            <img src="{{asset('home/img/ncc-vuong.png')}}"
+                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                 style="object-fit: contain;margin: auto">
+                        @else
+                            <img src="{{asset('image/users/'. $vsto->avatar)}}"
+                                 class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
+                                 style="object-fit: contain;margin: auto">
+                        @endif
+                    </div>
+                    <span
+                        class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,30,'...')}}</span>
+                </a>
+            </div>
+        @endforeach
+        @if(count($vstore) < 8)
+            @for($i = 0;$i < 8 - count($vstore);$i++)
                 <div class="flex flex-col gap-4 items-center cursor-pointer">
-                    <a href="{{route("intro",['slug'=>$vsto->slug])}}" target="_blank">
-                        <div class="max-w-[120px]" style="margin: auto">
-                            @if($vsto->avatar =='')
-                                <img src="{{asset('home/img/ncc-vuong.png')}}"
-                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
-                                     style="object-fit: contain;margin: auto">
-                            @else
-                                <img src="{{asset('image/users/'. $vsto->avatar)}}"
-                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
-                                     style="object-fit: contain;margin: auto">
-                            @endif
+                    <div class="max-w-[120px]" style="margin: auto">
+                        <div
+                            class="placeholder-content md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full object-cover relative">
+                            <div class="img-center w-full w-[30px] mx-auto h-[30px] z-[4] absolute rounded-full">
+                                <img src="{{asset('landingpage/images/image-xxl.png')}}"
+                                     style="object-fit: contain;margin: auto" class="w-full rounded-full shadow-md"
+                                     alt="">
+                            </div>
                         </div>
-                        <span
-                            class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,30,'...')}}</span>
-                    </a>
-                </div>
-            @endforeach
-        </div>
-    @else
-        <div class="flex justify-center gap-4 mb-[30px] md:pb-[50px] text-center">
-            @foreach($vstore as $vsto)
-                <div class="flex flex-col gap-4 items-center cursor-pointer">
-                    <a href="{{route("intro",['slug'=>$vsto->slug])}}" target="_blank">
-                        <div class="max-w-[120px]" style="margin: auto">
-                            @if($vsto->avatar =='')
-                                <img src="{{asset('home/img/ncc-vuong.png')}}"
-                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
-                                     style="object-fit: contain;margin: auto">
-                            @else
-                                <img src="{{asset('image/users/'. $vsto->avatar)}}"
-                                     class="md:w-[100px] md:h-[100px] w-[60px] h-[60px] rounded-full shadow-md" alt=""
-                                     style="object-fit: contain;margin: auto">
-                            @endif
+
+                    </div>
+                    <div
+                        class="w-[120px] py-2 px-4 flex flex-col gap-2.5 justify-center bg-white rounded-bl-lg rounded-br-lg">
+                        <div class="placeholder-content" style="height:10px;">
+                            <div class="placeholder-content_item"></div>
                         </div>
-                        <span
-                            class="text-sm text-sm lg:text-base xl:text-lg text-[#2C2C37] text-center">{{ mb_strimwidth($vsto->name,0,30,'...')}}</span>
-                    </a>
+                    </div>
+
                 </div>
-            @endforeach
-        </div>
-    @endif
+            @endfor
+        @endif
+    </div>
 
 </div>
 <div class="h-[63px] pt-[22px] bg-[#1E90FF] mt-[56px]">
@@ -662,8 +772,8 @@
         autoplay: false,
         autoplaySpeed: 3000,
         pauseOnFocus: true,
-        slidesToScroll: 5,
-        slidesToShow: 5,
+        slidesToScroll: 6,
+        slidesToShow: 6,
         rows: 1,
 
         dots: true,
