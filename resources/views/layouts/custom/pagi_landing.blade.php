@@ -17,10 +17,10 @@
             @elseif($paginator->currentPage() == 1 && $paginator->onFirstPage())
                 <div class="px-2 md:px-4 py-1     rounded-tl-lg rounded-bl-lg" style="cursor: default">
                     <svg width=" 29" height="30" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <path d="M17.4463 12.6308L15.7546 14.6044L17.4463 16.5781" stroke="#3A57E8"
+                        <path d="M17.4463 12.6308L15.7546 14.6044L17.4463 16.5781" stroke="#ddd"
                               stroke-width="1.5"
                               stroke-linecap="round" stroke-linejoin="round"/>
-                        <path d="M14.4014 12.6308L12.7096 14.6044L14.4014 16.5781" stroke="#3A57E8"
+                        <path d="M14.4014 12.6308L12.7096 14.6044L14.4014 16.5781" stroke="#ddd"
                               stroke-width="1.5"
                               stroke-linecap="round" stroke-linejoin="round"/>
                     </svg>
@@ -112,9 +112,9 @@
             @else
                     <div class="px-2 md:px-4 py-1 rounded-tr-lg rounded-br-lg">
                         <svg width="29" height="30" viewBox="0 0 29 30" fill="none" xmlns="http://www.w3.org/2000/svg">
-                            <path d="M11.9209 12.6308L13.6126 14.6044L11.9209 16.5781" stroke="#3A57E8" stroke-width="1.5"
+                            <path d="M11.9209 12.6308L13.6126 14.6044L11.9209 16.5781" stroke="#ddd" stroke-width="1.5"
                                   stroke-linecap="round" stroke-linejoin="round"/>
-                            <path d="M14.9658 12.6308L16.6576 14.6044L14.9658 16.5781" stroke="#3A57E8" stroke-width="1.5"
+                            <path d="M14.9658 12.6308L16.6576 14.6044L14.9658 16.5781" stroke="#ddd" stroke-width="1.5"
                                   stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
