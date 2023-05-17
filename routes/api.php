@@ -118,7 +118,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
         Route::get('/detail-order-cancel', [\App\Http\Controllers\Api\OrderController::class, 'detailOrderCancel']);
         Route::put('/update-amount-warehouse', [\App\Http\Controllers\Api\OrderController::class, 'updateAmountWarehouse']);
-
+        Route::post('/vshop-confirm/{order_id}',[\App\Http\Controllers\Api\OrderController::class,'vshopConfirm']);
+        Route::post('/vshop-refuse/{order_id}',[\App\Http\Controllers\Api\OrderController::class,'vshopRefuse']);
     });
 
 //    Route::('big-sales')->group(function () {
