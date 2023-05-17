@@ -515,6 +515,7 @@
                     // hoặc thêm thông báo lỗi
                 }
             }
+
             var path = "{{ asset('/plupload/js/') }}";
 
             var uploader = new plupload.Uploader({
@@ -548,7 +549,7 @@
                         document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
                     },
                     FileUploaded: function (up, file, result) {
-                       const responseResult = JSON.parse(result.response);
+                        const responseResult = JSON.parse(result.response);
 
                         if (responseResult.ok == 0) {
                             Swal.fire({
@@ -660,7 +661,7 @@
                 const {index} = item.dataset;
                 item.addEventListener('click', (e) => {
                     $('.img-zoom-full').html(`<img src="${arrImage[index].includes('storage/products') ?
-                    '{{asset('')}}/' + arrImage[index] : arrImage[index]}" style="width:100%" />`);
+                        '{{asset('')}}/' + arrImage[index] : arrImage[index]}" style="width:100%" />`);
                     $('#modalDetailImg').modal('show');
                 });
             })
@@ -687,13 +688,14 @@
             let input = document.createElement('input');
             input.type = 'file';
             input.multiple = 'multiple'
+            input.accept = "image/jpeg", "image/gif", "image/png", "image/jpg";
             input.onchange = _ => {
                 var files = Array.from(input.files);
                 for (let i = 0; i < input.files.length; i++) {
                     let file = input.files[i];
                     let allowedImageTypes = ["image/jpeg", "image/gif", "image/png", "image/jpg"];
                     if (!allowedImageTypes.includes(file.type)) {
-                        error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif ]";
+                        error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif .jpeg]";
                         document.querySelector('#btnSave').setAttribute('disabled', 'true');
                         return;
                     }

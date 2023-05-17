@@ -667,14 +667,15 @@
 
             let input = document.createElement('input');
             input.type = 'file';
-            input.multiple = 'multiple'
+            input.multiple = 'multiple';
+            input.accept = "image/jpeg", "image/gif", "image/png", "image/jpg";
             input.onchange = _ => {
                 var files = Array.from(input.files);
                 for (let i = 0; i < input.files.length; i++) {
                     let file = input.files[i];
                     let allowedImageTypes = ["image/jpeg", "image/gif", "image/png", "image/jpg"];
                     if (!allowedImageTypes.includes(file.type)) {
-                        error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif ]";
+                        error.innerHTML = "Đuôi file được cho phép là: [ .jpg .png .gif .jpeg ]";
                         document.querySelector('#btnSave').setAttribute('disabled', 'true');
                         return;
                     }
