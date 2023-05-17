@@ -112,7 +112,11 @@
     </div>
 </div>
 
-@if($product->status != 1)
+@if($product->status == 1)
+    <script>
+        document.querySelector('#btnConfirm').style.display = 'block'
+    </script>
+@else
     <script>
         document.querySelector('#btnConfirm').style.display = 'none'
     </script>

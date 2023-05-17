@@ -89,51 +89,52 @@
                                     <th class="white-space-130 text-center">Ngành hàng</th>
                                     <th class="white-space-130 text-center">Nhà cung cấp</th>
                                     <th class="white-space-130">
-                                    <div class="d-flex align-items-center justify-content-around">
+                                        <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
                                     Chiết khấu cho <br> V-Store
 </span>
-                                        <span style="float: right;cursor: pointer">
+                                            <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.discount')
-                                                @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort"
-                                                       data-sort="requests.discount"></i>
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort"
+                                                           data-sort="requests.discount"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort"
+                                                           data-sort="requests.discount"></i>
+                                                    @endif
                                                 @else
-                                                    <i class="fa-solid fa-sort-up sort"
-                                                       data-sort="requests.discount"></i>
+                                                    <i class="fas fa-sort sort" data-sort="requests.discount"></i>
                                                 @endif
-                                            @else
-                                                <i class="fas fa-sort sort" data-sort="requests.discount"></i>
-                                            @endif
                                 </span>
-</div>
+                                        </div>
                                     </th>
 
-                                    <th class="white-space-130">     <div class="d-flex align-items-center justify-content-around">
+                                    <th class="white-space-130">
+                                        <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
                                     Chiết khấu cho <br> V-Shop
 </span>
-                                        <span style="float: right;cursor: pointer">
+                                            <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.discount_vShop')
-                                                @if($type == 'desc')
-                                                    <i class="fa-solid fa-sort-down sort"
-                                                       data-sort="requests.discount_vShop"></i>
+                                                    @if($type == 'desc')
+                                                        <i class="fa-solid fa-sort-down sort"
+                                                           data-sort="requests.discount_vShop"></i>
+                                                    @else
+                                                        <i class="fa-solid fa-sort-up sort"
+                                                           data-sort="requests.discount_vShop"></i>
+                                                    @endif
                                                 @else
-                                                    <i class="fa-solid fa-sort-up sort"
-                                                       data-sort="requests.discount_vShop"></i>
+                                                    <i class="fas fa-sort sort" data-sort="requests.discount_vShop"></i>
                                                 @endif
-                                            @else
-                                                <i class="fas fa-sort sort" data-sort="requests.discount_vShop"></i>
-                                            @endif
                                 </span>
-</div>
+                                        </div>
                                     </th>
                                     <th class="white-space-100">
-                                    <div class="d-flex align-items-center justify-content-around">
+                                        <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
                                     V-Store xét duyệt
 </span>
-                                </th>
+                                    </th>
                                     <th class="white-space-120 text-center">Trạng thái
                                         <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.status')
@@ -164,7 +165,8 @@
                                             <td class="text-center font-medium white-space-130">{{$request->user_name}}</td>
                                             <td class="text-center white-space-100">{{$request->discount}}%</td>
                                             <td class="text-center white-space-100">{{$request->discount_vShop}}%</td>
-                                            <td class="text-center white-space-100"><span>{{$request->vstore_name}}</span></td>
+                                            <td class="text-center white-space-100">
+                                                <span>{{$request->vstore_name}}</span></td>
                                             <td class="text-center white-space-160">
                                                 @if($request->status == 1)
                                                     <div class="text-warning  "
@@ -204,10 +206,13 @@
                                                         duyệt</p>
                                                 @endif
                                             </td>
-                                            <td class="white-space-80 text-center"><a href="javascript:void(0)" class="btn btn-link p-0"
-                                                   style="text-decoration: underline;"
-                                                   onclick="showDetail({{$request->id}})"
-                                                   data-toggle="modal" data-target=".bd-example-modal-lg">Chi tiết</a>
+                                            <td class="white-space-80 text-center"><a href="javascript:void(0)"
+                                                                                      class="btn btn-link p-0"
+                                                                                      style="text-decoration: underline;"
+                                                                                      onclick="showDetail({{$request->id}})"
+                                                                                      data-toggle="modal"
+                                                                                      data-target=".bd-example-modal-lg">Chi
+                                                    tiết</a>
                                             </td>
                                         </tr>
                                     @endforeach
@@ -328,6 +333,7 @@
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id + '?status=' + status)
             $('#btnConfirm').html('Duyệt')
+            $('#btnConfirm').css('display', 'block');
             $('#modalDetail').modal('show');
 
         }
@@ -341,6 +347,8 @@
             </div>
             `);
             $('#btnConfirm').html('Từ chối')
+            $('#btnConfirm').css('display', 'block');
+
             document.querySelector('#form').setAttribute('action', '{{route('screens.admin.product.confirm')}}/' + id + '?status=' + status)
             $('#modalDetail').modal('show');
 
