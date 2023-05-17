@@ -9,7 +9,8 @@
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav flex-column">
                     <li class="nav-divider">
-                        Menu
+                        {{-- Menu --}}
+                        &nbsp;
                     </li>
                     <li class="nav-item ">
                         <a class="nav-link {{ (request()->is('dashboard*')) ? 'active' : '' }}"
