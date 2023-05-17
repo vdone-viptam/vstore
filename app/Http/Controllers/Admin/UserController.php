@@ -48,7 +48,7 @@ class UserController extends Controller
         $this->v['key_search'] = trim($request->key_search) ?? '';
 
         $this->v['users'] = User::select('users.name', 'users.id', 'email', 'id_vdone', 'company_name',
-            'phone_number', 'tax_code', 'address', 'users.created_at', 'confirm_date', 'users.referral_code', 'users.role_id','accountant_confirm');
+            'phone_number', 'tax_code', 'address', 'users.created_at', 'confirm_date', 'users.referral_code', 'users.role_id', 'accountant_confirm');
         $limit = $request->limit ?? 10;
         if (strlen($this->v['key_search']) > 0) {
             $this->v['users'] = $this->v['users']
@@ -144,20 +144,18 @@ class UserController extends Controller
             $user->save();
             $this->sendAccountant($user);
             if ($user->role_id == 4) {
+                $district = District::where('district_id', $user->district_id)->first()->district_name;
+                $province = Province::where('province_id', $user->provinceId)->first()->province_name;
+                $wards = Ward::where('wards_id', $user->ward_id)->first()->wards_name;
 
+                $address = $wards . ', ' . $district . '. ' . $province;
+                $result = getLatLongByAddress($address);
+                if (!$result) {
+                    return redirect()->back()->with('error', 'Địa chỉ không hợp lệ');
+                }
 
-//                $district = District::where('district_id', $user->district_id)->first()->district_name;
-//                $province = Province::where('province_id', $user->provinceId)->first()->province_name;
-//                $wards = Ward::where('wards_id', $user->ward_id)->first()->wards_name;
-//
-//                $address = $wards . ', ' . $district . '. ' . $province;
-//
-//                $result = app('geocoder')->geocode($address)->get();
-//
-//                $coordinates = $result[0]->getCoordinates();
-//                $lat = $coordinates->getLatitude();
-//                $long = $coordinates->getLongitude();
-
+                $lat = $result['lat'];
+                $long = $result['lng'];
                 $warehouses = new Warehouses();
                 $warehouses->name = $user->name;
                 $warehouses->phone_number = $user->phone_number;
@@ -210,7 +208,7 @@ class UserController extends Controller
             return redirect()->back()->with('success', 'Kích hoạt tài khoản thành công');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
         }
     }
 
@@ -482,48 +480,49 @@ class UserController extends Controller
 
 
     // gửi thông tin tài khoản sang kế toán để làm lịch sử giao dịch
-    public function sendAccountant( $user){
+    public function sendAccountant($user)
+    {
 //        accountCode=${dto.accountCode}&code=${dto.code}&companyName=${dto.companyName}&vStoreName=${dto.vStoreName}&taxCode=${dto.taxCode}
-        $order_service = OrderService::where('user_id',$user->id)->first();
-        if ($user->role_id == 2){
+        $order_service = OrderService::where('user_id', $user->id)->first();
+        if ($user->role_id == 2) {
             $value = 12000000;
             $code = $order_service->no;
-        }elseif ($user->role_id == 4){
+        } elseif ($user->role_id == 4) {
             $value = 1200000;
             $code = $order_service->no;
-        }elseif ($user->role_id == 3){
+        } elseif ($user->role_id == 3) {
             $value = 300000000;
             $code = Str::lower(Str::random(10));
         }
 
-        if ($user->role_id != 3){
-            $hmac = 'code='. $code .'&companyName='.$user->company_name. '&vStoreName=' . $user->name.'&taxCode='.$user->tax_code;
+        if ($user->role_id != 3) {
+            $hmac = 'code=' . $code . '&companyName=' . $user->company_name . '&vStoreName=' . $user->name . '&taxCode=' . $user->tax_code;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
-            $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
+            $sig = hash_hmac('sha256', $hmac, config('domain.key_split'));
             $data = [
-                "code"=>$code,
-                "accountCode"=>$user->account_code,
-                "type"=>$user->role_id,
-                "value"=>$value,
-                "vStoreName"=>$user->name,
-                "companyName"=>$user->company_name,
-                "taxCode"=>$user->tax_code,
-                "email"=>$user->email,
-                "phone"=>$user->phone_number,
-                "signature"=>$sig
+                "code" => $code,
+                "accountCode" => $user->account_code,
+                "type" => $user->role_id,
+                "value" => $value,
+                "vStoreName" => $user->name,
+                "companyName" => $user->company_name,
+                "taxCode" => $user->tax_code,
+                "email" => $user->email,
+                "phone" => $user->phone_number,
+                "signature" => $sig
             ];
-            $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
-        }else{
-            $hmac = 'code='. $user->trading_code .'&status='. 1 . '&accountCode='. $user->account_code;
+            $respon = Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store', $data);
+        } else {
+            $hmac = 'code=' . $user->trading_code . '&status=' . 1 . '&accountCode=' . $user->account_code;
 //                    code=${dto.code}&status=${dto.status}&accountCode=${dto.accountCode}
-            $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
+            $sig = hash_hmac('sha256', $hmac, config('domain.key_split'));
             $data = [
-                "code"=>$user->trading_code,
-                "accountCode"=>$user->account_code,
-                "status"=>1,
-                "signature"=>$sig
+                "code" => $user->trading_code,
+                "accountCode" => $user->account_code,
+                "status" => 1,
+                "signature" => $sig
             ];
-            $respon =Http::patch(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data);
+            $respon = Http::patch(config('domain.domain_vdone') . 'accountant/buy-account/v-store', $data);
         }
 
     }
