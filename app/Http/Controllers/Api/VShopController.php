@@ -1035,7 +1035,7 @@ class  VShopController extends Controller
                 'updated_at' => Carbon::now(),
             ];
             $province_name = Province::where('province_id', $request->province)->first()->province_name;
-            $district_name = District::where('district_id', $request->district)->first()->district_name;
+            $district_name = $request->district;
             $wards_name = Ward::where('wards_id', $request->wards)->first()->wards_name;
             $address = $wards_name . ',' . $district_name . ', ' . $province_name;
             $result = getLatLongByAddress($address);
