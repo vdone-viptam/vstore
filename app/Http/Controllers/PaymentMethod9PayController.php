@@ -665,15 +665,18 @@ class PaymentMethod9PayController extends Controller
             $order->save();
 
             $ware_user = Warehouses::select('user_id')->where('id', $order->warehouse_id)->first();
-            $user = User::find($ware_user->user_id);
-            $data = [
-                'title' => 'Bạn vừa có 1 thông báo mới',
-                'avatar' => '',
-                'message' => 'Bạn vừa có đơn hàng mới',
-                'created_at' => Carbon::now()->format('h:i A d/m/Y'),
-                'href' => route('screens.storage.product.requestOut', ['key_search' => $code])
-            ];
-            $user->notify(new AppNotification($data));
+            if ($ware_user){
+                $user = User::find($ware_user->user_id);
+                $data = [
+                    'title' => 'Bạn vừa có 1 thông báo mới',
+                    'avatar' => '',
+                    'message' => 'Bạn vừa có đơn hàng mới',
+                    'created_at' => Carbon::now()->format('h:i A d/m/Y'),
+                    'href' => route('screens.storage.product.requestOut', ['key_search' => $code])
+                ];
+                $user->notify(new AppNotification($data));
+            }
+
             return response()->json([
                 "status_code" => 200,
                 "message" => "Đặt hàng thành công"
