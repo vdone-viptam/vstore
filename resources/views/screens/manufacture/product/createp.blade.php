@@ -519,7 +519,7 @@
                     },
                     FileUploaded: function (up, file, result) {
 
-                        responseResult = JSON.parse(result.response);
+                       const  responseResult = JSON.parse(result.response);
 
                         if (responseResult.ok == 0) {
                             Swal.fire({

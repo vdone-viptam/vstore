@@ -171,6 +171,13 @@
                             <div class="col-12 mb-3 col-xl-6">
                                 <div class="form-group" id="file-input">
                                     <label for="name">Video sản phẩm</label>
+                                    @if(strlen($product->video) > 0)
+                                        <video width="320" height="240" controls class="form-control mb-2">
+                                            <source src="{{asset($product->video)}}" type="video/mp4">
+                                        </video>
+                                    @else
+                                        <p>Không có video liên quan đến sản phẩm</p>
+                                    @endif
                                     <input type="file" id="pickfiles" class="form-control form-control-lg"
                                            accept="video/mp4">
                                     <div id="filelist"></div>
@@ -541,13 +548,12 @@
                         document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
                     },
                     FileUploaded: function (up, file, result) {
-
-                        responseResult = JSON.parse(result.response);
+                       const responseResult = JSON.parse(result.response);
 
                         if (responseResult.ok == 0) {
                             Swal.fire({
                                 icon: 'error',
-                                title: 'Xem chi tiết sản phẩm thất bại !',
+                                title: 'Upload video không thành công !',
                                 text: responseResult.info,
                             })
                         }

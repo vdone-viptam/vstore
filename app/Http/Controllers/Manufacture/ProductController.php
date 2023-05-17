@@ -193,7 +193,7 @@ class ProductController extends Controller
             $product->availability_status = 0;
             $product->status = 0;
             $product->sku_id = $request->sku_id;
-            // Upload Image
+            $product->manufacturer_address = $request->manufacturer_address;
             $product->video = $request->video;
 
             while (true) {
@@ -590,6 +590,7 @@ class ProductController extends Controller
             $product->import_address = $request->import_address ?? '';
             $product->packing_type = $request->packing_type;
             $product->sku_id = $request->sku_id;
+            $product->manufacturer_address = $request->manufacturer_address;
             $product->status = 0;
             // Upload Image
             $product->video = $request->video;
@@ -599,7 +600,7 @@ class ProductController extends Controller
             if (json_decode($request->images)) {
                 if (json_decode($request->images)) {
                     foreach (json_decode($request->images) as $image) {
-                        if (strpos($image,'data:image') !== false) {
+                        if (strpos($image, 'data:image') !== false) {
                             $path = $this->saveImgBase64($image, 'products');
                             $photo_gallery[] = 'storage/products/' . $path;
                         } else {
