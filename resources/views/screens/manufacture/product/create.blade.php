@@ -39,7 +39,7 @@
                                 <h3 style="font-size: 18px;">Thông tin cơ bản</h3>
                             </div>
 
-                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12"  id="div2">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" id="div2">
                                 <div class="form-group">
                                     <label for="name">Chọn V-Store<span class="text-danger">*</span></label>
                                     <select class="form-control form-control-lg" disabled name="">
@@ -556,17 +556,12 @@
                         uploader.start();
                     },
                     UploadProgress: function (up, file) {
-                        console.log('UploadProgress');
-                        console.log(file);
                         document.querySelector('.btnSave').setAttribute('disabled', 'true');
                         document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
                     },
                     FileUploaded: function (up, file, result) {
 
-                        console.log('FileUploaded');
-                        console.log(file);
-                        console.log(JSON.parse(result.response));
-                        responseResult = JSON.parse(result.response);
+                        const responseResult = JSON.parse(result.response);
 
                         if (responseResult.ok == 0) {
                             Swal.fire({
