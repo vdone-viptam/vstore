@@ -755,22 +755,6 @@ class  VShopController extends Controller
             $address->province_name = Province::where('province_id', $address->province)->first()->province_name;
             $address->district_name = District::where('district_id', $address->district)->first()->district_name;
             $address->wards_name = Ward::where('wards_id', $address->wards)->first()->wards_name;
-            $address = $address->wards_name . ',' . $address->district_name . ', ' . $address->province_name;
-
-            $result = getLatLongByAddress($address);
-            if (!$result) {
-                return response()->json([
-                    'status_code' => 400,
-                    'message' => 'Địa chỉ không hợp lệ',
-                ], 400);
-            }
-
-            $lat = $result['lat'];
-            $long = $result['lng'];
-            if ($lat && $long){
-                $address->lat = $lat;
-                $address->long = $long;
-            }
             return response()->json([
                 'status_code' => 200,
                 'data' => $address,
@@ -1029,9 +1013,26 @@ class  VShopController extends Controller
                 'name_address' => $request->name_address,
                 'updated_at' => Carbon::now(),
             ];
+            $province_name = Province::where('province_id', $request->province)->first()->province_name;
+            $district_name = District::where('district_id', $request->district)->first()->district_name;
+            $wards_name = Ward::where('wards_id', $request->wards)->first()->wards_name;
+            $address = $wards_name . ',' . $district_name . ', ' . $province_name;
+            $result = getLatLongByAddress($address);
+            if (!$result) {
+                return response()->json([
+                    'status_code' => 400,
+                    'message' => 'Địa chỉ không hợp lệ',
+                ], 400);
+            }
 
-
+            $lat = $result['lat'];
+            $long = $result['lng'];
+            if ($lat && $long) {
+                $data['lat'] = $lat;
+                $data['long'] = $long;
+            }
             $model = DB::table('vshop')->where('pdone_id', $id)->update($data);
+
             return response()->json([
                 'status_code' => 201,
                 'data' => 'Cập nhật địa chỉ thành công',
