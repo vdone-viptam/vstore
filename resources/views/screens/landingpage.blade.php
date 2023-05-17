@@ -559,7 +559,7 @@
     <div
         class="grid grid-cols-2 gap-4 lg:gap-6 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 place-items-center grid-shop">
         @foreach($hot_products as $product)
-            <div class="w-[220px] flex flex-col relative cursor-pointer shadow-md">
+            <div class="w-[256px] flex flex-col relative cursor-pointer shadow-md">
                 @if($product->discount_sale > 0)
                     <div class="text-center gg w-[51px] h-[52px] absolute left-[15px] top-0">
                         <p class="text-white text-sm md:text-[17px] font-bold">{{$product->discount_sale}}%</p>
@@ -603,9 +603,11 @@
                     </div>
                 </div>
             </div>
+
+        @endforeach
             @if($hot_products->total() < 6)
                 @for($i = 0;$i < 6 - count($hot_products);$i++)
-                    <div class="bg-[#FFF] w-[220px] flex flex-col relative cursor-pointer shadow-md">
+                    <div class="bg-[#FFF] w-[256px] flex flex-col relative cursor-pointer shadow-md">
                         <div
                             class="placeholder-content h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff] relative">
                             <div class="img-center w-full w-[40px] mx-auto h-[40px] z-[4] absolute">
@@ -632,8 +634,6 @@
                     </div>
                 @endfor
             @endif
-        @endforeach
-
     </div>
     {{$hot_products->withQueryString()->links('layouts.custom.pagi_landing')}}
 
