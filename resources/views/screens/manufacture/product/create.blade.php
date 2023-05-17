@@ -101,7 +101,7 @@
                             </div>
                             <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Giá sản phẩm (đồng) </label>
+                                    <label for="name">Giá sản phẩm (đ) </label>
                                     <input type="text" class="form-control form-control-lg" id="price" name="price"
                                            value="{{old('price')}}" placeholder="0 đ" readonly>
                                 </div>
@@ -309,7 +309,7 @@
                             </div>
 
                             <div class="col-12">
-                                <h3 style="font-size: 24px;">Thanh toán </h3>
+                                
                                 <span style="font-size: 18px;">Phương thức thanh toán <span
                                         class="text-danger">*</span></span>
                             </div>
