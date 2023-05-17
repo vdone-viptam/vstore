@@ -424,7 +424,7 @@
                         var id = 'blobid' + (new Date()).getTime();
                         var blobCache = tinymce.activeEditor.editorUpload.blobCache;
                         var base64 = reader.result.split(',')[1];
-                        fetch('{{route('upload')}}', {
+                        fetch('{{route('upload')}}?_token={{csrf_token()}}', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'

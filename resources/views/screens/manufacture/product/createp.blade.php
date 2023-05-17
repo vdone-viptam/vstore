@@ -414,11 +414,11 @@
                         var id = 'blobid' + (new Date()).getTime();
                         var blobCache = tinymce.activeEditor.editorUpload.blobCache;
                         var base64 = reader.result.split(',')[1];
-                        fetch('{{route('upload')}}', {
+                        fetch('{{route('upload')}}?_token={{csrf_token()}}', {
                             method: 'POST',
                             headers: {
                                 'Content-Type': 'application/json'
-                                // 'Content-Type': 'application/x-www-form-urlencoded',
+
                             },
                             body: JSON.stringify({file: reader.result}) // body data type must match "Content-Type" header
                         }).then(res => res.json())
@@ -519,7 +519,7 @@
                     },
                     FileUploaded: function (up, file, result) {
 
-                       const  responseResult = JSON.parse(result.response);
+                        const responseResult = JSON.parse(result.response);
 
                         if (responseResult.ok == 0) {
                             Swal.fire({
