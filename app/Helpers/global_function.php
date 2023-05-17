@@ -57,15 +57,45 @@ function calculateShippingByProductID($productID, $districtId, $provinceId, $war
     $places = $products;
     $min_distance = PHP_FLOAT_MAX;
     $warehouse = null;
+    $lat = $result['lat'];
+    $long = $result['lng'];
     foreach ($places as $place) {
-        $lat = $result['lat'];
-        $long = $result['lng'];
+
         $distance = haversine($lat, $long, $place->lat, $place->long);
         if ($distance < $min_distance) {
             $min_distance = $distance;
             $warehouse = $place;
         }
     }
+    $vshops = \App\Models\Vshop::join('vshop_products','vshop_products.vshop_id','vshop.id')
+        ->where('vshop_products.status',2)
+        ->where('vshop_products.product_id',$productID)
+        ->select(
+            'vshop.id as id',
+            'vshop.lat',
+            'vshop.long',
+            'vshop.province',
+            'vshop.district'
+        )
+        ->get();
+    if (count($vshops)>0){
+        $min_vshop = PHP_FLOAT_MAX;
+        $vshop = null;
+        foreach ($vshops as $val){
+
+            $vshop_distance = haversine($lat, $long, $val->lat, $val->long);
+            if ($vshop_distance < $min_vshop) {
+                $min_vshop = $vshop_distance;
+                $vshop = $val;
+            }
+        }
+
+        if (haversine($lat, $long, $vshop->lat, $vshop->long)< haversine($lat, $long, $warehouse->lat, $warehouse->long) ){
+            $warehouse = $vshop;
+            $warehouse->isVshop = 1;
+        }
+    }
+
     return $warehouse;
 }
 

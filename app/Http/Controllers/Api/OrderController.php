@@ -138,12 +138,24 @@ class OrderController extends Controller
                 ], 400);
             }
 
-            $order->warehouse_id = $warehouse->id;
+            if ($warehouse->isVshop && $warehouse->isVshop ==1 ){
+                $order->warehouse_id = null;
+                $order->is_vshop = $warehouse->id;
+                $district = $warehouse->district;
+                $province = $warehouse->province;
+            }else{
+                $order->warehouse_id = $warehouse->id;
+                $order->is_vshop=  null;
+                $district = $warehouse->district_id;
+                $province = $warehouse->city_id;
+            }
+
+
 
             $body = [
                 // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
-                'SENDER_DISTRICT' => $warehouse->district_id,
-                'SENDER_PROVINCE' => $warehouse->city_id,
+                'SENDER_DISTRICT' => $district,
+                'SENDER_PROVINCE' => $province,
                 'RECEIVER_DISTRICT' => $districtId,
                 'RECEIVER_PROVINCE' => $provinceId,
 
@@ -174,8 +186,8 @@ class OrderController extends Controller
 
             $body = [
                 // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
-                'SENDER_DISTRICT' => $warehouse->district_id,
-                'SENDER_PROVINCE' => $warehouse->city_id,
+                'SENDER_DISTRICT' => $district,
+                'SENDER_PROVINCE' => $province,
                 'RECEIVER_DISTRICT' => $districtId,
                 'RECEIVER_PROVINCE' => $provinceId,
 
@@ -218,7 +230,7 @@ class OrderController extends Controller
         $orderItem->order_id = $order->id;
         $orderItem->product_id = $product->id;
         $orderItem->vshop_id = $product->vshop_id;
-        $orderItem->warehouse_id = $order->warehouse_id ?? 5;
+        $orderItem->warehouse_id = $order->warehouse_id ?? null;
         $orderItem->sku = '';
         $orderItem->delivery_partner_id = 1;
         $orderItem->price = $product->price;
@@ -226,6 +238,9 @@ class OrderController extends Controller
         $orderItem->discount_vshop = isset($discount['discountsFromVShop']) ? $discount['discountsFromVShop'] : 0;
         $orderItem->discount_ncc = isset($discount['discountsFromSuppliers']) ? $discount['discountsFromSuppliers'] : 0;
         $orderItem->discount_vstore = isset($discount['discountsFromVStore']) ? $discount['discountsFromVStore'] : 0;
+        if ($order->is_vshop !==null){
+            $orderItem->is_vshop = $order->is_vshop;
+        }
         $orderItem->save();
         $product->images = json_decode($product->images);
 
