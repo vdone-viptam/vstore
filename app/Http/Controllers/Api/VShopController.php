@@ -755,6 +755,22 @@ class  VShopController extends Controller
             $address->province_name = Province::where('province_id', $address->province)->first()->province_name;
             $address->district_name = District::where('district_id', $address->district)->first()->district_name;
             $address->wards_name = Ward::where('wards_id', $address->wards)->first()->wards_name;
+            $address = $address->wards_name . ',' . $address->district_name . ', ' . $address->province_name;
+
+            $result = getLatLongByAddress($address);
+            if (!$result) {
+                return response()->json([
+                    'status_code' => 400,
+                    'message' => 'Địa chỉ không hợp lệ',
+                ], 400);
+            }
+
+            $lat = $result['lat'];
+            $long = $result['lng'];
+            if ($lat && $long){
+                $address->lat = $lat;
+                $address->long = $long;
+            }
             return response()->json([
                 'status_code' => 200,
                 'data' => $address,
