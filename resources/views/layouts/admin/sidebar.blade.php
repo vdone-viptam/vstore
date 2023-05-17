@@ -8,7 +8,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav flex-column">
-                   
+
                     <li class="nav-item ">
                         <a class="nav-link {{ (request()->is('dashboard*')) ? 'active' : '' }}"
                            href="{{route('screens.admin.dashboard.index')}}" aria-expanded="false"
@@ -118,12 +118,12 @@
                         </div>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link {{ (request()->is('finances*')) ? 'active' : '' }}" href="#"
+                        <a class="nav-link {{ (request()->is('finances*')) ? 'active' :  ( (request()->is('bank*')) ? 'active' : '' ) }}" href="#"
                            data-toggle="collapse" aria-expanded="{{ (request()->is('finances*')) ? 'true' : 'false' }}"
                            data-target="#submenu-7" aria-controls="submenu-7"><i
                                 class="fas fa-fw fa-dollar-sign"></i>Quản lý tài chính</a>
                         <div id="submenu-7"
-                             class="{{ (request()->is('finances*')) ? 'collapshow' : 'collapse' }} submenu" style="">
+                             class="{{ (request()->is('finances*')) ? 'collapshow' : ( (request()->is('bank*')) ? 'collapshow' : 'collapse' ) }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('finances/request-deposit*')) ? 'active1' : '' }}"

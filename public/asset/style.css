@@ -512,6 +512,10 @@ table thead th{
     white-space: unset !important;
     min-width: 150px !important;
 }
+.white-space-160{
+    white-space: unset !important;
+    min-width: 160px !important;
+}
 .white-space-180{
     white-space: unset !important;
     min-width: 180px !important;
