@@ -2,12 +2,11 @@
     @csrf
     <div class="col-12">
         <div class="form-group">
-            <label>Lựa chọn sản phẩm tạo giảm giá</label>
-            <select name="product_id" id="product_id" readonly
-                    class="form-control-lg form-control choose-product">
-                <option
-                    value="{{$product1->id}}" selected>{{$product1->name}}</option>
-            </select>
+            <label for="">Tên sản phẩm</label>
+                <input  value="{{$product1->name}}" readonly
+                       class="form-control-lg form-control choose-product"/>
+            <input name="product_id" value="{{$product1->id}}" type="hidden"
+                   class="form-control-lg form-control choose-product"/>
         </div>
         <div class="form-group">
             <label class="">Giá sản phẩm:</label>
@@ -66,7 +65,6 @@
                 <span class="">Thời gian bắt đầu:</span>
                 <input type="datetime-local" name="start_date" id="start_date"
                        required value="{{$discount->start_date}}"
-                       min="{{ Carbon\Carbon::now()->addSeconds(600)->format('Y-m-d H:i') }}"
                        class="form-control-lg form-control ">
                 @error('start_date')
                 <p class="text-red-600">{{$message}}</p>

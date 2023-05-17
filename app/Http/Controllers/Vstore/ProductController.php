@@ -235,7 +235,7 @@ class ProductController extends Controller
 
     public function createDis()
     {
-        $product = DB::table('products')->select('name', 'id')->where('status', 2)->where('vstore_id', Auth::id())->get();
+        $product = DB::table('products')->select('name', 'id')->where('status', 2)->where('availability_status', 1)->where('vstore_id', Auth::id())->get();
         $data = [];
         foreach ($product as $pr) {
             if (DB::table('discounts')->where('user_id', Auth::id())->where('product_id', $pr->id)->count() == 0) {
