@@ -46,7 +46,7 @@ class DiscountController extends Controller
 
     public function createDis()
     {
-        $product = DB::table('products')->select('name', 'id')->where('status', 2)->where('user_id', Auth::id())->get();
+        $product = DB::table('products')->select('name', 'id')->where('status', 2)->where('availability_status', 1)->where('user_id', Auth::id())->get();
         $data = [];
         foreach ($product as $pr) {
             if (DB::table('discounts')->where('user_id', Auth::id())->where('product_id', $pr->id)->count() == 0) {
@@ -137,14 +137,14 @@ class DiscountController extends Controller
     {
         Discount::where('start_date', '<=', \Carbon\Carbon::now())
             ->where('end_date', '>=', Carbon::now())
-            ->where('type',1)
+            ->where('type', 1)
             ->where('status', 0)
             ->where('discounts.user_id', Auth::id())
             ->update(['status' => 1]);
 
         Discount::where('end_date', '<', Carbon::now())
             ->where('status', 1)
-            ->where('type',1)
+            ->where('type', 1)
             ->where('discounts.user_id', Auth::id())
             ->update(['status' => 2]);
 
