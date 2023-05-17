@@ -1,5 +1,5 @@
 @extends('layouts.storage.main')
-@section('page_title','Hồ sơ của tôi')
+@section('page_title','Quản lý thông tin kho')
 @section('custom_css')
 {{-- <link rel="stylesheet" href="{{asset('asset/css/style.css')}}"> --}}
 <style>
