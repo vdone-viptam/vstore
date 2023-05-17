@@ -476,7 +476,7 @@
             <!-- slider2 -->
             <div class="slider2">
                 @foreach($big_sale as $pro)
-                    <div class="w-[256px] flex flex-col relative cursor-pointer">
+                    <div class="w-[220px] flex flex-col relative cursor-pointer">
                         <div class="text-center gg w-[51px] h-[52px] absolute left-[15px] top-0">
                             <p class="text-white text-sm md:text-[17px] font-bold">{{$pro->discount}}%</p>
                             <p class="text-[9px] md:text-xs text-[#FFFA00] font-medium">GIẢM</p>
@@ -516,7 +516,7 @@
                 @endforeach
                 @if(count($big_sale) < 6)
                     @for($i = 0;$i < 6 - count($big_sale);$i++)
-                        <div class="w-[256px] flex flex-col relative cursor-pointer bg-[#FFF]">
+                        <div class="w-[220px] flex flex-col relative cursor-pointer bg-[#FFF]">
                             <div
                                 class="placeholder-content h-[146px] w-full rounded-tl-lg object-cover rounded-tr-lg border-b border-[#f0f8ff] relative">
                                 <div class="img-center w-full w-[40px] mx-auto h-[40px] z-[4] absolute">

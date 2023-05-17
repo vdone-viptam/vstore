@@ -603,6 +603,8 @@
                     </div>
                 </div>
             </div>
+
+        @endforeach
             @if($hot_products->total() < 6)
                 @for($i = 0;$i < 6 - count($hot_products);$i++)
                     <div class="bg-[#FFF] w-[220px] flex flex-col relative cursor-pointer shadow-md">
@@ -632,8 +634,6 @@
                     </div>
                 @endfor
             @endif
-        @endforeach
-
     </div>
     {{$hot_products->withQueryString()->links('layouts.custom.pagi_landing')}}
 

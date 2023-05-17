@@ -297,7 +297,7 @@
         }
 
         let limit = document.getElementById('limit');
-        document.getElementById('btnConfirm').style.display = 'none';
+        document.getElementById('btnConfirm').setAttribute('disabled', 'true');
 
         function appect(id, discount, status) {
             $('.md-content').html(`
@@ -324,14 +324,14 @@
                 if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
                     if ($('#appect').is(":checked")) {
                         document.getElementById('messageDis').style.display = 'none';
-                        document.getElementById('btnConfirm').style.display = 'block';
+                        document.getElementById('btnConfirm').removeAttribute('disabled');
                     } else {
                         document.getElementById('messageDis').style.display = 'none';
-                        document.getElementById('btnConfirm').style.display = 'none';
+                        document.getElementById('btnConfirm').setAttribute('disabled', 'true');
                     }
                 } else {
                     document.getElementById('messageDis').style.display = 'block';
-                    document.getElementById('btnConfirm').style.display = 'none';
+                    document.getElementById('btnConfirm').setAttribute('disabled', 'true');
                 }
 
             });
@@ -339,14 +339,14 @@
                 if (+$('#discount_vShop').val() < Number(document.getElementById('discount').dataset.discount) && +$('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2) {
                     if ($('#appect').is(":checked")) {
                         document.getElementById('messageDis').style.display = 'none';
-                        document.getElementById('btnConfirm').style.display = 'block';
+                        document.getElementById('btnConfirm').removeAttribute('disabled');
                     } else {
                         document.getElementById('messageDis').style.display = 'none';
-                        document.getElementById('btnConfirm').style.display = 'none';
+                        document.getElementById('btnConfirm').setAttribute('disabled', 'true');
                     }
                 } else {
                     document.getElementById('messageDis').style.display = 'block';
-                    document.getElementById('btnConfirm').style.display = 'none';
+                    document.getElementById('btnConfirm').setAttribute('disabled', 'true');
                 }
             })
             document.getElementsByName('discount_vShop')[0].addEventListener("keypress", (e) => {
@@ -367,10 +367,10 @@
                 $('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2 &&
                 $('#appect').is(":checked")) {
                 document.getElementById('messageDis').style.display = 'none';
-                document.getElementById('btnConfirm').style.display = 'block';
+                document.getElementById('btnConfirm').removeAttribute('disabled');
             } else {
                 document.getElementById('messageDis').style.display = 'block';
-                document.getElementById('btnConfirm').style.display = 'none';
+                document.getElementById('btnConfirm').setAttribute('disabled', 'true');
             }
         }
 
@@ -387,7 +387,7 @@
             document.querySelector('#form').setAttribute('name', '_csrf');
 
             $('#modalDetail').modal('show');
-            document.getElementById('btnConfirm').style.display = 'block';
+            document.getElementById('btnConfirm').removeAttribute('disabled');
 
         }
 

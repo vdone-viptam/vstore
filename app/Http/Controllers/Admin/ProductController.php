@@ -175,7 +175,7 @@ class ProductController extends Controller
             return redirect()->back()->with('success', 'Thay đổi trạng thái yêu cầu thành công');
         } catch (\Exception $e) {
             DB::rollBack();
-            return redirect()->back()->with('error', $e->getMessage());
+            return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
 
         }
     }

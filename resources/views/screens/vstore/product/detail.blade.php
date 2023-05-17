@@ -131,20 +131,11 @@
 
 
 <script>
-    //     document.getElementById('btnConfirm').style.display = 'none';
-    //     document.getElementsByName('discount_vShop')[0].addEventListener("keypress", (e) => {
-    //         var regex = new RegExp("^[0-9.]+$");
-    //         var key = String.fromCharCode(!event.charCode ? event.which : event.charCode);
-    //         if (!regex.test(key)) {
-    //             event.preventDefault();
-    //             return false;
-    //         }
-    //     });
     document.querySelector('#status').addEventListener('change', (e) => {
         if (e.target.value == 2) {
             $("#discount_vShop").attr('disabled', 'true')
             $("#discount_vShop").val('')
-            document.getElementById('btnConfirm').style.display = 'block';
+            document.getElementById('btnConfirm').removeAttribute('disabled');
             document.querySelector('#note').innerHTML = `
    <label for="name">Lý do từ chối</label>
 <textarea name="note" placeholder="Lý do từ chối"
@@ -159,16 +150,16 @@
     </label>`);
                 $('#appectAP').on('change', (e) => {
                     if (e.target.checked && $('#discount_vShop').val() < Number(document.getElementById('discount').dataset.discount) && +$('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2) {
-                        document.getElementById('btnConfirm').style.display = 'block';
+                        document.getElementById('btnConfirm').removeAttribute('disabled');
                     } else {
-                        document.getElementById('btnConfirm').style.display = 'none';
+                        document.getElementById('btnConfirm').setAttribute('disabled', 'true');
                     }
                 });
             }
             $("#discount_vShop").removeAttr('disabled')
 
             document.querySelector('#note').innerHTML = ``;
-            document.getElementById('btnConfirm').style.display = 'none';
+            document.getElementById('btnConfirm').setAttribute('disabled', 'true');
         } else {
             document.querySelector('#note').innerHTML = ``;
         }
@@ -185,15 +176,15 @@
     </label>`);
                 $('#appectAP').on('change', (e) => {
                     if (e.target.checked && $('#discount_vShop').val() < Number(document.getElementById('discount').dataset.discount) && +$('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2) {
-                        document.getElementById('btnConfirm').style.display = 'block';
+                        document.getElementById('btnConfirm').removeAttribute('disabled');
                     } else {
-                        document.getElementById('btnConfirm').style.display = 'none';
+                        document.getElementById('btnConfirm').setAttribute('disabled', 'true');
                     }
                 });
             } else {
 
                 document.getElementById('messageDis').style.display = 'block';
-                document.getElementById('btnConfirm').style.display = 'none';
+                document.getElementById('btnConfirm').setAttribute('disabled', 'true');
             }
 
         })
