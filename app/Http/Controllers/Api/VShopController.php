@@ -699,7 +699,22 @@ class  VShopController extends Controller
 
         try {
             $vshop = Vshop::where('pdone_id', $request->pdone_id)->first();
+            $province_name = Province::where('province_id', $request->province)->first()->province_name;
+            $district_name = District::where('district_id', $request->district)->first()->district_name;
+            $wards_name = Ward::where('wards_id', $request->wards)->first()->wards_name;
+            $address = $wards_name . ',' . $district_name . ', ' . $province_name;
+            $result = getLatLongByAddress($address);
+            if (!$result) {
+                return response()->json([
+                    'status_code' => 400,
+                    'message' => 'Địa chỉ không hợp lệ',
+                ], 400);
+            }
+
+            $lat = $result['lat'];
+            $long = $result['lng'];
             if (!$vshop) {
+
                 DB::table('vshop')->insert([
                     'name_address' => $request->name_address,
                     'pdone_id' => $pdone_id,
@@ -709,7 +724,9 @@ class  VShopController extends Controller
                     'district' => $request->district,
                     'province' => $request->province,
                     'wards' => $request->wards,
-                    'created_at' => Carbon::now()
+                    'created_at' => Carbon::now(),
+                    'lat' => $lat,
+                    'long' => $long
                 ]);
             } else {
                 $vshop->name = $request->name;
@@ -719,6 +736,10 @@ class  VShopController extends Controller
                 $vshop->province = $request->province;
                 $vshop->name_address = $request->name_address;
                 $vshop->wards = $request->wards;
+                if ($lat && $long) {
+                    $vshop->lat = $lat;
+                    $vshop->long = $long;
+                }
                 $vshop->save();
 
             }
