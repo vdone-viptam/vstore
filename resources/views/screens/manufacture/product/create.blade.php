@@ -39,27 +39,14 @@
                                 <h3 style="font-size: 18px;">Thông tin cơ bản</h3>
                             </div>
 
-                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" id="div1">
+                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12"  id="div2">
                                 <div class="form-group">
                                     <label for="name">Chọn V-Store<span class="text-danger">*</span></label>
-                                    <select class="form-control form-control-lg" disabled name="vstore_id">
+                                    <select class="form-control form-control-lg" disabled name="">
                                         <option value="{{$vstore->id}}">{{$vstore->name}}</option>
                                     </select>
+                                    <input type="hidden" name="vstore_id" value="{{$vstore->id}}">
                                     <button onclick="changeHidden(1)" class="btn btn-primary mt-2" type="button">Thay
-                                        đổi
-                                    </button>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" style="display: none" id="div2">
-                                <div class="form-group">
-                                    <label for="name">Chọn V-Store<span class="text-danger">*</span></label>
-                                    <select class="form-control form-control-lg" name="vstore_id" id="selectVs">
-                                        @foreach($v_stores as $v)
-                                            <option value="{{$v->id}}">{{$v->name}}</option>
-
-                                        @endforeach
-                                    </select>
-                                    <button type="button" class="btn btn-primary mt-2" onclick="changeHidden(2)">Thay
                                         đổi
                                     </button>
                                 </div>
@@ -81,7 +68,8 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Mức chiết khấu cho V-Store(%) <span class="text-danger">*</span></label>
+                                    <label for="name">Mức chiết khấu cho V-Store(%) <span
+                                            class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg number discountA" required
                                            id="discountA"
                                            name="discountA"
@@ -144,7 +132,7 @@
                                 <div class="form-group" id="file-input">
                                     <label for="name">Tài liệu sản phẩm<span class="text-danger">*</span></label>
                                     <input type="file" id="pickfiles"
-                                           class="form-control form-control-lg"  accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
+                                           class="form-control form-control-lg" accept="application/msword, application/vnd.ms-excel, application/vnd.ms-powerpoint,
                                         text/plain, application/pdf, image/*">
                                     <div id="filelist"></div>
                                 </div>
@@ -194,8 +182,9 @@
                                         <div class="col-6">
                                             <label for="name">Số tiền (đ)</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
-                                                name="sub_moneyv[]" value="{{isset(old('sub_moneyv')[0]) ? old('sub_moneyv')[0] : '0 đ'}}"
-                                                tabindex="-1" readonly style="pointer-events: none">
+                                                   name="sub_moneyv[]"
+                                                   value="{{isset(old('sub_moneyv')[0]) ? old('sub_moneyv')[0] : '0 đ'}}"
+                                                   tabindex="-1" readonly style="pointer-events: none">
                                         </div>
                                     </div>
                                 </div>
@@ -245,8 +234,9 @@
                                         <div class="col-6">
                                             <label for="name">Số tiền (đ)</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
-                                                name="sub_moneyv[]" value="{{isset(old('sub_moneyv')[1]) ? old('sub_moneyv')[1] : '0 đ'}}"
-                                                tabindex="-1" readonly style="pointer-events: none">
+                                                   name="sub_moneyv[]"
+                                                   value="{{isset(old('sub_moneyv')[1]) ? old('sub_moneyv')[1] : '0 đ'}}"
+                                                   tabindex="-1" readonly style="pointer-events: none">
                                         </div>
                                     </div>
                                 </div>
@@ -297,8 +287,9 @@
                                         <div class="col-6">
                                             <label for="name">Số tiền (đ)</label>
                                             <input type="text" class="form-control form-control-lg number sub-moneyv"
-                                                    name="sub_moneyv[]" value="{{isset(old('sub_moneyv')[2]) ? old('sub_moneyv')[2] : '0 đ'}}"
-                                                    tabindex="-1" readonly style="pointer-events: none">
+                                                   name="sub_moneyv[]"
+                                                   value="{{isset(old('sub_moneyv')[2]) ? old('sub_moneyv')[2] : '0 đ'}}"
+                                                   tabindex="-1" readonly style="pointer-events: none">
                                         </div>
                                     </div>
                                 </div>
@@ -340,7 +331,8 @@
                                 <button type="button" class="btn btn-secondary" onClick="window.location.reload();">Hủy
                                     bỏ
                                 </button>
-                                <button type="submit" class="btn btn-primary ml-2 btnSave" id="appect">Tạo yêu cầu</button>
+                                <button type="submit" class="btn btn-primary ml-2 btnSave" id="appect">Tạo yêu cầu
+                                </button>
                             </div>
 
                         </div>
@@ -394,7 +386,6 @@
                 }
             });
         })
-
         document.querySelector('#appect').setAttribute('disabled', 'true');
 
         document.querySelectorAll('.discountA').forEach((item, index) => {
@@ -429,11 +420,30 @@
 
         function changeHidden(type) {
             if (type === 1) {
-                document.querySelector('#div1').style.display = 'none';
-                document.querySelector('#div2').style.display = 'block';
+
+                $('#div2').html(`                            <div class="form-group">
+                                    <label for="name">Chọn V-Store<span class="text-danger">*</span></label>
+                                    <select class="form-control form-control-lg" name="vstore_id" id="selectVs">
+                                        @foreach($v_stores as $v)
+                <option value="{{$v->id}}">{{$v->name}}</option>
+
+                                        @endforeach
+                </select>
+                <button type="button" class="btn btn-primary mt-2" onclick="changeHidden(2)">Thay
+                    đổi
+                </button>
+            </div>`);
             } else {
-                document.querySelector('#div2').style.display = 'none';
-                document.querySelector('#div1').style.display = 'block';
+                $('#div2').html(`                   <div class="form-group">
+                                    <label for="name">Chọn V-Store<span class="text-danger">*</span></label>
+                                    <select class="form-control form-control-lg" disabled name="">
+                                        <option value="{{$vstore->id}}">{{$vstore->name}}</option>
+                                    </select>
+                                    <input type="hidden" name="vstore_id" value="{{$vstore->id}}">
+                                    <button onclick="changeHidden(1)" class="btn btn-primary mt-2" type="button">Thay
+                                        đổi
+                                    </button>
+                                </div>`);
             }
         }
 
