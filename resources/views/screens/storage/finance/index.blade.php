@@ -475,7 +475,6 @@
             $('.dropdown-finance .dropdown-menu-finan li').click(function () {
                 $(this).parents('.dropdown-finance').find('span').html($(this).html());
                 $(this).parents('.dropdown-finance').find('input').attr('value', $(this).attr('id'));
-                console.log($(this).text())
             });
 
         </script>
