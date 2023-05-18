@@ -80,6 +80,7 @@ class WarehouseController extends Controller
 
     public function postAddProduct(Request $request)
     {
+
         $validator = Validator::make($request->all(), [
             'product_id' => 'required',
             'ware_id' => 'required',
@@ -91,7 +92,9 @@ class WarehouseController extends Controller
             'quantity.min' => 'Không được nhỏ hơn 1',
             'quantity.not_in' => 'Không được nhỏ hơn hoặc bằng 0',
         ]);
+
         if ($validator->fails()) {
+
             return redirect()->back()->withErrors($validator->errors())->withInput($request->all())->with('validate', 'failed');
         }
 
@@ -145,6 +148,7 @@ class WarehouseController extends Controller
             }
             return redirect()->back()->with('success', 'Gửi yêu cầu gửi sản phẩm thành công');
         } catch (\Exception $exception) {
+            dd($exception->getMessage());
             return redirect()->back()->with('error', 'Gửi yêu cầu gửi sản phẩm không thành công');
 
         }
@@ -209,11 +213,20 @@ from product_warehouses where ware_id = warehouses.id and product_warehouses.sta
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
         }
+        $warehouse_aff = json_decode(Auth::user()->warehouse_aff) ?? [];
+
         $this->v['field'] = $request->field ?? 'request_warehouses.id';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
         $this->v['key_search'] = trim($request->key_search) ?? '';
+        $this->v['productAc'] = Product::select('id', 'name')->where('user_id', Auth::id())->where('status', 2)->get();
 
+        $this->v['warehouses'] = DB::table('warehouses')->selectRaw('warehouses.name as ware_name,warehouses.id,
+            warehouses.phone_number,
+            warehouses.address,warehouses.user_id')
+            ->join('users', 'warehouses.user_id', '=', 'users.id')
+            ->whereIn('warehouses.user_id', $warehouse_aff)
+            ->paginate($this->v['limit']);
         $this->v['products'] = Warehouses::select('request_warehouses.code', 'warehouses.name as ware_name',
             'products.name', 'request_warehouses.status',
             'request_warehouses.quantity',
