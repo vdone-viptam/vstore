@@ -138,6 +138,9 @@
             @if(Session::has('success'))
             swalNoti('center', 'success', 'Đã thay đổi mật khẩu','', 500, true, 2200);
             @endif
+            setTimeout(() => {
+                $('.text-danger').fadeOut();
+            }, 3000);
         });
     </script>
 @endsection
