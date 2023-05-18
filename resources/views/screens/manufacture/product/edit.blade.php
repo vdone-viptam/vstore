@@ -380,7 +380,7 @@
 @section('custom_js')
     <script src="{{ asset('plupload/js/plupload.full.min.js') }}"></script>
 
-    <script src="https://cdn.tiny.cloud/1/eipbi8bjib571v1w6eywh5ua9w3i7mik7k6afn65tew8m0fe/tinymce/6/tinymce.min.js"
+    <script src="https://cdn.tiny.cloud/1/7tjk3u280yd2cehohvciojbodm7okckvrqkfv61pmpk56e4k/tinymce/6/tinymce.min.js"
             referrerpolicy="origin"></script>
 
     <script async>
