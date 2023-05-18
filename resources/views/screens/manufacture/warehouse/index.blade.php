@@ -570,7 +570,7 @@
                     Swal.fire({
                         icon: 'error',
                         title: 'Liên kết kho không thành công',
-                        text: error0.message,
+                        // text: error0.message,
                     })
                 }
             }).done(function (data) {
