@@ -580,6 +580,9 @@ class LoginController extends Controller
                 ], $user->toArray());
                 $user->id = $userUpdateOrCreate->id;
 
+                // xoá khi có cái cũ tồn tại
+                WarehouseType::where('user_id', $user->id)->delete();
+
                 if(isset($request->normal_storage)){
                     if(!empty($request->acreage_normal_storage)){
                         $warehouseType = new WarehouseType();
