@@ -27,14 +27,15 @@
             display: block;
             padding: 10px;
 
+
         }
 
-        .dropdown-finance .select > i {
+        .dropdown-finance div > i {
             font-size: 13px;
             color: #888;
             cursor: pointer;
             transition: all .3s ease-in-out;
-            float: right;
+
             line-height: 20px
         }
 
@@ -53,8 +54,9 @@
             background-color: #f8f8f8
         }
 
-        .dropdown-finance.active .select > i {
-            transform: rotate(-90deg)
+        .dropdown-finance.active div > i {
+            transform: rotate(-90deg);
+            transition: .5s all;
         }
 
         .dropdown-finance .dropdown-menu-finan {
@@ -143,7 +145,7 @@
                                                     </li>
                                                 </ul>
                                             </div>
-                                            <input type="hidden" name="bank_id">
+                                            <input type="hidden" name="bank_id" value="{{$wallet->bank->id}}">
                                             <ul class="dropdown-menu-finan">
                                                 @foreach($banks as $bank)
                                                     <li id="{{$bank->id}}">
@@ -222,8 +224,11 @@
                                 <div class="form-group">
                                     <label>Tên ngân hàng:</label>
                                     <div class="dropdown-finance">
-                                        <div class="select">
-                                            <span>Lựa chọn ngân hàng</span>
+                                        <div class="d-flex justify-content-between align-items-center px-2">
+                                            <div class="select">
+                                                <span>Lựa chọn ngân hàng</span>
+
+                                            </div>
                                             <i class="fa fa-chevron-left"></i>
                                         </div>
                                         <input type="hidden" name="bank_id">
@@ -470,7 +475,6 @@
             $('.dropdown-finance .dropdown-menu-finan li').click(function () {
                 $(this).parents('.dropdown-finance').find('span').html($(this).html());
                 $(this).parents('.dropdown-finance').find('input').attr('value', $(this).attr('id'));
-                console.log($(this).text())
             });
 
         </script>

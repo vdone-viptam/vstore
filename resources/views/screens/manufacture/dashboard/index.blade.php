@@ -64,12 +64,12 @@
                         <div class="row">
                             <div class="col-xl-6 col-lg-4 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Chọn sản phẩm <span class="text-danger">*</span></label>
+                                    <label for="name">Tên sản phẩm <span class="text-danger">*</span></label>
                                     <select class="form-control form-control-lg" id="product_id" name="product_id">
                                         <option value="" selected disabled>Lựa chọn sản phẩm thêm vào kho</option>
                                         {{-- @foreach($products as $product)
                                             <option
-                                                value="{{$product->id}}" {{old('product_id') == $product->id ? 'selected' : ''}}>{{$product->name}}</option>
+                                                value="{{$product->id}}" {{old('product_id') == $product->id ? 'selected' : ''}}>{{$product->name}}</option> 
                                         @endforeach --}}
                                     </select>
                                     @error('product_id')

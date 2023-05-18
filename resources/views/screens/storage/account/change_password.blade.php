@@ -43,11 +43,7 @@
                 <div class="card">
                     <h5 class="card-header" style="font-size: 18px;">Đổi mật khẩu</h5>
                     <div class="card-body">
-                        @if(\Illuminate\Support\Facades\Session::has('success'))
-                            <div class="alert alert-success collapshow" role="alert">
-                                Mật khẩu của bạn đã được đổi thành công!
-                            </div>
-                        @endif
+
                         <form method="post" action="{{route('screens.storage.account.saveChangePassword')}}">
                             @csrf
                             <div class="row">
@@ -142,9 +138,14 @@
 @section('custom_js')
 
     <script>
-        setTimeout(() => {
-            $('.alert.alert-success.collapshow').hide();
-        }, "5000");
+        $(document).ready(function () {
+            @if(Session::has('success'))
+            swalNoti('center', 'success', 'Đã thay đổi mật khẩu','', 500, true, 2200);
+            @endif
+            setTimeout(() => {
+                $('.text-danger').fadeOut();
+            }, 3000);
+        });
     </script>
 
 @endsection

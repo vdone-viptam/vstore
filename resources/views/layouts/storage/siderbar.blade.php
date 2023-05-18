@@ -8,7 +8,7 @@
             </button>
             <div class="collapse navbar-collapse" id="navbarNav">
                 <ul class="navbar-nav flex-column">
-                    
+
                     <li class="nav-item ">
                         <a class="nav-link {{ (request()->is('dashboard*')) ? 'active' : '' }}"
                            href="{{route('screens.storage.dashboard.index')}}" aria-expanded="false"
@@ -120,7 +120,7 @@
                                     <a class="nav-link {{ (request()->is('account')) ? 'active1' : '' }}" href="{{route('screens.storage.account.profile')}}">Hồ sơ của tôi</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link {{ (request()->is('account/information-warehouse')) ? 'active1' : '' }}" href="{{route('screens.storage.warehouse.profile')}}">Thông tin kho</a>
+                                    <a class="nav-link {{ (request()->is('account/detail-profile-warehouse')) ? 'active1' : '' }}" href="{{route('screens.storage.warehouse.profile')}}">Thông tin kho</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('account/change-password')) ? 'active1' : '' }}" href="{{route('screens.storage.account.changePassword')}}">Đổi mật khẩu</a>
