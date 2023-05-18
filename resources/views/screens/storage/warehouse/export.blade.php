@@ -116,7 +116,7 @@
                             <th class="white-space-130 text-center">Mã xuất hàng</th>
                             <th class="white-space-130 text-center">Mã sản phẩm</th>
                             <th >
-                               
+
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -129,7 +129,7 @@
                                             <i class="fas fa-sort sort" data-sort="product_name"></i>
                                         @endif
                                 </span>
-                                
+
                             </th>
                             <th class="white-space-130 text-center">Nhà cung cấp
                                 <span style="float: right;cursor: pointer">
@@ -157,7 +157,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-150 text-center">Thời gian xuất hàng
+                            <th class="white-space-160 text-center">Thời gian xuất hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'updated_at')
                                         @if($type == 'desc')
@@ -185,7 +185,7 @@
                                 </span>
                             </th>
                             <th class="white-space-160">
-                               
+
                                 Thao tác/Trạng thái
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'status')
@@ -198,10 +198,10 @@
                                         <i class="fas fa-sort sort" data-sort="status"></i>
                                     @endif
                                 </span>
-                            
-                     
+
+
                             </th>
-                            <th class="text-center white-space-120">Xuất hóa đơn</th>
+                            <th class="text-center white-space-100">Xuất hóa đơn</th>
                             <th class="white-space-80"></th>
                         </tr>
                         </thead>
@@ -247,7 +247,7 @@
 
                                         @endif
                                     </td>
-                                    <td class="text-center white-space-150">
+                                    <td class="text-center white-space-120">
                                         <div class="">
                                             <a href="javascript:void(0)" onclick="showBill({{$request->order_number}})"
                                                class="bg-danger  text-white font-medium py-2 px-2 rounded ">

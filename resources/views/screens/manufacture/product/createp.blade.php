@@ -110,9 +110,9 @@
                             </div>
                             <div class="col-xl-3 col-lg-12 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Mã SKU sản phẩm<span class="text-danger">*</span></label>
+                                    <label for="name">Mã vạch sản phẩm<span class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg" id="sku_id" name="sku_id"
-                                           value="{{old('sku_id')}}" placeholder="Nhập mã SKU của sản phẩm">
+                                           value="{{old('sku_id')}}" placeholder="Nhập mã vạch của sản phẩm">
                                     @error('sku_id')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                     @enderror

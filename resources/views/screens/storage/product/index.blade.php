@@ -73,9 +73,9 @@
                         <thead>
                         <tr>
                             <th class="text-center white-space-120">Mã sản phẩm</th>
-                            <th class="text-center white-space-150">Mã SKU sản phẩm</th>
+                            <th class="text-center white-space-150">Mã vạch sản phẩm</th>
                             <th >
-                         
+
                                 Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
@@ -88,7 +88,7 @@
                                         <i class="fas fa-sort sort" data-sort="product_name"></i>
                                     @endif
                                 </span>
-                           
+
                             </th>
                             <th class="white-space-120 text-center">Danh mục
                                 <span style="float: right;cursor: pointer">
@@ -138,7 +138,7 @@
 
                             <th class="text-center white-space-100">
                             <div class="d-flex align-items-center justify-content-around">
-                                <span class="white-space-90">    
+                                <span class="white-space-90">
                             Số lượng chờ <br> xuất
 </span>
                                 <span style="float: right;cursor: pointer">
@@ -223,7 +223,7 @@
                </div>
                <div class="row">
                         <div class="col-5">
-                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Mã SKU sản phẩm: </h5>
+                            <h5 style="font-size:16px; white-space:nowrap; font-weight:600">Mã vạch sản phẩm: </h5>
                         </div>
                         <div class="col-7">
                             <span style="color:#000">${data.data.sku_id}</span>

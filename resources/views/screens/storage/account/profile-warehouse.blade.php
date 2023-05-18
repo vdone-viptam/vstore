@@ -523,6 +523,7 @@ aria-hidden="true">
         let input = document.createElement('input');
         input.type = 'file';
         input.multiple = 'multiple'
+        input.accept="image/jpeg", "image/gif", "image/png", "image/jpg";
         input.onchange = _ => {
             var files = Array.from(input.files);
 
