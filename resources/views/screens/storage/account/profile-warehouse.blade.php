@@ -565,6 +565,7 @@ aria-hidden="true">
     $('#modalDetail').modal('show');
     }
     function render(data, elementInput, imgEvent) {
+        // console.log(data);
         if (data.length >= 5) {
 
             $(elementInput).addClass("hidden");
@@ -606,66 +607,68 @@ aria-hidden="true">
 
         const getId = elementInput.attr('id');
         const checkId = document.getElementById(getId);
+        if(checkId){
 
-        checkId.parentNode.querySelectorAll('.delete-one-image').forEach((item, indexDelete) => {
+            checkId.parentNode.querySelectorAll('.delete-one-image').forEach((item, indexDelete) => {
 
-
-            const {index} = item.dataset;
-            item.addEventListener('click', (e) => {
-                if(data.length <= 1){
-                    return swalNoti('center', 'error', 'Ảnh kho không thể trống ','', 500, true, 2200);
-                }
-
-                // hafm xoá ảnh từ arr
-                switch (checkArr) {
-                    case '1':
-                        arrImage1 = data.filter((item1, index1) =>{ return index1 !== +index});
-                        arrImage = arrImage1;
-                        break;
-                    case '2':
-                        arrImage2 = data.filter((item1, index1) =>{ return index1 !== +index});
-                        arrImage = arrImage2;
-                        break;
-                    case '3':
-                        arrImage3 = data.filter((item1, index1) =>{ return index1 !== +index});
-                        arrImage = arrImage3;
-                        break;
-                    case '4':
-                        arrImage4 = data.filter((item1, index1) =>{ return index1 !== +index});
-                        arrImage = arrImage4;
-                        break;
-                    case '5':
-                        arrImage5 = data.filter((item1, index1) =>{ return index1 !== +index});
-                        arrImage = arrImage5;
-                        break;
-                    case '6':
-                        arrImage6 = data.filter((item1, index1) =>{ return index1 !== +index});
-                        arrImage = arrImage6;
-                        break;
-                    default:
-                        break;
-                }
-                // arrImage = data.filter((item1, index1) =>{ return index1 !== +index});
-
-                // hien the them anh
-                var div = e.target.closest('.align-items-start');
-                if(div){
-                    let addImgspElement = div.querySelector('.add-imgSP');
-                    if (arrImage.length < 5) {
-                        addImgspElement.classList.remove('hidden');
+                const {index} = item.dataset;
+                item.addEventListener('click', (e) => {
+                    if(data.length <= 1){
+                        return swalNoti('center', 'error', 'Ảnh kho không thể trống ','', 500, true, 2200);
                     }
-                    render(arrImage,elementInput,1);
-                }
+
+                    // hafm xoá ảnh từ arr
+                    switch (checkArr) {
+                        case '1':
+                            arrImage1 = data.filter((item1, index1) =>{ return index1 !== +index});
+                            arrImage = arrImage1;
+                            break;
+                        case '2':
+                            arrImage2 = data.filter((item1, index1) =>{ return index1 !== +index});
+                            arrImage = arrImage2;
+                            break;
+                        case '3':
+                            arrImage3 = data.filter((item1, index1) =>{ return index1 !== +index});
+                            arrImage = arrImage3;
+                            break;
+                        case '4':
+                            arrImage4 = data.filter((item1, index1) =>{ return index1 !== +index});
+                            arrImage = arrImage4;
+                            break;
+                        case '5':
+                            arrImage5 = data.filter((item1, index1) =>{ return index1 !== +index});
+                            arrImage = arrImage5;
+                            break;
+                        case '6':
+                            arrImage6 = data.filter((item1, index1) =>{ return index1 !== +index});
+                            arrImage = arrImage6;
+                            break;
+                        default:
+                            break;
+                    }
+                    // arrImage = data.filter((item1, index1) =>{ return index1 !== +index});
+
+                    // hien the them anh
+                    var div = e.target.closest('.align-items-start');
+                    if(div){
+                        let addImgspElement = div.querySelector('.add-imgSP');
+                        if (arrImage.length < 5) {
+                            addImgspElement.classList.remove('hidden');
+                        }
+                        render(arrImage,elementInput,1);
+                    }
+                })
             })
-        })
+
+        }
     }
 
-    arrImage1 = JSON.parse($('.rawImg1').val());
-    arrImage2 = JSON.parse($('.rawImg2').val());
-    arrImage3 = JSON.parse($('.rawImg3').val());
-    arrImage4 = JSON.parse($('.rawImg4').val());
-    arrImage5 = JSON.parse($('.rawImg5').val());
-    arrImage6 = JSON.parse($('.rawImg6').val());
+    arrImage1 = $('.rawImg1').val() ? JSON.parse($('.rawImg1').val()) : [];
+    arrImage2 = $('.rawImg2').val() ? JSON.parse($('.rawImg2').val()) : [];
+    arrImage3 = $('.rawImg3').val() ? JSON.parse($('.rawImg3').val()) : [];
+    arrImage4 = $('.rawImg4').val() ? JSON.parse($('.rawImg4').val()) : [];
+    arrImage5 = $('.rawImg5').val() ? JSON.parse($('.rawImg5').val()) : [];
+    arrImage6 = $('.rawImg6').val() ? JSON.parse($('.rawImg6').val()) : [];
 
     render(arrImage1, $('#normalImageStorageInput') , 1);
     render(arrImage2, $('#normalImagePcccInput') , 1);
