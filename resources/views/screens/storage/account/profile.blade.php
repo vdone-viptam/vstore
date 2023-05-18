@@ -44,7 +44,7 @@
                                 <div class="user-avatar text-center d-block mx-auto"
                                      style="position: relative; width: 128px; height: 128px; border-radius: 100%;">
                                     <img id="img-avatar"
-                                         src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('asset/images/success.png')}}"
+                                         src="{{$infoAccount->avatar ? asset('image/users/'.$infoAccount->avatar) : asset('home/img/kho-vuong.png')}}"
                                          alt="User Avatar" class="rounded-circle user-avatar-xxl">
                                     <label for="upload-avatar">
                                         <i class="fas fa-image upAvatar" style="position: absolute; bottom: 10px; right: 10px; cursor: pointer; z-index: 10
@@ -280,7 +280,7 @@
             setTimeout(() => {
                 $("#alert-succ").hide('fade');
             }, 1000);
-            
+
             function convertDate(inputFormat) {
                 function pad(s) {
                     return (s < 10) ? '0' + s : s;
