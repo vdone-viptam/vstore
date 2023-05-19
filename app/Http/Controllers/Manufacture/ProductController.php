@@ -109,7 +109,7 @@ class ProductController extends Controller
         $error = [
             'name' => 'required|max:255',
             'category_id' => 'required',
-            'price' => 'required|min:1',
+            'price' => 'required|numeric|min:1',
             'sku_id' => 'required|max:255|unique:products',
             'description' => 'required',
             'short_content' => 'required|max:500',
@@ -135,6 +135,7 @@ class ProductController extends Controller
             'name.required' => 'Tên sản phẩm bắt buộc nhập',
             'category_id.required' => 'Ngành hàng bắt buộc chọn',
             'price.required' => 'Giá sản phẩm bắt buộc nhập',
+            'price.numeric' => 'Giá sản phẩm bắt buộc là số',
             'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
             'sku_id.required' => 'Mã SKU bắt buộc nhập',
             'sku_id.max' => 'Mã SKU ít hơn 255 ký tự',
