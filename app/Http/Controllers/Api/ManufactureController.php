@@ -75,7 +75,7 @@ class ManufactureController extends Controller
     {
         $limit = $request->limit ?? 100;
         $user = User::where('role_id', 2)->where('account_code', '!=', null)
-            ->select('id', 'name', 'avatar','account_code')
+            ->select('id', 'name', 'avatar', 'account_code')
             ->paginate($limit);
 
         if ($user) {
@@ -106,7 +106,7 @@ class ManufactureController extends Controller
 
             $user = User::select('avatar', 'name', 'id', 'account_code', 'description', 'phone_number')->where('role_id', 2)->where('id', $ncc_id)->first();
             if ($user) {
-                $user->total_product = $user->products()->where('status', 2)->count();
+                $user->total_product = $user->products()->where('status', 2)->where('availability_status', 1)->count();
                 $user->avatar = ($user->avatar != '') ? asset('image/users/' . $user->avatar) : asset('home/img/ncc-vuong.png');
                 $cate = Category::select('categories.name')
                     ->join('products', 'categories.id', '=', 'products.category_id')
@@ -114,7 +114,7 @@ class ManufactureController extends Controller
                     ->where('products.status', 2)
                     ->groupBy('categories.name')
                     ->get();
-                $products = Product::select('id','images','user_id')->where('user_id', $ncc_id)->where('status', 2)->limit(5)->get();
+                $products = Product::select('id', 'images', 'user_id')->where('user_id', $ncc_id)->where('availability_status', 1)->where('status', 2)->limit(5)->get();
                 $images = [];
                 for ($i = 0; $i < count($products); $i++) {
                     $images[] = asset(json_decode($products[$i]->images)[0]);
@@ -130,7 +130,7 @@ class ManufactureController extends Controller
                 $user->description = [
                     'text' => $user->description,
                     'images' => $images,
-                    'arr_product'=>$arr_product
+                    'arr_product' => $arr_product
                 ];
                 $user->categories = implode(', ', $data);
 
