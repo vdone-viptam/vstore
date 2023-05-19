@@ -86,7 +86,7 @@ class BankController extends Controller
     {
         if (empty($request->image)) {
             $validator = Validator::make($request->all(), [
-                'name' => 'required|unique:banks|min:1|max:255',
+                'name' => 'required|min:1|max:255',
                 'full_name' => 'required|min:1|max:255',
             ], [
                 'name.required' => 'Tên ngân hàng bắt buộc nhập',
@@ -111,7 +111,7 @@ class BankController extends Controller
             }
         }
         $validator = Validator::make($request->all(), [
-            'name' => 'required|unique:banks|min:1|max:255',
+            'name' => 'required|min:1|max:255',
             'image' => 'required|image',
             'full_name' => 'required|min:1|max:255',
         ], [
