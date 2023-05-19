@@ -540,6 +540,7 @@
                         document.getElementById('filelist').innerHTML = '';
                     },
                     FilesAdded: function (up, files) {
+                        document.getElementById("pickfiles").disabled = true;
                         plupload.each(files, function (file) {
                             document.getElementById('filelist').innerHTML = '<div id="' + file.id + '">' + file.name + ' (' + plupload.formatSize(file.size) + ') <b></b></div>';
                         });
@@ -550,6 +551,7 @@
                         document.getElementById(file.id).getElementsByTagName('b')[0].innerHTML = '<span>' + file.percent + "%</span>";
                     },
                     FileUploaded: function (up, file, result) {
+                        document.getElementById("pickfiles").disabled = false;
                         const responseResult = JSON.parse(result.response);
 
                         if (responseResult.ok == 0) {
