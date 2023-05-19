@@ -185,7 +185,7 @@ class VstoreController extends Controller
             }
 
             $user->categories = implode(', ', $data);
-            $products = Product::select('images')->where('vstore_id', $id)->where('status', 2)->limit(5)->get();
+            $products = Product::select('images')->where('vstore_id', $id)->where('availability_status',1)->where('status', 2)->limit(5)->get();
             $images = [];
             for ($i = 0; $i < count($products); $i++) {
                 $images[] = asset(json_decode($products[$i]->images)[0]);
