@@ -91,7 +91,7 @@
 
                             </th>
                             <th class="white-space-130 text-center">
-                          
+
                             Ngành hàng
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'brand')
@@ -108,7 +108,7 @@
                             </th>
 
                             <th class="white-space-160">
-                    
+
                             Thời gian yêu cầu
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'requests.created_at')
@@ -124,7 +124,7 @@
 
                             </th>
                             <th class="white-space-150">
-                          
+
                             V-Store niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
@@ -140,7 +140,7 @@
 
                             </th>
                             <th class="white-space-160">
-                         
+
                             Trạng thái yêu cầu
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'requests.status')
@@ -209,7 +209,7 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="9" class="text-center">Không có dữ liệu phù hợp</td>
+                                <td colspan="7" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>

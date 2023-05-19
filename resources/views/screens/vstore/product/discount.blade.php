@@ -82,7 +82,7 @@
                         <thead>
                         <tr>
                             <th >
-                            
+
                                     Tên sản phẩm
                                     <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -124,7 +124,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th style="white-space-130 text-center">Ngày kết thúc
+                            <th class="white-space-130 text-center">Ngày kết thúc
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'discounts.end_date')
                                         @if($type == 'desc')
@@ -168,7 +168,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
                         @if(count($discounts) > 0)
                             @foreach($discounts as $discount)
                                 <tr>
