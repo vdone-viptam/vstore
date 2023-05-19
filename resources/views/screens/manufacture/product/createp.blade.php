@@ -488,6 +488,7 @@
             var path = "{{ asset('/plupload/js/') }}";
 
             var uploader = new plupload.Uploader({
+                multi_selection: false,
                 browse_button: 'pickfiles',
                 container: document.getElementById('file-input'),
                 url: '{{ route("chunk.store") }}',
