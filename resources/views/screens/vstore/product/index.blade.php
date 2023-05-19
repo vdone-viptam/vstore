@@ -72,7 +72,7 @@
                         <tr>
                             <th class="white-space-100 text-center">Mã sản phẩm</th>
                             <th >
-                    
+
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -118,7 +118,7 @@
                                     @endif
                                 </span>
 </div>
-                           
+
                             </th>
                             <th class="white-space-130">
                             <div class="d-flex align-items-center justify-content-around">
@@ -205,7 +205,7 @@
                                     @endif
                                 </span>
 </div>
-                               
+
                             </th>
                             <th class="white-space-80">
                             </th>
@@ -299,7 +299,6 @@
         }
 
         let limit = document.getElementById('limit');
-        console.log(limit)
         $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;

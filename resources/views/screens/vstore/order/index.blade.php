@@ -91,7 +91,7 @@
                                             <i class="fas fa-sort sort" data-sort="products.name"></i>
                                         @endif
                                 </span>
-                              
+
                             </th>
                             <th class="white-space-110 text-center" rowspan="2">Ngành hàng
                                 <span style="float: right;cursor: pointer">
@@ -107,7 +107,7 @@
                                 </span>
                             </th>
     <th class="white-space-130" rowspan="2">
-                              
+
                               Giá sản phẩm
 
                               <span style="float: right;cursor: pointer">
@@ -121,7 +121,7 @@
                                       <i class="fas fa-sort sort" data-sort="products.price"></i>
                                   @endif
                           </span>
-                         
+
                       </th>
     <th class="white-space-100 text-center" rowspan="2">Số lượng
                                 <span style="float: right;cursor:pointer">
@@ -154,9 +154,9 @@
 </span>
                                 </div>
 
-                                 
-  
-                             
+
+
+
                             </th>
     <th class="white-space-130" rowspan="2">
                             <div class="d-flex align-items-center justify-content-around">
@@ -195,15 +195,15 @@
                                         @endif
                                 </span>
 </div>
-                              
-                            </th>   
+
+                            </th>
     <th colspan="2" scope="colgroup" class="white-space-130">Chiết khấu nhận được</th>
     <th rowspan="2" class="white-space-80">
     </th>
   </tr>
   <tr>
     <th scope="col" class="white-space-100">  <div class="d-flex align-items-center justify-content-around">
-                                <span class="white-space-90">                    
+                                <span class="white-space-90">
                                 Phần trăm
 </span>
                                     <span style="float: right;cursor:pointer">
@@ -218,7 +218,7 @@
                                         @endif
                              </span></th>
     <th scope="col" class="white-space-100" >  <div class="d-flex align-items-center justify-content-around">
-                                <span class="white-space-90">                    
+                                <span class="white-space-90">
                                 Thành tiền
 </span>
                                     <span style="float: right;cursor:pointer">
@@ -343,7 +343,6 @@
         }
 
         let limit = document.getElementById('limit');
-        console.log(limit)
         $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;

@@ -417,7 +417,6 @@
         }
 
         let limit = document.getElementById('limit');
-        console.log(limit)
         $(document).ready(function () {
             document.querySelectorAll('.sort').forEach(item => {
                 const {sort} = item.dataset;
