@@ -99,7 +99,7 @@ class BankController extends Controller
                 $bank->full_name = $request->full_name;
                 $bank->save();
                 DB::commit();
-                return redirect()->back()->with('success', 'Cập nhật danh mục sản phẩm thành công');
+                return redirect()->back()->with('success', 'Cập nhật ngân hàng thành công');
             } catch (\Exception $e) {
                 DB::rollBack();
                 return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
