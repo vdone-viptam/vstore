@@ -320,7 +320,7 @@
                                     <label for="name">Địa chỉ đơn vị chịu trách nhiệm nhập khẩu/ thương nhân</label>
                                     <input type="text" class="form-control form-control-lg" id="import_address"
                                            name="import_address"
-                                           value="{{old('import_address')}}" placeholder="Nhập tên địa chỉ đơn vị">
+                                           value="{{old('import_address')}}" placeholder="Nhập địa chỉ đơn vị">
                                     @error('import_address')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                     @enderror

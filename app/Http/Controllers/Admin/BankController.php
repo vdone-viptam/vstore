@@ -12,10 +12,12 @@ use Illuminate\Support\Facades\DB;
 class BankController extends Controller
 {
     private $v;
+
     public function __construct()
     {
         $this->v = [];
     }
+
     public function index(Request $request)
     {
         $this->v['field'] = $request->field ?? 'id';
@@ -25,8 +27,8 @@ class BankController extends Controller
         $this->v['banks'] = Bank::query()->select('id', 'name', 'image', 'full_name');
         if (strlen($this->v['key_search']) > 0) {
             $this->v['banks'] = $this->v['banks']
-            ->where('name', 'like', '%' . $this->v['key_search'] . '%')
-            ->orwhere('full_name', 'like', '%' . $this->v['key_search'] . '%');
+                ->where('name', 'like', '%' . $this->v['key_search'] . '%')
+                ->orwhere('full_name', 'like', '%' . $this->v['key_search'] . '%');
         }
         $this->v['banks'] = $this->v['banks']->orderBy($this->v['field'], $this->v['type'])->paginate($this->v['limit']);
         return view('screens.admin.bank.index', $this->v);
@@ -79,10 +81,11 @@ class BankController extends Controller
         $this->v['banks'] = Bank::find($id);
         return response()->json(['view' => view('screens.admin.bank.edit', $this->v)->render()]);
     }
+
     public function update(Request $request, $id)
     {
         if (empty($request->image)) {
-            Validator::make($request->all(), [
+            $validator = Validator::make($request->all(), [
                 'name' => 'required|unique:banks|min:1|max:255',
                 'full_name' => 'required|min:1|max:255',
             ], [
@@ -91,7 +94,9 @@ class BankController extends Controller
                 'full_name.required' => 'Tên ngân hàng bắt buộc nhập',
                 'full_name.unique' => 'Tên ngân hàng  đã tồn tại'
             ]);
-
+            if ($validator->fails()) {
+                return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+            }
             DB::beginTransaction();
             try {
                 $bank = Bank::find($id);
@@ -105,7 +110,7 @@ class BankController extends Controller
                 return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
             }
         }
-        Validator::make($request->all(), [
+        $validator = Validator::make($request->all(), [
             'name' => 'required|unique:banks|min:1|max:255',
             'image' => 'required|image',
             'full_name' => 'required|min:1|max:255',
@@ -117,6 +122,9 @@ class BankController extends Controller
             'full_name.required' => 'Tên ngân hàng bắt buộc nhập',
             'full_name.unique' => 'Tên ngân hàng  đã tồn tại'
         ]);
+        if ($validator->fails()) {
+            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+        }
         DB::beginTransaction();
         try {
             $bank = Bank::find($id);
