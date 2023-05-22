@@ -1090,11 +1090,13 @@ class OrderController extends Controller
      * @param Request $request
      * @param order_id
      * @bodyParam pdone_id id vshop
+     * @bodyParam note lý do từ chối
      * @return \Illuminate\Http\JsonResponse
      */
     public function vshopRefuse(Request $request,$order_id){
         $validator = Validator::make($request->all(), [
             'pdone_id' => 'required|exists:vshop,pdone_id',
+            'note' => 'required|max:200',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -1111,6 +1113,7 @@ class OrderController extends Controller
         }
         if ($order){
             $order->export_status=3;
+            $order->note=$request->note;
             $order->save();
             return response()->json([
                 'success' => true,
