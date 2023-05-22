@@ -478,7 +478,7 @@ class ProductController extends Controller
                         'Token' => $login['data']['token']
                     ]
                 )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp', [
-                    "ORDER_NUMBER" => '',
+                    "ORDER_NUMBER" => $order->no,
                     "SENDER_FULLNAME" => $warehouse->name,
                     "SENDER_ADDRESS" => $warehouse->address . ',' . $quan_huyen_gui . ',' . $tinh_thanh_gui,
                     "SENDER_PHONE" => $warehouse->phone_number,
@@ -501,7 +501,10 @@ class ProductController extends Controller
                     "LIST_ITEM" => $list_item,
                 ]);
 
-                $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
+                if (json_decode($taodon)->data->ORDER_NUMBER){
+                    $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
+                }
+
                 $order->save();
                 $requestEX = new RequestWarehouse();
 
