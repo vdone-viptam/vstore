@@ -712,7 +712,7 @@ class OrderController extends Controller
 
         $validator = Validator::make($request->all(), [
             'order_id' => 'required',
-            'descriptions' => 'required|max:200',
+            'description' => 'required|max:200',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -752,7 +752,7 @@ class OrderController extends Controller
 
             $refuseStatus = 5;
             $order->export_status = $refuseStatus;
-            $order->note = $request->descriptions;
+            $order->note = $request->description;
 
             $order->save();
 
