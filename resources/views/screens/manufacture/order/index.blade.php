@@ -204,7 +204,7 @@
                             @foreach ($orders as $order)
                                 <tr>
                                     <td class="text-center white-space-140">{{ $order->no }}</td>
-                                    <td class="white-space-250">{{ $order->orderItem[0]->product->name }}</td>
+                                    <td class="white-space-250">{{ $order->name}}</td>
                                     <td class="text-center white-space-140">
                                         @if ($order->export_status == 0)
                                             <span class="text-warning ">Chờ xác nhận</span>
@@ -222,11 +222,11 @@
                                             <span class="text-danger ">Khách từ chối</span>
                                         @endif
                                     </td>
-                                    <td class=" text-right white-space-130">{{ number_format($order->orderItem[0]->price, '0', '.', '.') }}
+                                    <td class=" text-right white-space-130">{{ number_format($order->price, '0', '.', '.') }}
                                         đ
                                     </td>
-                                    <td class="text-center white-space-100">{{ $order->orderItem[0]->quantity }}</td>
-                                    <td class="text-center white-space-140">{{ $order->orderItem[0]->warehouse->name }}</td>
+                                    <td class="text-center white-space-100">{{ $order->quantity }}</td>
+                                    <td class="text-center white-space-140">{{ $order->ware_name }}</td>
                                     <td class="text-center white-space-140">{{ \Carbon\Carbon::parse($order->created_at)->format('d/m/Y H:i') }}</td>
                                     <td class="text-center white-space-130">
                                         @if($order->export_status == 2 || $order->export_status == 4)

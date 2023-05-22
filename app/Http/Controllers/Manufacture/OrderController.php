@@ -34,8 +34,9 @@ class OrderController extends Controller
         $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['orders'] = Order::query()->join('order_item', 'order.id', '=', 'order_item.order_id')
             ->join('products', 'order_item.product_id', '=', 'products.id')
-            ->select('order.no', 'order.id', 'order.export_status', 'order.created_at', 'products.name', 'order_item.price', 'total', DB::raw('order_item.price * order_item.quantity * (100 - products.discount) / 100 as money'))
+            ->select('order_item.quantity', 'order.no', 'order.id', 'order.export_status', 'order.created_at', 'products.name', 'order_item.price', 'total', DB::raw('order_item.price * order_item.quantity * (100 - products.discount) / 100 as money'))
             ->selectSub('select nick_name from vshop where vshop.id=order_item.vshop_id limit 1', 'vshop_name')
+            ->selectSub('select name from warehouses where warehouses.id=order.warehouse_id limit 1', 'ware_name')
             ->where('order.status', '!=', 2)
             ->where('products.user_id', Auth::id())
             ->where('products.discount', '!=', null)
