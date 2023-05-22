@@ -627,7 +627,7 @@ class OrderController extends Controller
                 'quantity', 'order_item.order_id', 'product_id', 'export_status', 'order.updated_at',
                 'order.total',
                 'estimated_date',
-                "order.is_vshop"
+                'order.is_vshop'
             );
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
@@ -635,7 +635,7 @@ class OrderController extends Controller
                 ->orderBy('order.id', 'desc');
 
             if ($status == 0){
-                $orders = $orders->where('order.is_vshop','$vshop_id->id');
+                $orders = $orders->where('order.is_vshop',$vshop_id->id);
             }else{
                 $orders = $orders->where('vshop_id', $vshop_id->id);
             }
@@ -931,7 +931,16 @@ class OrderController extends Controller
             ], 500);
         }
     }
-
+    /**
+     * Vshop xác nhận đơn hàng
+     *
+     * API dùng cập Vshop xác nhận đơn hàng
+     *
+     * @param Request $request
+     * @param order_id
+     * @bodyParam pdone_id id vshop
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function vshopConfirm(Request $request,$order_id ){
         $validator = Validator::make($request->all(), [
@@ -1074,10 +1083,21 @@ class OrderController extends Controller
 
         };
     }
-
+    /**
+     * Vshop từ chối đơn hàng
+     *
+     * API dùng để Vshop từ chối đơn hàng
+     *
+     * @param Request $request
+     * @param order_id
+     * @bodyParam pdone_id id vshop
+     * @bodyParam note lý do từ chối
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function vshopRefuse(Request $request,$order_id){
         $validator = Validator::make($request->all(), [
             'pdone_id' => 'required|exists:vshop,pdone_id',
+            'note' => 'required|max:200',
         ]);
         if ($validator->fails()) {
             return response()->json([
@@ -1085,6 +1105,12 @@ class OrderController extends Controller
             ], 401);
         }
         $order = Order::where('id',$order_id)->where('export_status',0)->first();
+        if (!$order){
+            return response()->json([
+                'success' => false,
+                'message' => 'Cập nhật đơn hàng không thành công',
+            ], 400);
+        }
         $vshop = Vshop::find($order->is_vshop);
         if ($vshop->pdone_id != $request->pdone_id){
             return response()->json([
@@ -1094,6 +1120,7 @@ class OrderController extends Controller
         }
         if ($order){
             $order->export_status=3;
+            $order->note=$request->note;
             $order->save();
             return response()->json([
                 'success' => true,
