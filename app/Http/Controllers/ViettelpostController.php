@@ -29,7 +29,8 @@ class ViettelpostController extends Controller
         \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('all'));
         $data = $request->DATA;
         $a = $request->all()['DATA']['ORDER_NUMBER'];
-        $order = Order::where('order_number', $request->all()['DATA']['ORDER_NUMBER'])->first();
+        $reference = $request->all()['DATA']['ORDER_REFERENCE'];
+        $order = Order::where('order_number', $request->all()['DATA']['ORDER_NUMBER'])->orWhere('no',$reference)->first();
         \Illuminate\Support\Facades\Log::info('CALLBACK_VIETTEL_POST', compact('order', 'a'));
 
 
@@ -106,6 +107,9 @@ class ViettelpostController extends Controller
                 $order->export_status = 5;
                 $order->updated_at = Carbon::now();
             };
+            if ($order->order_number == null && $request->all()['DATA']['ORDER_NUMBER']){
+                $order->order_number = $request->all()['DATA']['ORDER_NUMBER'];
+            }
             $order->save();
         }
 
