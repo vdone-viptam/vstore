@@ -635,7 +635,7 @@ class OrderController extends Controller
                 ->orderBy('order.id', 'desc');
 
             if ($status == 0){
-                $orders = $orders->where('order.is_vshop','$vshop_id->id');
+                $orders = $orders->where('order.is_vshop',$vshop_id->id);
             }else{
                 $orders = $orders->where('vshop_id', $vshop_id->id);
             }
