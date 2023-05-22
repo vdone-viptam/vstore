@@ -627,7 +627,7 @@ class OrderController extends Controller
                 'quantity', 'order_item.order_id', 'product_id', 'export_status', 'order.updated_at',
                 'order.total',
                 'estimated_date',
-                "order.is_vshop"
+                'order.is_vshop'
             );
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
@@ -930,7 +930,16 @@ class OrderController extends Controller
             ], 500);
         }
     }
-
+    /**
+     * Vshop xác nhận đơn hàng
+     *
+     * API dùng cập Vshop xác nhận đơn hàng
+     *
+     * @param Request $request
+     * @param order_id
+     * @bodyParam pdone_id id vshop
+     * @return \Illuminate\Http\JsonResponse
+     */
 
     public function vshopConfirm(Request $request,$order_id ){
         $validator = Validator::make($request->all(), [
@@ -1073,7 +1082,16 @@ class OrderController extends Controller
 
         };
     }
-
+    /**
+     * Vshop từ chối đơn hàng
+     *
+     * API dùng để Vshop từ chối đơn hàng
+     *
+     * @param Request $request
+     * @param order_id
+     * @bodyParam pdone_id id vshop
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function vshopRefuse(Request $request,$order_id){
         $validator = Validator::make($request->all(), [
             'pdone_id' => 'required|exists:vshop,pdone_id',
