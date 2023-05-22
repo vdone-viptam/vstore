@@ -626,13 +626,19 @@ class OrderController extends Controller
                 'discount_vstore',
                 'quantity', 'order_item.order_id', 'product_id', 'export_status', 'order.updated_at',
                 'order.total',
-                'estimated_date'
+                'estimated_date',
+                "order.is_vshop"
             );
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
                 ->where('order.status', '!=', 2)
-                ->orderBy('order.id', 'desc')
-                ->where('vshop_id', $vshop_id->id);
+                ->orderBy('order.id', 'desc');
+
+            if ($status == 0){
+                $orders = $orders->where('order.is_vshop','$vshop_id->id');
+            }else{
+                $orders = $orders->where('vshop_id', $vshop_id->id);
+            }
             if ($status !== 10 && $status != 5 && $status != 4) {
                 $orders = $orders->where('export_status', $status);
             }
