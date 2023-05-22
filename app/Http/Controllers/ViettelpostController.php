@@ -103,7 +103,8 @@ class ViettelpostController extends Controller
 
                 }
             }
-            if ($order->order_status == 503 || $order->order_status == 507) {
+            if ($order->order_status == 503) {
+                $order->cancel_status = 2;
                 $order->export_status = 5;
                 $order->updated_at = Carbon::now();
             };

@@ -717,38 +717,39 @@ class OrderController extends Controller
         if ($validator->fails()) {
             return response()->json([
                 'messageError' => $validator->errors(),
-            ], 401);
+            ], 400);
         }
         DB::beginTransaction();
         try {
             $order = Order::find($request->order_id);
             if (!$order) {
                 return response()->json([
-                    'success' => false,
+                    'status_code' => 404,
                     'message' => 'Không tìm thấy Order'
                 ], 404);
             }
 
-            $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
-                'USERNAME' => config('domain.TK_VAN_CHUYEN'),
-                'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
-            ]);
+//            $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
+//                'USERNAME' => config('domain.TK_VAN_CHUYEN'),
+//                'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
+//            ]);
 
             // check nếu khách huỷ mà chưa đc duyệt request
-            $checkUpdate = RequestWarehouse::select('request_warehouses.status')->join('order', 'order.order_number', 'request_warehouses.order_number')
-                ->where('order.id', $request->order_id)
-                ->where('type', 2)
-                ->first();
+//            $checkUpdate = RequestWarehouse::select('request_warehouses.status')->join('order', 'order.order_number', 'request_warehouses.order_number')
+//                ->where('order.id', $request->order_id)
+//                ->where('type', 2)
+//                ->first();
+//
+//            if ($checkUpdate) {
+//                if ($checkUpdate->status == 1) {
+//                    $order->cancel_status = 2;
+//                } else {
+//                    $order->cancel_status = 1;
+//                }
+//            } else {
+//                $order->cancel_status = 1;
+//            }
 
-            if ($checkUpdate) {
-                if ($checkUpdate->status == 1) {
-                    $order->cancel_status = 2;
-                } else {
-                    $order->cancel_status = 1;
-                }
-            } else {
-                $order->cancel_status = 1;
-            }
             $refuseStatus = 5;
             $order->export_status = $refuseStatus;
             $order->note = $request->descriptions;
@@ -756,16 +757,16 @@ class OrderController extends Controller
             $order->save();
 
 
-            $huy_don = Http::withHeaders(
-                [
-                    'Content-Type' => ' application/json',
-                    'Token' => $login['data']['token']
-                ]
-            )->post('https://partner.viettelpost.vn/v2/order/UpdateOrder', [
-                'TYPE' => 4,
-                'ORDER_NUMBER' => $order->order_number,
-                'NOTE' => "Hủy đơn do khách hàng",
-            ]);
+//            $huy_don = Http::withHeaders(
+//                [
+//                    'Content-Type' => ' application/json',
+//                    'Token' => $login['data']['token']
+//                ]
+//            )->post('https://partner.viettelpost.vn/v2/order/UpdateOrder', [
+//                'TYPE' => 4,
+//                'ORDER_NUMBER' => $order->order_number,
+//                'NOTE' => "Hủy đơn do khách hàng",
+//            ]);
 //            $order_item = OrderItem::select('product_id', 'quantity')->where('order_id', $order->id)->first();
 //            $product = Product::find($order_item->product_id);
 //
@@ -786,7 +787,7 @@ class OrderController extends Controller
             DB::commit();
 
             return response()->json([
-                'status_code' => 201,
+                'status_code' => 200,
                 'message' => 'Hủy đơn thành công'
             ], 201);
 
