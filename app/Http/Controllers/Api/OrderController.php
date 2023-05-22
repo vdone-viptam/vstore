@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Models\District;
 use App\Models\Order;
 use App\Models\OrderItem;
 use App\Models\Point;
 use App\Models\Product;
 use App\Models\ProductWarehouses;
+use App\Models\Province;
 use App\Models\RequestWarehouse;
 use App\Models\Vshop;
 use App\Models\VshopProduct;
@@ -15,6 +17,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Str;
 
@@ -623,13 +626,19 @@ class OrderController extends Controller
                 'discount_vstore',
                 'quantity', 'order_item.order_id', 'product_id', 'export_status', 'order.updated_at',
                 'order.total',
-                'estimated_date'
+                'estimated_date',
+                "order.is_vshop"
             );
 
             $orders = $orders->join('order', 'order_item.order_id', '=', 'order.id')
                 ->where('order.status', '!=', 2)
-                ->orderBy('order.id', 'desc')
-                ->where('vshop_id', $vshop_id->id);
+                ->orderBy('order.id', 'desc');
+
+            if ($status == 0){
+                $orders = $orders->where('order.is_vshop','$vshop_id->id');
+            }else{
+                $orders = $orders->where('vshop_id', $vshop_id->id);
+            }
             if ($status !== 10 && $status != 5 && $status != 4) {
                 $orders = $orders->where('export_status', $status);
             }
@@ -920,5 +929,180 @@ class OrderController extends Controller
                 'message' => $e->getMessage()
             ], 500);
         }
+    }
+
+
+    public function vshopConfirm(Request $request,$order_id ){
+        $validator = Validator::make($request->all(), [
+            'pdone_id' => 'required|exists:vshop,pdone_id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'messageError' => $validator->errors(),
+            ], 401);
+        }
+        DB::beginTransaction();
+        try {
+        $order = Order::where('id',$order_id)->where('is_vshop','!=',null)->first();
+        if (!$order) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Không tìm thấy đơn hàng'
+            ], 404);
+        }
+        $vshop = Vshop::find($order->is_vshop);
+        if ($vshop->pdone_id != $request->pdone_id){
+            return response()->json([
+                'success' => false,
+                'message' => 'đơn hàng không phải của vshop'
+            ], 400);
+        }
+
+
+        $order_item = OrderItem::where('order_id',$order->id)->first();
+        $product = Product::find($order_item->product_id);
+        $order->export_status = 1;
+
+
+        if ($order->method_payment == 'COD') {
+            $money_colection = (int)$order->total - (int)$order->shipping;
+            $order_payment = 2;
+        } else {
+            $money_colection = 0;
+            $order_payment = 1;
+        }
+            $login = Http::post('https://partner.viettelpost.vn/v2/user/Login', [
+                'USERNAME' => config('domain.TK_VAN_CHUYEN'),
+                'PASSWORD' => config('domain.MK_VAN_CHUYEN'),
+            ]);
+        $get_list = Http::withHeaders(
+            [
+                'Content-Type' => ' application/json',
+                'Token' => $login['data']['token']
+            ]
+        )->post('https://partner.viettelpost.vn/v2/order/getPriceAll', [
+            'SENDER_DISTRICT' => $vshop->district,
+            'SENDER_PROVINCE' => $vshop->province,
+            'RECEIVER_DISTRICT' => $order->district_id,
+            'RECEIVER_PROVINCE' => $order->province_id,
+            'PRODUCT_TYPE' => 'HH',
+            'PRODUCT_WEIGHT' => ($product->weight) * $order_item->quantity,
+            'PRODUCT_PRICE' => $order->total - $order->shipping,
+            'MONEY_COLLECTION' => $money_colection,
+            'TYPE' => 1,
+
+        ]);
+        $date = str_replace(' giờ', '', $get_list[0]['THOI_GIAN']);
+        $order->estimated_date = \Illuminate\Support\Carbon::now()->addHours((int)$date);
+
+        $tinh_thanh_gui = Province::where('province_id', $vshop->province)->first()->province_name ?? '';
+        $quan_huyen_gui = District::where('district_id', $vshop->district)->first()->district_name ?? '';
+        $date = str_replace(' giờ', '', $get_list[0]['THOI_GIAN']);
+        $order->estimated_date = \Illuminate\Support\Carbon::now()->addHours((int)$date);
+
+        $priceDiscount = $product->price;
+        $totalDiscountSuppliersAndVStore = 0;
+        if ($order_item->discount_ncc) {
+            $totalDiscountSuppliersAndVStore += $order_item->discount_ncc;
+        }
+        if ($order_item->discount_vstore) {
+            $totalDiscountSuppliersAndVStore += $order_item->discount_vstore;
+        }
+        if ($totalDiscountSuppliersAndVStore > 0) {
+            $priceDiscount = $priceDiscount - $priceDiscount * ($totalDiscountSuppliersAndVStore / 100);
+        }
+        if ($order_item->discount_vshop) {
+            $priceDiscount = $priceDiscount - $priceDiscount * ($order_item->discount_vshop / 100);
+        }
+        $vat = $priceDiscount * ($product->vat / 100);
+        $priceDiscount = $priceDiscount + $vat;
+
+
+        $list_item[] = [
+            'PRODUCT_NAME' => $product->name,
+            'PRODUCT_QUANTITY' => $order_item->quantity,
+            'PRODUCT_PRICE' => $priceDiscount,
+            'PRODUCT_WEIGHT' => $product->weight * $order_item->quantity,
+        ];
+        $product_name = Str::limit($product->name,15,'...');
+
+        $taodon = Http::withHeaders(
+            [
+                'Content-Type' => ' application/json',
+                'Token' => $login['data']['token']
+            ]
+        )->post('https://partner.viettelpost.vn/v2/order/createOrderNlp', [
+            "ORDER_NUMBER" => '',
+            "SENDER_FULLNAME" => $vshop->name,
+            "SENDER_ADDRESS" => $vshop->address . ',' . $quan_huyen_gui . ',' . $tinh_thanh_gui,
+            "SENDER_PHONE" => $vshop->phone_number,
+            "RECEIVER_FULLNAME" => $order->fullname,
+            "RECEIVER_ADDRESS" => $order->address,
+            "RECEIVER_PHONE" => $order->phone,
+            "PRODUCT_NAME" => $product->name,
+            "PRODUCT_DESCRIPTION" => "$product_name (SL:$order_item->quantity)",
+            "PRODUCT_QUANTITY" => $order_item->quantity,
+            "PRODUCT_PRICE" => $order->total - $order->shipping,
+            "PRODUCT_WEIGHT" => $product->weight * $order_item->quantity,
+            "PRODUCT_LENGTH" => null,
+            "PRODUCT_WIDTH" => null,
+            "PRODUCT_HEIGHT" => null,
+            "ORDER_PAYMENT" => $order_payment,
+            "ORDER_SERVICE" => $get_list[0]['MA_DV_CHINH'],
+            "ORDER_SERVICE_ADD" => '',
+            "ORDER_NOTE" => "$product_name (SL:$order_item->quantity)",
+            "MONEY_COLLECTION" => $money_colection,
+            "LIST_ITEM" => $list_item,
+        ]);
+
+        $order->order_number = json_decode($taodon)->data->ORDER_NUMBER;
+        $order->save();
+            DB::commit();
+        return response()->json([
+            'success' => true,
+            'message' => 'Cập nhật đơn hàng thành công',
+
+        ], 201);
+        } catch (\Exception $e) {
+            DB::rollBack();
+            Log::error($e->getMessage(), []);
+            return response()->json([
+                'success' => false,
+                'message' => 'Có lỗi xảy ra.Vui lòng thử lại',
+            ], 500);
+
+        };
+    }
+
+    public function vshopRefuse(Request $request,$order_id){
+        $validator = Validator::make($request->all(), [
+            'pdone_id' => 'required|exists:vshop,pdone_id',
+        ]);
+        if ($validator->fails()) {
+            return response()->json([
+                'messageError' => $validator->errors(),
+            ], 401);
+        }
+        $order = Order::where('id',$order_id)->where('export_status',0)->first();
+        $vshop = Vshop::find($order->is_vshop);
+        if ($vshop->pdone_id != $request->pdone_id){
+            return response()->json([
+                'success' => false,
+                'message' => 'đơn hàng không phải của vshop'
+            ], 400);
+        }
+        if ($order){
+            $order->export_status=3;
+            $order->save();
+            return response()->json([
+                'success' => true,
+                'message' => 'Cập nhật đơn hàng thành công',
+            ], 201);
+        }
+
+        return response()->json([
+            'success' => true,
+            'message' => 'Cập nhật đơn hàng không thành công',
+        ], 201);
     }
 }
