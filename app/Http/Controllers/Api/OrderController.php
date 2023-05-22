@@ -1104,6 +1104,12 @@ class OrderController extends Controller
             ], 401);
         }
         $order = Order::where('id',$order_id)->where('export_status',0)->first();
+        if (!$order){
+            return response()->json([
+                'success' => false,
+                'message' => 'Cập nhật đơn hàng không thành công',
+            ], 400);
+        }
         $vshop = Vshop::find($order->is_vshop);
         if ($vshop->pdone_id != $request->pdone_id){
             return response()->json([
