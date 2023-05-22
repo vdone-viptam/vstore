@@ -704,7 +704,7 @@ class OrderController extends Controller
      *
      * @param Request $request
      * @bodyParam order_id id order
-     * @bodyParam order_id descriptions order
+     * @bodyParam description Ly do huy don hang
      * @return \Illuminate\Http\JsonResponse
      */
     public function refuseOrderByCustomer(Request $request)
