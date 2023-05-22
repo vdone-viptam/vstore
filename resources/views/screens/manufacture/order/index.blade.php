@@ -239,7 +239,7 @@
                                         {{ number_format($order->total, 0, '.', '.') }} đ
                                     </td>
                                     <td class="text-center white-space-150">
-                                        {{ $order->orderItem[0]->vshop->name ?? 'Viptam' }}
+                                        {{ $order->vshop_name ?? 'Viptam' }}
                                     </td>
                                     <td class="text-right white-space-130">
                                         {{ number_format($order->money , 0, '.', '.') }} đ
