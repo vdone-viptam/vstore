@@ -721,7 +721,7 @@ class OrderController extends Controller
         }
         DB::beginTransaction();
         try {
-            $order = Order::find($request->order_id);
+            $order = Order::where('id',$request->order_id)->where('export_status',0)->first();
             if (!$order) {
                 return response()->json([
                     'status_code' => 404,
