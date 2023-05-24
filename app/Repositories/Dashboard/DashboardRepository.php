@@ -315,7 +315,7 @@ class DashboardRepository implements DashboardRepositoryInterface
 
     public function requestTaxCodeToday()
     {
-        $data = RequestChangeTaxCode::where('status', 0)->join("users", 'request_change_taxcode.user_id', '=', 'users.id')->count();
+        $data = RequestChangeTaxCode::where('request_change_taxcode.status', 0)->join("users", 'request_change_taxcode.user_id', '=', 'users.id')->count();
         return $data;
     }
 
