@@ -443,7 +443,7 @@ class OrderController extends Controller
         try {
             $status = $request->status ?? 10;
             $limit = $request->limit ?? 5;
-            $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number', 'estimated_date');
+            $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number', 'estimated_date','method_payment');
 
             if ($status != 10 && $status != 4 && $status != 5) {
                 $orders = $orders->where('export_status', $status);
