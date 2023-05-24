@@ -443,7 +443,7 @@ class OrderController extends Controller
         try {
             $status = $request->status ?? 10;
             $limit = $request->limit ?? 5;
-            $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number', 'estimated_date');
+            $orders = Order::select('no', 'id', 'total', 'export_status', 'order_number', 'estimated_date','method_payment');
 
             if ($status != 10 && $status != 4 && $status != 5) {
                 $orders = $orders->where('export_status', $status);
@@ -461,7 +461,17 @@ class OrderController extends Controller
                 ->where('status', '!=', 2)
                 ->orderBy('order.id', 'desc')
                 ->where('user_id', $id)->paginate($limit);
-
+            if ($orders->method_payment==1){
+                $orders->method_payments = 'Thanh toán bằng thẻ nội địa';
+            }elseif ($orders->method_payment==2){
+                $orders->method_payments = 'Thanh toán bằng thẻ quốc tế';
+            }elseif ($orders->method_payment==3){
+                $orders->method_payments = 'Thanh toán bằng 9Pay';
+            }elseif ($orders->method_payment==4){
+                $orders->method_payments = 'Thanh toán bằng chuển khoản ngân hàng';
+            }elseif ($orders->method_payment==5){
+                $orders->method_payments = 'Thanh toán bằng khi nhận hàng';
+            }
             foreach ($orders as $order) {
                 if ($status == 5 || ($order->export_status == 4 && $order->estimated_date <= Carbon::now() && Carbon::now()->diffInDays($order->estimated_date) > 7)) {
                     $order->is_complete = true;
@@ -548,6 +558,17 @@ class OrderController extends Controller
                 ->where('status', '!=', 2)
                 ->orderBy('updated_at', 'desc')
                 ->first();
+            if ($order->method_payment==1){
+                $order->method_payments = 'Thanh toán bằng thẻ nội địa';
+        }elseif ($order->method_payment==2){
+                $order->method_payments = 'Thanh toán bằng thẻ quốc tế';
+        }elseif ($order->method_payment==3){
+                $order->method_payments = 'Thanh toán bằng 9Pay';
+        }elseif ($order->method_payment==4){
+                $order->method_payments = 'Thanh toán bằng chuển khoản ngân hàng';
+        }elseif ($order->method_payment==5){
+                $order->method_payments = 'Thanh toán bằng khi nhận hàng';
+        }
             if (!$order) {
                 return response()->json([
                     'success' => false,
