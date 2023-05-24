@@ -461,15 +461,15 @@ class OrderController extends Controller
                 ->where('status', '!=', 2)
                 ->orderBy('order.id', 'desc')
                 ->where('user_id', $id)->paginate($limit);
-            if ($orders->method_payment==1){
+            if ($orders->method_payment=='ATM_CARD'){
                 $orders->method_payments = 'Thanh toán bằng thẻ nội địa';
-            }elseif ($orders->method_payment==2){
+            }elseif ($orders->method_payment=='CREDIT_CARD'){
                 $orders->method_payments = 'Thanh toán bằng thẻ quốc tế';
-            }elseif ($orders->method_payment==3){
+            }elseif ($orders->method_payment=='9PAY'){
                 $orders->method_payments = 'Thanh toán bằng 9Pay';
-            }elseif ($orders->method_payment==4){
+            }elseif ($orders->method_payment=='BANK_TRANSFER'){
                 $orders->method_payments = 'Thanh toán bằng chuển khoản ngân hàng';
-            }elseif ($orders->method_payment==5){
+            }elseif ($orders->method_payment=='COD'){
                 $orders->method_payments = 'Thanh toán bằng khi nhận hàng';
             }
             foreach ($orders as $order) {
@@ -558,17 +558,7 @@ class OrderController extends Controller
                 ->where('status', '!=', 2)
                 ->orderBy('updated_at', 'desc')
                 ->first();
-            if ($order->method_payment==1){
-                $order->method_payments = 'Thanh toán bằng thẻ nội địa';
-        }elseif ($order->method_payment==2){
-                $order->method_payments = 'Thanh toán bằng thẻ quốc tế';
-        }elseif ($order->method_payment==3){
-                $order->method_payments = 'Thanh toán bằng 9Pay';
-        }elseif ($order->method_payment==4){
-                $order->method_payments = 'Thanh toán bằng chuển khoản ngân hàng';
-        }elseif ($order->method_payment==5){
-                $order->method_payments = 'Thanh toán bằng khi nhận hàng';
-        }
+
             if (!$order) {
                 return response()->json([
                     'success' => false,
@@ -602,6 +592,17 @@ class OrderController extends Controller
                 $order->method_payment = 4;
             } elseif ($order->method_payment == 'COD') {
                 $order->method_payment = 5;
+            }
+            if ($order->method_payment==1){
+                $order->method_payments = 'Thanh toán bằng thẻ nội địa';
+            }elseif ($order->method_payment==2){
+                $order->method_payments = 'Thanh toán bằng thẻ quốc tế';
+            }elseif ($order->method_payment==3){
+                $order->method_payments = 'Thanh toán bằng 9Pay';
+            }elseif ($order->method_payment==4){
+                $order->method_payments = 'Thanh toán bằng chuển khoản ngân hàng';
+            }elseif ($order->method_payment==5){
+                $order->method_payments = 'Thanh toán bằng khi nhận hàng';
             }
             return response()->json([
                 'success' => true,
