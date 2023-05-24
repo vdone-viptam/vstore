@@ -47,7 +47,7 @@ class Handler extends ExceptionHandler
     {
         $this->renderable(function (\Exception $e) {
             if ($e->getPrevious() instanceof \Illuminate\Session\TokenMismatchException) {
-                return redirect()->back()->with('error','Bạn không thể submit form quá nhanh');
+                return redirect()->back()->with('error','Bạn không thể gửi yêu cầu đăng nhập quá nhanh');
             };
         });
     }
