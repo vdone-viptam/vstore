@@ -256,7 +256,7 @@ class DashboardRepository implements DashboardRepositoryInterface
     {
         $checkRole = User::where('id', Auth::id())->first()->role_id;
 
-        $data = Order::whereNotIn('order.export_status', [3,5])
+        $data = Order::whereNotIn('order.export_status', [3, 5])
             ->whereDate('order.created_at', date('Y-m-d'))
             ->join('order_item', 'order_item.order_id', 'order.id')
             ->where('order.status', '!=', '2')
@@ -277,7 +277,7 @@ class DashboardRepository implements DashboardRepositoryInterface
         $data = Order::query()
             ->join('order_item', 'order_item.order_id', 'order.id')
             ->join('products', 'products.id', 'order_item.product_id')
-            ->whereNotIn('order.export_status', [3,5])
+            ->whereNotIn('order.export_status', [3, 5])
             ->where('order.status', '!=', '2')
             ->whereDate('order.created_at', date('Y-m-d'));
         if ($checkRole == 2) {
@@ -315,7 +315,7 @@ class DashboardRepository implements DashboardRepositoryInterface
 
     public function requestTaxCodeToday()
     {
-        $data = RequestChangeTaxCode::where('status', 0)->count();
+        $data = RequestChangeTaxCode::where('status', 0)->join("users", 'request_change_taxcode.user_id', '=', 'users.id')->count();
         return $data;
     }
 
@@ -529,7 +529,9 @@ class DashboardRepository implements DashboardRepositoryInterface
 
         return $dashboardChart;
     }
-    public function revenueInMonthNow(){
+
+    public function revenueInMonthNow()
+    {
 
 
         $currentMonth = Carbon::now()->month;
@@ -537,7 +539,7 @@ class DashboardRepository implements DashboardRepositoryInterface
 
         $checkRole = User::where('id', Auth::id())->first()->role_id;
 
-        $data = Order::whereNotIn('order.export_status', [3,5])
+        $data = Order::whereNotIn('order.export_status', [3, 5])
             ->whereMonth('order.created_at', '=', $currentMonth)
             ->whereYear('order.created_at', '=', $currentYear)
             ->where('order.status', '!=', '2')
@@ -553,7 +555,9 @@ class DashboardRepository implements DashboardRepositoryInterface
         return $data;
 
     }
-    public function productRunningOut(){
+
+    public function productRunningOut()
+    {
         $data = ProductWarehouses::query()
             ->select('products.id')
             ->join("products", 'products.id', '=', 'product_warehouses.product_id')
@@ -562,7 +566,9 @@ class DashboardRepository implements DashboardRepositoryInterface
             ->count();
         return $data;
     }
-    public function unapprovedOrder(){
+
+    public function unapprovedOrder()
+    {
         $data = PreOrderVshop::query()
             ->join('products', 'pre_order_vshop.product_id', '=',
                 'products.id')

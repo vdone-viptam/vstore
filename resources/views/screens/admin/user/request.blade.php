@@ -111,7 +111,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <tr>
                         @if(count($requests) > 0)
                             @foreach($requests as $request)
                                 <tr>
@@ -149,14 +148,14 @@
                             @endforeach
                         @else
                             <tr>
-                                <td colspan="5" class="text-center">Không có dữ liệu phù hợp</td>
+                                <td colspan="9" class="text-center">Không có dữ liệu phù hợp</td>
                             </tr>
                         @endif
                         </tbody>
                     </table>
 
                 </div>
-            
+
                 <div class="d-flex align-items-center justify-content-end mt-4">
                     {{$requests->withQueryString()->links('layouts.custom.paginator')}}
                     <div class="ml-4">
@@ -169,7 +168,7 @@
                     </div>
                 </div>
                 </div>
-              
+
 
             </div>
 
