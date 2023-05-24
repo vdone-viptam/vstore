@@ -3,6 +3,8 @@
 namespace App\Exceptions;
 
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Illuminate\Session\TokenMismatchException;
 use Throwable;
 
 class Handler extends ExceptionHandler
@@ -43,8 +45,18 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-        $this->reportable(function (Throwable $e) {
-            //
+        $this->renderable(function (\Exception $e) {
+            if ($e->getPrevious() instanceof \Illuminate\Session\TokenMismatchException) {
+                return redirect()->back()->with('error','Bạn không thể submit form quá nhanh');
+            };
         });
     }
+//
+//    public function render($request, Throwable $e)
+//    {
+//        if($e->getCode() == 419){
+//            return new \HttpException($e->getMessage(), 419);
+//        }
+//        return parent::render($request, $e);
+//    }
 }
