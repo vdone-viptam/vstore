@@ -464,15 +464,15 @@ class OrderController extends Controller
 
             foreach ($orders as $order) {
                 if ($order->method_payment=='ATM_CARD'){
-                    $order->method_payments = 'Thanh toán bằng thẻ nội địa';
+                    $order->method_payments = 'Thanh toán qua Thẻ nội địa';
                 }elseif ($order->method_payment=='CREDIT_CARD'){
-                    $order->method_payments = 'Thanh toán bằng thẻ quốc tế';
+                    $order->method_payments = 'Thanh toán qua Thẻ quốc tế';
                 }elseif ($order->method_payment=='9PAY'){
-                    $order->method_payments = 'Thanh toán bằng 9Pay';
+                    $order->method_payments = 'Thanh toán qua 9Pay';
                 }elseif ($order->method_payment=='BANK_TRANSFER'){
-                    $order->method_payments = 'Thanh toán bằng chuển khoản ngân hàng';
+                    $order->method_payments = 'Chuyển khoản ngân hàng';
                 }elseif ($order->method_payment=='COD'){
-                    $order->method_payments = 'Thanh toán bằng khi nhận hàng';
+                    $order->method_payments = 'Thanh toán khi nhận hàng';
                 }
                 if ($status == 5 || ($order->export_status == 4 && $order->estimated_date <= Carbon::now() && Carbon::now()->diffInDays($order->estimated_date) > 7)) {
                     $order->is_complete = true;
@@ -584,18 +584,19 @@ class OrderController extends Controller
             $order->detail->price = $product->price;
             $order->detail->product_name = $product->name;
             if ($order->method_payment == '9PAY') {
+                $order->method_payments = 'Thanh toán qua 9Pay';
                 $order->method_payment = 1;
             } elseif ($order->method_payment == 'ATM_CARD') {
-                $order->method_payments = 'Thanh toán bằng thẻ nội địa';
+                $order->method_payments = 'Thanh toán qua Thẻ nội địa';
                 $order->method_payment = 2;
             } elseif ($order->method_payment == 'CREDIT_CARD') {
-                $order->method_payments = 'Thanh toán bằng thẻ quốc tế';
+                $order->method_payments = 'Thanh toán qua Thẻ quốc tế';
                 $order->method_payment = 3;
             } elseif ($order->method_payment == 'BANK_TRANSFER') {
-                $order->method_payments = 'Thanh toán bằng chuển khoản ngân hàng';
+                $order->method_payments = 'Chuyển khoản ngân hàng';
                 $order->method_payment = 4;
             } elseif ($order->method_payment == 'COD') {
-                $order->method_payments = 'Thanh toán bằng khi nhận hàng';
+                $order->method_payments = 'Thanh toán khi nhận hàng';
                 $order->method_payment = 5;
             }
 
