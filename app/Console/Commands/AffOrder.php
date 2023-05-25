@@ -45,6 +45,7 @@ class AffOrder extends Command
             $orders = Order::select('id','no','user_id')
                 ->where('export_status', 4)
                 ->where('status', '!=',2)
+                ->where('updated_at','<=',Carbon::now()->addDay(-7))
                 ->where('is_split','!=',1)
                 ->get();
             foreach ($orders as $order) {
