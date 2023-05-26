@@ -42,29 +42,32 @@ class ReviewProductRepository implements ReviewProductRepositoryInterface
                     'order.shipping',
                 )
                 ->first();
-            $array['count_product'] = $orderItem->quantity;
-            $array['quantity'] = $orderItem->quantity;
 
-            // a = ( giá sp * sl) - giảm giá
-            //  b = a *vat (tính vat)
-            // số tiền thực tế phải đóng = a + b + phí ship
-            $totalDiscount = ($orderItem->discount_vshop + $orderItem->discount_ncc + $orderItem->discount_vstore );
-            if( $totalDiscount  > 0 ){
-                $totalDiscount = $totalDiscount /100;
+                $orderItem->quantity =$orderItem->quantity??0;
+                $array['count_product'] = $orderItem->quantity;
+                $array['quantity'] = $orderItem->quantity;
+
+                // a = ( giá sp * sl) - giảm giá
+                //  b = a *vat (tính vat)
+                // số tiền thực tế phải đóng = a + b + phí ship
+                $totalDiscount = ($orderItem->discount_vshop + $orderItem->discount_ncc + $orderItem->discount_vstore );
+                if( $totalDiscount  > 0 ){
+                    $totalDiscount = $totalDiscount /100;
+                }
+                $totalProduct = $orderItem->price * $orderItem->quantity;
+                $shipping = $orderItem->shipping;
+                $totalVat = $product->vat;
+                if( $totalVat  > 0 ){
+                    $totalVat = $totalVat / 100 ;
+                }
+                $amount_to_pay = $totalProduct  -  (  $totalProduct * $totalDiscount );
+                // $amount_to_pay = $amount_to_pay + $amount_to_pay* $totalVat + $shipping;
+                $array['amount_to_pay'] = $amount_to_pay;
+                $array['price_product'] = $totalProduct;
+                $array['price'] = $totalProduct;
             }
-            $totalProduct = $orderItem->price * $orderItem->quantity;
-            $shipping = $orderItem->shipping;
-            $totalVat = $product->vat;
-            if( $totalVat  > 0 ){
-                $totalVat = $totalVat / 100 ;
-            }
-            $amount_to_pay = $totalProduct  -  (  $totalProduct * $totalDiscount );
-            // $amount_to_pay = $amount_to_pay + $amount_to_pay* $totalVat + $shipping;
-            $array['amount_to_pay'] = $amount_to_pay;
-            $array['price_product'] = $totalProduct;
-            $array['price'] = $totalProduct;
-        }
-        return $array;
+            return $array;
+
     }
     public function calculatorFeeProductOrder($productId,$orderItemId)
     {

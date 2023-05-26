@@ -245,7 +245,7 @@ class OrderController extends Controller
             $orderItem->is_vshop = $order->is_vshop;
         }
         $orderItem->save();
-        $product->images = json_decode($product->images);
+        $product->images = asset(json_decode($product->images)[0]);
 
         $order->total_vat = $totalVat;
         return response()->json([
