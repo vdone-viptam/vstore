@@ -58,12 +58,12 @@ class CartController extends Controller
         $cart = CartV2::where('user_id', $userId)
             ->where('id', $id)
             ->first();
-        if(!$cart) {
+        if (!$cart) {
             return response()->json([
                 "status_code" => 401,
             ], 401);
         }
-        if($quantity <= 0) {
+        if ($quantity <= 0) {
             CartItemV2::where('cart_id', $id)
                 ->where('vshop_id', $vshopId)
                 ->where('product_id', $productId)->delete();
@@ -114,11 +114,11 @@ class CartController extends Controller
 
         $cart = CartV2::where('cart_v2.user_id', $user_id)
             ->where('status', config('constants.statusCart.cart'))->first();
-        if(!$cart) {
+        if (!$cart) {
             return response()->json([
                 'status_code' => 200,
                 'message' => "Giỏ hàng trống",
-                'carts'=>[]
+                'carts' => []
             ], 200);
         }
         $cartItems = CartItemV2::where('cart_id', $cart->id)
@@ -147,7 +147,7 @@ class CartController extends Controller
                 ->where('vshop_id', $item->vshop_id_)
                 ->first();
 
-            if(!$checkProductVshop) {
+            if (!$checkProductVshop) {
                 continue;
             }
 
@@ -164,15 +164,27 @@ class CartController extends Controller
             $item->images = $newImages;
 
             $item->discount = getDiscountProduct($item->id, $item->vshop_id_);
+            $discount_product = null;
+            $discount = getDiscountProduct($item->id, $item->vshop_id_);
+            if (isset($discount['discountsFromSuppliers'])){
+                $discount_product += $discount['discountsFromSuppliers'];
+            }
+            if (isset($discount['discountsFromVStore'])){
+                $discount_product += $discount['discountsFromVStore'];
+            }
+            if (isset($discount['discountsFromVShop'])){
+                $discount_product += $discount['discountsFromVShop'];
+            }
+            $item->discount_product = $discount_product;
             $result[$item['vshop_id']]['products'][] = $item;
         }
 
         $result = array_values($result);
-        if($result===[]) {
+        if ($result === []) {
             return response()->json([
                 'status_code' => 200,
                 'message' => "Giỏ hàng trống",
-                'carts'=>[]
+                'carts' => []
             ], 200);
         }
 
@@ -215,7 +227,7 @@ class CartController extends Controller
 
         // Kiểm tra xêm vshop tồn tại không ?
         $vshop = Vshop::find($vshopId);
-        if(!$vshop) {
+        if (!$vshop) {
             return response()->json([
                 'status_code' => 404,
             ], 500);
@@ -230,7 +242,7 @@ class CartController extends Controller
             ->where('products.id', $id)
             ->where('products.status', 2) // active
             ->where('vshop_products.vshop_id', $vshopId)
-            ->WhereIn('vshop_products.status',[1,2])
+            ->WhereIn('vshop_products.status', [1, 2])
             ->select('products.id', 'products.sku_id', 'products.price', 'products.images', 'products.name')
             ->first();
 
@@ -255,7 +267,7 @@ class CartController extends Controller
             ->where('user_id', $userId)
             ->first();
 
-        if(!$cart) {
+        if (!$cart) {
             $cart = new CartV2();
             $cart->status = config('constants.statusCart.cart');
             $cart->user_id = $userId;
@@ -267,7 +279,7 @@ class CartController extends Controller
             ->where('vshop_id', $vshopId)
             ->first();
 
-        if($checkCartItem) {
+        if ($checkCartItem) {
             $checkCartItem->quantity += $quantity;
             $checkCartItem->sku = $product->sku_id;
             $checkCartItem->price = $product->price;
@@ -287,10 +299,9 @@ class CartController extends Controller
             'status_code' => 201,
             'message' => 'Thêm sản phẩm vào giỏ hàng thành công',
             'cart_item' => $checkCartItem,
-            'product' =>$product
+            'product' => $product
         ], 201);
     }
-
 
 
 }
