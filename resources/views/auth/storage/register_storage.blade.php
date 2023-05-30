@@ -14,7 +14,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Đăng ký KHO</title>
+    <title>{{$type_create == 'true' ? 'Thêm mới tài khoản' : 'Đăng ký KHO'}}</title>
     <link rel="stylesheet" href="{{asset('asset/css/style.css')}}">
     <link rel="stylesheet" href="{{asset('asset/dist/output.css')}}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
@@ -76,16 +76,26 @@
     </div>
 @endif
 
-<form class="splash-container splash-register" action="{{route('post_register',['role_id' => 4])}}" id="formRegister-V" enctype="multipart/form-data" method="POST">
+<form class="splash-container splash-register"
+      action="{{route('post_register',['role_id' => 4,'type_create' => $type_create ?? false])}}" id="formRegister-V"
+      enctype="multipart/form-data" method="POST">
     @csrf
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between">
-            <div>
-                <h1 class="mb-1" style="font-size:34px;">Đăng ký</h1>
+            @if($type_create == 'true')
+                <h1 class="mb-1">Thêm mới tài khoản</h1>
+            @else
+                <h1 class="mb-1">Đăng ký</h1>
+                @if (isset($_GET['orderErr']))
+                    <span class="text-danger text-red-500">{{ $_GET['orderErr'] }}</span>
+                @endif
+                @if (\Illuminate\Support\Facades\Session::has('orderErr'))
+                    <span class="text-danger text-red-500">{{ \Illuminate\Support\Facades\Session::get('orderErr') }}</span>
+                @endif
                 <p>Vui lòng nhập thông tin để đăng ký tài khoản.</p>
-            </div>
-
-            <img src="{{asset('asset/images/titleK.png')}}" style="object-fit: contain; height: 40px !important;" alt="Logo">
+            @endif
+            <img src="{{asset('asset/images/titleK.png')}}" style="object-fit: contain; height: 40px !important;"
+                 alt="Logo">
         </div>
         <div class="card-body">
             <div class="row">
@@ -130,9 +140,11 @@
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
-                        <label style="font-weight: 600; display:flex;align-items:center" for="idpDone"><span class="text-danger">*</span>ID P-Done
-                            người đại diện <svg style="cursor: pointer;margin-left: 3px;" width="14" height="14" viewBox="0 0 14 14"
-                                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <label style="font-weight: 600; display:flex;align-items:center" for="idpDone"><span
+                                class="text-danger">*</span>ID P-Done
+                            người đại diện
+                            <svg style="cursor: pointer;margin-left: 3px;" width="14" height="14" viewBox="0 0 14 14"
+                                 fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <title>Vui lòng nhập ID P-Done của người đại diện của bạn</title>
                                 <path
                                     d="M7 0C3.13437 0 0 3.13437 0 7C0 10.8656 3.13437 14 7 14C10.8656 14 14 10.8656 14 7C14 3.13437 10.8656 0 7 0ZM7 12.8125C3.79063 12.8125 1.1875 10.2094 1.1875 7C1.1875 3.79063 3.79063 1.1875 7 1.1875C10.2094 1.1875 12.8125 3.79063 12.8125 7C12.8125 10.2094 10.2094 12.8125 7 12.8125Z"
@@ -140,7 +152,8 @@
                                 <path
                                     d="M6.24976 4.25C6.24976 4.44891 6.32877 4.63968 6.46943 4.78033C6.61008 4.92098 6.80084 5 6.99976 5C7.19867 5 7.38943 4.92098 7.53009 4.78033C7.67074 4.63968 7.74976 4.44891 7.74976 4.25C7.74976 4.05109 7.67074 3.86032 7.53009 3.71967C7.38943 3.57902 7.19867 3.5 6.99976 3.5C6.80084 3.5 6.61008 3.57902 6.46943 3.71967C6.32877 3.86032 6.24976 4.05109 6.24976 4.25ZM7.37476 6H6.62476C6.55601 6 6.49976 6.05625 6.49976 6.125V10.375C6.49976 10.4438 6.55601 10.5 6.62476 10.5H7.37476C7.44351 10.5 7.49976 10.4438 7.49976 10.375V6.125C7.49976 6.05625 7.44351 6 7.37476 6Z"
                                     fill="black" fill-opacity="0.45"></path>
-                            </svg></label>
+                            </svg>
+                        </label>
                         <input class="form-control form-control-lg" required="" type="text"
                                name="id_vdone" id="id_vdone"
                                value="{{old('id_vdone')}}"
@@ -152,7 +165,8 @@
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
-                        <label style="font-weight: 600;" for="company"><span class="text-danger">*</span>Tên công ty/ hợp tác xã/ hộ kinh doanh cá thể</label>
+                        <label style="font-weight: 600;" for="company"><span class="text-danger">*</span>Tên công ty/
+                            hợp tác xã/ hộ kinh doanh cá thể</label>
                         <input class="form-control form-control-lg" type="text" required=""
                                name="company_name" id="company_name"
                                placeholder="Nhập tên công ty/ hợp tác xã/ hộ kinh doanh cá thể"
@@ -244,10 +258,11 @@
 
                 <div class="col-xl-6">
                     <div class="form-group">
-                        <label style="font-weight: 600;" for="address"><span class="text-danger">*</span>Địa chỉ chi tiết</label>
+                        <label style="font-weight: 600;" for="address"><span class="text-danger">*</span>Địa chỉ chi
+                            tiết</label>
                         <input class="form-control form-control-lg" type="text" name="address" id="address" required=""
-                            value="{{old('address')}}"
-                            placeholder="Nhập địa chỉ chi tiết (VD:Số nhà, tòa nhà, thôn...)">
+                               value="{{old('address')}}"
+                               placeholder="Nhập địa chỉ chi tiết (VD:Số nhà, tòa nhà, thôn...)">
                         @error('address')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
@@ -266,8 +281,9 @@
                     <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(154, 154, 204, 0.22);">
                         <label class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox"
-                                {{ old('normal_storage') ? 'checked' : '' }}
-                                class="custom-control-input" name="normal_storage" value="normal_storage" id="normal_storage"><span
+                                   {{ old('normal_storage') ? 'checked' : '' }}
+                                   class="custom-control-input" name="normal_storage" value="normal_storage"
+                                   id="normal_storage"><span
                                 class="custom-control-label">Kho thường</span>
                         </label>
                         @error('normal_storage')
@@ -280,9 +296,10 @@
                                         <label style="font-weight: 600;"><span
                                                 class="text-danger">*</span>Diện tích kho
                                             (m2)</label>
-                                        <input class="only-number form-control form-control-lg" type="text" name="acreage_normal_storage" id="acreage_normal_storage"
-                                            value="{{ old('acreage_normal_storage') }}"
-                                            placeholder="Nhập diện tích (m2)">
+                                        <input class="only-number form-control form-control-lg" type="text"
+                                               name="acreage_normal_storage" id="acreage_normal_storage"
+                                               value="{{ old('acreage_normal_storage') }}"
+                                               placeholder="Nhập diện tích (m2)">
                                         @error('acreage_normal_storage')
                                         <p class="text-red-600">{{$message}}</p>
                                         @enderror
@@ -295,9 +312,10 @@
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="only-number form-control form-control-lg" type="text" name="length_normal_storage" id="length_normal_storage"
-                                                    value="{{ old('length_normal_storage') }}"
-                                                    placeholder="Chiều dài">
+                                                <input class="only-number form-control form-control-lg" type="text"
+                                                       name="length_normal_storage" id="length_normal_storage"
+                                                       value="{{ old('length_normal_storage') }}"
+                                                       placeholder="Chiều dài">
                                                 @error('length_normal_storage')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
@@ -305,9 +323,10 @@
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="only-number form-control form-control-lg" type="text" name="width_normal_storage" id="width_normal_storage"
-                                                    value="{{ old('width_normal_storage') }}"
-                                                    placeholder="Chiều rộng">
+                                                <input class="only-number form-control form-control-lg" type="text"
+                                                       name="width_normal_storage" id="width_normal_storage"
+                                                       value="{{ old('width_normal_storage') }}"
+                                                       placeholder="Chiều rộng">
                                                 @error('width_normal_storage')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
@@ -315,9 +334,10 @@
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="only-number form-control form-control-lg" type="text" name="height_normal_storage" id="height_normal_storage"
-                                                    value="{{ old('height_normal_storage') }}"
-                                                    placeholder="Chiều cao">
+                                                <input class="only-number form-control form-control-lg" type="text"
+                                                       name="height_normal_storage" id="height_normal_storage"
+                                                       value="{{ old('height_normal_storage') }}"
+                                                       placeholder="Chiều cao">
                                                 @error('height_normal_storage')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
@@ -331,20 +351,23 @@
                                     <div class="form-group">
                                         <label style="font-weight: 600;" for="volume_normal_storage">Thể tích kho
                                             (m3)</label>
-                                        <input class="only-number form-control form-control-lg" type="text" name="volume_normal_storage" id="volume_normal_storage"
-                                            value="{{ old('volume_normal_storage') }}"
-                                            placeholder="Nhập thể tích (m3)">
-                                            @error('volume_normal_storage')
-                                            <p class="text-red-600">{{$message}}</p>
-                                            @enderror
+                                        <input class="only-number form-control form-control-lg" type="text"
+                                               name="volume_normal_storage" id="volume_normal_storage"
+                                               value="{{ old('volume_normal_storage') }}"
+                                               placeholder="Nhập thể tích (m3)">
+                                        @error('volume_normal_storage')
+                                        <p class="text-red-600">{{$message}}</p>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
                                             class="text-danger">*</span>Hình ảnh kho</label>
-                                    <input class="form-control form-control-lg" type="file" name="image_normal_storage[]" id="image_normal_storage"
-                                        placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
+                                    <input class="form-control form-control-lg" type="file"
+                                           name="image_normal_storage[]" id="image_normal_storage"
+                                           placeholder="Nhập hình ảnh kho" multiple
+                                           accept="image/png, image/gif, image/jpeg">
                                     @error('image_normal_storage')
                                     <p class="text-red-600">{{$message}}</p>
                                     @enderror
@@ -355,8 +378,10 @@
                                 <div class="col-12 my-4">
                                     <label style="font-weight: 600;" for="tts">Giấy chứng nhận
                                         PCCC/Chứng nhận khác</label>
-                                    <input class="form-control form-control-lg" type="file" name="image_pccc_normal_storage[]"
-                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác" multiple accept="image/png, image/gif, image/jpeg">
+                                    <input class="form-control form-control-lg" type="file"
+                                           name="image_pccc_normal_storage[]"
+                                           placeholder="Nhập chứng nhận PCCC/Chứng nhận khác" multiple
+                                           accept="image/png, image/gif, image/jpeg">
                                     @error('image_pccc_normal_storage')
                                     <p class="text-red-600">{{$message}}</p>
                                     @enderror
@@ -373,8 +398,9 @@
                     <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(168, 168, 207, 0.22);">
                         <label class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox"
-                                {{ old('cold_storage') ? 'checked' : '' }}
-                                class="custom-control-input" name="cold_storage" value="cold_storage" id="cold_storage"><span
+                                   {{ old('cold_storage') ? 'checked' : '' }}
+                                   class="custom-control-input" name="cold_storage" value="cold_storage"
+                                   id="cold_storage"><span
                                 class="custom-control-label">Kho lạnh</span>
                         </label>
                         @error('cold_storage')
@@ -387,9 +413,10 @@
                                         <label style="font-weight: 600;" for="dts"><span
                                                 class="text-danger">*</span>Diện tích kho
                                             (m2)</label>
-                                        <input class="only-number form-control form-control-lg" type="text" name="acreage_cold_storage" id="acreage_cold_storage"
-                                            value="{{ old('acreage_cold_storage') }}"
-                                            placeholder="Nhập diện tích (m2)">
+                                        <input class="only-number form-control form-control-lg" type="text"
+                                               name="acreage_cold_storage" id="acreage_cold_storage"
+                                               value="{{ old('acreage_cold_storage') }}"
+                                               placeholder="Nhập diện tích (m2)">
                                         @error('acreage_cold_storage')
                                         <p class="text-red-600">{{$message}}</p>
                                         @enderror
@@ -402,9 +429,10 @@
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="only-number form-control form-control-lg" type="text" name="length_cold_storage" id="length_cold_storage"
-                                                    value="{{ old('length_cold_storage') }}"
-                                                    placeholder="Chiều dài">
+                                                <input class="only-number form-control form-control-lg" type="text"
+                                                       name="length_cold_storage" id="length_cold_storage"
+                                                       value="{{ old('length_cold_storage') }}"
+                                                       placeholder="Chiều dài">
                                                 @error('length_cold_storage')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
@@ -412,9 +440,10 @@
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="only-number form-control form-control-lg" type="text" name="width_cold_storage" id="width_cold_storage"
-                                                    value="{{ old('width_cold_storage') }}"
-                                                    placeholder="Chiều rộng">
+                                                <input class="only-number form-control form-control-lg" type="text"
+                                                       name="width_cold_storage" id="width_cold_storage"
+                                                       value="{{ old('width_cold_storage') }}"
+                                                       placeholder="Chiều rộng">
                                                 @error('width_cold_storage')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
@@ -422,9 +451,10 @@
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="only-number form-control form-control-lg" type="text" name="height_cold_storage" id="height_cold_storage"
-                                                    value="{{ old('height_cold_storage') }}"
-                                                    placeholder="Chiều cao">
+                                                <input class="only-number form-control form-control-lg" type="text"
+                                                       name="height_cold_storage" id="height_cold_storage"
+                                                       value="{{ old('height_cold_storage') }}"
+                                                       placeholder="Chiều cao">
                                                 @error('height_cold_storage')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
@@ -438,20 +468,23 @@
                                     <div class="form-group">
                                         <label style="font-weight: 600;" for="tts">Thể tích kho
                                             (m3)</label>
-                                        <input class="only-number form-control form-control-lg" type="text" name="volume_cold_storage" id="volume_cold_storage"
-                                            value="{{ old('volume_cold_storage') }}"
-                                            placeholder="Nhập thể tích (m3)">
-                                            @error('volume_cold_storage')
-                                            <p class="text-red-600">{{$message}}</p>
-                                            @enderror
+                                        <input class="only-number form-control form-control-lg" type="text"
+                                               name="volume_cold_storage" id="volume_cold_storage"
+                                               value="{{ old('volume_cold_storage') }}"
+                                               placeholder="Nhập thể tích (m3)">
+                                        @error('volume_cold_storage')
+                                        <p class="text-red-600">{{$message}}</p>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
                                             class="text-danger">*</span>Hình ảnh kho</label>
-                                    <input class="form-control form-control-lg" type="file" name="image_cold_storage[]" id="image_cold_storage"
-                                        placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
+                                    <input class="form-control form-control-lg" type="file" name="image_cold_storage[]"
+                                           id="image_cold_storage"
+                                           placeholder="Nhập hình ảnh kho" multiple
+                                           accept="image/png, image/gif, image/jpeg">
                                     @error('image_cold_storage')
                                     <p class="text-red-600">{{$message}}</p>
                                     @enderror
@@ -462,8 +495,10 @@
                                 <div class="col-12 my-4">
                                     <label style="font-weight: 600;" for="tts">Giấy chứng nhận
                                         PCCC/Chứng nhận khác</label>
-                                    <input class="form-control form-control-lg" type="file" name="image_pccc_cold_storage[]"
-                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác" multiple accept="image/png, image/gif, image/jpeg">
+                                    <input class="form-control form-control-lg" type="file"
+                                           name="image_pccc_cold_storage[]"
+                                           placeholder="Nhập chứng nhận PCCC/Chứng nhận khác" multiple
+                                           accept="image/png, image/gif, image/jpeg">
                                     @error('image_pccc_cold_storage')
                                     <p class="text-red-600">{{$message}}</p>
                                     @enderror
@@ -476,14 +511,14 @@
                     </div>
 
 
-
                 </div>
                 <div class="col-xl-4 col-lg-4 col-md-12 col-sm-12 ">
                     <div class="card p-4" style="box-shadow: 0px 1px 2px 4px rgba(154, 154, 204, 0.22);">
                         <label class="custom-control custom-checkbox custom-control-inline">
                             <input type="checkbox"
-                                {{ old('warehouse') ? 'checked' : '' }}
-                                class="only-number custom-control-input" name="warehouse" value="warehouse" id="warehouse"><span
+                                   {{ old('warehouse') ? 'checked' : '' }}
+                                   class="only-number custom-control-input" name="warehouse" value="warehouse"
+                                   id="warehouse"><span
                                 class="custom-control-label">Kho bãi</span>
                         </label>
                         @error('warehouse')
@@ -496,9 +531,10 @@
                                         <label style="font-weight: 600;" for="dts"><span
                                                 class="text-danger">*</span>Diện tích kho
                                             (m2)</label>
-                                        <input class="only-number form-control form-control-lg" type="text" name="acreage_warehouse" id="acreage_warehouse"
-                                            value="{{ old('acreage_warehouse') }}"
-                                            placeholder="Nhập diện tích (m2)">
+                                        <input class="only-number form-control form-control-lg" type="text"
+                                               name="acreage_warehouse" id="acreage_warehouse"
+                                               value="{{ old('acreage_warehouse') }}"
+                                               placeholder="Nhập diện tích (m2)">
                                         @error('acreage_warehouse')
                                         <p class="text-red-600">{{$message}}</p>
                                         @enderror
@@ -511,9 +547,10 @@
                                     <div class="row">
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="only-number form-control form-control-lg" type="text" name="length_warehouse" id="length_warehouse"
-                                                    value="{{ old('length_warehouse') }}"
-                                                    placeholder="Chiều dài">
+                                                <input class="only-number form-control form-control-lg" type="text"
+                                                       name="length_warehouse" id="length_warehouse"
+                                                       value="{{ old('length_warehouse') }}"
+                                                       placeholder="Chiều dài">
                                                 @error('length_warehouse')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
@@ -521,9 +558,10 @@
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="only-number form-control form-control-lg" type="text" name="width_warehouse" id="width_warehouse"
-                                                    value="{{ old('width_warehouse') }}"
-                                                    placeholder="Chiều rộng">
+                                                <input class="only-number form-control form-control-lg" type="text"
+                                                       name="width_warehouse" id="width_warehouse"
+                                                       value="{{ old('width_warehouse') }}"
+                                                       placeholder="Chiều rộng">
                                                 @error('width_warehouse')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
@@ -531,9 +569,10 @@
                                         </div>
                                         <div class="col-xl-4 col-lg-12 col-md-12 col-sm-12">
                                             <div class="form-group">
-                                                <input class="only-number form-control form-control-lg" type="text" name="height_warehouse" id="height_warehouse"
-                                                    value="{{ old('height_warehouse') }}"
-                                                    placeholder="Chiều cao">
+                                                <input class="only-number form-control form-control-lg" type="text"
+                                                       name="height_warehouse" id="height_warehouse"
+                                                       value="{{ old('height_warehouse') }}"
+                                                       placeholder="Chiều cao">
                                                 @error('height_warehouse')
                                                 <p class="text-red-600">{{$message}}</p>
                                                 @enderror
@@ -547,20 +586,23 @@
                                     <div class="form-group">
                                         <label style="font-weight: 600;" for="tts">Thể tích kho
                                             (m3)</label>
-                                        <input class="only-number form-control form-control-lg" type="text" name="volume_warehouse" id="volume_warehouse"
-                                            value="{{ old('volume_warehouse') }}"
-                                            placeholder="Nhập thể tích (m3)">
-                                            @error('volume_warehouse')
-                                            <p class="text-red-600">{{$message}}</p>
-                                            @enderror
+                                        <input class="only-number form-control form-control-lg" type="text"
+                                               name="volume_warehouse" id="volume_warehouse"
+                                               value="{{ old('volume_warehouse') }}"
+                                               placeholder="Nhập thể tích (m3)">
+                                        @error('volume_warehouse')
+                                        <p class="text-red-600">{{$message}}</p>
+                                        @enderror
                                     </div>
                                 </div>
 
                                 <div class="col-12">
                                     <label style="font-weight: 600;" for="tts"><span
                                             class="text-danger">*</span>Hình ảnh kho</label>
-                                    <input class="form-control form-control-lg" type="file" name="image_warehouse[]" id="image_warehouse"
-                                        placeholder="Nhập hình ảnh kho" multiple accept="image/png, image/gif, image/jpeg">
+                                    <input class="form-control form-control-lg" type="file" name="image_warehouse[]"
+                                           id="image_warehouse"
+                                           placeholder="Nhập hình ảnh kho" multiple
+                                           accept="image/png, image/gif, image/jpeg">
                                     @error('image_warehouse')
                                     <p class="text-red-600">{{$message}}</p>
                                     @enderror
@@ -571,8 +613,10 @@
                                 <div class="col-12 my-4">
                                     <label style="font-weight: 600;" for="tts">Giấy chứng nhận
                                         PCCC/Chứng nhận khác</label>
-                                    <input class="form-control form-control-lg" type="file" name="image_pccc_warehouse[]"
-                                        placeholder="Nhập chứng nhận PCCC/Chứng nhận khác" multiple accept="image/png, image/gif, image/jpeg">
+                                    <input class="form-control form-control-lg" type="file"
+                                           name="image_pccc_warehouse[]"
+                                           placeholder="Nhập chứng nhận PCCC/Chứng nhận khác" multiple
+                                           accept="image/png, image/gif, image/jpeg">
                                     @error('image_pccc_warehouse')
                                     <p class="text-red-600">{{$message}}</p>
                                     @enderror
@@ -589,16 +633,26 @@
 
             <div class="form-group mt-4" style="max-width: 450px; margin: 0 auto;">
                 <label class="custom-control custom-checkbox">
-                    <input class="custom-control-input" required type="checkbox"><span class="custom-control-label">Tôi đồng
-                        ý với <span style="text-decoration: underline;cursor: pointer;"  class="underline text-blue-700" data-toggle="modal" data-target=".modal-terms">Điều khoản sử dụng dịch vụ.</span></span>
+                    <input class="custom-control-input" required
+                           type="checkbox" {{$type_create == 'true' ? 'checked ' : ''}}><span
+                        class="custom-control-label">Tôi đồng
+                        ý với <span style="text-decoration: underline;cursor: pointer;" class="underline text-blue-700"
+                                    data-toggle="modal"
+                                    data-target=".modal-terms">Điều khoản sử dụng dịch vụ.</span></span>
                 </label>
                 <div class="form-group pt-2">
-                    <button class="btn btn-block btn-primary btn-secondary active" disabled type="submit">Đăng ký mua</button>
+                    <button class="btn btn-block btn-primary btn-secondary active" disabled
+                            type="submit">{{$type_create == 'true' ? 'Thêm mới tài khoản' : 'Đăng ký mua'}}</button>
                 </div>
             </div>
         </div>
         <div class="card-footer bg-white">
-            <p>Bạn đã có tài khoản? <a href="{{route('login_storage')}}" class="text-secondary">Đăng nhập ngay</a></p>
+            @if($type_create == 'true')
+                <p><a href="{{route('screens.admin.user.list_user')}}">Quay lại</a></p>
+            @else
+                <p>Bạn đã có tài khoản? <a href="{{route('login_storage')}}" class="text-secondary">Đăng nhập ngay</a>
+                </p>
+            @endif
         </div>
     </div>
 </form>
@@ -615,33 +669,48 @@
                 </button>
             </div>
             <div class="content col-12 my-4">
-                VDONE tạo ra các công nghệ và dịch vụ nhằm hỗ trợ mọi người kết nối với nhau, xây dựng cộng đồng cũng như
-            phát triển doanh nghiệp. Các Điều khoản này điều chỉnh việc bạn sử dụng các sản phẩm, tính năng, ứng dụng,
-            dịch vụ, công nghệ cũng như phần mềm khác mà chúng tôi cung cấp (Sản phẩm của VDONE), trừ khi chúng tôi nêu
-            rõ là áp dụng các điều khoản riêng (và không áp dụng các điều khoản này). Các Sản phẩm này do VipTam, Inc.
-            cung cấp cho bạn. <br>
-            Bạn không mất phí sử dụng các sản phẩm và dịch vụ khác thuộc phạm vi điều chỉnh của những Điều khoản này,
-            trừ khi chúng tôi có quy định khác. Thay vào đó, doanh nghiệp, tổ chức và những cá nhân khác sẽ phải trả
-            tiền cho chúng tôi để hiển thị quảng cáo về sản phẩm và dịch vụ của họ cho bạn. Khi sử dụng Sản phẩm của
-            chúng tôi, bạn đồng ý để chúng tôi hiển thị quảng cáo mà chúng tôi cho rằng có thể phù hợp với bạn và sở
-            thích của bạn. Chúng tôi sử dụng dữ liệu cá nhân của bạn để xác định những quảng cáo được cá nhân hóa sẽ
-            hiển thị cho bạn. <br>
-            Chúng tôi không bán dữ liệu cá nhân của bạn cho các nhà quảng cáo, cũng không chia sẻ thông tin trực tiếp
-            nhận dạng bạn (chẳng hạn như tên, địa chỉ email hoặc thông tin liên hệ khác) với những đơn vị này trừ khi
-            được bạn cho phép cụ thể. Thay vào đó, các nhà quảng cáo có thể cho chúng tôi biết thông tin như kiểu đối
-            tượng mà họ muốn nhìn thấy quảng cáo và chúng tôi có thể hiển thị những quảng cáo ấy cho người có thể quan
-            tâm. <br>
-Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những đơn vị này nắm được cách mọi người tương tác
-            với nội dung của họ. Hãy xem Mục 2 ở bên dưới để hiểu rõ hơn cách chúng tôi hiển thị quảng cáo được cá nhân
-            hóa trên Sản phẩm của VDONE theo các điều khoản này.
-            Chính sách quyền riêng tư của chúng tôi giải thích cách chúng tôi thu thập và sử dụng dữ liệu cá nhân của bạn để quyết định hiển thị cho bạn quảng cáo nào, cũng như để cung cấp tất cả các dịch vụ khác được mô tả
-            bên dưới. Bạn cũng có thể chuyển đến trang cài đặt trên Sản phẩm có liên quan của VDONE bất cứ lúc nào để
-            xem lại các lựa chọn quyền riêng tư mình có đối với cách chúng tôi sử dụng dữ liệu của bạn.
+                VDONE tạo ra các công nghệ và dịch vụ nhằm hỗ trợ mọi người kết nối với nhau, xây dựng cộng đồng cũng
+                như
+                phát triển doanh nghiệp. Các Điều khoản này điều chỉnh việc bạn sử dụng các sản phẩm, tính năng, ứng
+                dụng,
+                dịch vụ, công nghệ cũng như phần mềm khác mà chúng tôi cung cấp (Sản phẩm của VDONE), trừ khi chúng tôi
+                nêu
+                rõ là áp dụng các điều khoản riêng (và không áp dụng các điều khoản này). Các Sản phẩm này do VipTam,
+                Inc.
+                cung cấp cho bạn. <br>
+                Bạn không mất phí sử dụng các sản phẩm và dịch vụ khác thuộc phạm vi điều chỉnh của những Điều khoản
+                này,
+                trừ khi chúng tôi có quy định khác. Thay vào đó, doanh nghiệp, tổ chức và những cá nhân khác sẽ phải trả
+                tiền cho chúng tôi để hiển thị quảng cáo về sản phẩm và dịch vụ của họ cho bạn. Khi sử dụng Sản phẩm của
+                chúng tôi, bạn đồng ý để chúng tôi hiển thị quảng cáo mà chúng tôi cho rằng có thể phù hợp với bạn và sở
+                thích của bạn. Chúng tôi sử dụng dữ liệu cá nhân của bạn để xác định những quảng cáo được cá nhân hóa sẽ
+                hiển thị cho bạn. <br>
+                Chúng tôi không bán dữ liệu cá nhân của bạn cho các nhà quảng cáo, cũng không chia sẻ thông tin trực
+                tiếp
+                nhận dạng bạn (chẳng hạn như tên, địa chỉ email hoặc thông tin liên hệ khác) với những đơn vị này trừ
+                khi
+                được bạn cho phép cụ thể. Thay vào đó, các nhà quảng cáo có thể cho chúng tôi biết thông tin như kiểu
+                đối
+                tượng mà họ muốn nhìn thấy quảng cáo và chúng tôi có thể hiển thị những quảng cáo ấy cho người có thể
+                quan
+                tâm. <br>
+                Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những đơn vị này nắm được cách mọi người tương
+                tác
+                với nội dung của họ. Hãy xem Mục 2 ở bên dưới để hiểu rõ hơn cách chúng tôi hiển thị quảng cáo được cá
+                nhân
+                hóa trên Sản phẩm của VDONE theo các điều khoản này.
+                Chính sách quyền riêng tư của chúng tôi giải thích cách chúng tôi thu thập và sử dụng dữ liệu cá nhân
+                của bạn để quyết định hiển thị cho bạn quảng cáo nào, cũng như để cung cấp tất cả các dịch vụ khác được
+                mô tả
+                bên dưới. Bạn cũng có thể chuyển đến trang cài đặt trên Sản phẩm có liên quan của VDONE bất cứ lúc nào
+                để
+                xem lại các lựa chọn quyền riêng tư mình có đối với cách chúng tôi sử dụng dữ liệu của bạn.
             </div>
             <div class="modal-footer">
 
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
-                    lại</button>
+                    lại
+                </button>
             </div>
         </div>
     </div>
@@ -657,7 +726,8 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 <div class="modal-content">
                     <div class="modal-header">
                         <div class="d-flex flex-column" style="gap:6px">
-                            <img src="{{asset('home/img/titleK.png')}}" alt="" style="object-fit: contain; width:fit-content; height: 40px !important;">
+                            <img src="{{asset('home/img/titleK.png')}}" alt=""
+                                 style="object-fit: contain; width:fit-content; height: 40px !important;">
                             <h3 class="modal-title" style="font-size: 22px; font-weight:700;">Thông tin thanh toán</h3>
                         </div>
 
@@ -668,7 +738,8 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     <div class="content m-4">
                         <div class="w-100" style="background-color: #F2F8FF; border-radius: 10px;">
                             <div class="col-12">
-                                <h3 style="font-weight: 600; padding-top: 15px; font-size:22px; margin-bottom:15px;">Thông tin bên mua</h3>
+                                <h3 style="font-weight: 600; padding-top: 15px; font-size:22px; margin-bottom:15px;">
+                                    Thông tin bên mua</h3>
                             </div>
                             <div class="col-12">
                                 <div class="row">
@@ -753,7 +824,8 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                             <div class="col-xl-6 col-lg-6 col-md-12 my-3">
                                 <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
                                     <div class="col-12">
-                                        <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px">Chi tiết sản phẩm</h3>
+                                        <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px">
+                                            Chi tiết sản phẩm</h3>
                                     </div>
                                     @php
 
@@ -805,61 +877,79 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                                                     <h4 style=" margin-bottom:15px; font-weight:600">{{$value['title']}}</h4>
                                                 </div>
                                                 <div class="col-6 text-right">
-                                                    <span class="{{$value['class']}}" style="font-size: 16px;">{{$value['value']}}</span>
+                                                    <span class="{{$value['class']}}"
+                                                          style="font-size: 16px;">{{$value['value']}}</span>
                                                 </div>
                                             </div>
                                         @endforeach
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-xl-6 col-lg-6 col-md-12 my-3" >
+                            <div class="col-xl-6 col-lg-6 col-md-12 my-3">
                                 <div class="w-100 " style="background-color: #F2F8FF; border-radius: 10px;">
                                     <div class="col-12">
-                                        <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px;">Phương thức thanh toán</h3>
+                                        <h3 style="font-weight: 600; padding-top: 15px; margin-bottom:15px; font-size:22px;">
+                                            Phương thức thanh toán</h3>
                                     </div>
                                     <div class="col-12" style="padding-bottom: 15px;">
-                                        <div class="d-flex justify-content-between align-items-center w-100" style="background-color: white; border-radius: 10px; padding: 13px 20px;">
+                                        <div class="d-flex justify-content-between align-items-center w-100"
+                                             style="background-color: white; border-radius: 10px; padding: 13px 20px;">
                                             <div class="d-flex align-items-center" style="gap: 10px;">
                                                 <div style="width: 26px; height: 26px;">
                                                     <img src="{{asset('asset/icons/payment/icon_9pay.png')}}" alt="">
                                                 </div>
                                                 <span>Thanh toán ngay qua 9Pay</span>
                                             </div>
-                                            <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
-                                                <input type="radio" value="9PAY" name="method_payment" checked class="custom-control-input"><span class="custom-control-label"></span>
+                                            <label class="custom-control custom-radio custom-control-inline"
+                                                   style="margin: 0;">
+                                                <input type="radio" value="9PAY" name="method_payment" checked
+                                                       class="custom-control-input"><span
+                                                    class="custom-control-label"></span>
                                             </label>
                                         </div>
-                                        <div class="d-flex justify-content-between align-items-center w-100 my-2" style="background-color: white; border-radius: 10px; padding: 13px 20px;">
+                                        <div class="d-flex justify-content-between align-items-center w-100 my-2"
+                                             style="background-color: white; border-radius: 10px; padding: 13px 20px;">
                                             <div class="d-flex align-items-center" style="gap: 10px;">
                                                 <div style="width: 26px; height: 26px;">
                                                     <img src="{{asset('asset/icons/payment/icon_cart.png')}}" alt="">
                                                 </div>
                                                 <span>Thẻ nội địa</span>
                                             </div>
-                                            <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
-                                                <input type="radio" value="ATM_CARD" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
+                                            <label class="custom-control custom-radio custom-control-inline"
+                                                   style="margin: 0;">
+                                                <input type="radio" value="ATM_CARD" name="method_payment"
+                                                       class="custom-control-input"><span
+                                                    class="custom-control-label"></span>
                                             </label>
                                         </div>
-                                        <div class="d-flex justify-content-between align-items-center w-100" style="background-color: white; border-radius: 10px; padding: 13px 20px;">
+                                        <div class="d-flex justify-content-between align-items-center w-100"
+                                             style="background-color: white; border-radius: 10px; padding: 13px 20px;">
                                             <div class="d-flex align-items-center" style="gap: 10px;">
                                                 <div style="width: 26px; height: 26px;">
                                                     <img src="{{asset('asset/icons/payment/icon_cart_2.png')}}" alt="">
                                                 </div>
                                                 <span>Thẻ quốc tế</span>
                                             </div>
-                                            <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
-                                                <input type="radio" value="CREDIT_CARD" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
+                                            <label class="custom-control custom-radio custom-control-inline"
+                                                   style="margin: 0;">
+                                                <input type="radio" value="CREDIT_CARD" name="method_payment"
+                                                       class="custom-control-input"><span
+                                                    class="custom-control-label"></span>
                                             </label>
                                         </div>
-                                        <div class="d-flex justify-content-between align-items-center w-100 mt-2 " style="background-color: white; border-radius: 10px; padding: 13px 20px;">
+                                        <div class="d-flex justify-content-between align-items-center w-100 mt-2 "
+                                             style="background-color: white; border-radius: 10px; padding: 13px 20px;">
                                             <div class="d-flex align-items-center" style="gap: 10px;">
                                                 <div style="width: 26px; height: 26px;">
                                                     <img src="{{asset('asset/icons/payment/icon_bank.png')}}" alt="">
                                                 </div>
                                                 <span>Chuyển khoản ngân hàng</span>
                                             </div>
-                                            <label class="custom-control custom-radio custom-control-inline" style="margin: 0;">
-                                                <input type="radio" value="BANK_TRANSFER" name="method_payment"  class="custom-control-input"><span class="custom-control-label"></span>
+                                            <label class="custom-control custom-radio custom-control-inline"
+                                                   style="margin: 0;">
+                                                <input type="radio" value="BANK_TRANSFER" name="method_payment"
+                                                       class="custom-control-input"><span
+                                                    class="custom-control-label"></span>
                                             </label>
                                         </div>
                                     </div>
@@ -869,9 +959,13 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                     </div>
                     <div class="modal-footer ">
                         <div class="w-100 mx-auto text-center">
-                            <button type="button" class="btn font-medium mx-3" style="font-size:18px; color:#258AFF; padding:10px; min-width:300px;  text-align:center; border: 1px solid #258AFF; border-radius: 8px; " data-dismiss="modal">Đóng
+                            <button type="button" class="btn font-medium mx-3"
+                                    style="font-size:18px; color:#258AFF; padding:10px; min-width:300px;  text-align:center; border: 1px solid #258AFF; border-radius: 8px; "
+                                    data-dismiss="modal">Đóng
                             </button>
-                            <button type="submit" class="btn font-medium text-white mx-3" style="font-size:18px; background-color:#258AFF; padding:10px; min-width:300px;  text-align:center; border: 1px solid #258AFF; border-radius: 8px; ">Thanh toán
+                            <button type="submit" class="btn font-medium text-white mx-3"
+                                    style="font-size:18px; background-color:#258AFF; padding:10px; min-width:300px;  text-align:center; border: 1px solid #258AFF; border-radius: 8px; ">
+                                Thanh toán
                             </button>
                         </div>
                     </div>
@@ -882,11 +976,11 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
     @endif
     </div>
 
-<script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
-<script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
-<script src="{{asset('asset/js/main.js')}}"></script>
+    <script src="{{asset('asset/assets/vendor/jquery/jquery-3.3.1.min.js')}}"></script>
+    <script src="{{asset('asset/assets/vendor/bootstrap/js/bootstrap.bundle.js')}}"></script>
+    <script src="{{asset('asset/js/main.js')}}"></script>
 
-@include('auth.layout.oldLocation')
+    @include('auth.layout.oldLocation')
 
     <script>
         const divCity = document.getElementById('city_id');
@@ -920,7 +1014,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         });
         divDistrict.addEventListener('change', (e) => {
             fetch('{{route('get_city')}}?type=3&value=' + e.target.value)
-                .then((response) => response.json() )
+                .then((response) => response.json())
                 .then((data) => {
                     if (data.length > 0) {
                         btnSubmit.setAttribute('disabled', 'true');
@@ -937,11 +1031,11 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         function checkEmpty(inputs) {
             let check1 = true
             inputs.forEach((item1, index1) => {
-                if (!item1.value && index1 > 0 && index1 <= 10 ) {
+                if (!item1.value && index1 > 0 && index1 <= 10) {
                     check1 = false;
                 }
-                if(index1 == 10){
-                    if ( !item1.checked ){
+                if (index1 == 10) {
+                    if (!item1.checked) {
                         check1 = false;
                     }
                 }
@@ -960,7 +1054,7 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
                 // check phải ít nhất 1 trong 3 loại kho !
                 const condition2 = checkThreeCondition();
 
-                if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked && condition2 >0) {
+                if (check && divCity.value && divDistrict.value && divWard.value && inputs[10].checked && condition2 > 0) {
                     btnSubmit.removeAttribute('disabled');
                     btnSubmit.classList.remove('btn-secondary');
                 } else {
@@ -974,15 +1068,15 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         function checkThreeCondition() {
             let countCheck = 0;
 
-            const checkTypeStorage1 = $('#normal_storage').is(':checked') && $('#acreage_normal_storage').val() != '' && $('#image_normal_storage').val() != '' ;
+            const checkTypeStorage1 = $('#normal_storage').is(':checked') && $('#acreage_normal_storage').val() != '' && $('#image_normal_storage').val() != '';
             const checkTypeStorage2 = $('#cold_storage').is(':checked') && $('#acreage_cold_storage').val() != '' && $('#image_cold_storage').val() != '';
             const checkTypeStorage3 = $('#warehouse').is(':checked') && $('#acreage_warehouse').val() != '' && $('#image_warehouse').val() != '';
 
-            if(checkTypeStorage1)
+            if (checkTypeStorage1)
                 countCheck++;
-            if(checkTypeStorage2)
+            if (checkTypeStorage2)
                 countCheck++;
-            if(checkTypeStorage3)
+            if (checkTypeStorage3)
                 countCheck++;
             return countCheck;
         }
@@ -991,75 +1085,75 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
         // tao 1 hàm để 3 loại kho đều dùng đc ~~, mục đích check nếu ko bấm thì thôi, bấm thì phải điền nút
 
         function checkThreeTypeStorage(idCheckBox, acreageStorage) {
-            $(idCheckBox).click(function() {
+            $(idCheckBox).click(function () {
                 const condition2 = checkThreeCondition();
                 const check = checkEmpty(inputs);
 
-                if( $(idCheckBox).is(':checked')){
-                    if( $(acreageStorage).val() == ''){
+                if ($(idCheckBox).is(':checked')) {
+                    if ($(acreageStorage).val() == '') {
                         btnSubmit.setAttribute('disabled', 'true');
                         btnSubmit.classList.add('btn-secondary');
-                    }else if(check){
+                    } else if (check) {
                         btnSubmit.removeAttribute('disabled');
                         btnSubmit.classList.remove('btn-secondary');
                     }
-                }else{
-                    if( condition2 > 0 && check ){
+                } else {
+                    if (condition2 > 0 && check) {
                         btnSubmit.removeAttribute('disabled');
                         btnSubmit.classList.remove('btn-secondary');
-                    }else{
+                    } else {
                         btnSubmit.setAttribute('disabled', 'true');
                         btnSubmit.classList.add('btn-secondary');
                     }
                 }
             });
         };
-        checkThreeTypeStorage('#normal_storage','#acreage_normal_storage');
-        checkThreeTypeStorage('#cold_storage','#acreage_cold_storage');
-        checkThreeTypeStorage('#warehouse','#acreage_warehouse');
+        checkThreeTypeStorage('#normal_storage', '#acreage_normal_storage');
+        checkThreeTypeStorage('#cold_storage', '#acreage_cold_storage');
+        checkThreeTypeStorage('#warehouse', '#acreage_warehouse');
 
         // check input file # null
 
-        function checkThreeInputStorage(idCheckBox, inputFile, ) {
-            $(inputFile).change(function() {
+        function checkThreeInputStorage(idCheckBox, inputFile,) {
+            $(inputFile).change(function () {
                 const condition2 = checkThreeCondition();
                 const check = checkEmpty(inputs);
-                if( $(inputFile).val() != ''){
-                    if( $(idCheckBox).is(':checked')){
-                        if( $(inputFile).val() == ''){
+                if ($(inputFile).val() != '') {
+                    if ($(idCheckBox).is(':checked')) {
+                        if ($(inputFile).val() == '') {
                             btnSubmit.setAttribute('disabled', 'true');
                             btnSubmit.classList.add('btn-secondary');
-                        }else if(check){
+                        } else if (check) {
                             btnSubmit.removeAttribute('disabled');
                             btnSubmit.classList.remove('btn-secondary');
                         }
-                    }else{
-                        if( condition2 > 0 && check ){
+                    } else {
+                        if (condition2 > 0 && check) {
                             btnSubmit.removeAttribute('disabled');
                             btnSubmit.classList.remove('btn-secondary');
-                        }else{
+                        } else {
                             btnSubmit.setAttribute('disabled', 'true');
                             btnSubmit.classList.add('btn-secondary');
                         }
                     }
-                }else{
+                } else {
                     btnSubmit.setAttribute('disabled', 'true');
                     btnSubmit.classList.add('btn-secondary');
                 }
             });
         };
-        checkThreeInputStorage('#normal_storage','#image_normal_storage');
+        checkThreeInputStorage('#normal_storage', '#image_normal_storage');
         checkThreeInputStorage('#cold_storage', '#image_cold_storage');
         checkThreeInputStorage('#warehouse', '#image_warehouse');
 
-        checkThreeInputStorage('#normal_storage','#acreage_normal_storage');
+        checkThreeInputStorage('#normal_storage', '#acreage_normal_storage');
         checkThreeInputStorage('#cold_storage', '#acreage_cold_storage');
         checkThreeInputStorage('#warehouse', '#acreage_warehouse');
 
 
     </script>
 
-@if($isOrder)
+    @if($isOrder)
         <script>
             const formRegister = document.querySelector('#formRegister-V');
             const payment = document.querySelector('#payment');
@@ -1143,14 +1237,13 @@ Chúng tôi cho nhà quảng cáo biết hiệu quả quảng cáo để những
             }
 
 
-
-    </script>
-@endif
+        </script>
+    @endif
 
 </body>
 @if($isOrder)
     <script type="text/javascript">
-        $(window).on('load', function() {
+        $(window).on('load', function () {
             $('.modal-tt').modal('show');
         });
     </script>

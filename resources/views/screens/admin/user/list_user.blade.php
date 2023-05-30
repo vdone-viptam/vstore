@@ -1,6 +1,37 @@
 @extends('layouts.admin.main')
 @section('page_title','Danh sách tài khoản')
 
+
+@section('modal')
+    <div class="modal fade" id="modalDetail">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thêm mới tài khoản</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body md-content pt-0">
+                    <div class="form-group">
+                        <label for="">Lựa chọn loại tài khoản muốn thêm</label>
+                        <select name="typeCreate" id="typeCreate" class="form-control">
+                            <option value="nha-cung-cap">Nhà cung cấp</option>
+                            <option value="vstore">V-Store</option>
+                            <option value="kho">KHO</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng</button>
+                    <button class="btn btn-primary" id="btnSubmit" type="button">Tiếp tục</button>
+
+                </div>
+            </div>
+        </div>
+    </div>
+@endsection
+
 @section('content')
     <div class="container-fluid dashboard-content pt-0">
         <div class="row">
@@ -45,130 +76,131 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
+                            <button class="btn btn-success my-2" onclick="openModal()">Thêm mới tài khoản</button>
                             <table id="example" class="table table-striped table-bordered second"
                                    style="width:100%">
                                 <thead>
                                 <tr>
                                     <th class="white-space-130">
-                                     
-                                            Mã tài khoản
-                                            <span style="float: right;cursor: pointer">
+
+                                        Mã tài khoản
+                                        <span style="float: right;cursor: pointer">
                                         @if($field == 'account_code')
-                                                    @if($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort"
-                                                           data-sort="account_code"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort"
-                                                           data-sort="account_code"></i>
-                                                    @endif
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="account_code"></i>
                                                 @else
-                                                    <i class="fas fa-sort sort" data-sort="account_code"></i>
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                       data-sort="account_code"></i>
                                                 @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="account_code"></i>
+                                            @endif
                                     </span>
-                                     
+
                                     </th>
                                     <th class="white-space-120">
-                                   
-                                            Vai trò
-                                            <span style="float: right;cursor: pointer">
+
+                                        Vai trò
+                                        <span style="float: right;cursor: pointer">
                                         @if($field == 'role_id')
-                                                    @if($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort" data-sort="role_id"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort" data-sort="role_id"></i>
-                                                    @endif
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="role_id"></i>
                                                 @else
-                                                    <i class="fas fa-sort sort" data-sort="role_id"></i>
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="role_id"></i>
                                                 @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="role_id"></i>
+                                            @endif
                                     </span>
-                                      
+
                                     </th>
-                                    <th >
-                                     
-                                            Tên
-                                            <span style="float: right;cursor: pointer">
+                                    <th>
+
+                                        Tên
+                                        <span style="float: right;cursor: pointer">
                                         @if($field == 'name')
-                                                    @if($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
-                                                    @endif
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="name"></i>
                                                 @else
-                                                    <i class="fas fa-sort sort" data-sort="name"></i>
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="name"></i>
                                                 @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="name"></i>
+                                            @endif
                                     </span>
-                                    
+
                                     </th>
-                                    <th >
-                                    
-                                            Email
-                                            <span style="float: right;cursor: pointer">
+                                    <th>
+
+                                        Email
+                                        <span style="float: right;cursor: pointer">
                                         @if($field == 'email')
-                                                    @if($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort" data-sort="email"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort" data-sort="email"></i>
-                                                    @endif
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="email"></i>
                                                 @else
-                                                    <i class="fas fa-sort sort" data-sort="email"></i>
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="email"></i>
                                                 @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="email"></i>
+                                            @endif
                                     </span>
-                                     
+
                                     </th>
                                     <th class="white-space-120">
-                                       
-                                            Số điện thoại
-                                            <span style="float: right;cursor: pointer">
+
+                                        Số điện thoại
+                                        <span style="float: right;cursor: pointer">
                                         @if($field == 'phone_number')
-                                                    @if($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort"
-                                                           data-sort="phone_number"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort"
-                                                           data-sort="phone_number"></i>
-                                                    @endif
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="phone_number"></i>
                                                 @else
-                                                    <i class="fas fa-sort sort" data-sort="phone_number"></i>
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                       data-sort="phone_number"></i>
                                                 @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="phone_number"></i>
+                                            @endif
                                     </span>
-                                        
+
                                     </th>
                                     <th class="white-space-100">
-                                   
-                                            Tên công ty
-                                            <span style="float: right;cursor: pointer">
+
+                                        Tên công ty
+                                        <span style="float: right;cursor: pointer">
                                         @if($field == 'company_name')
-                                                    @if($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort"
-                                                           data-sort="company_name"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort"
-                                                           data-sort="company_name"></i>
-                                                    @endif
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="company_name"></i>
                                                 @else
-                                                    <i class="fas fa-sort sort" data-sort="company_name"></i>
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                       data-sort="company_name"></i>
                                                 @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="company_name"></i>
+                                            @endif
                                     </span>
-                                     
+
                                     </th>
                                     <th class="white-space-110">
-                        
-                                            Mã số thuế
-                                            <span style="float: right;cursor: pointer">
+
+                                        Mã số thuế
+                                        <span style="float: right;cursor: pointer">
                                         @if($field == 'tax_code')
-                                                    @if($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort" data-sort="tax_code"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort" data-sort="tax_code"></i>
-                                                    @endif
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort" data-sort="tax_code"></i>
                                                 @else
-                                                    <i class="fas fa-sort sort" data-sort="tax_code"></i>
+                                                    <i class="fa-solid fa-sort-up sort" data-sort="tax_code"></i>
                                                 @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="tax_code"></i>
+                                            @endif
                                     </span>
-                                     
+
                                     </th>
                                     <th class="white-space-120 ">
-                                    <div class="d-flex align-items-center justify-content-around">
+                                        <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-80">
                                             Id P-Done <br> người đại diện
 </span>
@@ -183,25 +215,25 @@
                                                     <i class="fas fa-sort sort" data-sort="id_vdone"></i>
                                                 @endif
                                     </span>
-</div>
+                                        </div>
                                     </th>
                                     <th class="white-space-130">
-                                        
-                                            Ngày xét duyệt
-                                            <span style="float: right;cursor: pointer">
+
+                                        Ngày xét duyệt
+                                        <span style="float: right;cursor: pointer">
                                         @if($field == 'confirm_date')
-                                                    @if($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort"
-                                                           data-sort="confirm_date"></i>
-                                                    @else
-                                                        <i class="fa-solid fa-sort-up sort"
-                                                           data-sort="confirm_date"></i>
-                                                    @endif
+                                                @if($type == 'desc')
+                                                    <i class="fa-solid fa-sort-down sort"
+                                                       data-sort="confirm_date"></i>
                                                 @else
-                                                    <i class="fas fa-sort sort" data-sort="confirm_date"></i>
+                                                    <i class="fa-solid fa-sort-up sort"
+                                                       data-sort="confirm_date"></i>
                                                 @endif
+                                            @else
+                                                <i class="fas fa-sort sort" data-sort="confirm_date"></i>
+                                            @endif
                                     </span>
-                                      
+
                                     </th>
                                     <th class="white-space-100"></th>
                                 </tr>
@@ -224,7 +256,9 @@
                                                 @endif
                                             </td>
                                             <td class="white-space-150">{{$user->name}}</td>
-                                            <td class="white-space-150"><div class="lineclamp-1">{{$user->email}}</div> </td>
+                                            <td class="white-space-150">
+                                                <div class="lineclamp-1">{{$user->email}}</div>
+                                            </td>
                                             <td class="text-center white-space-110">{{$user->phone_number}}</td>
                                             <td class="white-space-130 text-center">{{$user->company_name}}</td>
                                             <td class="text-center white-space-110">{{$user->tax_code}}</td>
@@ -233,8 +267,8 @@
                                             <td class="text-center white-space-100">
                                                 @if($user->role_id==3 && $user->branch !=2 )
                                                     <a
-                                                       class="btn btn-primary px-3 py-1 check-yes-no"
-                                                       href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng
+                                                        class="btn btn-primary px-3 py-1 check-yes-no"
+                                                        href="{{route('screens.admin.user.up',['id'=>$user->id])}}">Nâng
                                                         cấp</a>
                                                 @endif
                                             </td>
@@ -282,7 +316,23 @@
         </script>
     @endif
     <script>
-
+        const openModal = () => {
+            $('#modalDetail').modal('show');
+            $('#btnSubmit').on('click', (e) => {
+                const value = $('#typeCreate').val();
+                switch (value) {
+                    case 'nha-cung-cap':
+                        document.location = '{{route('register_ncc')}}?type_create=true';
+                        break;
+                    case 'vstore':
+                        document.location = '{{route('register_vstore')}}?type_create=true';
+                        break;
+                    default:
+                        document.location = '{{route('register_storage')}}?type_create=true';
+                        break;
+                }
+            });
+        }
         $(document).ready(function () {
 
             let limit = document.getElementById('limit');
