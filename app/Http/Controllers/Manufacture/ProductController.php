@@ -110,7 +110,7 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
-            'sku_id' => 'required|max:255|unique:products',
+            'sku_id' => 'max:255|unique:products',
             'description' => 'required',
             'short_content' => 'required|max:500',
 
@@ -136,14 +136,13 @@ class ProductController extends Controller
             'category_id.required' => 'Ngành hàng bắt buộc chọn',
             'price.required' => 'Giá sản phẩm bắt buộc nhập',
             'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
-            'sku_id.required' => 'Mã SKU bắt buộc nhập',
             'sku_id.max' => 'Mã SKU ít hơn 255 ký tự',
             'sku_id.unique' => 'Mã SKU sản phẩm đã đăng ký',
             'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
             'short_content.required' => 'Tóm tắt sản phẩm bắt buộc nhập',
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
-            'brand.required' => 'Thương hiệu sản phẩm bắt buộc nhập',
-            'brand.max' => 'Thương hiệu sản phẩm ít hơn 255',
+            'brand.required' => 'Tên thương hiệu/nguyên liệu sản phẩm bắt buộc nhập',
+            'brand.max' => 'Tên thương hiệu/nguyên liệu sản phẩm ít hơn 255',
             'origin.required' => 'Xuất xứ sản phẩm bắt buộc nhập',
             'origin.max' => 'Xuất xứ sản phẩm ít hơn 255 ký tự',
             'material.required' => 'Chát liệu sản phẩm bắt buộc nhập',
@@ -192,7 +191,7 @@ class ProductController extends Controller
             $product->packing_type = $request->packing_type;
             $product->availability_status = 0;
             $product->status = 0;
-            $product->sku_id = $request->sku_id;
+            $product->sku_id = $request->sku_id ?? '';
             $product->manufacturer_address = $request->manufacturer_address;
             $product->video = $request->video;
 
@@ -512,7 +511,7 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
-            'sku_id' => 'required|max:255|unique:products,sku_id,' . $id,
+            'sku_id' => 'max:255|unique:products,sku_id,' . $id,
             'description' => 'required',
             'short_content' => 'required|max:500',
 
@@ -538,14 +537,13 @@ class ProductController extends Controller
             'category_id.required' => 'Ngành hàng bắt buộc chọn',
             'price.required' => 'Giá sản phẩm bắt buộc nhập',
             'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
-            'sku_id.required' => 'Mã SKU bắt buộc nhập',
             'sku_id.max' => 'Mã SKU ít hơn 255 ký tự',
             'sku_id.unique' => 'Mã SKU sản phẩm đã đăng ký',
             'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
             'short_content.required' => 'Tóm tắt sản phẩm bắt buộc nhập',
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
-            'brand.required' => 'Thương hiệu sản phẩm bắt buộc nhập',
-            'brand.max' => 'Thương hiệu sản phẩm ít hơn 255',
+            'brand.required' => 'Tên thương hiệu/nguyên liệu sản phẩm bắt buộc nhập',
+            'brand.max' => 'Tên thương hiệu/nguyên liệu sản phẩm ít hơn 255',
             'origin.required' => 'Xuất xứ sản phẩm bắt buộc nhập',
             'origin.max' => 'Xuất xứ sản phẩm ít hơn 255 ký tự',
             'material.required' => 'Chát liệu sản phẩm bắt buộc nhập',

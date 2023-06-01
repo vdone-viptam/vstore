@@ -81,20 +81,30 @@ class UserController extends Controller
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['field'] = $request->field ?? 'id';
         $this->v['limit'] = $request->limit ?? 10;
-        $limit = $request->limit ?? 10;
-        if (isset($request->key_search)) {
-            $this->v['users'] = $this->v['users']->where(function ($query) use ($request) {
-                $query->where('company_name', 'like', '%' . $request->key_search . '%')
-                    ->orwhere('name', 'like', '%' . $request->key_search . '%')
-                    ->orwhere('email', 'like', '%' . $request->key_search . '%')
-                    ->orwhere('id_vdone', 'like', '%' . $request->key_search . '%')
-                    ->orwhere('phone_number', 'like', '%' . $request->key_search . '%')
-                    ->orwhere('tax_code', '=', $request->key_search)
-                    ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
-                    ->orwhere('address', 'like', '%' . $request->key_search . '%');
-            });
 
+        $limit = $request->limit ?? 10;
+        if (isset($request->key_search) && ($this->v['key_search'] == 'V-Store P' || $this->v['key_search'] == 'V-Store F' || strtolower($this->v['key_search']) == strtolower('V-Store P') || strtolower($this->v['key_search']) == strtolower('V-Store F'))) {
+            if ($this->v['key_search'] == 'V-Store P' || strtolower($this->v['key_search']) == strtolower('V-Store P')) {
+                $this->v['users'] = $this->v['users']->where('role_id', 3)->where('branch', 1);
+            } else {
+                $this->v['users'] = $this->v['users']->where('role_id', 3)->where('branch', 2);
+            }
+        } else {
+            if (isset($request->key_search)) {
+                $this->v['users'] = $this->v['users']->where(function ($query) use ($request) {
+                    $query->where('company_name', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('name', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('email', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('id_vdone', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('phone_number', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('tax_code', '=', $request->key_search)
+                        ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
+                        ->orwhere('address', 'like', '%' . $request->key_search . '%');
+                });
+
+            }
         }
+
         $this->v['users'] = $this->v['users']->orderBy($this->v['field'], $this->v['type'])->where('account_code', '!=', null)->where('confirm_date', '!=', null)->paginate($limit);
 //        return  $this->v['users'];
         return view('screens.admin.user.list_user', $this->v);

@@ -217,7 +217,7 @@ class ProductController extends Controller
         $this->v['key_search'] = trim($request->key_search) ?? '';
         $this->v['type'] = $request->type ?? 'desc';
         $this->v['limit'] = $request->limit ?? 10;
-        $this->v['field'] = $request->field ?? 'amount_product_sold';
+        $this->v['field'] = $request->field ?? 'products.admin_confirm_date';
         $type = $request->type ?? 'asc';
         $this->v['products'] = Category::join('products', 'categories.id', '=', 'products.category_id')->join('users', 'products.user_id', '=', 'users.id')
             ->select('products.publish_id', 'products.category_id', 'products.user_id', 'products.discount', 'products.discount_vShop',

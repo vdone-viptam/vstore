@@ -59,7 +59,7 @@ class DashboardController extends Controller
 
         $this->v['key_search_request'] = $request->key_search_request ?? '';
         $this->v['type_request'] = $request->type_request ?? 'desc';
-        $this->v['field_request'] = $request->field_request ?? 'categories.id';
+        $this->v['field_request'] = $request->field_request ?? 'requests.vstore_confirm_date';
         $this->v['limit_request'] = $request->limit_request ?? 10;
         if (isset($request->noti_id)) {
             DB::table('notifications')->where('id', $request->noti_id)->update(['read_at' => Carbon::now()]);
