@@ -246,7 +246,7 @@ class OrderController extends Controller
         }
         $orderItem->save();
         $product->images = asset(json_decode($product->images)[0]);
-
+        $order->totalDiscount = $totalDiscount;
         $order->total_vat = $totalVat;
         return response()->json([
             'status_code' => 200,
