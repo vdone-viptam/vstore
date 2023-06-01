@@ -34,7 +34,7 @@ class LoginController extends Controller
     {
         $user = false;
         $order = false;
-        if($request->order && $request->user) {
+        if ($request->order && $request->user) {
             $user = User::find($request->user);
             $order = OrderService::find($request->order);
             $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
@@ -42,17 +42,17 @@ class LoginController extends Controller
             $order->status = 2;
             $order->save();
         }
-
+        $type_create = isset($request->type_create) ? $request->type_create : 'false';
         $referral_code = $request->referral_code ?? '';
 
-        return view('auth.Vstore.register_vstore',compact(['referral_code', 'user', 'order']));
+        return view('auth.Vstore.register_vstore', compact(['referral_code', 'user', 'order', 'type_create']));
     }
 
     public function getFormRegisterNCC(Request $request)
     {
         $user = false;
         $order = false;
-        if($request->order && $request->user) {
+        if ($request->order && $request->user) {
             $user = User::find($request->user);
             $order = OrderService::find($request->order);
             $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
@@ -60,9 +60,9 @@ class LoginController extends Controller
             $order->status = 2;
             $order->save();
         }
-
+        $type_create = isset($request->type_create) ? $request->type_create : 'false';
         $referral_code = $request->referral_code ?? '';
-        return view('auth.NCC.register_ncc', compact(['referral_code', 'user', 'order']));
+        return view('auth.NCC.register_ncc', compact(['referral_code', 'user', 'order', 'type_create']));
     }
 
     public function getFormRegisterVstorage(Request $request)
@@ -70,7 +70,7 @@ class LoginController extends Controller
 
         $user = false;
         $order = false;
-        if($request->order && $request->user) {
+        if ($request->order && $request->user) {
             $user = User::find($request->user);
             $order = OrderService::find($request->order);
             $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
@@ -78,10 +78,11 @@ class LoginController extends Controller
             $order->status = 2;
             $order->save();
         }
+        $type_create = isset($request->type_create) ? $request->type_create : 'false';
 
         $referral_code = $request->referral_code ?? '';
 
-        return view('auth.storage.register_storage', compact(['referral_code', 'user', 'order']));
+        return view('auth.storage.register_storage', compact(['referral_code', 'user', 'order', 'type_create']));
     }
 
     public function getFormLoginVstorage()
@@ -113,7 +114,8 @@ class LoginController extends Controller
         return view('auth.admin.login');
     }
 
-    public function postRegisterOrderNcc(Request $request){
+    public function postRegisterOrderNcc(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER',
             'order_id' => 'required',
@@ -131,7 +133,7 @@ class LoginController extends Controller
             ->where('status', 2)
             ->first();
 
-        if(!$order) {
+        if (!$order) {
             return redirect()->back()->withErrors([
                 "orderErr" => "Hành động không được thực hiện, vui lòng thử lại"
             ]);
@@ -155,7 +157,7 @@ class LoginController extends Controller
             'time' => $time,
             'invoice_no' => $invoiceNo,
             'description' => 'Mua dịch vụ',
-            'amount' => $amount + ($amount*(10/100)),
+            'amount' => $amount + ($amount * (10 / 100)),
             'back_url' => $backUrl,
             'return_url' => $returnUrl,
             'method' => $method,
@@ -180,7 +182,6 @@ class LoginController extends Controller
             return redirect()->to($redirectUrl);
         } catch (Exception $e) {
             Log::error($e);
-            dd($e);
             return response()->json([
                 "message" => "500 Internal Server Error",
                 "errors" => $e
@@ -188,7 +189,9 @@ class LoginController extends Controller
         }
 
     }
-    public function postRegisterOrderKho(Request $request){
+
+    public function postRegisterOrderKho(Request $request)
+    {
         $validator = Validator::make($request->all(), [
             'method_payment' => 'required|in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER',
             'order_id' => 'required',
@@ -206,7 +209,7 @@ class LoginController extends Controller
             ->where('status', 2)
             ->first();
 
-        if(!$order) {
+        if (!$order) {
             return redirect()->back()->withErrors([
                 "orderErr" => "Hành động không được thực hiện, vui lòng thử lại"
             ]);
@@ -230,7 +233,7 @@ class LoginController extends Controller
             'time' => $time,
             'invoice_no' => $invoiceNo,
             'description' => 'Mua dịch vụ',
-            'amount' => $amount + ($amount*(10/100)),
+            'amount' => $amount + ($amount * (10 / 100)),
             'back_url' => $backUrl,
             'return_url' => $returnUrl,
             'method' => $method,
@@ -263,9 +266,26 @@ class LoginController extends Controller
 
     }
 
+    public function returnUrl($role_id)
+    {
+        $route = '';
+        switch ($role_id):
+            case 2 :
+                $route = 'register_ncc';
+                break;
+            case 3 :
+                $route = 'register_vstore';
+                break;
+            default :
+                $route = 'register_storage';
+                break;
+        endswitch;
+
+        return $route;
+    }
+
     public function postFormRegister(Request $request) // FORM SUBMIT ĐĂNG kÝ
     {
-        // dd($request->all());
         $domain = $request->getHttpHost();
         $role_id = 0;
         if ($domain == config('domain.admin')) {
@@ -288,11 +308,12 @@ class LoginController extends Controller
                 'company_name' => 'required|max:50',
                 'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
                 'address' => 'required',
-                'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
+                'phone_number' => ['required', 'regex:/(84|0)+([0-9])/', 'between:10,11,12'],
                 'id_vdone' => 'required',
                 'city_id' => 'required',
                 'district_id' => 'required',
             ], [
+                'tax_code.between' => 'Mã số thuế không hợp lệ',
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên nhà V-Store bắt buộc nhập',
@@ -300,13 +321,14 @@ class LoginController extends Controller
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'company_name.max' => 'Tên công ty tối đa 50 kí tự',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
-                'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
+                'tax_code.regex' => 'Mã số phải không hơp lệ',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bắt buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
                 'city_id' => 'Tỉnh (thành phố) bắt buộc chọn',
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
                 'phone_number.regex' => 'Số điện thoại không hợp lệ',
+                'phone_number.between' => 'Số điện thoại độ dài bắt buộc từ 10 đến 11',
 
             ]);
         } elseif ($role_id == 4) {
@@ -316,7 +338,7 @@ class LoginController extends Controller
                 'company_name' => 'required|max:50',
                 'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
                 'address' => 'required|max:255',
-                'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
+                'phone_number' => ['required', 'regex:/(84|0)+([0-9])/', 'between:10,11,12'],
                 'id_vdone' => 'required|max:255',
 
                 // phai chon it nhat 1 trong 3 loai kho
@@ -366,6 +388,7 @@ class LoginController extends Controller
                 'district_id' => 'required',
                 'ward_id' => 'required'
             ], [
+                'tax_code.between' => 'Mã số thuế không hợp lệ',
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
                 'name.required' => 'Tên bắt buộc nhập',
@@ -373,8 +396,10 @@ class LoginController extends Controller
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'company_name.max' => 'Tên công ty tối đa 100 ký tự',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+                'tax_code.regex' => 'Mã số thuế không hợp lệ',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bắt buộc nhập',
+                'phone_number.between' => 'Số điện thoại độ dài bắt buộc từ 10 đến 11',
                 'id_vdone.required' => 'ID P-Done người đại điện bắt buộc nhập',
 
                 'acreage_normal_storage.integer' => 'Diện tích kho bắt buộc nhập',
@@ -461,7 +486,7 @@ class LoginController extends Controller
                 'company_name' => 'required|max:50',
                 'tax_code' => 'required|regex:/^[0-9]{10,13}$/',
                 'address' => 'required',
-                'phone_number' => ['required', 'regex:/(84|0[3|5|7|8|9])+([0-9]{8})\b/'],
+                'phone_number' => ['required', 'regex:/(84|0)+([0-9])/', 'between:10,11,12'],
                 'id_vdone' => 'required',
                 'city_id' => 'required',
                 'district_id' => 'required'
@@ -474,6 +499,8 @@ class LoginController extends Controller
                 'company_name.max' => 'Tên công ty tối đa 100 kí tự',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
+                'tax_code.regex' => 'Mã số thuế không hợp lệ',
+                'tax_code.between' => 'Mã số thuế không hợp lệ',
                 'address.required' => 'Địa chỉ bắt buộc nhập',
                 'phone_number.required' => 'Số điện thoại bắt buộc nhập',
                 'id_vdone.required' => 'ID người đại điện bắt buộc nhập',
@@ -481,18 +508,18 @@ class LoginController extends Controller
                 'district_id' => 'Quận (huyện) bắt buộc chọn',
                 'tax_code.digits' => 'Mã số phải có độ dài 10 hoặc 13 ký tự',
                 'phone_number.regex' => 'Số điện thoại không hợp lệ',
+                'phone_number.between' => 'Số điện thoại độ dài bắt buộc từ 10 đến 11',
                 'ward_id.required' => 'Phường (xã) bắt buộc chọn',
             ]);
         }
 
         if ($validator->fails()) {
-            // dd($validator->errors()  );
-            return redirect()->back()->withErrors($validator->errors())->withInput($request->all());
+            return redirect()->route($this->returnUrl($role_id), ['type_create' => $request->type_create])->withErrors($validator->errors())->withInput($request->all());
         }
 
-
+        DB::beginTransaction();
         try {
-            DB::beginTransaction();
+
             $checkEmail = DB::table('users')
                 ->where('email', $request->email)
                 ->where('role_id', $role_id)
@@ -544,8 +571,10 @@ class LoginController extends Controller
             if ($checkTax3 > 0) {
                 $error['phone_number'] = 'Số điện thoại đã được đăng ký';
             }
+
+
             if ($error !== null) {
-                return redirect()->back()->withErrors($error)->withInput($request->all());
+                return redirect()->route($this->returnUrl($role_id), ['type_create' => $request->type_create])->withErrors($error)->withInput($request->all());
             }
 
             $user = new User();
@@ -583,31 +612,31 @@ class LoginController extends Controller
                 // xoá khi có cái cũ tồn tại
                 WarehouseType::where('user_id', $user->id)->delete();
 
-                if(isset($request->normal_storage)){
-                    if(!empty($request->acreage_normal_storage)){
+                if (isset($request->normal_storage)) {
+                    if (!empty($request->acreage_normal_storage)) {
                         $warehouseType = new WarehouseType();
                         $warehouseType->user_id = $user->id;
-                        $warehouseType->type = 1 ;
+                        $warehouseType->type = 1;
                         $warehouseType->acreage = $request->acreage_normal_storage;
                         $warehouseType->volume = $request->volume_normal_storage;
                         $warehouseType->length = $request->length_normal_storage;
-                        $warehouseType->width = $request-> width_normal_storage;
+                        $warehouseType->width = $request->width_normal_storage;
                         $warehouseType->height = $request->height_normal_storage;
 
                         $file = [];
                         if ($request->hasFile('image_normal_storage')) {
                             foreach ($request->file('image_normal_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
-                                $img->storeAs(('public/image/users/storage/normal/image_storage/'.$user->id.'/'), $filestorage);
-                                $file[] = 'storage/image/users/storage/normal/image_storage/'.$user->id.'/' . $filestorage;
+                                $img->storeAs(('public/image/users/storage/normal/image_storage/' . $user->id . '/'), $filestorage);
+                                $file[] = 'storage/image/users/storage/normal/image_storage/' . $user->id . '/' . $filestorage;
                             }
                         }
                         $file1 = [];
                         if ($request->hasFile('image_pccc_normal_storage')) {
                             foreach ($request->file('image_pccc_normal_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
-                                $img->storeAs(('public/image/users/storage/normal/image_pccc/'.$user->id.'/'), $filestorage);
-                                $file1[] = 'storage/image/users/storage/normal/image_pccc/'.$user->id.'/' . $filestorage;
+                                $img->storeAs(('public/image/users/storage/normal/image_pccc/' . $user->id . '/'), $filestorage);
+                                $file1[] = 'storage/image/users/storage/normal/image_pccc/' . $user->id . '/' . $filestorage;
                             }
                         }
 
@@ -617,32 +646,32 @@ class LoginController extends Controller
                     }
                 }
 
-                if(isset($request->cold_storage)){
-                    if(!empty($request->acreage_cold_storage)){
+                if (isset($request->cold_storage)) {
+                    if (!empty($request->acreage_cold_storage)) {
 
                         $warehouseType = new WarehouseType();
                         $warehouseType->user_id = $user->id;
-                        $warehouseType->type = 2 ;
+                        $warehouseType->type = 2;
                         $warehouseType->acreage = $request->acreage_cold_storage;
                         $warehouseType->volume = $request->volume_cold_storage;
                         $warehouseType->length = $request->length_cold_storage;
-                        $warehouseType->width = $request-> width_cold_storage;
+                        $warehouseType->width = $request->width_cold_storage;
                         $warehouseType->height = $request->height_cold_storage;
 
                         $file2 = [];
                         if ($request->hasFile('image_cold_storage')) {
                             foreach ($request->file('image_cold_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
-                                $img->storeAs(('public/image/users/storage/cold/image_storage/'.$user->id.'/'), $filestorage);
-                                $file2[] = 'storage/image/users/storage/cold/image_storage/'.$user->id.'/' . $filestorage;
+                                $img->storeAs(('public/image/users/storage/cold/image_storage/' . $user->id . '/'), $filestorage);
+                                $file2[] = 'storage/image/users/storage/cold/image_storage/' . $user->id . '/' . $filestorage;
                             }
                         }
                         $file3 = [];
                         if ($request->hasFile('image_pccc_cold_storage')) {
                             foreach ($request->file('image_pccc_cold_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
-                                $img->storeAs(('public/image/users/storage/cold/image_pccc/'.$user->id.'/'), $filestorage);
-                                $file3[] = 'storage/image/users/storage/cold/image_pccc/'.$user->id.'/' . $filestorage;
+                                $img->storeAs(('public/image/users/storage/cold/image_pccc/' . $user->id . '/'), $filestorage);
+                                $file3[] = 'storage/image/users/storage/cold/image_pccc/' . $user->id . '/' . $filestorage;
                             }
                         }
 
@@ -653,31 +682,31 @@ class LoginController extends Controller
                         $warehouseType->save();
                     }
                 }
-                if(isset($request->warehouse)){
-                    if(!empty($request->acreage_warehouse)){
+                if (isset($request->warehouse)) {
+                    if (!empty($request->acreage_warehouse)) {
                         $warehouseType = new WarehouseType();
                         $warehouseType->user_id = $user->id;
-                        $warehouseType->type = 3 ;
+                        $warehouseType->type = 3;
                         $warehouseType->acreage = $request->acreage_warehouse;
                         $warehouseType->volume = $request->volume_warehouse;
                         $warehouseType->length = $request->length_warehouse;
-                        $warehouseType->width = $request-> width_warehouse;
+                        $warehouseType->width = $request->width_warehouse;
                         $warehouseType->height = $request->height_warehouse;
 
                         $file4 = [];
                         if ($request->hasFile('image_warehouse')) {
                             foreach ($request->file('image_warehouse') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
-                                $img->storeAs(('public/image/users/storage/warehouse/image_storage/'.$user->id.'/'), $filestorage);
-                                $file4[] = 'storage/image/users/storage/warehouse/image_storage/'.$user->id.'/' . $filestorage;
+                                $img->storeAs(('public/image/users/storage/warehouse/image_storage/' . $user->id . '/'), $filestorage);
+                                $file4[] = 'storage/image/users/storage/warehouse/image_storage/' . $user->id . '/' . $filestorage;
                             }
                         }
                         $file5 = [];
                         if ($request->hasFile('image_pccc_cold_storage')) {
                             foreach ($request->file('image_pccc_cold_storage') as $img) {
                                 $filestorage = date('YmdHi') . $img->getClientOriginalName();
-                                $img->storeAs(('public/image/users/storage/warehouse/image_pccc/'.$user->id.'/'), $filestorage);
-                                $file5[] = 'storage/image/users/storage/warehouse/image_pccc/'.$user->id.'/' . $filestorage;
+                                $img->storeAs(('public/image/users/storage/warehouse/image_pccc/' . $user->id . '/'), $filestorage);
+                                $file5[] = 'storage/image/users/storage/warehouse/image_pccc/' . $user->id . '/' . $filestorage;
                             }
                         }
 
@@ -704,74 +733,133 @@ class LoginController extends Controller
                     "confirm_date" => null,
                     "account_code" => null
                 ], $user->toArray());
-                $user->id = $userUpdateOrCreate->id;
-                $order = new OrderService();
-                $order->user_id = $user->id;
-                $order->type = "NCC";
-                $order->status = 2; // 2 là chưa hoàn thành
-                $order->payment_status = 2; // 2 là chưa thanh toán
-                $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
-                $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
-                $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
-                $order->total = config('constants.orderService.price_ncc');
-                $order->save();
 
+
+                if (isset($request->type_create) && $request->type_create == 'false') {
+
+                    $order = new OrderService();
+                    $order->user_id = $user->id;
+                    $order->type = "NCC";
+                    $order->status = 2; // 2 là chưa hoàn thành
+                    $order->payment_status = 2; // 2 là chưa thanh toán
+                    $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
+                    $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+                    $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+                    $order->total = config('constants.orderService.price_ncc');
+                    $order->save();
+                    DB::commit();
+                    return redirect()
+                        ->back()
+                        ->with([
+                            "order" => $order,
+                            "user" => $user
+                        ]);
+                } else {
+                    try {
+                        $user->id = $userUpdateOrCreate->id;
+                        $order = new OrderService();
+                        $order->user_id = $user->id;
+                        $order->type = "Admin Create NCC";
+                        $order->status = 3; // 2 là chưa hoàn thành
+                        $order->payment_status = 1; // 2 là chưa thanh toán
+                        $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
+                        $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+
+                        $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+                        $order->total = 0;
+
+                        $order->save();
+                    } catch (\Exception $exception) {
+                        return redirect()
+                            ->back()
+                            ->with('orderErr', 'Tài khoản đã được đăng ký');
+                    }
+                }
+
+
+                DB::commit();
                 return redirect()
-                    ->back()
-                    ->with([
-                        "order" => $order,
-                        "user" => $user
-                    ]);
+                    ->route('screens.admin.user.index', ['key_search' => $user->name])
+                    ->with('success', 'Thêm mới tài khoản thành công');
+
             }
 
             if ($role_id == 3) {
+                if (isset($request->type_create) && $request->type_create == 'false') {
 
+                    $value_price = 300000000;
 
-
-                $value_price = 300000000;
-
-                $trading_code = Str::lower(Str::random(10));
-                $check_trading_code = true;
-                while ($check_trading_code) {
-                    $checktrading = User::where('trading_code', $trading_code)->count();
-                    if (!$checktrading || $checktrading < 1) {
-                        $check_trading_code = false;
-                    }
                     $trading_code = Str::lower(Str::random(10));
-                }
-                $user->trading_code = $trading_code;
-                $user->save();
-                $hmac = 'code='. $trading_code .'&companyName='.$user->company_name. '&vStoreName=' . $user->name.'&taxCode='.$user->tax_code;
+                    $check_trading_code = true;
+                    while ($check_trading_code) {
+                        $checktrading = User::where('trading_code', $trading_code)->count();
+                        if (!$checktrading || $checktrading < 1) {
+                            $check_trading_code = false;
+                        }
+                        $trading_code = Str::lower(Str::random(10));
+                    }
+                    $user->trading_code = $trading_code;
+                    $hmac = 'code=' . $trading_code . '&companyName=' . $user->company_name . '&vStoreName=' . $user->name . '&taxCode=' . $user->tax_code;
 //                    sellerPDoneId=VNO398917577&buyerId=2&ukey=25M7I5f9913085b842&value=500000&orderId=10&userId=63
-                $sig = hash_hmac('sha256',$hmac,config('domain.key_split'));
-                $data_send = [
-                    "code"=>$trading_code,
-                    "accountCode"=>"",
-                    "type"=>$user->role_id,
-                    "value"=>$value_price,
-                    "vStoreName"=>$user->name,
-                    "companyName"=>$user->company_name,
-                    "taxCode"=>$user->tax_code,
-                    "email"=>$user->email,
-                    "phone"=>$user->phone_number,
-                    "signature"=>$sig
-                ];
-                $respon =Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store',$data_send);
-                $order = new OrderService();
-                $order->user_id = $user->id;
-                $order->type = "VSTORE";
-                $order->status = 3; // 2 là chưa hoàn thành
-                $order->payment_status = 1; // 2 là chưa thanh toán
-                $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
-                $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
-                $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
-                $order->total = config('constants.orderService.price_ncc');
-                $order->save();
+                    $sig = hash_hmac('sha256', $hmac, config('domain.key_split'));
+                    $data_send = [
+                        "code" => $trading_code,
+                        "accountCode" => "",
+                        "type" => $user->role_id,
+                        "value" => $value_price,
+                        "vStoreName" => $user->name,
+                        "companyName" => $user->company_name,
+                        "taxCode" => $user->tax_code,
+                        "email" => $user->email,
+                        "phone" => $user->phone_number,
+                        "signature" => $sig
+                    ];
+                    $respon = Http::post(config('domain.domain_vdone') . 'accountant/buy-account/v-store', $data_send);
+                    $order = new OrderService();
+                    $order->user_id = $user->id;
+                    $order->type = "VSTORE";
+                    $order->status = 3; // 2 là chưa hoàn thành
+                    $order->payment_status = 1; // 2 là chưa thanh toán
+                    $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
+                    $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+                    $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+                    $order->total = config('constants.orderService.price_vstore');
+                    $order->save();
+                    DB::commit();
+                    return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt. Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
+                } else {
 
-                return redirect()->route('login_vstore')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt. Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
+                    try {
+                        $user->accountant_confirm = 1;
+                        $user->save();
+
+                        $order = new OrderService();
+
+                        $order->user_id = $user->id;
+
+                        $order->type = "Admin Create Vstore";
+                        $order->status = 3; // 2 là chưa hoàn thành
+                        $order->payment_status = 1; // 2 là chưa thanh toán
+
+                        $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
+                        $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+
+                        $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+                        $order->total = 0;
+
+                        $order->save();
+                    } catch (\Exception $exception) {
+                        dd($exception->getMessage());
+                    }
+                }
+                DB::commit();
+                return redirect()
+                    ->route('screens.admin.user.index', ['key_search' => $user->name])
+                    ->with('success', 'Thêm mới tài khoản thành công');
             }
 
             if ($role_id == 4) {
+
                 $userUpdateOrCreate = User::updateOrCreate([
                     "email" => $request->email,
                     "role_id" => 4,
@@ -779,32 +867,53 @@ class LoginController extends Controller
                     "account_code" => null
                 ], $user->toArray());
                 $user->id = $userUpdateOrCreate->id;
-                $order = new OrderService();
-                $order->user_id = $user->id;
-                $order->type = "KHO";
-                $order->status = 2; // 2 là chưa hoàn thành
-                $order->payment_status = 2; // 2 là chưa thanh toán
-                $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
-                $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
-                $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
-                $order->total = config('constants.orderService.price_kho');
-                $order->save();
+
+                if (isset($request->type_create) && $request->type_create == 'false') {
+                    $order = new OrderService();
+                    $order->user_id = $user->id;
+                    $order->status = 2; // 2 là chưa hoàn thành
+                    $order->type = "KHO";
+                    $order->payment_status = 2; // 2 là chưa thanh toán
+                    $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
+                    $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+                    $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+                    $order->total = config('constants.orderService.price_kho');
+                    $order->save();
+                    DB::commit();
+                    return redirect()
+                        ->back()
+                        ->with([
+                            "order" => $order,
+                            "user" => $user
+                        ]);
+                } else {
+                    try {
+                        $order = new OrderService();
+                        $order->user_id = $user->id;
+                        $order->type = "Admin Create KHO";
+                        $order->status = 3; // 2 là chưa hoàn thành
+                        $order->payment_status = 1; // 2 là chưa thanh toán
+                        $order->method_payment = 'ATM_CARD'; // in:ATM_CARD,CREDIT_CARD,9PAY,BANK_TRANSFER,COD
+                        $latestOrder = OrderService::orderBy('created_at', 'DESC')->first();
+                        $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
+                        $order->total = 0;
+                        $order->save();
+                    } catch (\Exception $exception) {
+                        return redirect()
+                            ->back()
+                            ->with('orderErr', 'Tài khoản đã được đăng ký');
+                    }
+                }
+                DB::commit();
                 return redirect()
-                    ->back()
-                    ->with([
-                        "order" => $order,
-                        "user" => $user
-                    ]);
-
-//                return redirect()->route('login_storage')->with('success', 'Đăng ký tài khoản thành công, chờ xét duyệt. Hệ thống sẽ gửi thông tin tài khoản vào mail đã đăng ký.');
+                    ->route('screens.admin.user.index', ['key_search' => $user->name])
+                    ->with('success', 'Thêm mới tài khoản thành công');
             }
-
-            return redirect()->back()->with('error', 'Yêu cầu không hợp lệ');
+            return redirect()->back()->with('error',);
 
         } catch (\Exception $e) {
             DB::rollBack();
-            dd($e);
-            return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
+            return redirect()->back()->with('error', 'Có lỗi xảy ra.Vui lòng thử lại');
         }
     }
 
@@ -872,7 +981,6 @@ class LoginController extends Controller
                 return redirect()->back()->with('error', 'Tài khoản hoặc mật khẩu không chính xác');
             };
         } catch (\Exception $e) {
-            dd($e->getMessage());
             return redirect()->back()->with('error', 'Có lỗi xảy ra vui lòng thử lại');
         }
 
@@ -1081,7 +1189,6 @@ class LoginController extends Controller
                 return redirect()->route('screens.admin.dashboard.index');
             }
             if (Auth::user()->role_id == 2) {
-                // dd(1);
                 return redirect()->route('screens.manufacture.dashboard.index');
             }
             if (Auth::user()->role_id == 3) {
@@ -1144,7 +1251,7 @@ class LoginController extends Controller
 
             $response = District::select('district_id as DISTRICT_ID', 'district_name as DISTRICT_NAME', 'district_value as DISTRICT_VALUE', 'province_id as PROVINCE_ID')
                 ->where('province_id', $request->value)
-                ->orderBy('DISTRICT_NAME','asc')
+                ->orderBy('DISTRICT_NAME', 'asc')
                 ->get();
 //            return  $response;
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listDistrict?provinceId=' . $request->value);
@@ -1152,13 +1259,13 @@ class LoginController extends Controller
         } elseif ($request->type == 3) {
             $response = Ward::select('wards_id as WARDS_ID', 'district_id as DISTRICT_ID', 'wards_name as WARDS_NAME')
                 ->where('district_id', $request->value)
-                ->orderBy('WARDS_NAME','asc')
+                ->orderBy('WARDS_NAME', 'asc')
                 ->get();
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listWards?districtId=' . $request->value);
             return $response;
         } else {
             $response = Province::select('province_id as PROVINCE_ID', 'province_code as PROVINCE_CODE', 'province_name as PROVINCE_NAME')
-                ->orderBy('PROVINCE_NAME','asc')
+                ->orderBy('PROVINCE_NAME', 'asc')
                 ->get();
             return $response;
 //            $response = Http::get('https://partner.viettelpost.vn/v2/categories/listProvince');

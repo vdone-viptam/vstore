@@ -24,6 +24,7 @@ use Http\Client\Exception;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Session;
@@ -33,6 +34,108 @@ use Illuminate\Support\Str;
 
 class PaymentMethod9PayController extends Controller
 {
+
+
+    public function checkLog(Request $request)
+    {
+        DB::beginTransaction();
+        try {
+            $all = $request->all();
+            \Illuminate\Support\Facades\Log::info('CALLBACK_9PAY', compact('all'));
+            $checksum = $request->checksum;
+            $merchantKeyChecksum = config('payment9Pay.merchantKeyChecksum');
+            $hashChecksum = strtoupper(hash('sha256', $request->result . $merchantKeyChecksum));
+            if ($hashChecksum === $checksum) {
+                $result = base64_decode($request->result);
+                $payment = json_decode($result);
+                $status = $payment->status;
+                $checkPayment = PaymentHistory::where('payment_no', $payment->payment_no)->first();
+                if (!$checkPayment) {
+                    // Tạo lịch sử hoá đơn
+                    $paymentHistory = new PaymentHistory();
+                    $paymentHistory->amount = $payment->amount;
+                    $paymentHistory->amount_foreign = $payment->amount_foreign;
+                    $paymentHistory->amount_original = $payment->amount_original;
+                    $paymentHistory->amount_request = $payment->amount_request;
+                    $paymentHistory->bank = $payment->bank;
+                    $paymentHistory->card_brand = $payment->card_brand;
+                    $paymentHistory->card_info = json_encode($payment->card_info);
+                    $paymentHistory->currency = $payment->currency;
+                    $paymentHistory->description = $payment->description;
+                    $paymentHistory->error_code = $payment->error_code;
+                    $paymentHistory->exc_rate = $payment->exc_rate;
+                    $paymentHistory->failure_reason = $payment->failure_reason;
+                    $paymentHistory->foreign_currency = $payment->foreign_currency;
+                    $paymentHistory->invoice_no = $payment->invoice_no;
+                    $paymentHistory->lang = $payment->lang;
+                    $paymentHistory->method = $payment->method;
+                    $paymentHistory->payment_no = $payment->payment_no;
+                    $paymentHistory->status = $payment->status;
+                    $paymentHistory->tenor = $payment->tenor;
+                    $paymentHistory->save();
+                    //End Tạo lịch sử hoá đơn
+                }
+                if ($status === 5) {
+                    $order = Order::where('no', $payment->invoice_no)
+                        ->where('status', config('constants.orderStatus.wait_for_confirmation'))
+                        ->where('payment_status', config('constants.paymentStatus.no_done'))
+                        ->first();
+
+                    if ($order) {
+                        if ($order->payment_status != config('constants.paymentStatus.done')) {
+                            $order->payment_status = config('constants.paymentStatus.done');
+                        }
+                        if ($order->status != 1) {
+                            $order->status = 1;
+                        }
+                        $order_item = OrderItem::where('order_id', $order->id)->first();
+                        if ($order->warehouse_id != null) {
+                            if (RequestWarehouse::where('code', $order->no)->count() == 0) {
+                                $requestEx = new RequestWarehouse();
+
+                                $requestEx->ncc_id = 0;
+                                $requestEx->product_id = $order_item->product_id;
+                                $requestEx->status = 0;
+                                $requestEx->type = 10;
+                                $requestEx->ware_id = $order->warehouse_id;
+                                $requestEx->quantity = $order_item->quantity;
+                                $code = $order->no;
+                                $requestEx->order_number = '';
+                                $requestEx->code = $code;
+                                $requestEx->note = 'Đơn hàng mới';
+                                $requestEx->save();
+
+                                $order->request_warehouse_id = $requestEx->id;
+
+                                $order->save();
+
+                                $ware_user = Warehouses::select('user_id')->where('id', $order->warehouse_id)->first();
+                                $user = User::find($ware_user->user_id);
+                                $data = [
+                                    'title' => 'Bạn vừa có 1 thông báo mới',
+                                    'avatar' => '',
+                                    'message' => 'Bạn vừa có đơn hàng mới',
+                                    'created_at' => Carbon::now()->format('h:i A d/m/Y'),
+                                    'href' => route('screens.storage.product.requestOut', ['key_search' => $code])
+                                ];
+                                $user->notify(new AppNotification($data));
+
+                                $this->noti($order->id);
+                            }
+                        }
+                        $order->save();
+                        DB::commit();
+                        // nếu tồn tại URL return
+                    }
+                }
+            }
+            return response()->json(['status' => 'ok']);
+        } catch (\Exception $exception) {
+            DB::rollBack();
+            \Illuminate\Support\Facades\Log::info('CALLBACK_9PAY_ERROR', ['error' => $exception->getMessage()]);
+            return response()->json(['status' => 'error'], 500);
+        }
+    }
 
     public function callAPI($method, $url, $data, $headers = false)
     {
@@ -665,7 +768,7 @@ class PaymentMethod9PayController extends Controller
             $order->save();
 
             $ware_user = Warehouses::select('user_id')->where('id', $order->warehouse_id)->first();
-            if ($ware_user){
+            if ($ware_user) {
                 $user = User::find($ware_user->user_id);
                 $data = [
                     'title' => 'Bạn vừa có 1 thông báo mới',
