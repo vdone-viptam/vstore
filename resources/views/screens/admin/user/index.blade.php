@@ -357,73 +357,80 @@
                                                     @if($type == 'desc')
                                                         <i class="fa-solid fa-sort-down sort" data-sort="confirm_date"></i>
                                                     @else
-                                                        <i class="fa-solid fa-sort-up sort" data-sort="confirm_date"></i>
+                                                        <i class="fa-solid fa-sort-up sort"
+                                                           data-sort="confirm_date"></i>
                                                     @endif
                                                 @else
                                                     <i class="fas fa-sort sort" data-sort="confirm_date"></i>
                                                 @endif
                                             </span>
-                                </div>
+                                        </div>
                                     </th>
                                     <th class="white-space-90">
-                                    <div class="d-flex align-items-center justify-content-around">
+                                        <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-80">
                                             Mã người <br> giới  thiệu
                                 </span>
                                             <span style="float: right;cursor:pointer">
                                                 @if($field == 'users.referral_code')
                                                     @if($type == 'desc')
-                                                        <i class="fa-solid fa-sort-down sort" data-sort="users.referral_code"></i>
+                                                        <i class="fa-solid fa-sort-down sort"
+                                                           data-sort="users.referral_code"></i>
                                                     @else
-                                                        <i class="fa-solid fa-sort-up sort" data-sort="users.referral_code"></i>
+                                                        <i class="fa-solid fa-sort-up sort"
+                                                           data-sort="users.referral_code"></i>
                                                     @endif
                                                 @else
                                                     <i class="fas fa-sort sort" data-sort="users.referral_code"></i>
                                                 @endif
                                             </span>
-                                </div>
+                                        </div>
                                     </th>
                                     <th class="white-space-100">
 
-                                            Trạng thái
+                                        Trạng thái
 
                                     </th>
                                     <th class="white-space-80">Thao tác</th>
                                     <th class="white-space-80"></th>
                                 </tr>
-                            </thead>
-                            <tbody>
+                                </thead>
+                                <tbody>
 
-                        @if(count($users) > 0)
-                            @foreach($users as $user)
-                                <tr>
-                                    <td class="white-space-150">{{$user->name}}</td>
-                                    <td class="white-space-100"><div class="lineclamp-1">{{$user->email}}</div></td>
-                                    <td class="text-center white-space-110">{{$user->phone_number}}</td>
-                                    <td class="white-space-100">{{$user->company_name}}</td>
-                                    <td class="text-center white-space-130">{{$user->tax_code}}</td>
-                                    <td class="text-center white-space-140">{{$user->id_vdone}}</td>
-                                    <td class="text-center white-space-110">
-                                        @if($user->role_id == 2)
-                                            <span class="text-primary font-medium">Nhà cung cấp</span>
-                                        @elseif($user->role_id == 1)
-                                            Admin
-                                        @elseif($user->role_id == 4)
-                                            <span class="text-danger font-medium">Kho</span>
-                                        @else
-                                            <span class="text-success font-medium">V-Store</span>
-                                        @endif
-                                    </td>
-                                    <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i')}}</td>
-                                    <td class="text-center white-space-130">{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
-                                    <td class="text-center white-space-80">
-                                        {{strlen($user->referral_code) > 0 ? $user->referral_code : ''}}
-                                    </td>
-                                    <td class="text-center white-space-120">
-                                        @if(!empty($user->confirm_date))
-                                            <div class=" text-success  " style="border-radius: 2px;"><i class="fas fa-check mr-2"></i>Đã duyệt</div>
-                                        @elseif($user->accountant_confirm == 2 )
-                                            <span class="text-danger">
+                                @if(count($users) > 0)
+                                    @foreach($users as $user)
+                                        <tr>
+                                            <td class="white-space-150">{{$user->name}}</td>
+                                            <td class="white-space-100">
+                                                <div class="lineclamp-1">{{$user->email}}</div>
+                                            </td>
+                                            <td class="text-center white-space-110">{{$user->phone_number}}</td>
+                                            <td class="white-space-100">{{$user->company_name}}</td>
+                                            <td class="text-center white-space-130">{{$user->tax_code}}</td>
+                                            <td class="text-center white-space-140">{{$user->id_vdone}}</td>
+                                            <td class="text-center white-space-110">
+                                                @if($user->role_id == 2)
+                                                    <span class="text-primary font-medium">Nhà cung cấp</span>
+                                                @elseif($user->role_id == 1)
+                                                    Admin
+                                                @elseif($user->role_id == 4)
+                                                    <span class="text-danger font-medium">Kho</span>
+                                                @else
+                                                    <span class="text-success font-medium">V-Store</span>
+                                                @endif
+                                            </td>
+                                            <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i')}}</td>
+                                            <td class="text-center white-space-130">{{$user->confirm_date ? \Illuminate\Support\Carbon::parse($user->confirm_date)->format('d/m/Y H:i') : ''}}</td>
+                                            <td class="text-center white-space-80">
+                                                {{strlen($user->referral_code) > 0 ? $user->referral_code : ''}}
+                                            </td>
+                                            <td class="text-center white-space-120">
+                                                @if(!empty($user->confirm_date))
+                                                    <div class=" text-success  " style="border-radius: 2px;"><i
+                                                            class="fas fa-check mr-2"></i>Đã duyệt
+                                                    </div>
+                                                @elseif($user->accountant_confirm == 2 )
+                                                    <span class="text-danger">
                                                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none"
                                                       xmlns="http://www.w3.org/2000/svg">
                                                 <path
@@ -433,38 +440,41 @@
                                                 Từ chối
                                             </span>
 
+                                                @else
 
-                                        @else
-
-                                            <div class=" text-warning  " style="border-radius: 2px;"><i class="fas fa-clock mr-2"></i> Chờ duyệt</div>
-                                        @endif
-                                    </td>
-                                    <td class="text-center white-space-80">
-                                        @if((!$user->confirm_date && $user->role_id != 3) || (!$user->confirm_date && $user->accountant_confirm ==1 && $user->role_id == 3))
-                                            <a data-abc="{{$loop->iteration - 1}}"
-                                            href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
-                                            class="duyet btn text-primary font-medium px-2 py-0" style="text-decoration:underline;"
-                                            href="javascript:void(0)">Duyệt
-                                            </a>
-                                        @endif
-                                    </td>
-                                    <td class="text-center white-space-80">
-                                            <a href="javascript:void(0)" data-id="{{$user->id}}" data-role="{{$user->role_id}}"
-                                                onclick="showDetail({{$user->id}})"
-                                            class="more-details text-primary" style="text-decoration:underline">
-                                                Chi tiết</a>
-                                    </td>
-                                </tr>
-                            @endforeach
-                        @else
-                            <tr>
-                                <td colspan="12" class="text-center">Không có dữ liệu phù hợp</td>
-                            </tr>
-                        @endif
-                            </tbody>
-                        </table>
-                    </div>
-                    <div class="d-flex align-items-center justify-content-end mt-4">
+                                                    <div class=" text-warning  " style="border-radius: 2px;"><i
+                                                            class="fas fa-clock mr-2"></i> Chờ duyệt
+                                                    </div>
+                                                @endif
+                                            </td>
+                                            <td class="text-center white-space-80">
+                                                @if((!$user->confirm_date && $user->role_id != 3) || (!$user->confirm_date && $user->accountant_confirm ==1 && $user->role_id == 3))
+                                                    <a data-abc="{{$loop->iteration - 1}}"
+                                                       href="{{route('screens.admin.user.confirm',['id' => $user->id])}}"
+                                                       class="duyet btn text-primary font-medium px-2 py-0"
+                                                       style="text-decoration:underline;"
+                                                       href="javascript:void(0)">Duyệt
+                                                    </a>
+                                                @endif
+                                            </td>
+                                            <td class="text-center white-space-80">
+                                                <a href="javascript:void(0)" data-id="{{$user->id}}"
+                                                   data-role="{{$user->role_id}}"
+                                                   onclick="showDetail({{$user->id}})"
+                                                   class="more-details text-primary" style="text-decoration:underline">
+                                                    Chi tiết</a>
+                                            </td>
+                                        </tr>
+                                    @endforeach
+                                @else
+                                    <tr>
+                                        <td colspan="12" class="text-center">Không có dữ liệu phù hợp</td>
+                                    </tr>
+                                @endif
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="d-flex align-items-center justify-content-end mt-4">
                             {{$users->withQueryString()->links('layouts.custom.paginator')}}
                             <div class="ml-4">
                                 <div class="form-group">
@@ -477,240 +487,248 @@
                             </div>
                         </div>
 
+                    </div>
+                </div>
+            </div>
+            <!-- ============================================================== -->
+            <!-- end data table  -->
+            <!-- ============================================================== -->
+        </div>
+
+        <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
+             aria-labelledby="myLargeModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" style="font-size: 20px;">Thông tin chi tiết</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <form method="post">
+                            <div class="row">
+                                <div class="col-12">
+                                    <h3 style="font-size: 18px;">Thông tin cơ bản</h3>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tên sản phẩm <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="Nhập tên sản phẩm">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Chọn ngành hàng <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-control form-control-lg">
+                                            <option>10 phần tử / trang</option>
+                                            <option>25 phần tử / trang</option>
+                                            <option>50 phần tử / trang</option>
+                                        </select>
+                                    </div>
+
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Giá bán sản phẩm (Chưa VAT):</label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="0">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-12 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name"> Mã SKU sản phẩm<span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="">
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Chi tiết sản phẩm <span
+                                                class="text-danger">*</span></label>
+                                        <textarea name="" class="form-control form-control-lg" id=""
+                                                  cols="30" rows="10"
+                                                  placeholder="Nhập chi tiết sản phẩm"></textarea>
+
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="name">Tóm tắt sản phẩm <span
+                                                class="text-danger">*</span></label>
+                                        <textarea name="" class="form-control form-control-lg" id=""
+                                                  cols="30" rows="4"
+                                                  placeholder="Nhập tóm tắt sản phẩm"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-12 form-group">
+                                    <label for="">Hình ảnh sản phẩm:</label>
+                                    <div class="mb-3  d-flex flex-lg-wrap flex-xl-nowrap w-100">
+                                        <div class="col-xl-4 col-sm-6 ">
+                                            <img src="./assets/images/card-img-1.jpg" class="w-100 " alt=""
+                                                 style="object-fit: cover; height: 200px;">
+                                        </div>
+                                        <div class="col-xl-4 col-sm-6  ">
+                                            <img src="./assets/images/card-img-2.jpg" class="w-100 " alt=""
+                                                 style="object-fit: cover; height: 200px;">
+                                        </div>
+                                        <div class="col-xl-4 col-sm-6  ">
+                                            <img src="./assets/images/card-img-2.jpg" class="w-100 " alt=""
+                                                 style="object-fit: cover; height: 200px;">
+                                        </div>
+
+                                    </div>
+                                </div>
+
+                                <div class="col-12 mb-3 col-xl-12">
+                                    <div class="form-group">
+                                        <label for="name">Video sản phẩm</label>
+                                        <iframe height="300"
+                                                {{-- src="https://www.youtube.com/watch?v=gKqGZKo5fVs&list=RDMM5zLhk-HvXsw&index=2" --}}
+                                                frameborder="0" style="width: 100%;"></iframe>
+                                    </div>
+                                </div>
+                                <div class="col-12">
+                                    <h3 style="font-size: 18px;">Thông tin chi tiết</h3>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tên thương hiệu <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="Nhập tên thương hiệu">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Xuất xứ <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="Nhập xuất xứ">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Chất liệu <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="Nhập chất liệu sản phẩm">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Kích cỡ (Cm) <span
+                                                class="text-danger">*</span></label>
+                                        <div class="row">
+                                            <div class="col-xl-4 col-lg-4 col-12">
+                                                <input type="text" class="form-control form-control-lg"
+                                                       id="name" value="${data.data.name}"
+                                                       placeholder="Nhập chiều dài (Cm)">
+                                            </div>
+                                            <div class="col-xl-4 col-lg-4 col-12 ">
+                                                <input type="text" class="form-control form-control-lg"
+                                                       id="name" value="${data.data.name}"
+                                                       placeholder="Nhập chiều rộng (Cm)">
+                                            </div>
+                                            <div class="col-xl-4  col-lg-4 col-12">
+                                                <input type="text" class="form-control form-control-lg"
+                                                       id="name" value="${data.data.name}"
+                                                       placeholder="Nhập chiều cao (Cm)">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Trọng lượng (Gram) <span
+                                                class="text-danger">*</span></label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}"
+                                               placeholder="Nhập trọng lượng sản phẩm (Gram)">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Thể tích (Ml)</label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="Nhập thể tích sản phẩm">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tên tổ chức chịu trách nhiệm sản xuất </label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="Nhập tên tổ chức">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Địa chỉ tổ chức chịu trách nhiệm sản xuất</label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="Nhập địa chỉ tổ chức">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tên đơn vị chịu trách nhiệm nhập khẩu/thương
+                                            nhân</label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="Nhập tên địa chỉ đơn vị">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Địa chỉ đơn vị chịu trách nhiệm nhập khẩu</label>
+                                        <input type="text" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="Nhập tên địa chỉ đơn vị">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Ngày sản xuất</label>
+                                        <input type="date" class="form-control form-control-lg" id="name"
+                                               value="${data.data.name}" placeholder="Nhập tên thương hiệu">
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Kiểu đóng gói <span
+                                                class="text-danger">*</span></label>
+                                        <select class="form-control form-control-lg">
+                                            <option>10 phần tử / trang</option>
+                                            <option>25 phần tử / trang</option>
+                                            <option>50 phần tử / trang</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
+                            lại
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
-        <!-- ============================================================== -->
-        <!-- end data table  -->
-        <!-- ============================================================== -->
     </div>
-
-    <div class="modal fade bd-example-modal-lg" tabindex="-1" role="dialog"
-        aria-labelledby="myLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl">
-
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" style="font-size: 20px;">Thông tin chi tiết</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="card-body">
-                    <form method="post">
-                        <div class="row">
-                            <div class="col-12">
-                                <h3 style="font-size: 18px;">Thông tin cơ bản</h3>
-                            </div>
-
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Tên sản phẩm <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="Nhập tên sản phẩm">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Chọn ngành hàng <span
-                                            class="text-danger">*</span></label>
-                                    <select class="form-control form-control-lg">
-                                        <option>10 phần tử / trang</option>
-                                        <option>25 phần tử / trang</option>
-                                        <option>50 phần tử / trang</option>
-                                    </select>
-                                </div>
-
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Giá bán sản phẩm (Chưa VAT):</label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="0">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name"> Mã SKU sản phẩm<span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="">
-                                </div>
-                            </div>
-                            <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Chi tiết sản phẩm <span
-                                            class="text-danger">*</span></label>
-                                    <textarea name="" class="form-control form-control-lg" id=""
-                                        cols="30" rows="10"
-                                        placeholder="Nhập chi tiết sản phẩm"></textarea>
-
-                                </div>
-                                <div class="form-group">
-                                    <label for="name">Tóm tắt sản phẩm <span
-                                            class="text-danger">*</span></label>
-                                    <textarea name="" class="form-control form-control-lg" id=""
-                                        cols="30" rows="4"
-                                        placeholder="Nhập tóm tắt sản phẩm"></textarea>
-                                </div>
-                            </div>
-                            <div class="col-12 form-group">
-                                <label for="">Hình ảnh sản phẩm:</label>
-                                <div class="mb-3  d-flex flex-lg-wrap flex-xl-nowrap w-100">
-                                    <div class="col-xl-4 col-sm-6 ">
-                                        <img src="./assets/images/card-img-1.jpg" class="w-100 " alt=""
-                                            style="object-fit: cover; height: 200px;">
-                                    </div>
-                                    <div class="col-xl-4 col-sm-6  ">
-                                        <img src="./assets/images/card-img-2.jpg" class="w-100 " alt=""
-                                            style="object-fit: cover; height: 200px;">
-                                    </div>
-                                    <div class="col-xl-4 col-sm-6  ">
-                                        <img src="./assets/images/card-img-2.jpg" class="w-100 " alt=""
-                                            style="object-fit: cover; height: 200px;">
-                                    </div>
-
-                                </div>
-                            </div>
-
-                            <div class="col-12 mb-3 col-xl-12">
-                                <div class="form-group">
-                                    <label for="name">Video sản phẩm</label>
-                                    <iframe height="300"
-                                        {{-- src="https://www.youtube.com/watch?v=gKqGZKo5fVs&list=RDMM5zLhk-HvXsw&index=2" --}}
-                                        frameborder="0" style="width: 100%;"></iframe>
-                                </div>
-                            </div>
-                            <div class="col-12">
-                                <h3 style="font-size: 18px;">Thông tin chi tiết</h3>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Tên thương hiệu <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="Nhập tên thương hiệu">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Xuất xứ <span class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="Nhập xuất xứ">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Chất liệu <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="Nhập chất liệu sản phẩm">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Kích cỡ (Cm) <span
-                                            class="text-danger">*</span></label>
-                                    <div class="row">
-                                        <div class="col-xl-4 col-lg-4 col-12">
-                                            <input type="text" class="form-control form-control-lg"
-                                                id="name" value="${data.data.name}"
-                                                placeholder="Nhập chiều dài (Cm)">
-                                        </div>
-                                        <div class="col-xl-4 col-lg-4 col-12 ">
-                                            <input type="text" class="form-control form-control-lg"
-                                                id="name" value="${data.data.name}"
-                                                placeholder="Nhập chiều rộng (Cm)">
-                                        </div>
-                                        <div class="col-xl-4  col-lg-4 col-12">
-                                            <input type="text" class="form-control form-control-lg"
-                                                id="name" value="${data.data.name}"
-                                                placeholder="Nhập chiều cao (Cm)">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Trọng lượng (Gram) <span
-                                            class="text-danger">*</span></label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}"
-                                        placeholder="Nhập trọng lượng sản phẩm (Gram)">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Thể tích (Ml)</label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="Nhập thể tích sản phẩm">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Tên tổ chức chịu trách nhiệm sản xuất </label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="Nhập tên tổ chức">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Địa chỉ tổ chức chịu trách nhiệm sản xuất</label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="Nhập địa chỉ tổ chức">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Tên đơn vị chịu trách nhiệm nhập khẩu/thương
-                                        nhân</label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="Nhập tên địa chỉ đơn vị">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Địa chỉ đơn vị chịu trách nhiệm nhập khẩu</label>
-                                    <input type="text" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="Nhập tên địa chỉ đơn vị">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Ngày sản xuất</label>
-                                    <input type="date" class="form-control form-control-lg" id="name"
-                                        value="${data.data.name}" placeholder="Nhập tên thương hiệu">
-                                </div>
-                            </div>
-                            <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                <div class="form-group">
-                                    <label for="name">Kiểu đóng gói <span
-                                            class="text-danger">*</span></label>
-                                    <select class="form-control form-control-lg">
-                                        <option>10 phần tử / trang</option>
-                                        <option>25 phần tử / trang</option>
-                                        <option>50 phần tử / trang</option>
-                                    </select>
-                                </div>
-                            </div>
-
-
-                        </div>
-                    </form>
-                </div>
-                <div class="modal-footer">
-
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Đóng
-                        lại</button>
-                </div>
-            </div>
-        </div>
-    </div>
-</div>
 @endsection
 
 @section('custom_js')
+
+    @if(Session::has('success'))
+        <script>
+            const textSuccess = '{{ Session::get('success')}}';
+            swalNoti('center', 'success', textSuccess, '', 500, true, 2200);
+        </script>
+    @endif
     <script>
 
         const name = document.getElementById('name');
@@ -721,7 +739,7 @@
         $(document).ready(function () {
             @if(Session::has('success'))
             const textSuccess = '{{ Session::get('success')}}';
-            swalNoti('center', 'success', 'Duyệt tài khoản thành công','', 500, true, 2200);
+            swalNoti('center', 'success', 'Duyệt tài khoản thành công', '', 500, true, 2200);
             @endif
 
             document.querySelectorAll('.sort').forEach(item => {
@@ -781,14 +799,16 @@
             });
         });
         let product = {};
-        function formatDate (input) {
-            var datePart = input.match(/\d+/g),
-            year = datePart[0], // get only two digits
-            // year = datePart[0].substring(2), // get only two digits
-            month = datePart[1], day = datePart[2];
 
-            return day+'/'+month+'/'+year;
+        function formatDate(input) {
+            var datePart = input.match(/\d+/g),
+                year = datePart[0], // get only two digits
+                // year = datePart[0].substring(2), // get only two digits
+                month = datePart[1], day = datePart[2];
+
+            return day + '/' + month + '/' + year;
         }
+
         async function showDetail(id) {
             await $.ajax({
                 type: "GET",
@@ -812,24 +832,23 @@
                     $('#phone_number').val(data.phone_number);
                     $('#id_vdone').val(data.id_vdone);
                     $('#tax_code').val(data.tax_code);
-                    $('#created_at').val( convertTimeVN(data.created_at));
-                    $('#confirm_date').val(  convertTimeVN(data.confirm_date));
+                    $('#created_at').val(convertTimeVN(data.created_at));
+                    $('#confirm_date').val(convertTimeVN(data.confirm_date));
                     $('#referral_code').val(data.referral_code);
 
 
-
-                    if(data.role_id == 2){
+                    if (data.role_id == 2) {
                         $('#role_id').val('Nhà cung cấp');
-                    }else if(data.role_id == 1){
+                    } else if (data.role_id == 1) {
                         $('#role_id').val('Admin');
-                    }else if(data.role_id == 4){
+                    } else if (data.role_id == 4) {
                         $('#role_id').val('Kho');
-                    }else{
+                    } else {
                         $('#role_id').val('V-Store');
                     }
-                    if(data.confirm_date){
+                    if (data.confirm_date) {
                         $('#status').val('Đã duyệt');
-                    }else{
+                    } else {
                         $('#status').val('Chờ duyệt');
                     }
                 } else {

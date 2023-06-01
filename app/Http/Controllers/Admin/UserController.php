@@ -83,14 +83,17 @@ class UserController extends Controller
         $this->v['limit'] = $request->limit ?? 10;
         $limit = $request->limit ?? 10;
         if (isset($request->key_search)) {
-            $this->v['users'] = $this->v['users']->orwhere('company_name', 'like', '%' . $request->key_search . '%')
-                ->orwhere('name', 'like', '%' . $request->key_search . '%')
-                ->orwhere('email', 'like', '%' . $request->key_search . '%')
-                ->orwhere('id_vdone', 'like', '%' . $request->key_search . '%')
-                ->orwhere('phone_number', 'like', '%' . $request->key_search . '%')
-                ->orwhere('tax_code', '=', $request->key_search)
-                ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
-                ->orwhere('address', 'like', '%' . $request->key_search . '%');
+            $this->v['users'] = $this->v['users']->where(function ($query) use ($request) {
+                $query->where('company_name', 'like', '%' . $request->key_search . '%')
+                    ->orwhere('name', 'like', '%' . $request->key_search . '%')
+                    ->orwhere('email', 'like', '%' . $request->key_search . '%')
+                    ->orwhere('id_vdone', 'like', '%' . $request->key_search . '%')
+                    ->orwhere('phone_number', 'like', '%' . $request->key_search . '%')
+                    ->orwhere('tax_code', '=', $request->key_search)
+                    ->orwhere('account_code', 'like', '%' . $request->key_search . '%')
+                    ->orwhere('address', 'like', '%' . $request->key_search . '%');
+            });
+
         }
         $this->v['users'] = $this->v['users']->orderBy($this->v['field'], $this->v['type'])->where('account_code', '!=', null)->where('confirm_date', '!=', null)->paginate($limit);
 //        return  $this->v['users'];
