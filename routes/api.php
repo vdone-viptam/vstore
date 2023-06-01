@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Api\ReportController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -289,7 +290,9 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     Route::get('/ma-sp',[\App\Http\Controllers\TestController::class,'ma']);
 
 });
-
+Route::prefix('report')->group(function () {
+    Route::get('/',[ReportController::class, 'report'])->name('report');
+});
 Route::get('/get-city', [\App\Http\Controllers\Auth\LoginController::class, 'getCity'])->name('get_city');
 
 
