@@ -83,16 +83,20 @@
     <div class="card">
         <div class="card-header d-flex align-items-center justify-content-between">
             @if($type_create == 'true')
-                <h1 class="mb-1">Thêm mới tài khoản</h1>
+                <div>
+                    <h1 class="mb-1">Thêm mới tài khoản</h1>
+                </div>
             @else
-                <h1 class="mb-1">Đăng ký</h1>
-                @if (isset($_GET['orderErr']))
-                    <span class="text-danger text-red-500">{{ $_GET['orderErr'] }}</span>
-                @endif
-                @if (\Illuminate\Support\Facades\Session::has('orderErr'))
-                    <span class="text-danger text-red-500">{{ \Illuminate\Support\Facades\Session::get('orderErr') }}</span>
-                @endif
-                <p>Vui lòng nhập thông tin để đăng ký tài khoản.</p>
+                <div>
+                    <h1 class="mb-1">Đăng ký</h1>
+                    @if (isset($_GET['orderErr']))
+                        <span class="text-danger text-red-500">{{ $_GET['orderErr'] }}</span>
+                    @endif
+                    @if (\Illuminate\Support\Facades\Session::has('orderErr'))
+                        <span class="text-danger text-red-500">{{ \Illuminate\Support\Facades\Session::get('orderErr') }}</span>
+                    @endif
+                    <p>Vui lòng nhập thông tin để đăng ký tài khoản.</p>
+                </div>
             @endif
             <img src="{{asset('asset/images/titleK.png')}}" style="object-fit: contain; height: 40px !important;"
                  alt="Logo">
@@ -117,11 +121,9 @@
                     <div class="form-group">
                         <label style="font-weight: 600;" for="telephone"><span class="text-danger">*</span>Số điện
                             thoại công ty</label>
-                        <input class="only-number form-control form-control-lg" required=""
-                               type="text" name="phone_number" id="phone_number"
-                               value="{{old('phone_number')}}"
-                               pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b"
-                               placeholder="Nhập số điện thoại (VD: 0123456789)">
+                        <input required type="number" name="phone_number" id="phone_number"
+                               placeholder="Nhập số điện thoại công ty" value="{{ old('phone_number') }}"
+                               pattern="/(84|0)+([0-9])/" class="form-control form-control-lg">
                         @error('phone_number')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror

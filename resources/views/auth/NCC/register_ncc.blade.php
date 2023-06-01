@@ -129,7 +129,7 @@
                             ty </label>
                         <input required type="number" name="phone_number" id="phone_number"
                                placeholder="Nhập số điện thoại công ty" value="{{ old('phone_number') }}"
-                               pattern="(84|0[3|5|7|8|9])+([0-9]{8})\b" class="form-control form-control-lg">
+                               pattern="/(84|0)+([0-9])/" class="form-control form-control-lg">
                         @error('phone_number')
                         <p class="text-danger text-red-500">{{ $message }}</p>
                         @enderror

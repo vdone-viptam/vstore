@@ -110,7 +110,7 @@
                             </div>
                             <div class="col-xl-3 col-lg-12 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Mã vạch sản phẩm<span class="text-danger">*</span></label>
+                                    <label for="name">Mã vạch sản phẩm</label>
                                     <input type="text" class="form-control form-control-lg" id="sku_id" name="sku_id"
                                            value="{{$product->sku_id}}" placeholder="Nhập mã vạch của sản phẩm">
                                     @error('sku_id')
@@ -195,9 +195,10 @@
                             </div>
                             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Tên thương hiệu <span class="text-danger">*</span></label>
+                                    <label for="name">Tên thương hiệu <span
+                                            class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg" id="brand" name="brand"
-                                           value="{{$product->brand}}" placeholder="Nhập tên thương hiệu">
+                                           value="{{$product->brand}}" placeholder="Nhập tên thương hiệu/nguyên liệu">
                                     @error('brand')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                     @enderror
@@ -215,10 +216,10 @@
                             </div>
                             <div class="col-xl-6 col-lg-12 col-md-12 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Chất liệu <span class="text-danger">*</span></label>
+                                    <label for="name">Chất liệu/Nguyên liệu <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg" id="material"
                                            name="material"
-                                           value="{{$product->material}}" placeholder="Nhập chất liệu sản phẩm">
+                                           value="{{$product->material}}" placeholder="Nhập chất liệu hoặc nguyên liệu sản phẩm">
                                     @error('material')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
                                     @enderror
@@ -356,6 +357,7 @@
                                         </option>
                                         <option value="4" {{$product->packing_type == 4 ? 'selected' : ''}}>Bao Bì
                                         </option>
+                                        <option value="5" {{$product->packing_type == 5 ? 'selected' : ''}}>Chai</option>
                                     </select>
                                     @error('packing_type')
                                     <p class="text-danger mt-2 ml-1">{{$message}}</p>
