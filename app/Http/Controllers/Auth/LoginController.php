@@ -738,7 +738,7 @@ class LoginController extends Controller
                 if (isset($request->type_create) && $request->type_create == 'false') {
 
                     $order = new OrderService();
-                    $order->user_id = $user->id;
+                    $order->user_id = $userUpdateOrCreate->id;
                     $order->type = "NCC";
                     $order->status = 2; // 2 là chưa hoàn thành
                     $order->payment_status = 2; // 2 là chưa thanh toán
@@ -747,6 +747,7 @@ class LoginController extends Controller
                     $order->no = Str::random(5) . str_pad(isset($latestOrder->id) ? ($latestOrder->id + 1) : 1, 8, "0", STR_PAD_LEFT);
                     $order->total = config('constants.orderService.price_ncc');
                     $order->save();
+
                     DB::commit();
                     return redirect()
                         ->back()
@@ -756,9 +757,8 @@ class LoginController extends Controller
                         ]);
                 } else {
                     try {
-                        $user->id = $userUpdateOrCreate->id;
                         $order = new OrderService();
-                        $order->user_id = $user->id;
+                        $order->user_id = $userUpdateOrCreate->id;
                         $order->type = "Admin Create NCC";
                         $order->status = 3; // 2 là chưa hoàn thành
                         $order->payment_status = 1; // 2 là chưa thanh toán
@@ -870,7 +870,7 @@ class LoginController extends Controller
 
                 if (isset($request->type_create) && $request->type_create == 'false') {
                     $order = new OrderService();
-                    $order->user_id = $user->id;
+                    $order->user_id = $userUpdateOrCreate->id;
                     $order->status = 2; // 2 là chưa hoàn thành
                     $order->type = "KHO";
                     $order->payment_status = 2; // 2 là chưa thanh toán
@@ -889,7 +889,7 @@ class LoginController extends Controller
                 } else {
                     try {
                         $order = new OrderService();
-                        $order->user_id = $user->id;
+                        $order->user_id = $userUpdateOrCreate->id;
                         $order->type = "Admin Create KHO";
                         $order->status = 3; // 2 là chưa hoàn thành
                         $order->payment_status = 1; // 2 là chưa thanh toán
