@@ -110,7 +110,7 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
-            'sku_id' => 'max:255|unique:products',
+            'sku_id' => 'max:255',
             'description' => 'required',
             'short_content' => 'required|max:500',
 
@@ -137,7 +137,6 @@ class ProductController extends Controller
             'price.required' => 'Giá sản phẩm bắt buộc nhập',
             'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
             'sku_id.max' => 'Mã SKU ít hơn 255 ký tự',
-            'sku_id.unique' => 'Mã SKU sản phẩm đã đăng ký',
             'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
             'short_content.required' => 'Tóm tắt sản phẩm bắt buộc nhập',
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
@@ -511,7 +510,7 @@ class ProductController extends Controller
             'name' => 'required|max:255',
             'category_id' => 'required',
             'price' => 'required|min:1',
-            'sku_id' => 'max:255|unique:products,sku_id,' . $id,
+            'sku_id' => 'max:255',
             'description' => 'required',
             'short_content' => 'required|max:500',
 
@@ -538,7 +537,6 @@ class ProductController extends Controller
             'price.required' => 'Giá sản phẩm bắt buộc nhập',
             'price.min' => 'Giá sản phẩm phải lớn hơn hoặc bằng 1',
             'sku_id.max' => 'Mã SKU ít hơn 255 ký tự',
-            'sku_id.unique' => 'Mã SKU sản phẩm đã đăng ký',
             'description.required' => 'Chi tiết sản phẩm bắt buộc nhập',
             'short_content.required' => 'Tóm tắt sản phẩm bắt buộc nhập',
             'short_content.max' => 'Tóm tắt sản phẩm it hơn 500 ký tự',
