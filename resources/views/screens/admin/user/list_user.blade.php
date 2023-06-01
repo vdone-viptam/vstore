@@ -252,7 +252,11 @@
                                                 @elseif($user->role_id == 4)
                                                     <span class="text-danger font-medium">Kho</span>
                                                 @else
-                                                    <span class="text-success font-medium">V-Store</span>
+                                                    @if($user->role_id==3 && $user->branch !=2)
+                                                        <span class="text-success font-medium">V-Store P</span>
+                                                    @else
+                                                        <span class="text-success font-medium">V-Store F</span>
+                                                    @endif
                                                 @endif
                                             </td>
                                             <td class="white-space-150">{{$user->name}}</td>
