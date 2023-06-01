@@ -19,6 +19,7 @@ use Illuminate\Support\Facades\Route;
 
 //Route::get('/els', [\App\Http\Controllers\Api\ElasticsearchController::class, 'index']);
 Route::get('/9pay', [\App\Http\Controllers\PaymentMethod9PayController::class, 'historyPayment9Pay']);
+Route::post('/9pay/ipn', [\App\Http\Controllers\PaymentMethod9PayController::class, 'checkLog']);
 
 //Route::post('callback-viettel-post', function (Request $req) {
 //
@@ -41,8 +42,8 @@ Route::get('/9pay', [\App\Http\Controllers\PaymentMethod9PayController::class, '
 //        "req" => $req
 //    ]);
 //});
-Route::post('/duyet',[\App\Http\Controllers\TestController::class,'tuyet']);
-Route::post('/hoan-thanh',[\App\Http\Controllers\TestController::class,'tuyethoanthanh']);
+Route::post('/duyet', [\App\Http\Controllers\TestController::class, 'tuyet']);
+Route::post('/hoan-thanh', [\App\Http\Controllers\TestController::class, 'tuyethoanthanh']);
 //Route::get('/noti/{order_id}', [\App\Http\Controllers\PaymentMethod9PayController::class, 'noti']);
 Route::prefix('bill')->group(function () {
     Route::post('/add', [\App\Http\Controllers\Api\BillController::class, 'add']);
@@ -61,8 +62,8 @@ Route::get('viettel-post-linkin/{order_id}', [\App\Http\Controllers\ViettelpostC
 //Route::group(['domain' => config('domain.api')], function () {
 Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], function () {
 
-    Route::post('wallet-update/{code}',[\App\Http\Controllers\AccountingController::class,'confirmed']);
-    Route::post('user-vstore/{id}',[\App\Http\Controllers\AccountingController::class,'confirmedVstore']);
+    Route::post('wallet-update/{code}', [\App\Http\Controllers\AccountingController::class, 'confirmed']);
+    Route::post('user-vstore/{id}', [\App\Http\Controllers\AccountingController::class, 'confirmedVstore']);
     Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);
     Route::get('get-district/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getDistrict']);
     Route::get('get-wards/{id}', [\App\Http\Controllers\Api\AddressController::class, 'getWards']);
@@ -119,8 +120,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
 
         Route::get('/detail-order-cancel', [\App\Http\Controllers\Api\OrderController::class, 'detailOrderCancel']);
         Route::put('/update-amount-warehouse', [\App\Http\Controllers\Api\OrderController::class, 'updateAmountWarehouse']);
-        Route::post('/vshop-confirm/{order_id}',[\App\Http\Controllers\Api\OrderController::class,'vshopConfirm']);
-        Route::post('/vshop-refuse/{order_id}',[\App\Http\Controllers\Api\OrderController::class,'vshopRefuse']);
+        Route::post('/vshop-confirm/{order_id}', [\App\Http\Controllers\Api\OrderController::class, 'vshopConfirm']);
+        Route::post('/vshop-refuse/{order_id}', [\App\Http\Controllers\Api\OrderController::class, 'vshopRefuse']);
     });
 
 //    Route::('big-sales')->group(function () {
@@ -189,7 +190,7 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
         Route::get('/get-buy-more-discount/{id}', [\App\Http\Controllers\Api\VShopController::class, 'getBuyMoreDiscount']);
 
         Route::get('/get_money_history', [\App\Http\Controllers\Api\VShopController::class, 'get_mony_history']);
-        Route::post('delivery_off/{product_id}/{pdone_id}',[\App\Http\Controllers\Api\VShopController::class,'delivery_off']);
+        Route::post('delivery_off/{product_id}/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'delivery_off']);
         Route::post('/store-discount', [\App\Http\Controllers\Api\VShopController::class, 'storeDiscount']);
         Route::prefix('address')->group(function () {
             Route::post('/store/{pdone_id}', [\App\Http\Controllers\Api\VShopController::class, 'storeAddressReceive']);
@@ -286,8 +287,8 @@ Route::group(['domain' => config('domain.api'), 'middleware' => 'checkToken'], f
     });
 
 //    Route::get('/test', [\App\Http\Controllers\TestController::class, 'index']);
-    Route::get('/chia',[\App\Http\Controllers\TestController::class,'testchia']);
-    Route::get('/ma-sp',[\App\Http\Controllers\TestController::class,'ma']);
+    Route::get('/chia', [\App\Http\Controllers\TestController::class, 'testchia']);
+    Route::get('/ma-sp', [\App\Http\Controllers\TestController::class, 'ma']);
 
 });
 Route::prefix('report')->group(function () {
