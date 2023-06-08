@@ -8,7 +8,7 @@
         <div class="modal-dialog" role="document">\index.html
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
+                    <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Xuất hủy sản phẩm</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -25,7 +25,7 @@
     </div>
     <div class="modal fade" id="modalDetail" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
          aria-hidden="true">
-        <div class="modal-dialog" role="document">\index.html
+        <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel" style="font-size: 18px;">Thông tin chi tiết</h5>
@@ -81,7 +81,7 @@
                                         <input type="hidden" name="type" value="{{$type}}">
                                         <input type="hidden" name="field" value="{{$field}}">
                                         <input class="form-control" name="key_search" value="{{$key_search ?? ''}}"
-                                               type="search" placeholder="Nhập từ khóa tìm kiếm...">
+                                               type="hidden" placeholder="Nhập từ khóa tìm kiếm...">
                                     </form>
                                 </li>
                             </ul>
@@ -99,9 +99,9 @@
                         <tr>
                             <th class="white-space-120 text-center">Mã xuất hủy</th>
                             <th class="white-space-130 text-center">Mã sản phẩm</th>
-                            <th >
-                            
-                            Tên sản phẩm
+                            <th>
+
+                                Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'product_name')
                                         @if($type == 'desc')
@@ -138,10 +138,14 @@
                                 <tr>
                                     <td class="text-center white-space-140">{{$request->code}}</td>
                                     <td class="text-center white-space-140">{{$request->publish_id}}</td>
-                                    <td title="{{$request->product_name}}" class="white-space-350">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
+                                    <td title="{{$request->product_name}}"
+                                        class="white-space-350">{{\Illuminate\Support\Str::limit($request->product_name,50,'...')}}</td>
                                     <td class="text-center white-space-100">{{$request->quantity}}</td>
                                     <td class="white-space-200">{{$request->note}}</td>
-                                    <td class="white-space-80 text-center"><a href="javascript:void(0)" style="text-decoration:underline;" onclick="showDetail({{$request->id}})" class="btn btn-link px-2 py-0">Chi
+                                    <td class="white-space-80 text-center"><a href="javascript:void(0)"
+                                                                              style="text-decoration:underline;"
+                                                                              onclick="showDetail({{$request->id}})"
+                                                                              class="btn btn-link px-2 py-0">Chi
                                             tiết</a></td>
                                 </tr>
                             @endforeach
@@ -237,7 +241,7 @@
                     })
                     $('.md-create').html(`
                         <div class="form-group">
-                            <label for="exampleFormControlSelect1">Tạo xuất hủy</label>
+                            <label for="exampleFormControlSelect1">Chọn sản phẩm</label>
                             <select class="form-control" id="product_id">
                                 ${op}
                             </select>
