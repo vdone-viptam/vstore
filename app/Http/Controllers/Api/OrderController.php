@@ -184,12 +184,13 @@ class OrderController extends Controller
                     "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
                 ], 400);
             }
-            $ORDER_SERVICE = $getPriceAll[0]['MA_DV_CHINH'];
-
+//            $ORDER_SERVICE = $getPriceAll[0]['MA_DV_CHINH'];
+            $ORDER_SERVICE= "VHT";
             $body = [
                 // Cần tính toán các sản phẩm ở kho nào rồi tính phí vận chuyển. Hiện tại chưa làm
-                'SENDER_DISTRICT' => $district,
-                'SENDER_PROVINCE' => $province,
+
+                'SENDER_DISTRICT' => (int)$district,
+                'SENDER_PROVINCE' => (int)$province,
                 'RECEIVER_DISTRICT' => (int)$districtId,
                 'RECEIVER_PROVINCE' => (int)$provinceId,
 
@@ -215,8 +216,8 @@ class OrderController extends Controller
                     "message" => "Không thể xác định được chi phi giao hàng, vui lòng chọn địa điểm khác"
                 ], 400);
             }
-            $transportFee = $getPrice['data']['MONEY_TOTAL_OLD'];
 
+            $transportFee = $getPrice['data']['MONEY_TOTAL_OLD'];
             $order->total += $transportFee;
             $order->shipping = $transportFee;
         }

@@ -40,7 +40,9 @@ use Illuminate\Support\Facades\Route;
 //        ], 500);
 //    }
 //});
-
+Route::get('phpmyinfo', function () {
+    phpinfo();
+})->name('phpmyinfo');
 Route::get('/els', [\App\Http\Controllers\Api\ProductController::class, 'indexProduct']);
 
 Route::get('get-province', [\App\Http\Controllers\Api\AddressController::class, 'getProvince']);

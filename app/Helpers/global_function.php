@@ -95,7 +95,6 @@ function calculateShippingByProductID($productID, $districtId, $provinceId, $war
             $warehouse->isVshop = 1;
         }
     }
-
     return $warehouse;
 }
 
