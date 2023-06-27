@@ -19,6 +19,7 @@ class ElasticsearchController extends Controller
     public function __construct()
     {
         $this->client = ClientBuilder::create()
+            ->setBasicAuthentication(config('elasticsearch.username'), config('elasticsearch.password'))
             ->setHosts([config('elasticsearch.node')])
             ->build();
     }
@@ -304,6 +305,7 @@ class ElasticsearchController extends Controller
 
     public function createDocVShop($id, $name)
     {
+        
         $params = [
             'index' => config('elasticsearch.vshop'),
             'id' => $id,
