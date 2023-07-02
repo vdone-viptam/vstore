@@ -41,8 +41,21 @@
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Mã đơn nhập sẵn: </label>
+                                        <label for="name">Mã đơn hàng: </label>
                                         <input type="text" class="form-control form-control-lg" id="no" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Thời gian tạo đơn:</label>
+                                        <input type="text" class="form-control form-control-lg"
+                                               id="created_at" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Mã sản phẩm: </label>
+                                        <input type="text" class="form-control form-control-lg" id="sp" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -53,8 +66,20 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Giá sản phẩm:</label>
+                                        <label for="name">Đơn giá:</label>
                                         <input type="text" class="form-control form-control-lg" id="price" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Số lượng</label>
+                                        <input type="text" class="form-control form-control-lg" id="quantity" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tổng tiền:</label>
+                                        <input type="text" class="form-control form-control-lg" id="total" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -65,20 +90,21 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Số lượng sản phẩm</label>
-                                        <input type="text" class="form-control form-control-lg" id="quantity" readonly>
+                                        <label for="name">Giá trị trừ chiết khấu:</label>
+                                        <input type="text" class="form-control form-control-lg" id="discountA" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Tiền cọc trước đơn nhập sãn (nếu có):</label>
+                                        <label for="name">Tỷ lệ cọc(nếu có):</label>
+                                        <input type="text" class="form-control form-control-lg" id="depositP" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tiền cọc(nếu có):</label>
                                         <input type="text" class="form-control form-control-lg" id="deposits" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="name">Tổng tiền:</label>
-                                        <input type="text" class="form-control form-control-lg" id="total" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -87,14 +113,12 @@
                                         <input type="text" class="form-control form-control-lg" id="status" readonly>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="name">Thời gian tạo đơn:</label>
-                                        <input type="text" class="form-control form-control-lg"
-                                               id="created_at" readonly>
-                                    </div>
+                                <div class="col-12">
+                                    <h2>Địa chỉ nhận hàng</h2>
+                                    <p id="address"></p>
+                                    <p id="nameC"></p>
+                                    <p id="phone"></p>
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -152,7 +176,7 @@
 
                             </th>
                             <th >
-                         
+
                             Tên sản phẩm
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'products.name')
@@ -281,7 +305,7 @@
                                     <td class="text-center white-space-100">{{(int)$order->discount}}%</td>
                                     <td class="text-center white-space-100">{{number_format($order->quantity,0,'.','.')}}</td>
                                     <td class="text-right white-space-130">{{number_format($order->deposit_money ,0,'.','.')}} đ</td>
-                                    <td class="text-right white-space-130">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}} đ</td>
+                                    <td class="text-right white-space-140">{{number_format($order->total * (100 - $order->discount) / 100,0,'.','.')}}
                                     <td class="text-center white-space-140">
                                         @if($order->status == 1)
                                             <span class="text-success "> Đã hoàn thành</span>
@@ -367,6 +391,7 @@
                         success: function (result) {
                             if (result) {
                                 $("#no").val(result.no);
+                                $("#sp").val(result.product.publish_id);
                                 $("#name").val(result.product.name);
                                 $("#price").val(convertVND(result.product.price));
                                 const deposits = (result.total - (result.total * result
@@ -379,11 +404,14 @@
                                         .status == 4 ? 'Đang giao hàng' : 'Hủy';
 
                                 $("#discount").val(parseInt(result.discount) + ' %');
-                                $("#quantity").val(Intl.NumberFormat().format(result.quantity).replaceAll(',', '.'));
+                                $("#discountA").val(convertVND(result.product.price * result.quantity * (100 - result.discount) / 100));                                $("#quantity").val(Intl.NumberFormat().format(result.quantity).replaceAll(',', '.'));
                                 $("#deposits").val(convertVND(deposits));
-                                $("#total").val(convertVND(total));
+                                $("#total").val(convertVND(result.product.price * result.quantity));
                                 $("#status").val(status);
-
+                                $("#nameC").html(result.fullname);
+                                $("#address").html(result.address);
+                                $("#phone").html(result.phone);
+                                $("#depositP").val(deposits / total * 100+' %');
                                 $("#created_at").val(convertTimeVN(result.created_at));
                             }
                         },

@@ -320,7 +320,7 @@
             document.querySelector('#form').setAttribute('name', '_csrf');
             console.log(document.getElementsByName('discount_vShop'))
             document.getElementsByName('discount_vShop')[0].addEventListener('keyup', (e) => {
-                if (+e.target.value < Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
+                if (+e.target.value <= Number(document.getElementById('discount').dataset.discount) && +e.target.value >= Number(document.getElementById('discount').dataset.discount) / 2) {
                     if ($('#appect').is(":checked")) {
                         document.getElementById('messageDis').style.display = 'none';
                         document.getElementById('btnConfirm').removeAttribute('disabled');
@@ -335,7 +335,7 @@
 
             });
             $('#appect').on('change', (e) => {
-                if (+$('#discount_vShop').val() < Number(document.getElementById('discount').dataset.discount) && +$('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2) {
+                if (+$('#discount_vShop').val() <= Number(document.getElementById('discount').dataset.discount) && +$('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2) {
                     if ($('#appect').is(":checked")) {
                         document.getElementById('messageDis').style.display = 'none';
                         document.getElementById('btnConfirm').removeAttribute('disabled');
@@ -362,7 +362,7 @@
 
         function checkHideShow() {
             if (Number(document.getElementById('discount').dataset.discount) &&
-                $('#discount_vShop').val() < Number(document.getElementById('discount').dataset.discount) &&
+                $('#discount_vShop').val() <= Number(document.getElementById('discount').dataset.discount) &&
                 $('#discount_vShop').val() >= Number(document.getElementById('discount').dataset.discount) / 2 &&
                 $('#appect').is(":checked")) {
                 document.getElementById('messageDis').style.display = 'none';

@@ -47,38 +47,64 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
+                                        <label for="name">Thời gian tạo đơn:</label>
+                                        <input type="text" class="form-control form-control-lg"
+                                               id="created_at" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Mã sản phẩm: </label>
+                                        <input type="text" class="form-control form-control-lg" id="sp" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
                                         <label for="name">Tên sản phẩm:</label>
                                         <input type="text" class="form-control form-control-lg" id="name" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Giá sản phẩm:</label>
+                                        <label for="name">Đơn giá:</label>
                                         <input type="text" class="form-control form-control-lg" id="price" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Giảm giá (nếu có):</label>
+                                        <label for="name">Số lượng</label>
+                                        <input type="text" class="form-control form-control-lg" id="quantity" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tổng tiền:</label>
+                                        <input type="text" class="form-control form-control-lg" id="total" readonly>
+                                    </div>
+                                </div>
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Chiết khấu nhập sẵn (nếu có):</label>
                                         <input type="text" class="form-control form-control-lg" id="discount" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Số lượng sản phẩm</label>
-                                        <input type="text" class="form-control form-control-lg" id="quantity" readonly>
+                                        <label for="name">Giá trị trừ chiết khấu:</label>
+                                        <input type="text" class="form-control form-control-lg" id="discountA" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Tiền đặt cọc (nếu có):</label>
+                                        <label for="name">Tỷ lệ cọc(nếu có):</label>
+                                        <input type="text" class="form-control form-control-lg" id="depositP" readonly>
+                                    </div>
+                                </div>
+
+                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="name">Tiền cọc(nếu có):</label>
                                         <input type="text" class="form-control form-control-lg" id="deposits" readonly>
-                                    </div>
-                                </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="name">Tổng tiền:</label>
-                                        <input type="text" class="form-control form-control-lg" id="total" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
@@ -87,14 +113,12 @@
                                         <input type="text" class="form-control form-control-lg" id="status" readonly>
                                     </div>
                                 </div>
-                                <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
-                                    <div class="form-group">
-                                        <label for="name">Thời gian tạo đơn:</label>
-                                        <input type="text" class="form-control form-control-lg"
-                                               id="created_at" readonly>
-                                    </div>
+                                <div class="col-12">
+                                    <h2>Địa chỉ nhận hàng</h2>
+                                    <p id="address"></p>
+                                    <p id="nameC"></p>
+                                    <p id="phone"></p>
                                 </div>
-
                             </div>
                         </form>
                     </div>
@@ -276,7 +300,7 @@
                                     <td class="text-center white-space-100">{{(int)$order->discount}}%</td>
                                     <td class="text-center white-space-100">{{number_format($order->quantity,0,'.','.')}}</td>
                                     <td class="text-right white-space-140">{{number_format($order->deposit_money ,0,'.','.')}} đ</td>
-                                    <td class="text-right white-space-140">{{number_format($order->total - ($order->total * $order->discount / 100),0,'.','.')}}
+                                    <td class="text-right white-space-140">{{number_format($order->total * (100 - $order->discount) / 100,0,'.','.')}}
                                         đ
                                     </td>
                                     <td class="text-center white-space-150">
@@ -367,23 +391,36 @@
                         success: function (result) {
                             if (result) {
                                 $("#no").val(result.no);
+                                $("#sp").val(result.product.publish_id);
                                 $("#name").val(result.product.name);
                                 $("#price").val(convertVND(result.product.price));
-                                const deposits = (result.total - (result.total * result.discount / 100)) * (result.deposit_money / 100);
-                                const total = result.total - (result.total * result.discount / 100);
+                                const deposits = (result.total - (result.total * result
+                                    .discount / 100)) * (result.deposit_money / 100);
+                                const total = result.total - (result.total * result
+                                    .discount / 100);
 
-                                const status = result.status == 1 ? 'Đã hoàn thành' : result.status == 3 ? 'Đơn hàng mới' : result.status == 4 ? 'Đang giao hàng' : 'Hủy';
+                                const status = result.status == 1 ? 'Đã hoàn thành' :
+                                    result.status == 3 ? 'Đơn hàng mới' : result
+                                        .status == 4 ? 'Đang giao hàng' : 'Hủy';
 
                                 $("#discount").val(parseInt(result.discount) + ' %');
-                                $("#quantity").val(result.quantity);
+                                $("#discountA").val(convertVND(result.product.price * result.quantity * (100 - result.discount) / 100));
+                                $("#quantity").val(Intl.NumberFormat().format(result.quantity).replaceAll(',', '.'));
                                 $("#deposits").val(convertVND(deposits));
-                                $("#total").val(convertVND(total));
+                                $("#total").val(convertVND(result.product.price * result.quantity));
                                 $("#status").val(status);
-
+                                $("#nameC").html(result.fullname);
+                                $("#address").html(result.address);
+                                $("#phone").html(result.phone);
+                                $("#depositP").val(deposits / total * 100+' %');
                                 $("#created_at").val(convertTimeVN(result.created_at));
 
                                 $(".update-request").attr('data-id', result.id);
-
+                                if(result.status == 0){
+                                    $('.modal-footer').css('display','block')
+                                }else{
+                                    $('.modal-footer').css('display','none')
+                                }
                             }
                         },
                         error: function (xhr, ajaxOptions, thrownError) {
