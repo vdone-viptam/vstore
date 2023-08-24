@@ -416,7 +416,7 @@
                                                 @elseif($user->role_id == 4)
                                                     <span class="text-danger font-medium">Kho</span>
                                                 @else
-                                                    <span class="text-success font-medium">V-Store</span>
+                                                    <span class="text-success font-medium">Store</span>
                                                 @endif
                                             </td>
                                             <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i')}}</td>
@@ -844,7 +844,7 @@
                     } else if (data.role_id == 4) {
                         $('#role_id').val('Kho');
                     } else {
-                        $('#role_id').val('V-Store');
+                        $('#role_id').val('Store');
                     }
                     if (data.confirm_date) {
                         $('#status').val('Đã duyệt');

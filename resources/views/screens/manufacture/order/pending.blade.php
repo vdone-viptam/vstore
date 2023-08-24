@@ -135,7 +135,7 @@
                                 Giá trị đơn hàng
                             </th>
                             <th>
-                                V-Shop bán hàng
+                                Shop bán hàng
                             </th>
                             <th>
                                 Giá trị trừ chiết khấu

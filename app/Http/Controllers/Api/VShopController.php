@@ -31,7 +31,7 @@ use Illuminate\Support\Str;
 /**
  * @group Vshop
  *
- * Danh sách api liên quan V-shop
+ * Danh sách api liên quan Shop
  */
 class  VShopController extends Controller
 {

@@ -35,12 +35,12 @@
 
             <div class="row">
                 <div class="col-6">
-                    <label class="">Chiết khấu cho V-Shop:</label>
+                    <label class="">Chiết khấu cho Shop:</label>
                     <input disabled name="discount_vshop" id="discount_vshop"
                            class="form-control form-control-lg">
                 </div>
                 <div class="col-6">
-                    <label class="">Chiết khấu cho V-Shop (thành tiền):</label>
+                    <label class="">Chiết khấu cho Shop (thành tiền):</label>
                     <input class="form-control percent-to-vnd form-control-lg" disabled id="moneyMore">
                 </div>
             </div>

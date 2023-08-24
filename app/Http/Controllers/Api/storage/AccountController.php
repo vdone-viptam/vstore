@@ -53,7 +53,7 @@ class AccountController extends Controller
             'normal_storage' => 'required'
 
         ], [
-            'name.required' => 'Tên v-store bắt buộc nhập',
+            'name.required' => 'Tên Store bắt buộc nhập',
             'company_name.required' => 'Tên công ty bắt buộc nhập',
             'address.required' => 'Địa chỉ bắt buộc nhập',
             'phone_number.required' => 'Số điện thoại bất buộc nhập',

@@ -191,7 +191,7 @@
                             <th class="white-space-150">
                             <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
-                                Chiết khấu cho <br> V-SHOP
+                                Chiết khấu cho <br> Shop
 </span>
                                 <span style="cursor: pointer">
                                     @if($field == 'discount')

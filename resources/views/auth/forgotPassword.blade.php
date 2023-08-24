@@ -58,7 +58,7 @@
 <div class=" grid grid-cols-1 place-items-center translate-y-[4rem]">
     <div
         class="login flex flex-col justify-start items-start gap-6 md:gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl w-full  md:w-[500px] ">
-        <div class="w-[162px]">
+        <div class="w-[65px]">
             @if($role_id == 3)
                 <a href="{{route('login_vstore')}}"><img src="{{asset('home/img/Logo.png')}}" alt=""></a>
             @elseif($role_id == 2)

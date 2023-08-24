@@ -108,7 +108,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link"
-                                       href="#">V-Shop</a>
+                                       href="#">Shop</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link"

@@ -20,12 +20,12 @@
 
             <div class="row">
                 <div class="col-6">
-                    <label class="">Chiết khấu cho V-Store:</label>
+                    <label class="">Chiết khấu cho Store:</label>
                     <input disabled name="discount_ncc" id="discount_ncc"
                            class="form-control-lg form-control">
                 </div>
                 <div class="col-6">
-                    <label class="">Chiết khấu cho V-Store (thành tiền):</label>
+                    <label class="">Chiết khấu cho Store (thành tiền):</label>
                     <input type="text" id="moneyDis" placeholder="" disabled
                            class="form-control form-control-lg percent-to-vnd">
                 </div>

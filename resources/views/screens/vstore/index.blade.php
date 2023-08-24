@@ -4,10 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trang chủ V-Store</title>
+    <title>Trang chủ Store</title>
     <link rel="stylesheet" href="{{asset('home/dist/style.css')}}">
     <link rel="stylesheet" href="{{asset('home/dist/output.css')}}">
-    <meta property="og:title" content="V-Store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
+    <meta property="og:title" content="Store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
     <meta property="og:description"
           content="Hãy đồng hành cùng 20.000+ người bán hàng cùng những nhà phân phối hàng đầu Việt Nam."/>
     <meta property="og:url" content="{{asset('')}}"/>
@@ -32,10 +32,10 @@
 <div class="bg w-full relative ">
     <div class=" w-full md:max-w-[1440px] mx-auto gap-4 py-6 f-full xl:px-20 px-[20px]">
         <div class="flex justify-between items-center">
-            <div class="w-[168px] h-[36px] md:hidden">
+            <div class="w-[40px] h-[40px] md:hidden">
                 <a href="./"> <img src="{{asset('home/img/Logo.png')}}" class="w-full object-contain" alt=""></a>
             </div>
-            <div class="hidden md:block w-[270px] h-[59px]">
+            <div class="hidden md:block w-[80px] h-[80px]">
                 <a href="./"> <img src="{{asset('home/img/Logo.png')}}" class="w-full object-contain" alt=""></a>
             </div>
 
@@ -46,7 +46,7 @@
         <div
             class="flex flex-col justify-center gap-3 items-center md:items-start w-full md:justify-start lg:max-w-[650px] text-center lg:text-left">
             <h2 class="font-semibold text-[#414141] md:text-[60px] md:leading-[75px] text-2xl ">"Cổng thương mại điện tử
-                <strong class="text-[#1e65ff] font-semibold">V-Store"</strong></h2>
+                <strong class="text-[#1e65ff] font-semibold">Store"</strong></h2>
 
         </div>
         <div
@@ -68,7 +68,7 @@
                         </div>
                     </div>
                     <span class="text-[8px] md:text-xs font-bold text-[#4A4A4A] xl:text-base line-clamp-2">Sở hữu <span
-                            class="text-[#258AFF]"> 1 tài khoản V-Store </span>sử dụng trong <span
+                            class="text-[#258AFF]"> 1 tài khoản Store </span>sử dụng trong <span
                             class="text-[#258AFF]">3 năm.</span></span>
                 </div>
 {{--                <div class="flex items-center md:gap-2">--}}
@@ -126,7 +126,7 @@
                         </div>
                     </div>
                     <span class="text-[8px] md:text-xs font-bold text-[#4A4A4A] xl:text-base line-clamp-2">Thông báo đến <span
-                            class="text-[#258AFF]">10.000 tài khoản người dùng</span> và <span class="text-[#258AFF]">50 V-Shop</span> biết đến
+                            class="text-[#258AFF]">10.000 tài khoản người dùng</span> và <span class="text-[#258AFF]">50 Shop</span> biết đến
 10 sản phẩm, dịch vụ đầu tiên trong vòng 6 tháng.</span>
                 </div>
             </div>
@@ -139,14 +139,14 @@
         </div>
     </div>
 </div>
-    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16  w-full md:max-w-[1440px] mx-auto md:p-16 my-8 p-4">
-        <div class="w-full h-full order-last md:order-first">
+    <div class="grid grid-cols-1 lg:grid-cols-1 gap-16  w-full md:max-w-[1440px] mx-auto md:p-16 my-8 p-4">
+        <div class="w-full h-full order-last md:order-first hidden">
             <img src="{{asset('home/img/IMG.png')}}" class="w-full" alt="">
         </div>
-        <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
+        <div class="flex flex-col justify-center gap-6 order-first md:order-last text-center">
             <h2 class="font-semibold text-lg sm:text-3xl text-[#1D293F]">Cổng thương mại điện tử<strong
-                    class="text-[#1e65ff] font-semibold"> V-Store </strong> là gì?</h2>
-            <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">“Cổng thương mại điện tử V-Store” là cổng tiếp nhận đăng kí, kiểm duyệt và đàm phán chiết khấu các sản phẩm, dịch vụ từ nhà cung cấp. Nhà cung cấp muốn kinh doanh sản phẩm của mình trên nền tảng mạng xã hội VDONE thì bắt buộc phải khai báo sản phẩm của của mình thông qua các cổng V-Store. Mỗi một V-Store sẽ phụ trách các lĩnh vực sản phẩm khác nhau. Sản phẩm được cổng V-Store kiểm duyệt sẽ được cấp một mã sản phẩm và có thể lưu thông tin trên nền tảng VDONE. </span>
+                    class="text-[#1e65ff] font-semibold"> Store </strong> là gì?</h2>
+            <span class=" text-[#7C8087] leading-[24px] text-[12px] sm:text-xl ">“Cổng thương mại điện tử Store” là cổng tiếp nhận đăng kí, kiểm duyệt và đàm phán chiết khấu các sản phẩm, dịch vụ từ nhà cung cấp. Nhà cung cấp muốn kinh doanh sản phẩm của mình trên nền tảng mạng xã hội ABC thì bắt buộc phải khai báo sản phẩm của của mình thông qua các cổng Store. Mỗi một Store sẽ phụ trách các lĩnh vực sản phẩm khác nhau. Sản phẩm được cổng Store kiểm duyệt sẽ được cấp một mã sản phẩm và có thể lưu thông tin trên nền tảng ABC. </span>
         </div>
     </div>
     <div class="banner py-10">
@@ -171,8 +171,8 @@
 
     <div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 px-[20px] my-10 relative">
         <h2 class="text-lg sm:text-4xl font-bold text-[#1D293F] text-center ">Quy trình trở thành <strong
-                class="text-[#1e65ff] font-semibold">V-Store </strong></h2>
-        <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">Quy trình đăng ký V-Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của V-Store </span>
+                class="text-[#1e65ff] font-semibold">Store </strong></h2>
+        <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">Quy trình đăng ký Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của Store </span>
         <div class="w-[533px] h-[507px] absolute left-[-350px] xl:left-[-550px]">
             <img src="{{asset('home/img/circle.png')}}" class="w-full" alt="">
         </div>
@@ -238,20 +238,20 @@
                 </div>
                 <h3 class="text-[#1D293F] font-semibold text-2xl">Bắt đầu sử dụng</h3>
                 <span class="text-[#7C8087]">
-                    Hoàn thiện đăng ký và trở thành V-Store sở hữu những quyền lợi mang tới lợi ích kinh doanh lớn
+                    Hoàn thiện đăng ký và trở thành Store sở hữu những quyền lợi mang tới lợi ích kinh doanh lớn
                 </span>
             </div>
         </div>
     </div>
     <div class="flex flex-col justify-center items-center max-w-[1092px] mx-auto gap-2 xl:px-20 px-[20px]">
         <h2 class="text-[16px] sm:text-4xl font-bold text-[#1D293F] text-center">Lợi ích tham gia<strong
-                class="text-[#1e65ff] font-semibold"> V-Store </strong></h2>
-        <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">“Cổng thương mại điện tử V-Store” là công cụ được sử dụng để kết nối giữa người dùng với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tải hàng hóa, dịch vụ để thực hiện hoạt động thương mại hóa </span>
+                class="text-[#1e65ff] font-semibold"> Store </strong></h2>
+        <span class="text-[12px] sm:text-lg font-medium text-[#333] text-center ">“Cổng thương mại điện tử Store” là công cụ được sử dụng để kết nối giữa người dùng với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tải hàng hóa, dịch vụ để thực hiện hoạt động thương mại hóa </span>
 
     </div>
     <div
-        class="grid grid-cols-1 xl:grid-cols-2 place-items-center gap-2 xl:gap-8   w-full md:max-w-[1440px] mx-auto py-6 xl:px-20 px-[20px]">
-        <div class="flex flex-col justify-start items-center md:items-start gap-8 order-last xl:order-first">
+        class="grid grid-cols-1 xl:grid-cols-1 place-items-center gap-2 xl:gap-8   w-full md:max-w-[1440px] mx-auto py-6 xl:px-20 px-[20px]">
+        <div class="flex flex-col justify-center items-center md:items-start gap-8 order-last xl:order-first">
             <div class="flex flex-col gap-2 md:whitespace-nowrap">
 
 
@@ -289,7 +289,7 @@
                         </svg>
                     </div>
 
-                    <span class="text-[#4F4F4F] font-medium">Được VDONE hỗ trợ kết nối tới các nhà cung cấp. </span>
+                    <span class="text-[#4F4F4F] font-medium">Được ABC hỗ trợ kết nối tới các nhà cung cấp. </span>
                 </div>
                 <div class="flex justify-start items-start gap-2">
                     <div class="w-[21px]">
@@ -346,7 +346,7 @@
                class="btn-register font-semibold text-xl text-[#FFF] py-4 px-4 md:px-8 rounded-lg uppercase hover:opacity-70 transtion-all duration-200">Đăng
                 ký mua</a>
         </div>
-        <div class="order-first xl:order-last">
+        <div class="order-first xl:order-last hidden">
             <img src="{{asset('home/img/bnn.png')}}" class="w-full" alt="">
         </div>
 
@@ -355,14 +355,14 @@
         <div
             class=" flex flex-col justify-center items-center gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
             <h2 class="text-lg sm:text-4xl font-bold text-[#1D293F] text-center md:text-left"> <strong
-                    class="text-[#1e65ff] font-semibold">V-Store </strong> nổi bật</h2>
+                    class="text-[#1e65ff] font-semibold">Store </strong> nổi bật</h2>
             <div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-6 gap-2 md:gap-9 w-full">
                 <div class="box flex flex-col justify-center items-center gap-2 p-5">
                     <div class="w-[80px] h-[80px] rounded-full">
                         <img src="{{asset('home/img/avt.png')}}" class="w-full rounded-full" alt="">
                     </div>
                     <span
-                        class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED</span>
+                        class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ABC</span>
                 </div>
                 <div class="box flex flex-col justify-center items-center gap-2 p-5">
                     <div class="w-[80px] h-[80px] rounded-full">
@@ -381,14 +381,14 @@
                         <img src="{{asset('home/img/avt3.png')}}" class="w-full rounded-full" alt="">
                     </div>
                     <span
-                        class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED </span>
+                        class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ABC </span>
                 </div>
                 <div class="box flex flex-col justify-center items-center gap-2 p-5">
                     <div class="w-[80px] h-[80px] rounded-full">
                         <img src="{{asset('home/img/avt4.png')}}" class="w-full rounded-full" alt="">
                     </div>
                     <span
-                        class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ANEED </span>
+                        class="max-w-[135px] text-sm text-center font-semibold text-[#4F4F4F]">Công ty cổ phần ABC </span>
                 </div>
                 <div class="box flex flex-col justify-center items-center gap-2 p-5">
                     <div class="w-[80px] h-[80px] rounded-full">
@@ -400,13 +400,13 @@
         </div>
     </div>
     <!-- <div class="flex flex-col justify-center items-center gap-8   w-full md:max-w-[1440px] mx-auto py-16 xl:px-20 px-[20px]">
-        <h2 class="text-2xl font-bold text-[#4F4F4F] uppercase">NHỮNG CÂU HỎI ĐẶT RA CHO V-STORE </h2>
+        <h2 class="text-2xl font-bold text-[#4F4F4F] uppercase">NHỮNG CÂU HỎI ĐẶT RA CHO STORE </h2>
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8 w-full">
             <div class="w-full h-full">
                 <img src="./img/quest.png" class="w-full" alt="">
             </div>
             <ul class="flex flex-col gap-2 w-full">
-                <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">V-Store vận hành như thế nào? <div class="w-[25px]">
+                <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Store vận hành như thế nào? <div class="w-[25px]">
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
                         </svg>
@@ -416,7 +416,7 @@
                         Lorem ipsum dolor sit amet consectetur adipisicing elit. Est modi doloremque quis quo ipsa voluptas, neque odit architecto tenetur ad repellendus nobis fuga sit unde obcaecati! Ex consequuntur nesciunt eaque!
                     </div>
                 </li>
-                <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Làm sao để trở thành thành viên của V-Store <div class="w-[25px]">
+                <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Làm sao để trở thành thành viên của Store <div class="w-[25px]">
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
                         </svg>
@@ -424,7 +424,7 @@
                     </a>
 
                 </li>
-                <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Thành viên của V-Store sẽ được hưởng những lợi ích gì? <div class="w-[25px]">
+                <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Thành viên của Store sẽ được hưởng những lợi ích gì? <div class="w-[25px]">
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
                         </svg>
@@ -432,7 +432,7 @@
                     </a>
 
                 </li>
-                <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Nhà phát triển V-Store?<div class="w-[25px]">
+                <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Nhà phát triển Store?<div class="w-[25px]">
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
                         </svg>
@@ -440,7 +440,7 @@
                     </a>
 
                 </li>
-                <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Đối tác của V-Store?<div class="w-[25px]">
+                <li class="w-full"><a href="#" class="flex justify-between text-[#333] text-xl items-center w-full border-[#0E88FF] border-[1px] rounded-[20px] py-3 px-3 md:px-8">Đối tác của Store?<div class="w-[25px]">
                     <svg width="24" height="25" viewBox="0 0 24 25" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.9182 16.1933C12.4233 16.729 11.5767 16.729 11.0818 16.1933L7.01002 11.7854C6.27046 10.9848 6.8383 9.68726 7.92821 9.68726L16.0718 9.68726C17.1617 9.68726 17.7295 10.9848 16.99 11.7854L12.9182 16.1933Z" fill="#333333"/>
                         </svg>
@@ -486,7 +486,7 @@
 
                     </a></li>
             </ul>
-            <span class="uppercase text-xs text-[#272D4E]">Copyright <script>document.write(new Date().getFullYear());</script> © viptam.com</span>
+            <span class="uppercase text-xs text-[#272D4E]">Copyright <script>document.write(new Date().getFullYear());</script> © ABC.vn</span>
         </div>
     </footer>
     <script type="text/javascript" src="//cdn.jsdelivr.net/npm/slick-carousel@1.8.1/slick/slick.min.js"></script>

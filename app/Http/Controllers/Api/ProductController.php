@@ -657,7 +657,7 @@ class ProductController extends Controller
      * API lấy danh sách sản phẩm theo vshop
      *
      * @param Request $request
-     * @param  $pdone_id  mã ID user V-Shop
+     * @param  $pdone_id  mã ID user Shop
      * @urlParam publish_id tìm kiếm theo mã sản phẩm mã sản phẩm
      * @urlParam category_id tìm kiếm theo danh mục
      * @urlParam order_by_price sắp xếp theo giá
@@ -753,7 +753,7 @@ class ProductController extends Controller
      * API lấy danh sách sản phẩm theo vshop
      *
      * @param Request $request
-     * @param  $pdone_id  mã ID user V-Shop
+     * @param  $pdone_id  mã ID user Shop
      * @urlParam orderBy 1 Số lượng sản phẩm còn lại | 2 Số sản phẩm đã bán | 3 Tỷ lệ bán sản phẩm
      * @urlParam status 1 tiếp thị | 2 nhập sẵn
      * urlParam type  asc|desc Mặc định asc
@@ -827,7 +827,7 @@ class ProductController extends Controller
      *
      * API lấy danh sách sản phẩm để tạo bill vãng lai
      *
-     * @param  $pdone_id  mã ID user V-Shop
+     * @param  $pdone_id  mã ID user Shop
      *
      * @return \Illuminate\Http\JsonResponse
      */
@@ -1238,9 +1238,9 @@ class ProductController extends Controller
     }
 
     /**
-     * Hủy niêm yết sản phẩm của 1 V-shop
+     * Hủy niêm yết sản phẩm của 1 shop
      *
-     * API dùng để hủy niêm yết sản phẩm của V-shop
+     * API dùng để hủy niêm yết sản phẩm của shop
      *
      * @param $pdone_id ID user vshop
      * @param $product_id ID sản phẩm

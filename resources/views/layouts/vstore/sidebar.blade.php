@@ -79,7 +79,7 @@
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('partners/vshop*')) ? 'active1' : '' }}"
-                                       id="listVstore" href="{{route('screens.vstore.partner.vshop')}}">V-Shop</a>
+                                       id="listVstore" href="{{route('screens.vstore.partner.vshop')}}">Shop</a>
                                 </li>
                             </ul>
                         </div>

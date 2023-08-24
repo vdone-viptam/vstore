@@ -1318,7 +1318,7 @@ paths:
                   example: perspiciatis
                 vshop_id:
                   type: required
-                  description: 'mã v-shop'
+                  description: 'mã Shop'
                   example: explicabo
                 is_pdone:
                   type: boolean
@@ -1516,7 +1516,7 @@ paths:
             value: omnis
   '/api/categories/get-category-by-vstore/{vstore_id}':
     get:
-      summary: 'Danh sách danh mục theo V-Store'
+      summary: 'Danh sách danh mục theo Store'
       operationId: danhSchDanhMcTheoVStore
       description: 'API này sẽ trả về danh sách danh mục theo vstore được chọn'
       parameters:
@@ -1840,7 +1840,7 @@ paths:
     get:
       summary: Bill
       operationId: bill
-      description: 'API dùng trả về % giảm giá dựa trên số lượng sản phẩm V-Shop lấy hàng sẵn'
+      description: 'API dùng trả về % giảm giá dựa trên số lượng sản phẩm Shop lấy hàng sẵn'
       parameters:
         -
           in: header
@@ -5932,9 +5932,9 @@ paths:
             value: rem
   '/api/products/destroy-affiliate/{pdone_id}/{product_id}':
     delete:
-      summary: 'Hủy niêm yết sản phẩm của 1 V-shop'
+      summary: 'Hủy niêm yết sản phẩm của 1 Shop'
       operationId: hyNimYtSnPhmCa1VShop
-      description: 'API dùng để hủy niêm yết sản phẩm của V-shop'
+      description: 'API dùng để hủy niêm yết sản phẩm của Shop'
       parameters:
         -
           in: header
@@ -6152,9 +6152,9 @@ paths:
           type: string
   '/api/review-product/list-review-vdone/{done_id}':
     get:
-      summary: 'xem danh sách đánh giá một sản phẩm trên Vdone'
+      summary: 'xem danh sách đánh giá một sản phẩm trên ABC'
       operationId: xemDanhSchnhGiMtSnPhmTrnVdone
-      description: 'API dùng xem danh sách đánh giá sản phẩm trên Vdone'
+      description: 'API dùng xem danh sách đánh giá sản phẩm trên ABC'
       parameters:
         -
           in: header
@@ -7587,7 +7587,7 @@ paths:
             value: est
   /api/vstore/search:
     get:
-      summary: 'Danh sách V-Store có tên chứa từ khóa tìm kiếm'
+      summary: 'Danh sách Store có tên chứa từ khóa tìm kiếm'
       operationId: danhSchVStoreCTnChaTKhaTmKim
       description: 'API này sẽ trả về danh sách vstore'
       parameters:
@@ -7800,7 +7800,7 @@ tags:
     description: ''
   -
     name: Finance
-    description: "\nDanh sách api liên quan tài chính V-Shop"
+    description: "\nDanh sách api liên quan tài chính Shop"
   -
     name: Manufacture
     description: "\nDanh sách api liên quan nhà cung cấp"
@@ -7815,7 +7815,7 @@ tags:
     description: "\nDanh sách api liên quan tới đánh giá sản phẩm"
   -
     name: Vshop
-    description: "\nDanh sách api liên quan V-shop"
+    description: "\nDanh sách api liên quan Shop"
   -
     name: Vstore
     description: "\nDanh sách api liên quan nhà phân phối vstore"

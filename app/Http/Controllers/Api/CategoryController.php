@@ -96,7 +96,7 @@ class CategoryController extends Controller
 
 
     /**
-     * Danh sách danh mục theo V-Store
+     * Danh sách danh mục theo Store
      *
      * API này sẽ trả về danh sách danh mục theo vstore được chọn
      *

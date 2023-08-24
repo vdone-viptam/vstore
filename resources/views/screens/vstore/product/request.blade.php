@@ -305,9 +305,9 @@
                 <input class="form-control number" data-discount="${discount}" name="discount" id="discount" disabled value="${discount} %">
                             </div>
                             <div class="form-group">
-                            <label>Chiết khấu cho V-Shop</label>
+                            <label>Chiết khấu cho Shop</label>
                 <input class="form-control number-percent" name="discount_vShop" id="discount_vShop">
-                            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2} và không lớn hơn ${discount}</p>
+                            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho Shop không được nhỏ hơn ${discount / 2} và không lớn hơn ${discount}</p>
                             </div>
                 <div class="form-group text-left mt-3">
                     <label class="custom-control custom-checkbox custom-control-inline" style="margin: 0;">

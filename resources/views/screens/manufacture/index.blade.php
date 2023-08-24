@@ -77,7 +77,7 @@
                 </a>
             </div>
             <div class="w-[105px] h-[82px]">
-            <img src="{{asset('home/img/vdone.png')}}" class="w-full object-contain" alt="">
+            <img src="{{asset('home/img/Logo.png')}}" class="w-full object-contain" alt="">
 
             </div>
         </div>
@@ -129,11 +129,11 @@
     <div
         class="grid grid-cols-1 lg:grid-cols-2 gap-16  w-full md:max-w-[1440px] place-items-end mx-auto md:p-16 my-8 p-4">
         <div class="w-full h-full order-last md:order-first">
-            <img src="{{asset('home/img/imgncc.png')}}" class="w-full" alt="">
+            <img src="{{asset('home/img/nhacung.jpg')}}" class="w-full" alt="">
         </div>
         <div class="flex flex-col gap-6 order-first md:order-last text-center md:text-left">
             <h2 class="font-bold text-2xl md:text-4xl text-[#034D82]">Nhà cung cấp là gì?</h2>
-            <span style="text-align: left;" class=" text-[#90A3B4] tracking-[0.3px] ">"Nhà cung cấp" là mắt xích vô cùng quan trọng trong chuỗi hoạt động thương mại điện tử của nền tảng VDONE. Tại VDONE, các nhà cung cấp là tổ chức bao gồm Doanh nghiệp, Hợp tác xã, Hộ kinh doanh, có đủ nguồn lực cung cấp sản phẩm hoặc dịch vụ cho V-Store, đảm bảo nguồn hàng liên tục cho hoạt động kinh doanh. Mỗi Nhà cung cấp sẽ đăng ký sản phẩm và đưa đến người tiêu dùng thông qua Cổng thương mại điện tử V-Store.</span>
+            <span style="text-align: left;" class=" text-[#90A3B4] tracking-[0.3px] ">"Nhà cung cấp" là mắt xích vô cùng quan trọng trong chuỗi hoạt động thương mại điện tử của nền tảng ABC. Tại ABC, các nhà cung cấp là tổ chức bao gồm Doanh nghiệp, Hợp tác xã, Hộ kinh doanh, có đủ nguồn lực cung cấp sản phẩm hoặc dịch vụ cho Store, đảm bảo nguồn hàng liên tục cho hoạt động kinh doanh. Mỗi Nhà cung cấp sẽ đăng ký sản phẩm và đưa đến người tiêu dùng thông qua Cổng thương mại điện tử Store.</span>
             <a href="{{route('register_ncc')}}"
                class="flex items-center gap-5 font-bold text-[#04AADD] hover:opacity-70 transition-all duration-200">Trở
                 thành Nhà cung cấp
@@ -152,15 +152,15 @@
    <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 w-full md:max-w-[1440px] mx-auto place-items-center p-4">
         <div class="flex flex-col gap-6 max-w-[485px]">
             <h2 class="text-[#034D82] font-bold text-2xl md:text-4xl tracking-[0.3px] text-center">Quy trình trở thành <br> Nhà cung cấp</h2>
-            <span class="font-semibold tracking-[0.3px] text-[#90A3B4]">Quy trình đăng ký V-Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của Nhà cung cấp</span>
+            <span class="font-semibold tracking-[0.3px] text-[#90A3B4]">Quy trình đăng ký Store đơn giản nhanh chóng, giúp người dùng dễ dàng nhận được những đặc quyền của Nhà cung cấp</span>
             <ul class="step">
                 <li><a href="#" class="flex flex-col text-[#FEB30D] font-bold gap-1"><div class="dot"></div> Bước 1: Tạo tài khoản <span class="text-sm text-[#90A3B4] font-semibold">Tạo tài khoản dễ dàng bằng cách truy cập cổng đăng ký và điền thông tin theo hướng dẫn</span></a></li>
-                <li><a href="#" class="flex flex-col text-[#FEB30D] font-bold gap-1"><div class="dot"></div>Bước 2: Đưa sản phẩm lên V-Store<span class="text-sm text-[#90A3B4] font-semibold">Hoàn thiện thông tin sản phẩm trên V-Store theo hướng dẫn</span></a></li>
+                <li><a href="#" class="flex flex-col text-[#FEB30D] font-bold gap-1"><div class="dot"></div>Bước 2: Đưa sản phẩm lên Store<span class="text-sm text-[#90A3B4] font-semibold">Hoàn thiện thông tin sản phẩm trên Store theo hướng dẫn</span></a></li>
                 <li><a href="#" class="flex flex-col text-[#FEB30D] font-bold gap-1"><div class="dot"></div>Bước 3: Quản lý bán hàng <span class="text-sm text-[#90A3B4] font-semibold">Quản lý đơn hàng trên hệ thống và đưa sản phẩm tới người tiêu dùng</span></a></li>
             </ul>
         </div>
         <div class="order-first md:order-last">
-        <img src="{{asset('home/img/bncom.png')}}" class="w-full" alt="">
+        <img src="{{asset('home/img/quytrinh.jpeg')}}" class="w-full" alt="">
         </div>
    </div>
 </div>
@@ -214,7 +214,7 @@
                     </div>
                 </div>
                 <span class="text-sm font-semibold text-[#034D82] text-center">
-            Được hệ thống VDONE hỗ trợ kết nối tới các V-Shop.
+            Được hệ thống ABC hỗ trợ kết nối tới các Shop.
             </span>
        </div>
        <div class="text-center boxli w-full p-3 mx-auto">
@@ -230,7 +230,7 @@
     </div>
     <div class="flex flex-col gap-6 text-center md:text-left col-span-4">
         <h2 class="font-bold text-2xl md:text-4xl text-[#034D82]">Lợi ích khi trở thành <br> Nhà cung cấp</h2>
-        <span style="text-align: left;" class=" text-[#90A3B4] tracking-[0.3px] ">Khi trở thành “Nhà cung cấp” bạn sẽ được kết nối với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tải hàng hóa, dịch vụ trên cổng V-Store để thực hiện hoạt động thương mại hóa cho các sản phẩm của doanh nghiệp.</span>
+        <span style="text-align: left;" class=" text-[#90A3B4] tracking-[0.3px] ">Khi trở thành “Nhà cung cấp” bạn sẽ được kết nối với hệ thống quản trị thương mại điện tử thông qua hình thức đăng tải hàng hóa, dịch vụ trên cổng Store để thực hiện hoạt động thương mại hóa cho các sản phẩm của doanh nghiệp.</span>
         <a href="#" class="flex items-center gap-5 font-bold text-[#04AADD] hover:opacity-70 transition-all duration-200">Trở thành Nhà cung cấp <svg width="16" height="12" viewBox="0 0 16 12" fill="none" xmlns="http://www.w3.org/2000/svg">
 <path d="M15.5303 6.53033C15.8232 6.23744 15.8232 5.76256 15.5303 5.46967L10.7574 0.6967C10.4645 0.403807 9.98959 0.403807 9.6967 0.6967C9.40381 0.989593 9.40381 1.46447 9.6967 1.75736L13.9393 6L9.6967 10.2426C9.40381 10.5355 9.40381 11.0104 9.6967 11.3033C9.98959 11.5962 10.4645 11.5962 10.7574 11.3033L15.5303 6.53033ZM-6.55671e-08 6.75L15 6.75L15 5.25L6.55671e-08 5.25L-6.55671e-08 6.75Z" fill="#04AADD"/>
 </svg>
@@ -296,7 +296,7 @@
                                 <h4 style="font-weight: 700; margin-bottom:15px;">ID P-Done người đại diện</h4>
                             </div>
                             <div class="col-6">
-                                <span style="font-size: 16px;">{{$user->id_vdone}}</span>
+                                <span style="font-size: 16px;">{{$user->id_ABC}}</span>
                             </div>
                         </div>
 
@@ -451,8 +451,8 @@
 <div class="bg-[#D4F0FF]">
     <div class="grid grid-cols-1 md:grid-cols-2 gap-8   w-full md:max-w-[1440px] mx-auto xl:px-20 px-[20px] py-10">
         <div class="flex flex-col gap-6">
-            <h2 class="text-[#034D82] font-bold text-4xl text-center">Nhà cung cấp nói gì khi tham gia hệ thống  V-Store</h2>
-            <span class="text-[#90A3B4]">V-Store đang hợp tác với rất nhiều Nhà cung cấp ở đa dạng ngành hàng. Phối hợp cung ứng hàng hoá mang lại doanh thu vượt trội so với các nền tảng thương mại điện tử thông thường.</span>
+            <h2 class="text-[#034D82] font-bold text-4xl text-center">Nhà cung cấp nói gì khi tham gia hệ thống  Store</h2>
+            <span class="text-[#90A3B4]">Store đang hợp tác với rất nhiều Nhà cung cấp ở đa dạng ngành hàng. Phối hợp cung ứng hàng hoá mang lại doanh thu vượt trội so với các nền tảng thương mại điện tử thông thường.</span>
         </div>
         <div class="slider">
             <section>
@@ -464,7 +464,7 @@
                 <path d="M86.0938 1.5625L84.0625 5.71875L79.4688 6.375C78.6562 6.5 78.3438 7.5 78.9375 8.09375L82.2188 11.3125L81.4375 15.8438C81.3125 16.6562 82.1875 17.2812 82.9062 16.9062L87 14.75L91.0625 16.9062C91.7812 17.2812 92.6562 16.6562 92.5312 15.8438L91.75 11.3125L95.0312 8.09375C95.625 7.5 95.3125 6.5 94.5 6.375L89.9375 5.71875L87.875 1.5625C87.5312 0.84375 86.4688 0.8125 86.0938 1.5625Z" fill="#FAAD13"/>
                 <path d="M112.094 1.5625L110.062 5.71875L105.469 6.375C104.656 6.5 104.344 7.5 104.938 8.09375L108.219 11.3125L107.438 15.8438C107.312 16.6562 108.188 17.2812 108.906 16.9062L113 14.75L117.062 16.9062C117.781 17.2812 118.656 16.6562 118.531 15.8438L117.75 11.3125L121.031 8.09375C121.625 7.5 121.312 6.5 120.5 6.375L115.938 5.71875L113.875 1.5625C113.531 0.84375 112.469 0.8125 112.094 1.5625Z" fill="#FAAD13"/>
                 </svg>
-                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng V-Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
+                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
                 <div class="flex items-center gap-2">
                     <div class="w-[57px]">
                         <div class="w-[56px] h-[56px] rounded-full">
@@ -491,7 +491,7 @@
                 <path d="M86.0938 1.5625L84.0625 5.71875L79.4688 6.375C78.6562 6.5 78.3438 7.5 78.9375 8.09375L82.2188 11.3125L81.4375 15.8438C81.3125 16.6562 82.1875 17.2812 82.9062 16.9062L87 14.75L91.0625 16.9062C91.7812 17.2812 92.6562 16.6562 92.5312 15.8438L91.75 11.3125L95.0312 8.09375C95.625 7.5 95.3125 6.5 94.5 6.375L89.9375 5.71875L87.875 1.5625C87.5312 0.84375 86.4688 0.8125 86.0938 1.5625Z" fill="#FAAD13"/>
                 <path d="M112.094 1.5625L110.062 5.71875L105.469 6.375C104.656 6.5 104.344 7.5 104.938 8.09375L108.219 11.3125L107.438 15.8438C107.312 16.6562 108.188 17.2812 108.906 16.9062L113 14.75L117.062 16.9062C117.781 17.2812 118.656 16.6562 118.531 15.8438L117.75 11.3125L121.031 8.09375C121.625 7.5 121.312 6.5 120.5 6.375L115.938 5.71875L113.875 1.5625C113.531 0.84375 112.469 0.8125 112.094 1.5625Z" fill="#FAAD13"/>
                 </svg>
-                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng V-Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
+                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
                 <div class="flex items-center gap-2">
                     <div class="w-[57px]">
                         <div class="w-[56px] h-[56px] rounded-full">
@@ -518,7 +518,7 @@
                 <path d="M86.0938 1.5625L84.0625 5.71875L79.4688 6.375C78.6562 6.5 78.3438 7.5 78.9375 8.09375L82.2188 11.3125L81.4375 15.8438C81.3125 16.6562 82.1875 17.2812 82.9062 16.9062L87 14.75L91.0625 16.9062C91.7812 17.2812 92.6562 16.6562 92.5312 15.8438L91.75 11.3125L95.0312 8.09375C95.625 7.5 95.3125 6.5 94.5 6.375L89.9375 5.71875L87.875 1.5625C87.5312 0.84375 86.4688 0.8125 86.0938 1.5625Z" fill="#FAAD13"/>
                 <path d="M112.094 1.5625L110.062 5.71875L105.469 6.375C104.656 6.5 104.344 7.5 104.938 8.09375L108.219 11.3125L107.438 15.8438C107.312 16.6562 108.188 17.2812 108.906 16.9062L113 14.75L117.062 16.9062C117.781 17.2812 118.656 16.6562 118.531 15.8438L117.75 11.3125L121.031 8.09375C121.625 7.5 121.312 6.5 120.5 6.375L115.938 5.71875L113.875 1.5625C113.531 0.84375 112.469 0.8125 112.094 1.5625Z" fill="#FAAD13"/>
                 </svg>
-                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng V-Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
+                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
                 <div class="flex items-center gap-2">
                     <div class="w-[57px]">
                         <div class="w-[56px] h-[56px] rounded-full">
@@ -545,7 +545,7 @@
                 <path d="M86.0938 1.5625L84.0625 5.71875L79.4688 6.375C78.6562 6.5 78.3438 7.5 78.9375 8.09375L82.2188 11.3125L81.4375 15.8438C81.3125 16.6562 82.1875 17.2812 82.9062 16.9062L87 14.75L91.0625 16.9062C91.7812 17.2812 92.6562 16.6562 92.5312 15.8438L91.75 11.3125L95.0312 8.09375C95.625 7.5 95.3125 6.5 94.5 6.375L89.9375 5.71875L87.875 1.5625C87.5312 0.84375 86.4688 0.8125 86.0938 1.5625Z" fill="#FAAD13"/>
                 <path d="M112.094 1.5625L110.062 5.71875L105.469 6.375C104.656 6.5 104.344 7.5 104.938 8.09375L108.219 11.3125L107.438 15.8438C107.312 16.6562 108.188 17.2812 108.906 16.9062L113 14.75L117.062 16.9062C117.781 17.2812 118.656 16.6562 118.531 15.8438L117.75 11.3125L121.031 8.09375C121.625 7.5 121.312 6.5 120.5 6.375L115.938 5.71875L113.875 1.5625C113.531 0.84375 112.469 0.8125 112.094 1.5625Z" fill="#FAAD13"/>
                 </svg>
-                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng V-Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
+                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
                 <div class="flex items-center gap-2">
                     <div class="w-[57px]">
                         <div class="w-[56px] h-[56px] rounded-full">
@@ -572,7 +572,7 @@
                 <path d="M86.0938 1.5625L84.0625 5.71875L79.4688 6.375C78.6562 6.5 78.3438 7.5 78.9375 8.09375L82.2188 11.3125L81.4375 15.8438C81.3125 16.6562 82.1875 17.2812 82.9062 16.9062L87 14.75L91.0625 16.9062C91.7812 17.2812 92.6562 16.6562 92.5312 15.8438L91.75 11.3125L95.0312 8.09375C95.625 7.5 95.3125 6.5 94.5 6.375L89.9375 5.71875L87.875 1.5625C87.5312 0.84375 86.4688 0.8125 86.0938 1.5625Z" fill="#FAAD13"/>
                 <path d="M112.094 1.5625L110.062 5.71875L105.469 6.375C104.656 6.5 104.344 7.5 104.938 8.09375L108.219 11.3125L107.438 15.8438C107.312 16.6562 108.188 17.2812 108.906 16.9062L113 14.75L117.062 16.9062C117.781 17.2812 118.656 16.6562 118.531 15.8438L117.75 11.3125L121.031 8.09375C121.625 7.5 121.312 6.5 120.5 6.375L115.938 5.71875L113.875 1.5625C113.531 0.84375 112.469 0.8125 112.094 1.5625Z" fill="#FAAD13"/>
                 </svg>
-                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng V-Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
+                <span class="text-[#90A3B4]">Tôi và công ty của mình đã có bước đầu thành công khi đưa sản phẩm của mình lên nền tảng Store. Việc vận hành cũng vô cùng đơn giản nhờ công cụ quản lý thông minh</span>
                 <div class="flex items-center gap-2">
                     <div class="w-[57px]">
                         <div class="w-[56px] h-[56px] rounded-full">

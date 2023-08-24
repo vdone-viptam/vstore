@@ -1,5 +1,5 @@
 @extends('layouts.manufacture.main')
-@section('page_title','Báo cáo V-Store')
+@section('page_title','Báo cáo Store')
 
 @section('modal')
     <div class="modal modal-details">
@@ -57,12 +57,12 @@
 
 @section('content')
     <div class="brc flex justify-start items-center gap-2 px-5 xl:px-16 py-4">
-        <span class="text-secondary">Quản lý V-Store</span>
+        <span class="text-secondary">Quản lý Store</span>
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
             <path d="M10 6L15.2929 11.2929C15.6834 11.6834 15.6834 12.3166 15.2929 12.7071L10 18" stroke="black"
                   stroke-opacity="0.45" stroke-width="1.5" stroke-linecap="round"/>
         </svg>
-        <a href="./" class="text-blueMain font-medium italic">Báo cáo V-Store</a>
+        <a href="./" class="text-blueMain font-medium italic">Báo cáo Store</a>
     </div>
     <div class="flex flex-col justify-start items-start gap-10 px-5 xl:px-16">
         <div class="flex justify-start items-start gap-2 flex-wrap">
@@ -119,7 +119,7 @@
                         </defs>
                     </svg>
 
-                    Báo cáo V-Store
+                    Báo cáo Store
                 </h2>
 
             </div>
@@ -140,7 +140,7 @@
                              Giá bán
                             </th>
                             <th>
-                             Tên V-Store
+                             Tên Store
                             </th>
                             <th>
                                 Chiết khấu (%)
@@ -159,7 +159,7 @@
                             </td>
                             <td>10.000.000</td>
                             <td>
-                             Aneed V-Store
+                              Store
                             </td>
                             <td>
                                15%
@@ -178,7 +178,7 @@
                              </td>
                              <td>10.000.000</td>
                              <td>
-                              Aneed V-Store
+                               Store
                              </td>
                              <td>
                                 15%
@@ -197,7 +197,7 @@
                              </td>
                              <td>10.000.000</td>
                              <td>
-                              Aneed V-Store
+                               Store
                              </td>
                              <td>
                                 15%
@@ -216,7 +216,7 @@
                              </td>
                              <td>10.000.000</td>
                              <td>
-                              Aneed V-Store
+                               Store
                              </td>
                              <td>
                                 15%
@@ -235,7 +235,7 @@
                              </td>
                              <td>10.000.000</td>
                              <td>
-                              Aneed V-Store
+                               Store
                              </td>
                              <td>
                                 15%

@@ -87,7 +87,7 @@
     </div>
     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
         <div class="form-group">
-            <label for="name">Chiết khấu cho V-Shop</label>
+            <label for="name">Chiết khấu cho Shop</label>
             <input type="text" class="form-control form-control-lg" disabled id="name"
                    value="{{$product->discount_vShop}}%" placeholder="Nhập tên sản phẩm">
         </div>

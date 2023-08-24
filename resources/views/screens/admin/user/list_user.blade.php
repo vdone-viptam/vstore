@@ -17,7 +17,7 @@
                         <label for="">Lựa chọn loại tài khoản muốn thêm</label>
                         <select name="typeCreate" id="typeCreate" class="form-control">
                             <option value="nha-cung-cap">Nhà cung cấp</option>
-                            <option value="vstore">V-Store</option>
+                            <option value="vstore">Store</option>
                             <option value="kho">KHO</option>
                         </select>
                     </div>
@@ -253,9 +253,9 @@
                                                     <span class="text-danger font-medium">Kho</span>
                                                 @else
                                                     @if($user->role_id==3 && $user->branch !=2)
-                                                        <span class="text-success font-medium">V-Store P</span>
+                                                        <span class="text-success font-medium">Store P</span>
                                                     @else
-                                                        <span class="text-success font-medium">V-Store F</span>
+                                                        <span class="text-success font-medium">Store F</span>
                                                     @endif
                                                 @endif
                                             </td>

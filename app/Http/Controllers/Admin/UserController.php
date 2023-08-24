@@ -83,8 +83,8 @@ class UserController extends Controller
         $this->v['limit'] = $request->limit ?? 10;
 
         $limit = $request->limit ?? 10;
-        if (isset($request->key_search) && ($this->v['key_search'] == 'V-Store P' || $this->v['key_search'] == 'V-Store F' || strtolower($this->v['key_search']) == strtolower('V-Store P') || strtolower($this->v['key_search']) == strtolower('V-Store F'))) {
-            if ($this->v['key_search'] == 'V-Store P' || strtolower($this->v['key_search']) == strtolower('V-Store P')) {
+        if (isset($request->key_search) && ($this->v['key_search'] == 'Store P' || $this->v['key_search'] == 'Store F' || strtolower($this->v['key_search']) == strtolower('Store P') || strtolower($this->v['key_search']) == strtolower('Store F'))) {
+            if ($this->v['key_search'] == 'Store P' || strtolower($this->v['key_search']) == strtolower('Store P')) {
                 $this->v['users'] = $this->v['users']->where('role_id', 3)->where('branch', 1);
             } else {
                 $this->v['users'] = $this->v['users']->where('role_id', 3)->where('branch', 2);
@@ -184,7 +184,7 @@ class UserController extends Controller
             if ($user->role_id == 2) {
                 Mail::send('email.active_ncc', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
                     $message->to($user->email);
-                    $message->subject('V-Store chào mừng quý khách hàng đã đăng ký tài khoản Nhà cung cấp');
+                    $message->subject('Store chào mừng quý khách hàng đã đăng ký tài khoản Nhà cung cấp');
                 });
 //                $elasticsearchController = new ElasticsearchController();
 //                try {
@@ -198,7 +198,7 @@ class UserController extends Controller
             if ($user->role_id == 3) {
                 Mail::send('email.active_vstore', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
                     $message->to($user->email);
-                    $message->subject('Chào mừng quý khách hàng đã đăng ký tài khoản V-Store');
+                    $message->subject('Chào mừng quý khách hàng đã đăng ký tài khoản Store');
                 });
 //                $elasticsearchController = new ElasticsearchController();
 //                try {
@@ -213,7 +213,7 @@ class UserController extends Controller
             if ($user->role_id == 4) {
                 Mail::send('email.active_kho', ['ID' => $ID, 'password' => $password], function ($message) use ($user) {
                     $message->to($user->email);
-                    $message->subject('V-Store chào mừng quý khách hàng đã đăng ký tài khoản KHO');
+                    $message->subject('Store chào mừng quý khách hàng đã đăng ký tài khoản KHO');
                 });
             }
             DB::commit();

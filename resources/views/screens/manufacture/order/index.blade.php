@@ -178,7 +178,7 @@
 
                             </th>
                             <th class="white-space-130 text-center">
-                                V-Shop bán hàng
+                                Shop bán hàng
                             </th>
                             <th class="white-space-180">
 

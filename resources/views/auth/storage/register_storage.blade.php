@@ -157,10 +157,10 @@
                             </svg>
                         </label>
                         <input class="form-control form-control-lg" required="" type="text"
-                               name="id_vdone" id="id_vdone"
-                               value="{{old('id_vdone')}}"
+                               name="id_ABC" id="id_ABC"
+                               value="{{old('id_ABC')}}"
                                placeholder="Nhập ID P-Done người đại diện (VD: VN1234567891)">
-                        @error('id_vdone')
+                        @error('id_ABC')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
                     </div>
@@ -183,10 +183,10 @@
                     <div class="form-group">
                         <label style="font-weight: 600;" for="idpDonemore">&nbsp;ID P-Done người đại diện (khác)</label>
                         <input class="form-control form-control-lg" type="text"
-                               name="id_vdone_diff" id="id_vdone_diff"
-                               value="{{old('id_vdone_diff')}}"
+                               name="id_ABC_diff" id="id_ABC_diff"
+                               value="{{old('id_ABC_diff')}}"
                                placeholder="Nhập ID P-Done người đại diện khác (VD: VN12345678)">
-                        @error('id_vdone_diff')
+                        @error('id_ABC_diff')
                         <p class="text-red-600">{{$message}}</p>
                         @enderror
                     </div>
@@ -671,11 +671,11 @@
                 </button>
             </div>
             <div class="content col-12 my-4">
-                VDONE tạo ra các công nghệ và dịch vụ nhằm hỗ trợ mọi người kết nối với nhau, xây dựng cộng đồng cũng
+                ABC tạo ra các công nghệ và dịch vụ nhằm hỗ trợ mọi người kết nối với nhau, xây dựng cộng đồng cũng
                 như
                 phát triển doanh nghiệp. Các Điều khoản này điều chỉnh việc bạn sử dụng các sản phẩm, tính năng, ứng
                 dụng,
-                dịch vụ, công nghệ cũng như phần mềm khác mà chúng tôi cung cấp (Sản phẩm của VDONE), trừ khi chúng tôi
+                dịch vụ, công nghệ cũng như phần mềm khác mà chúng tôi cung cấp (Sản phẩm của ABC), trừ khi chúng tôi
                 nêu
                 rõ là áp dụng các điều khoản riêng (và không áp dụng các điều khoản này). Các Sản phẩm này do VipTam,
                 Inc.
@@ -700,11 +700,11 @@
                 tác
                 với nội dung của họ. Hãy xem Mục 2 ở bên dưới để hiểu rõ hơn cách chúng tôi hiển thị quảng cáo được cá
                 nhân
-                hóa trên Sản phẩm của VDONE theo các điều khoản này.
+                hóa trên Sản phẩm của ABC theo các điều khoản này.
                 Chính sách quyền riêng tư của chúng tôi giải thích cách chúng tôi thu thập và sử dụng dữ liệu cá nhân
                 của bạn để quyết định hiển thị cho bạn quảng cáo nào, cũng như để cung cấp tất cả các dịch vụ khác được
                 mô tả
-                bên dưới. Bạn cũng có thể chuyển đến trang cài đặt trên Sản phẩm có liên quan của VDONE bất cứ lúc nào
+                bên dưới. Bạn cũng có thể chuyển đến trang cài đặt trên Sản phẩm có liên quan của ABC bất cứ lúc nào
                 để
                 xem lại các lựa chọn quyền riêng tư mình có đối với cách chúng tôi sử dụng dữ liệu của bạn.
             </div>
@@ -782,7 +782,7 @@
                                         <h4 style="font-weight: 600;margin-bottom:15px;">ID P-Done người đại diện</h4>
                                     </div>
                                     <div class="col-6">
-                                        <span style="font-size: 16px;">{{$user->id_vdone}}</span>
+                                        <span style="font-size: 16px;">{{$user->id_ABC}}</span>
                                     </div>
                                 </div>
 
@@ -1182,8 +1182,8 @@
                 setValueById("ward_id", infoNCC.ward_id);
                 setValueById("address", infoNCC.address);
                 setValueById("phone_number", infoNCC.phone_number);
-                setValueById("id_vdone", infoNCC.id_vdone);
-                setValueById("id_vdone_diff", infoNCC.id_vdone_diff);
+                setValueById("id_ABC", infoNCC.id_ABC);
+                setValueById("id_ABC_diff", infoNCC.id_ABC_diff);
                 setValueById("referral_code", infoNCC.referral_code);
 
                 loadAddress(infoNCC.provinceId, infoNCC.district_id, infoNCC.ward_id);

@@ -361,7 +361,7 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p style="font-weight:bold;font-size:19px;">V-Store chào mừng quý khách hàng</p>
+                        <p style="font-weight:bold;font-size:19px;">Store chào mừng quý khách hàng</p>
                         <p>Quý khách hàng đã đăng ký tài khoản NCC với những thông tin như sau : </p>
 
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">

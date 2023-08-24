@@ -291,7 +291,7 @@
             <a href="#vs">
                 <p
                     class="hover:text-[#258AFF] text-[#696984] text-sm lg:text-lg font-semibold leading-7 cursor-pointer">
-                    V-Store
+                    Store
                 </p>
             </a>
         </div>
@@ -341,7 +341,7 @@
                     </p>
                 </a>
                 <a href="#vs">
-                    <p class="hover:text-[#258AFF] text-[#696984] text-base font-semibold cursor-pointer">V-Store
+                    <p class="hover:text-[#258AFF] text-[#696984] text-base font-semibold cursor-pointer">Store
                     </p>
                 </a>
             </div>
@@ -640,7 +640,7 @@
     <!--  -->
     <p class="uppercase text-[#258AFF] text-[20px] md:text-[30px] font-bold text-center mt-[30px] md:mt-[90px] section"
        id="vs">
-        V-Store liên kết
+        Store liên kết
     </p>
     <div class="w-[37px] mx-auto mb-[60px]"></div>
 

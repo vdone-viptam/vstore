@@ -13,9 +13,9 @@
             integrity="sha512-STof4xm1wgkfm7heWqFJVn58Hm3EtS31XFaagaa8VMReCXAkQnJZ+jEy8PCC/iT18dFy95WcExNHFTqLyp72eQ=="
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
-    <meta property="og:title" content="V-Store"/>
+    <meta property="og:title" content="Store"/>
     <meta property="og:title"
-          content="V-Store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối và sản xuất"/>
+          content="Store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối và sản xuất"/>
     <meta property="og:description"
           content="Hãy đồng hành cùng 20.000+ người kinh doanh và nhà phân phối uy tín tại việt nam."/>
     <meta property="og:description" content=""/>
@@ -342,7 +342,7 @@
                     </p>
                 </a>
                 <a href="#vs">
-                    <p class="hover:text-[#258AFF] text-[#696984] text-base font-semibold cursor-pointer">V-Store
+                    <p class="hover:text-[#258AFF] text-[#696984] text-base font-semibold cursor-pointer">Store
                     </p>
                 </a>
             </div>

@@ -1,18 +1,18 @@
 @extends('layouts.manufacture.main')
-@section('page_title','Danh sách V-Store liên kết')
+@section('page_title','Danh sách Store liên kết')
 
 @section('page')
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Danh sách V-Store liên kết</h2>
+                <h2 class="pageheader-title">Danh sách Store liên kết</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Liên kết V-Store</a>
+                            <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Liên kết Store</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Danh sách V-Store liên kết</li>
+                            <li class="breadcrumb-item active" aria-current="page">Danh sách Store liên kết</li>
                         </ol>
                     </nav>
                 </div>
@@ -26,7 +26,7 @@
     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
         <div class="card">
             <div class="card-header d-flex align-items-center justify-content-between flex-wrap" style="gap:10px">
-                <h5 class="mb-0" style="font-size:18px;">Danh sách V-Store liên kết</h5>
+                <h5 class="mb-0" style="font-size:18px;">Danh sách Store liên kết</h5>
                 <ul class="navbar-nav ">
                     <li class="nav-item">
                         <div id="custom-search" class="top-search-bar">
@@ -48,8 +48,8 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th class="white-space-130 text-center">Mã V-Store</th>
-                            <th class="white-space-150 text-center">Tên V-Store
+                            <th class="white-space-130 text-center">Mã Store</th>
+                            <th class="white-space-150 text-center">Tên Store
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'vstore_name')
                                         @if($type == 'desc')
@@ -62,7 +62,7 @@
                                     @endif
                                 </span>
                             </th>
-                            <th class="white-space-150 text-center">Số điện thoại V-Store
+                            <th class="white-space-150 text-center">Số điện thoại Store
                                 <span style="float: right;cursor:pointer">
                                     @if($field == 'phone_number')
                                         @if($type == 'desc')
@@ -77,7 +77,7 @@
                             </th>
                             <th class="white-space-250 text-center">
 
-                                    Tổng số sản phẩm niêm yết trên V-Store
+                                    Tổng số sản phẩm niêm yết trên Store
                                     <span style="float: right;cursor: pointer">
                                         @if($field == 'total_product')
                                             @if($type == 'desc')
@@ -173,7 +173,7 @@
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
-                        <h5 class="modal-title" style="font-size: 20px;">Thông tin V-Store niêm yết sản phẩm</h5>
+                        <h5 class="modal-title" style="font-size: 20px;">Thông tin Store niêm yết sản phẩm</h5>
                         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                             <span aria-hidden="true">&times;</span>
                         </button>
@@ -183,20 +183,20 @@
                             <div class="row">
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Mã V-Store: </label>
+                                        <label for="name">Mã Store: </label>
                                         <input type="text" class="form-control form-control-lg" id="account_code"
                                                readonly>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Tên V-Store:</label>
+                                        <label for="name">Tên Store:</label>
                                         <input type="text" class="form-control form-control-lg" id="name" readonly>
                                     </div>
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Số điện thoại V-Store:</label>
+                                        <label for="name">Số điện thoại Store:</label>
                                         <input type="text" class="form-control form-control-lg" id="phone" readonly>
                                     </div>
                                 </div>
@@ -216,7 +216,7 @@
                                 </div>
                                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                                     <div class="form-group">
-                                        <label for="name">Tổng số sản phẩm niêm yết trên V-Store:</label>
+                                        <label for="name">Tổng số sản phẩm niêm yết trên Store:</label>
                                         <input type="text" class="form-control form-control-lg" id="total-product"
                                                readonly>
                                     </div>

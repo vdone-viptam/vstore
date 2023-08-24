@@ -356,9 +356,9 @@
 <input class="form-control number" data-discount="${discount}" name="discount" id="discount" disabled value="${discount} %">
             </div>
             <div class="form-group">
-               <label>Chiết khấu cho V-Shop</label>
+               <label>Chiết khấu cho Shop</label>
 <input class="form-control number" name="discount_vShop" id="discount_vShop">
-            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho V-Shop không được nhỏ hơn ${discount / 2} và lớn hơn ${discount}</p>
+            <p id="messageDis" style="display: none" class="text-danger mt-2 ms-1">Chiết khấu cho Shop không được nhỏ hơn ${discount / 2} và lớn hơn ${discount}</p>
             </div>
             `);
             document.querySelector('#form').setAttribute('action', '{{route('screens.vstore.product.confirm')}}/' + id + '?status=' + status)
