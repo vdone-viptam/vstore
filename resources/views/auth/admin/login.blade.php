@@ -20,7 +20,7 @@
     <div
         class="login flex flex-col justify-start items-start gap-10 xl:px-10 p-10 px-4 lg:px-10 shadow-2xl bg-[#FFF] rounded-xl  w-full  md:w-[500px] ">
 
-        <div class="w-[162px]">
+        <div class="w-[65px]">
             <img style="object-fit: contain;" src="{{asset('asset/images/logo.png')}}" alt="">
         </div>
         <h1 class="text-4xl font-medium max-w-[520px]">Đăng nhập</h1>

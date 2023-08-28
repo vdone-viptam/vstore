@@ -52,8 +52,8 @@ Thêm sản phẩm vào kho</h2>
                                 <option value="{{$val->id}}">{{$val->name}}</option>
                             @endforeach
 
-{{--                            <option value="1">V-Store 1</option>--}}
-{{--                            <option value="2">V-Store 2</option>--}}
+{{--                            <option value="1">Store 1</option>--}}
+{{--                            <option value="2">Store 2</option>--}}
                         </select>
                         @error('product_id')
                         <p class="text-red-600">{{$message}}</p>
@@ -73,8 +73,8 @@ Thêm sản phẩm vào kho</h2>
                             @foreach($warehouses as $val)
                                 <option value="{{$val->id}}">{{$val->name}}</option>
                             @endforeach
-{{--                            <option value="1">V-Store 1</option>--}}
-{{--                            <option value="2">V-Store 2</option>--}}
+{{--                            <option value="1">Store 1</option>--}}
+{{--                            <option value="2">Store 2</option>--}}
                         </select>
                         @error('ware_id')
                         <p class="text-red-600">{{$message}}</p>

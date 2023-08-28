@@ -157,7 +157,7 @@
 {{--                  <input class="form-control form-control-lg" disabled value="${data.data.product_name}">--}}
 {{--                </div>--}}
 {{--                <div class="form-group">--}}
-{{--                    <span >V-Store niêm yết:</label>--}}
+{{--                    <span >Store niêm yết:</label>--}}
 {{--                  <input class="form-control form-control-lg" disabled value="${data.data.user_name}" >--}}
 {{--                </div>--}}
 {{--                <div class="form-group">--}}
@@ -167,7 +167,7 @@
 {{--                    <label>Vat :</label>--}}
 {{--                  <input class="form-control form-control-lg" disabled value="${data.data.vat}" >        </div>--}}
 {{--                <div class="form-group">--}}
-{{--                    <span >Chiết khấu V-Store :</label>--}}
+{{--                    <span >Chiết khấu Store :</label>--}}
 {{--                  <input class="form-control form-control-lg" disabled value="${data.data.discount}" >--}}
 {{--                   </form>--}}
 

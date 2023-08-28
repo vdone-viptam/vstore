@@ -806,7 +806,7 @@ class PaymentMethod9PayController extends Controller
                 'merchantKey' => $merchantKey,
                 'time' => $time,
                 'invoice_no' => $invoiceNo,
-                'description' => 'Đơn hàng Vdone',
+                'description' => 'Đơn hàng ABC',
                 'amount' => $amount,
                 'back_url' => $backUrl,
                 'return_url' => $returnUrl,

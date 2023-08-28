@@ -275,7 +275,7 @@
                                         @elseif($user->role_id == 4)
                                             <span class="text-danger font-medium">Kho</span>
                                         @else
-                                            <span class="text-success font-medium">V-Store</span>
+                                            <span class="text-success font-medium">Store</span>
                                         @endif
                                     </td>
                                     <td class="text-center white-space-130">{{\Illuminate\Support\Carbon::parse($user->created_at)->format('d/m/Y H:i')}}</td>
@@ -325,7 +325,7 @@
             <div class="card">
                 <div class="card-header d-flex align-items-center justify-content-between flex-wrap"
                     style="gap:10px">
-                    <h5 class="mb-0" style="font-size:18px;">Sản phẩm xét duyệt lên V-Store chưa xác
+                    <h5 class="mb-0" style="font-size:18px;">Sản phẩm xét duyệt lên Store chưa xác
                         nhận</h5>
                     <ul class="navbar-nav ">
                         <li class="nav-item">
@@ -411,7 +411,7 @@
                                     <th class="white-space-130">
                                     <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
-                                            Chiết khấu cho <br> V-Store
+                                            Chiết khấu cho <br> Store
 </span>
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'products.discount')
@@ -429,7 +429,7 @@
                                     <th class="white-space-110 text-center">
                                     <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
-                                            V-Store <br> xét duyệt
+                                            Store <br> xét duyệt
 </span>
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'vstore_name')
@@ -447,7 +447,7 @@
                                     <th class="white-space-130 text-center">
                                     <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
-                                            Chiết khấu cho <br> V-Shop
+                                            Chiết khấu cho <br> Shop
 </span>
                                             <span style="float: right;cursor:pointer">
                                                 @if($field_request == 'requests.discount_vshop')

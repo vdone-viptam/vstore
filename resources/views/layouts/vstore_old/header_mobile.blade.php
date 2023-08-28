@@ -198,7 +198,7 @@
                     </div>
                     <ul class="flex flex-col gap-2 pl-7 text-[#3369D1] text-[12px] font-medium  list hidden">
                         <li><a href="{{Route('screens.vstore.partner.index')}}">Danh sách nhà cung cấp</a></li>
-                        <li><a href="{{Route('screens.vstore.partner.vshop')}}">Danh sách V-Shop</a></li>
+                        <li><a href="{{Route('screens.vstore.partner.vshop')}}">Danh sách Shop</a></li>
                         {{--                        <li><a href="{{Route('screens.vstore.partner.ship')}}">Dối tác giao hàng</a></li>--}}
                     </ul>
                 </div>

@@ -212,7 +212,7 @@ class VstoreController extends Controller
     }
 
     /**
-     * Danh sách V-Store có tên chứa từ khóa tìm kiếm
+     * Danh sách Store có tên chứa từ khóa tìm kiếm
      *
      * API này sẽ trả về danh sách vstore
      *

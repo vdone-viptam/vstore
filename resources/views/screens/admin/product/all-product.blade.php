@@ -113,7 +113,7 @@
                                     <th class="white-space-130 text-center">
                                     <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">   
-                                    Chiết khấu cho <br> V-Store
+                                    Chiết khấu cho <br> Store
 </span>
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'discount')
@@ -131,14 +131,14 @@
                                     <th class="white-space-100 text-center">
                                     <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">    
-                                    V-Store xét duyệt
+                                    Store xét duyệt
 </span>
 </div>
                                 </th>
                                     <th class="white-space-130 text-center">
                                     <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">    
-                                    Chiết khấu cho <br> V-Shop
+                                    Chiết khấu cho <br> Shop
 </span>
                                         <span style="float: right;cursor: pointer">
                                             @if($field == 'discount_vShop')

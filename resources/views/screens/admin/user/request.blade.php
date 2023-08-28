@@ -119,7 +119,7 @@
                                         @if($request->role_id == 2)
                                             <span class="text-primary font-medium">Nhà cung cấp</span>
                                         @elseif($request->role_id == 3)
-                                            <span class="text-success font-medium">V-Store</span>
+                                            <span class="text-success font-medium">Store</span>
                                         @else
                                             <span class="text-danger font-medium">Kho</span>
                                         @endif

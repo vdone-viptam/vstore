@@ -204,7 +204,7 @@ class CartController extends Controller
      * @param $id "mã sản phẩm"
      * @bodyParam  user_id required mã user của người dùng
      * @bodyParam  quantity required|numeric|min:1 Số sản phẩm mua
-     * @bodyParam  vshop_id required mã v-shop
+     * @bodyParam  vshop_id required mã shop
      * @return JsonResponse
      */
     public function add(Request $request, $id): JsonResponse

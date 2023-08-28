@@ -269,7 +269,7 @@
 
                                 </th>
                                 <th class="white-space-150">
-                                        V-Store niêm yết
+                                        Store niêm yết
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'vstore_name')
                                                 @if($type == 'desc')
@@ -287,7 +287,7 @@
 
                                 <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
-                                        Chiết khấu cho <br> V-Store
+                                        Chiết khấu cho <br> Store
                                         </span>
                                         <span style="float: right;cursor:pointer">
                                             @if($field == 'discount')

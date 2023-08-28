@@ -364,7 +364,7 @@ class ProductController extends Controller
                     }
                 },
             ], [
-                'vstore_id.required' => 'V-Store bắt buộc chọn',
+                'vstore_id.required' => 'Store bắt buộc chọn',
                 'product_id.required' => 'Sản phẩm kiểm duyệt bắt buộc chọn',
                 'discountA.required' => 'Chiết khấu bắt buộc nhập',
                 'role.min' => 'Vai trò với sản phẩm bắt buộc chọn',

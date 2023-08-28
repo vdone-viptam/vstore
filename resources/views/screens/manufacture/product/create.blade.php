@@ -41,7 +41,7 @@
 
                             <div class="col-xl-6 col-lg-6 col-md-12 col-sm-12" id="div2">
                                 <div class="form-group">
-                                    <label for="name">Chọn V-Store<span class="text-danger">*</span></label>
+                                    <label for="name">Chọn Store<span class="text-danger">*</span></label>
                                     <select class="form-control form-control-lg" disabled name="">
                                         <option value="{{$vstore->id}}">{{$vstore->name}}</option>
                                     </select>
@@ -68,14 +68,14 @@
                             </div>
                             <div class="col-xl-3 col-lg-3 col-md-6 col-sm-12">
                                 <div class="form-group">
-                                    <label for="name">Mức chiết khấu cho V-Store(%) <span
+                                    <label for="name">Mức chiết khấu cho Store(%) <span
                                             class="text-danger">*</span></label>
                                     <input type="text" class="form-control form-control-lg number discountA" required
                                            id="discountA"
                                            name="discountA"
                                            pattern="^[1-9][0-9]?$|^100$"
                                            title="Giá trị thích hợp từ 1 => 100"
-                                           value="{{old('discountA')}}" placeholder="Mức chiết khấu cho V-Store(%)">
+                                           value="{{old('discountA')}}" placeholder="Mức chiết khấu cho Store(%)">
                                     <p data-title="Chiết khấu" class="ml-1 mt-2 messageE text-danger"></p>
                                     @error('discountA')
                                     <p class="text-danger ml-1 mt-2">{{$message}}</p>
@@ -422,7 +422,7 @@
             if (type === 1) {
 
                 $('#div2').html(`                            <div class="form-group">
-                                    <label for="name">Chọn V-Store<span class="text-danger">*</span></label>
+                                    <label for="name">Chọn Store<span class="text-danger">*</span></label>
                                     <select class="form-control form-control-lg" name="vstore_id" id="selectVs">
                                         @foreach($v_stores as $v)
                 <option value="{{$v->id}}">{{$v->name}}</option>
@@ -435,7 +435,7 @@
             </div>`);
             } else {
                 $('#div2').html(`                   <div class="form-group">
-                                    <label for="name">Chọn V-Store<span class="text-danger">*</span></label>
+                                    <label for="name">Chọn Store<span class="text-danger">*</span></label>
                                     <select class="form-control form-control-lg" disabled name="">
                                         <option value="{{$vstore->id}}">{{$vstore->name}}</option>
                                     </select>

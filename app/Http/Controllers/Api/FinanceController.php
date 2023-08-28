@@ -16,7 +16,7 @@ use Illuminate\Support\Str;
 /**
  * @group Finance
  *
- * Danh sách api liên quan tài chính V-Shop
+ * Danh sách api liên quan tài chính Shop
  */
 class FinanceController extends Controller
 {

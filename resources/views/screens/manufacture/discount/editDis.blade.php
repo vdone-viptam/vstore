@@ -18,12 +18,12 @@
 
             <div class="row">
                 <div class="col-6">
-                    <label class="">Chiết khấu cho V-Store:</label>
+                    <label class="">Chiết khấu cho Store:</label>
                     <input disabled name="discount_ncc" id="discount_ncc"
                            class="form-control-lg form-control" value="{{$product1->discount}}%">
                 </div>
                 <div class="col-6">
-                    <label class="">Chiết khấu cho V-Store (thành tiền):</label>
+                    <label class="">Chiết khấu cho Store (thành tiền):</label>
                     <input type="text" class="form-control form-control-lg" id="moneyDis" disabled
                            placeholder=""
                            value="{{number_format($product1->price * ($product1->discount / 100),0,'.','.') }} đ">

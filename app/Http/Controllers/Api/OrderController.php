@@ -633,7 +633,7 @@ class OrderController extends Controller
             if (!$vshop_id) {
                 return response()->json([
                     'success' => false,
-                    'message' => 'Không tìm thấy V-shop'
+                    'message' => 'Không tìm thấy Shop'
                 ], 404);
             }
             $orders = OrderItem::select(

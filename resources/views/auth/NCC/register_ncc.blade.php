@@ -202,7 +202,7 @@
                             P-Done người
                             giới thiệu</label>
                         <input class="form-control form-control-lg" type="text" name="referral_code"
-                               placeholder="V-Shop giới thiệu" readonly value="{{ $referral_code }}">
+                               placeholder="Shop giới thiệu" readonly value="{{ $referral_code }}">
                     </div>
                 </div>
             </div>

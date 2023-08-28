@@ -9,7 +9,7 @@
     <title>@yield('page_title')</title>
     <meta name="csrf-token" content="{{csrf_token()}}">
     <meta property="og:type" content="website"/>
-    <meta property="og:title" content="V-Store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
+    <meta property="og:title" content="Store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
     <meta property="og:description"
           content="Hãy đồng hành cùng 20.000+ người bán hàng cùng những nhà phân phối hàng đầu Việt Nam."/>
     <meta property="og:url" content="{{asset('')}}"/>
@@ -159,7 +159,7 @@
             <div class="container-fluid">
                 <div class="row">
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
-                        Copyright © 2023, được vận hành bởi đội nhóm Aneed
+                        Copyright © 2023, được vận hành bởi đội nhóm 
                     </div>
                     <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12 col-12">
                         <div class="text-md-right footer-links d-none d-sm-block">

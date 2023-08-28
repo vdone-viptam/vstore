@@ -125,7 +125,7 @@
                             </th>
                             <th class="white-space-150">
 
-                            V-Store niêm yết
+                            Store niêm yết
                                 <span style="float: right;cursor: pointer">
                                     @if($field == 'users.name')
                                         @if($type == 'desc')
@@ -180,14 +180,14 @@
                                     <td class="text-center white-space-200">
                                         @if($request->status == 0)
                                             <div class="text-warning "><i class="fas fa-clock mr-2 text-warning"></i>
-                                                Đang chờ xét duyệt lên V-Store
+                                                Đang chờ xét duyệt lên Store
                                             </div>
                                         @elseif($request->status == 1)
                                             <div class="text-warning "><i class="fas fa-clock mr-2 text-warning"></i>Chờ
-                                                V-Store đồng ý - chờ hệ thống duyệt
+                                                Store đồng ý - chờ hệ thống duyệt
                                             </div>
                                         @elseif($request->status == 2)
-                                            <div class="text-danger "><i class="fas fa-times mr-2 text-danger"></i>V-Store từ
+                                            <div class="text-danger "><i class="fas fa-times mr-2 text-danger"></i>Store từ
                                                 chối
                                             </div>
                                         @elseif($request->status == 3)

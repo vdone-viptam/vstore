@@ -55,7 +55,7 @@ class DashboardController extends Controller
 
         $this->v['countRegisterAccountPending'] = $this->v['users']->count();
 
-        // Sản phẩm xét duyệt lên V-Store chưa xác nhận
+        // Sản phẩm xét duyệt lên Store chưa xác nhận
 
         $this->v['key_search_request'] = $request->key_search_request ?? '';
         $this->v['type_request'] = $request->type_request ?? 'desc';

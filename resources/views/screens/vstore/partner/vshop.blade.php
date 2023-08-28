@@ -5,14 +5,14 @@
     <div class="row">
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
             <div class="page-header">
-                <h2 class="pageheader-title">Danh sách V-Shop liên kết</h2>
+                <h2 class="pageheader-title">Danh sách Shop liên kết</h2>
 
                 <div class="page-breadcrumb">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item"><a href="#" class="breadcrumb-link">Đối tác</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Danh sách V-Shop liên kết</li>
+                            <li class="breadcrumb-item active" aria-current="page">Danh sách Shop liên kết</li>
                         </ol>
                     </nav>
                 </div>
@@ -49,8 +49,8 @@
                     <table id="example" class="table table-striped table-bordered second">
                         <thead>
                         <tr>
-                            <th class="white-space-100 text-center">Mã V-Shop</th>
-                            <th class="text-center">Tên V-Shop
+                            <th class="white-space-100 text-center">Mã Shop</th>
+                            <th class="text-center">Tên Shop
 
                             </th>
                             <th class="white-space-200 text-center">Số sản phẩm tiếp thị

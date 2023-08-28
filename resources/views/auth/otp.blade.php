@@ -64,7 +64,7 @@
         {{--            </div>--}}
         {{--            <span class="text-title">Quay lại</span>--}}
         {{--        </a>--}}
-        <div class="w-[162px]">
+        <div class="w-[65px]">
             @if($role_id == 3)
                 <a href="{{route('login_vstore')}}"><img src="{{asset('home/img/Logo.png')}}" alt=""></a>
             @elseif($role_id == 2)

@@ -119,7 +119,7 @@ if($order && $user) {
                                     <h4 style="font-weight: 600; margin-bottom:15px;">ID P-Done người đại diện</h4>
                                 </div>
                                 <div class="col-6">
-                                    <span style="font-size: 16px;">{{$user->id_vdone}}</span>
+                                    <span style="font-size: 16px;">{{$user->id_ABC}}</span>
                                 </div>
                             </div>
 
@@ -266,7 +266,7 @@ if($order && $user) {
         <div class="flex justify-between items-center">
             <div class="w-[105px] h-[82px]">
                 <a href="./">
-                    <img src="{{asset('home/img/vdone.png')}}" class="w-full object-contain" alt="">
+                    <img src="{{asset('home/img/ABC.png')}}" class="w-full object-contain" alt="">
                 </a>
             </div>
 
@@ -353,7 +353,7 @@ if($order && $user) {
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">KHO là mắt xích quan trọng trong chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của VDONE</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">KHO là mắt xích quan trọng trong chuỗi cung ứng hàng hóa trong hoạt động thương mại điện tử của ABC</span>
         </div>
         </div>
 
@@ -386,7 +386,7 @@ if($order && $user) {
                 <div class="w-[85px] h-[85px] rounded-full bg-[#FFF] flex items-center justify-center text-[#258AFF] text-[40px] font-semibold">
                    2
                 </div>
-                <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Tiếp nhận hàng hóa từ Nhà cung cấp V-Store</h2>
+                <h2 class="text-[#258AFF] text-[20px] md:text-[24px] xl:text-[28px] font-semibold text-center">Tiếp nhận hàng hóa từ Nhà cung cấp Store</h2>
                 <span class="text-[#343434] text-sm text-center md:text-base xl:text-lg font-semibold">Hàng nghìn Nhà cung cấp từ khắp cả nước chờ sử dụng KHO của bạn để đấu nối vào chuỗi cung ứng hàng hóa đến tay người dùng.</span>
 
             </div>
@@ -417,7 +417,7 @@ if($order && $user) {
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia vào hệ thống thương mại điện tử V-Store</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia vào hệ thống thương mại điện tử Store</span>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[21px]">
@@ -441,7 +441,7 @@ if($order && $user) {
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left">Hàng nghìn Nhà cung cấp của V-Store chờ gửi hàng vào <br> KHO.</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left">Hàng nghìn Nhà cung cấp của Store chờ gửi hàng vào <br> KHO.</span>
         </div>
         <div class="flex items-center gap-4">
             <div class="w-[21px]">
@@ -478,7 +478,7 @@ if($order && $user) {
 </svg>
 
             </div>
-            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia các khóa đào tạo về công nghệ, chức năng mới của hệ thống VDONE, V-Store.</span>
+            <span class=" text-[#343434] leading-[24px] text-[12px] sm:text-lg text-left ">Tham gia các khóa đào tạo về công nghệ, chức năng mới của hệ thống ABC, Store.</span>
         </div>
         </div>
 
@@ -585,7 +585,7 @@ if($order && $user) {
                                     <h4 style="font-weight: 700; margin-bottom:15px;">ID P-Done người đại diện</h4>
                                 </div>
                                 <div class="col-6">
-                                    <span style="font-size: 16px;">{{$user->id_vdone}}</span>
+                                    <span style="font-size: 16px;">{{$user->id_ABC}}</span>
                                 </div>
                             </div>
 

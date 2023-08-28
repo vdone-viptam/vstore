@@ -135,7 +135,7 @@
                                 <a href="#categories-GETapi-categories">Danh sách danh mục</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="categories-GETapi-categories-get-category-by-vstore--vstore_id-">
-                                <a href="#categories-GETapi-categories-get-category-by-vstore--vstore_id-">Danh sách danh mục theo V-Store</a>
+                                <a href="#categories-GETapi-categories-get-category-by-vstore--vstore_id-">Danh sách danh mục theo Store</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="categories-GETapi-categories-get-product-vstore-by-category--category_id-">
                                 <a href="#categories-GETapi-categories-get-product-vstore-by-category--category_id-">Chi tiết danh mục</a>
@@ -417,7 +417,7 @@
                                 <a href="#product-GETapi-products--id-">Chi tiết sản phẩm</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="product-DELETEapi-products-destroy-affiliate--pdone_id---product_id-">
-                                <a href="#product-DELETEapi-products-destroy-affiliate--pdone_id---product_id-">Hủy niêm yết sản phẩm của 1 V-shop</a>
+                                <a href="#product-DELETEapi-products-destroy-affiliate--pdone_id---product_id-">Hủy niêm yết sản phẩm của 1 Shop</a>
                             </li>
                                                                         </ul>
                             </ul>
@@ -436,7 +436,7 @@
                                 <a href="#review-GETapi-review-product-list-review-product--product_id-">xem danh sách đánh giá một sản phẩm</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="review-GETapi-review-product-list-review-vdone--done_id-">
-                                <a href="#review-GETapi-review-product-list-review-vdone--done_id-">xem danh sách đánh giá một sản phẩm trên Vdone</a>
+                                <a href="#review-GETapi-review-product-list-review-vdone--done_id-">xem danh sách đánh giá một sản phẩm trên ABC</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="review-POSTapi-review-product-rep-review-product">
                                 <a href="#review-POSTapi-review-product-rep-review-product">rep đánh giá của khách</a>
@@ -516,7 +516,7 @@
                                 <a href="#vstore-GETapi-vstore">Danh sách nhà vstore</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="vstore-GETapi-vstore-search">
-                                <a href="#vstore-GETapi-vstore-search">Danh sách V-Store có tên chứa từ khóa tìm kiếm</a>
+                                <a href="#vstore-GETapi-vstore-search">Danh sách Store có tên chứa từ khóa tìm kiếm</a>
                             </li>
                                                                                 <li class="tocify-item level-2" data-unique="vstore-GETapi-vstore--id-">
                                 <a href="#vstore-GETapi-vstore--id-">chi tiết vstore</a>
@@ -2741,7 +2741,7 @@ access-control-allow-origin: *
             </div>
                     </form>
 
-                    <h2 id="categories-GETapi-category-get-category-by-vstore--vstore_id-">Danh sách danh mục theo V-Store</h2>
+                    <h2 id="categories-GETapi-category-get-category-by-vstore--vstore_id-">Danh sách danh mục theo Store</h2>
 
 <p>
 </p>
@@ -3368,7 +3368,7 @@ access-control-allow-origin: *
 <p>
 </p>
 
-<p>API dùng trả về % giảm giá dựa trên số lượng sản phẩm V-Shop lấy hàng sẵn</p>
+<p>API dùng trả về % giảm giá dựa trên số lượng sản phẩm Shop lấy hàng sẵn</p>
 
 <span id="example-requests-GETapi-discount-get-discount">
 <blockquote>Example request:</blockquote>
@@ -7359,7 +7359,7 @@ access-control-allow-origin: *
 
                 <h1 id="vshop">Vshop</h1>
 
-    <p>Danh sách api liên quan V-shop</p>
+    <p>Danh sách api liên quan Shop</p>
 
                                 <h2 id="vshop-GETapi-vshop">GET api/vshop</h2>
 
@@ -9513,7 +9513,7 @@ fetch(url, {
                value="explicabo"
                data-component="body">
     <br>
-<p>mã v-shop Example: <code>explicabo</code></p>
+<p>mã Shop Example: <code>explicabo</code></p>
         </div>
                 <div style=" padding-left: 28px;  clear: unset;">
             <b style="line-height: 2;"><code>is_pdone</code></b>&nbsp;&nbsp;
@@ -9996,7 +9996,7 @@ access-control-allow-origin: *
             </div>
                     </form>
 
-                    <h2 id="categories-GETapi-categories-get-category-by-vstore--vstore_id-">Danh sách danh mục theo V-Store</h2>
+                    <h2 id="categories-GETapi-categories-get-category-by-vstore--vstore_id-">Danh sách danh mục theo Store</h2>
 
 <p>
 </p>
@@ -10628,7 +10628,7 @@ access-control-allow-origin: *
 <p>
 </p>
 
-<p>API dùng trả về % giảm giá dựa trên số lượng sản phẩm V-Shop lấy hàng sẵn</p>
+<p>API dùng trả về % giảm giá dựa trên số lượng sản phẩm Shop lấy hàng sẵn</p>
 
 <span id="example-requests-GETapi-discount-get-discount">
 <blockquote>Example request:</blockquote>
@@ -16841,7 +16841,7 @@ access-control-allow-origin: *
 
                 <h1 id="finance">Finance</h1>
 
-    <p>Danh sách api liên quan tài chính V-Shop</p>
+    <p>Danh sách api liên quan tài chính Shop</p>
 
                                 <h2 id="finance-GETapi-finances-get-list-bank">Danh sách ngân hàng</h2>
 
@@ -21242,12 +21242,12 @@ access-control-allow-origin: *
             </div>
                     </form>
 
-                    <h2 id="product-DELETEapi-products-destroy-affiliate--pdone_id---product_id-">Hủy niêm yết sản phẩm của 1 V-shop</h2>
+                    <h2 id="product-DELETEapi-products-destroy-affiliate--pdone_id---product_id-">Hủy niêm yết sản phẩm của 1 Shop</h2>
 
 <p>
 </p>
 
-<p>API dùng để hủy niêm yết sản phẩm của V-shop</p>
+<p>API dùng để hủy niêm yết sản phẩm của Shop</p>
 
 <span id="example-requests-DELETEapi-products-destroy-affiliate--pdone_id---product_id-">
 <blockquote>Example request:</blockquote>
@@ -21873,12 +21873,12 @@ access-control-allow-origin: *
         </div>
         </form>
 
-                    <h2 id="review-GETapi-review-product-list-review-vdone--done_id-">xem danh sách đánh giá một sản phẩm trên Vdone</h2>
+                    <h2 id="review-GETapi-review-product-list-review-vdone--done_id-">xem danh sách đánh giá một sản phẩm trên ABC</h2>
 
 <p>
 </p>
 
-<p>API dùng xem danh sách đánh giá sản phẩm trên Vdone</p>
+<p>API dùng xem danh sách đánh giá sản phẩm trên ABC</p>
 
 <span id="example-requests-GETapi-review-product-list-review-vdone--done_id-">
 <blockquote>Example request:</blockquote>
@@ -22174,7 +22174,7 @@ fetch(url, {
 
                 <h1 id="vshop">Vshop</h1>
 
-    <p>Danh sách api liên quan V-shop</p>
+    <p>Danh sách api liên quan Shop</p>
 
                                 <h2 id="vshop-GETapi-vshop-products--pdone_id-">GET api/vshop/products/{pdone_id}</h2>
 
@@ -25516,7 +25516,7 @@ access-control-allow-origin: *
         </div>
         </form>
 
-                    <h2 id="vstore-GETapi-vstore-search">Danh sách V-Store có tên chứa từ khóa tìm kiếm</h2>
+                    <h2 id="vstore-GETapi-vstore-search">Danh sách Store có tên chứa từ khóa tìm kiếm</h2>
 
 <p>
 </p>

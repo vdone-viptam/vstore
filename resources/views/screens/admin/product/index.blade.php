@@ -91,7 +91,7 @@
                                     <th class="white-space-130">
                                         <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
-                                    Chiết khấu cho <br> V-Store
+                                    Chiết khấu cho <br> Store
 </span>
                                             <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.discount')
@@ -112,7 +112,7 @@
                                     <th class="white-space-130">
                                         <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
-                                    Chiết khấu cho <br> V-Shop
+                                    Chiết khấu cho <br> Shop
 </span>
                                             <span style="float: right;cursor: pointer">
                                                  @if($field == 'requests.discount_vShop')
@@ -132,7 +132,7 @@
                                     <th class="white-space-100">
                                         <div class="d-flex align-items-center justify-content-around">
                                 <span class="white-space-90">
-                                    V-Store xét duyệt
+                                    Store xét duyệt
 </span>
                                     </th>
                                     <th class="white-space-120 text-center">Trạng thái
@@ -327,7 +327,7 @@
 <input class="form-control number" data-discount="${discount}" name="discount" id="discount" disabled value="${discount} %">
             </div>
             <div class="form-group">
-               <label>Chiết khấu cho V-Shop</label>
+               <label>Chiết khấu cho Shop</label>
 <input class="form-control number-percent" name="discount_vShop" id="discount_vShop" value="${discount_vShop}" disabled>
             </div>
             `);

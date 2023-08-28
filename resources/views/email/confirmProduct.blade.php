@@ -8,7 +8,7 @@
         </div>
         <p style="font-size:1.5em">Xin chào,</p>
         <p style="font-size:1.2em">Đơn đăng ký xét duyệt sản phẩm của bạn đã được gửi đến quản trị viên, vui lòng thanh toán!<br>- Mã tài khoản của bạn là: {{$ID}} <br>- Mật khẩu: {{$password}}</p>
-        <p style="font-size:1em;">Xin cảm ơn,<br />V-Store admin</p>
+        <p style="font-size:1em;">Xin cảm ơn,<br />Store admin</p>
         <hr style="border:none;border-top:1px solid #eee" />
         <!-- <div style="float:right;padding:8px 0;color:#aaa;font-size:0.8em;line-height:1;font-weight:300">
           <p>Your Brand Inc</p>

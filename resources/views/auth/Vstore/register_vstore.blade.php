@@ -17,7 +17,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{{$type_create == 'true' ? 'Thêm mới tài khoản' : 'Đăng ký V-Store'}}</title>
+    <title>{{$type_create == 'true' ? 'Thêm mới tài khoản' : 'Đăng ký Store'}}</title>
     <link rel="stylesheet" href="{{ asset('asset/css/style.css') }}">
     <link rel="stylesheet" href="{{ asset('asset/dist/output.css') }}">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.3/jquery.min.js"
@@ -25,7 +25,7 @@
             crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="http://ajax.aspnetcdn.com/ajax/jquery.validate/1.11.1/jquery.validate.min.js"></script>
     <link rel="icon" type="image/x-icon" href="{{ asset('asset/images/Frame 1321315296.ico') }}">
-    <meta property="og:title" content="V-Store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
+    <meta property="og:title" content="Store | Ecommerce. Cổng thương mại điện tử dành cho nhà phân phối"/>
     <meta property="og:description"
           content="Hãy đồng hành cùng 20.000+ người bán hàng cùng những nhà phân phối hàng đầu Việt Nam."/>
     <meta property="og:url" content="{{ asset('') }}"/>
@@ -99,7 +99,7 @@
 
             </div>
 
-            <img src="{{ asset('asset/images/vstore.png') }}" style="object-fit: contain; width:162px; height:40px;"
+            <img src="{{ asset('asset/images/logo.png') }}" style="object-fit: contain; width:65px; height:65px;"
                  alt="Logo">
         </div>
         <div class="card-body">
@@ -130,9 +130,9 @@
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
                         <label style="font-weight: 600;" for="vstore" style="font-weight: 600;"><span
-                                class="text-danger">*</span>Tên V-Store</label>
+                                class="text-danger">*</span>Tên Store</label>
                         <input class="form-control form-control-lg" required type="text" name="name"
-                               id="name" placeholder="Nhập V-Store" value="{{ old('name') }}">
+                               id="name" placeholder="Nhập Store" value="{{ old('name') }}">
                         @error('name')
                         <p class="text-danger text-red-500">{{ $message }}</p>
                         @enderror
@@ -140,12 +140,12 @@
                 </div>
                 <div class="col-xl-6 col-lg-6">
                     <div class="form-group">
-                        <label style="font-weight: 600;" for="id_vdone"><span class="text-danger">*</span>ID
+                        <label style="font-weight: 600;" for="id_ABC"><span class="text-danger">*</span>ID
                             P-Done người đại diện </label>
-                        <input class="form-control form-control-lg" required type="text" name="id_vdone"
-                               id="id_vdone" placeholder="Nhập ID P-Done người đại diện"
-                               value="{{ old('id_vdone') }}">
-                        @error('id_vdone')
+                        <input class="form-control form-control-lg" required type="text" name="id_ABC"
+                               id="id_ABC" placeholder="Nhập ID P-Done người đại diện"
+                               value="{{ old('id_ABC') }}">
+                        @error('id_ABC')
                         <p class="text-danger text-red-500">{{ $message }}</p>
                         @enderror
                     </div>
@@ -165,9 +165,9 @@
                     <div class="form-group">
                         <label style="font-weight: 600;" for="idpDonemore"><span class="text-danger"></span>
                             &ensp;ID P-Done người đại diện (khác)</label>
-                        <input class="form-control form-control-lg" type="text" name="id_vdone_diff"
-                               id="id_vdone_diff" placeholder="Nhập ID P-Done người đại diện (khác)"
-                               value="{{ old('id_vdone_diff') }}">
+                        <input class="form-control form-control-lg" type="text" name="id_ABC_diff"
+                               id="id_ABC_diff" placeholder="Nhập ID P-Done người đại diện (khác)"
+                               value="{{ old('id_ABC_diff') }}">
                     </div>
                 </div>
                 <div class="col-xl-6 col-lg-6">
@@ -190,7 +190,7 @@
                         <label style="font-weight: 600;" for="codeInvite"><span class="text-danger"></span>
                             &ensp;Mã P-Done người giới thiệu</label>
                         <input class="form-control form-control-lg" type="text" name="referral_code"
-                               placeholder="V-Shop giới thiệu" readonly value="{{ $referral_code }}">
+                               placeholder="Shop giới thiệu" readonly value="{{ $referral_code }}">
                     </div>
                 </div>
             </div>
@@ -287,11 +287,11 @@
                 </button>
             </div>
             <div class="content col-12 my-4">
-                VDONE tạo ra các công nghệ và dịch vụ nhằm hỗ trợ mọi người kết nối với nhau, xây dựng cộng đồng cũng
+                ABC tạo ra các công nghệ và dịch vụ nhằm hỗ trợ mọi người kết nối với nhau, xây dựng cộng đồng cũng
                 như
                 phát triển doanh nghiệp. Các Điều khoản này điều chỉnh việc bạn sử dụng các sản phẩm, tính năng, ứng
                 dụng,
-                dịch vụ, công nghệ cũng như phần mềm khác mà chúng tôi cung cấp (Sản phẩm của VDONE), trừ khi chúng tôi
+                dịch vụ, công nghệ cũng như phần mềm khác mà chúng tôi cung cấp (Sản phẩm của ABC), trừ khi chúng tôi
                 nêu
                 rõ là áp dụng các điều khoản riêng (và không áp dụng các điều khoản này). Các Sản phẩm này do VipTam,
                 Inc.
@@ -316,11 +316,11 @@
                 tác
                 với nội dung của họ. Hãy xem Mục 2 ở bên dưới để hiểu rõ hơn cách chúng tôi hiển thị quảng cáo được cá
                 nhân
-                hóa trên Sản phẩm của VDONE theo các điều khoản này.
+                hóa trên Sản phẩm của ABC theo các điều khoản này.
                 Chính sách quyền riêng tư của chúng tôi giải thích cách chúng tôi thu thập và sử dụng dữ liệu cá nhân
                 của bạn để quyết định hiển thị cho bạn quảng cáo nào, cũng như để cung cấp tất cả các dịch vụ khác được
                 mô tả
-                bên dưới. Bạn cũng có thể chuyển đến trang cài đặt trên Sản phẩm có liên quan của VDONE bất cứ lúc nào
+                bên dưới. Bạn cũng có thể chuyển đến trang cài đặt trên Sản phẩm có liên quan của ABC bất cứ lúc nào
                 để
                 xem lại các lựa chọn quyền riêng tư mình có đối với cách chúng tôi sử dụng dữ liệu của bạn.
             </div>
@@ -362,7 +362,7 @@
     const divCity = document.getElementById('city_id');
     const divDistrict = document.getElementById('district_id');
     const divWard = document.getElementById('ward_id');
-    fetch('{{ route('get_city') }}', {
+    fetch('{{ route("get_city") }}', {
         mode: 'no-cors',
 
     })
@@ -370,13 +370,13 @@
         .then((data) => {
             document.getElementById('city_id').innerHTML =
                 `<option value="0" disabled selected>Lựa chọn tỉnh (thành phố)</option>` + data.map(item =>
-                    `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{ old('city_id') }}' ? 'selected' : ''}>${item.PROVINCE_NAME}</option>`
+                    `<option data-name="${item.PROVINCE_NAME}" value="${item.PROVINCE_ID}" ${item.PROVINCE_ID == '{{ old("city_id") }}' ? 'selected' : ''}>${item.PROVINCE_NAME}</option>`
                 );
         })
         .catch(console.error);
 
     divCity.addEventListener('change', (e) => {
-        fetch('{{ route('get_city') }}?type=2&value=' + e.target.value, {
+        fetch('{{ route("get_city") }}?type=2&value=' + e.target.value, {
             mode: 'no-cors',
 
         })
@@ -408,7 +408,7 @@
             )
     });
     divDistrict.addEventListener('change', (e) => {
-        fetch('{{ route('get_city') }}?type=3&value=' + e.target.value, {
+        fetch('{{ route("get_city") }}?type=3&value=' + e.target.value, {
             mode: 'no-cors',
 
         })
@@ -498,8 +498,8 @@
             setValueById("ward_id", infoNCC.ward_id);
             setValueById("address", infoNCC.address);
             setValueById("phone_number", infoNCC.phone_number);
-            setValueById("id_vdone", infoNCC.id_vdone);
-            setValueById("id_vdone_diff", infoNCC.id_vdone_diff);
+            setValueById("id_ABC", infoNCC.id_ABC);
+            setValueById("id_ABC_diff", infoNCC.id_ABC_diff);
 
             setValueById("referral_code", infoNCC.referral_code);
 
@@ -507,7 +507,7 @@
         }
 
         function loadAddress(provinceId, district_id, ward_id) {
-            fetch('{{ route('get_city') }}', {
+            fetch('{{ route("get_city") }}', {
                 mode: 'no-cors',
             })
                 .then((response) => response.json())
@@ -518,7 +518,7 @@
                         );
                 })
                 .catch(console.error);
-            fetch('{{ route('get_city') }}?type=2&value=' + provinceId, {
+            fetch('{{ route("get_city") }}?type=2&value=' + provinceId, {
                 mode: 'no-cors',
             })
                 .then((response) => response.json())
@@ -534,7 +534,7 @@
                     }
                 })
                 .catch(() => divDistrict.innerHTML = `<option value="0" disabled selected>Lựa chọn quận (huyện)</option>`);
-            fetch('{{ route('get_city') }}?type=3&value=' + district_id, {
+            fetch('{{ route("get_city") }}?type=3&value=' + district_id, {
                 mode: 'no-cors',
             }).then((response) => response.json())
                 .then((data) => {

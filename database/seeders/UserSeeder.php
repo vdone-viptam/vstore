@@ -21,7 +21,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Khánh hòa',
                'email'=>'vstore.khanhhoa@gmail.com',
-               'company_name' => 'V-Store Khánh hòa',
+               'company_name' => 'Store Khánh hòa',
                'tax_code'=>1000000001,
                'code'=>'vnvst1000000001',
                'branch'=>2,
@@ -33,7 +33,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Bình dương',
                'email'=>'vstore.binhduong@gmail.com',
-               'company_name' => 'V-Store Bình Dương',
+               'company_name' => 'Store Bình Dương',
                'tax_code'=>1000000002,
                'code'=>'vnvst1000000002',
                'branch'=>2,
@@ -45,7 +45,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Hà Nội',
                'email'=>'vstore.hanoi@gmail.com',
-               'company_name' => 'V-Store Hà Nội',
+               'company_name' => 'Store Hà Nội',
                'tax_code'=>1000000003,
                'code'=>'vnvst1000000003',
                'branch'=>2,
@@ -57,7 +57,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Phú Yên',
                'email'=>'vstore.phuyen@gmail.com',
-               'company_name' => 'V-Store Phú Yên',
+               'company_name' => 'Store Phú Yên',
                'tax_code'=>1000000004,
                'code'=>'vnvst1000000004',
                'branch'=>2,
@@ -69,7 +69,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Tây Ninh',
                'email'=>'vstore.tayninh@gmail.com',
-               'company_name' => 'V-Store Tây Ninh',
+               'company_name' => 'Store Tây Ninh',
                'tax_code'=>1000000005,
                'code'=>'vnvst1000000005',
                'branch'=>2,
@@ -81,7 +81,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Đồng Tháp',
                'email'=>'vstore.dongthap@gmail.com',
-               'company_name' => 'V-Store Đồng Tháp',
+               'company_name' => 'Store Đồng Tháp',
                'tax_code'=>1000000006,
                'code'=>'vnvst1000000006',
                'branch'=>2,
@@ -93,7 +93,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Thanh Hóa',
                'email'=>'vstore.thanhhoa@gmail.com',
-               'company_name' => 'V-Store Thanh Hóa',
+               'company_name' => 'Store Thanh Hóa',
                'tax_code'=>1000000007,
                'code'=>'vnvst1000000007',
                'branch'=>2,
@@ -105,7 +105,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Đăk Nông',
                'email'=>'vstore.daknong@gmail.com',
-               'company_name' => 'V-Store Đăk Nông',
+               'company_name' => 'Store Đăk Nông',
                'tax_code'=>1000000008,
                'code'=>'vnvst1000000008',
                'branch'=>2,
@@ -117,7 +117,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Sơn La',
                'email'=>'vstore.sonla@gmail.com',
-               'company_name' => 'V-Store Sơn La',
+               'company_name' => 'Store Sơn La',
                'tax_code'=>1000000009,
                'code'=>'vnvst1000000009',
                'branch'=>2,
@@ -129,7 +129,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Ninh Thuận',
                'email'=>'vstore.ninhthuan@gmail.com',
-               'company_name' => 'V-Store Ninh Thuận',
+               'company_name' => 'Store Ninh Thuận',
                'tax_code'=>1000000010,
                'code'=>'vnvst1000000010',
                'branch'=>2,
@@ -141,7 +141,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Gia Lai',
                'email'=>'vstore.gialai@gmail.com',
-               'company_name' => 'V-Store Gia Lai',
+               'company_name' => 'Store Gia Lai',
                'tax_code'=>1000000011,
                'code'=>'vnvst1000000011',
                'branch'=>2,
@@ -153,7 +153,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Bắc Giang',
                'email'=>'vstore.bacgiang@gmail.com',
-               'company_name' => 'V-Store Bắc Giang',
+               'company_name' => 'Store Bắc Giang',
                'tax_code'=>1000000012,
                'code'=>'vnvst1000000012',
                'branch'=>2,
@@ -165,7 +165,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Bạc Liêu',
                'email'=>'vstore.baclieu@gmail.com',
-               'company_name' => 'V-Store Bạc Liêu',
+               'company_name' => 'Store Bạc Liêu',
                'tax_code'=>1000000013,
                'code'=>'vnvst1000000013',
                'branch'=>2,
@@ -177,7 +177,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Tiền Giang',
                'email'=>'vstore.tiengiang@gmail.com',
-               'company_name' => 'V-Store Tiền Giang',
+               'company_name' => 'Store Tiền Giang',
                'tax_code'=>1000000014,
                'code'=>'vnvst1000000014',
                'branch'=>2,
@@ -189,7 +189,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Quảng Trị',
                'email'=>'vstore.quangtri@gmail.com',
-               'company_name' => 'V-Store Tiền Giang',
+               'company_name' => 'Store Tiền Giang',
                'tax_code'=>1000000015,
                'code'=>'vnvst1000000015',
                'branch'=>2,
@@ -201,7 +201,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Dak Lak',
                'email'=>'vstore.daklak@gmail.com',
-               'company_name' => 'V-Store Dak Lak',
+               'company_name' => 'Store Dak Lak',
                'tax_code'=>1000000016,
                'code'=>'vnvst1000000016',
                'branch'=>2,
@@ -213,7 +213,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Bình Thuận',
                'email'=>'vstore.binhthuan@gmail.com',
-               'company_name' => 'V-Store Bình Thuận',
+               'company_name' => 'Store Bình Thuận',
                'tax_code'=>1000000017,
                'code'=>'vnvst1000000017',
                'branch'=>2,
@@ -225,7 +225,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Ninh Bình',
                'email'=>'vstore.ninhbinh@gmail.com',
-               'company_name' => 'V-Store Ninh Bình',
+               'company_name' => 'Store Ninh Bình',
                'tax_code'=>1000000018,
                'code'=>'vnvst1000000018',
                'branch'=>2,
@@ -237,7 +237,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Bến Tre',
                'email'=>'vstore.bentre@gmail.com',
-               'company_name' => 'V-Store Bến Tre',
+               'company_name' => 'Store Bến Tre',
                'tax_code'=>1000000019,
                'code'=>'vnvst1000000019',
                'branch'=>2,
@@ -249,7 +249,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Hậu Giang',
                'email'=>'vstore.haugiang@gmail.com',
-               'company_name' => 'V-Store Hậu Giang',
+               'company_name' => 'Store Hậu Giang',
                'tax_code'=>1000000020,
                'code'=>'vnvst1000000020',
                'branch'=>2,
@@ -261,7 +261,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Đà Nẵng',
                'email'=>'vstore.danang@gmail.com',
-               'company_name' => 'V-Store Đà Nẵng',
+               'company_name' => 'Store Đà Nẵng',
                'tax_code'=>1000000021,
                'code'=>'vnvst1000000021',
                'branch'=>2,
@@ -273,7 +273,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Yên Bái',
                'email'=>'vstore.yenbai@gmail.com',
-               'company_name' => 'V-Store Yên Bái',
+               'company_name' => 'Store Yên Bái',
                'tax_code'=>1000000022,
                'code'=>'vnvst1000000022',
                'branch'=>2,
@@ -285,7 +285,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Trà vinh',
                'email'=>'vstore.travinh@gmail.com',
-               'company_name' => 'V-Store Trà Vinh',
+               'company_name' => 'Store Trà Vinh',
                'tax_code'=>1000000023,
                'code'=>'vnvst1000000023',
                'branch'=>2,
@@ -297,7 +297,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Vĩnh Long',
                'email'=>'vstore.travinh@gmail.com',
-               'company_name' => 'V-Store Vĩnh Long',
+               'company_name' => 'Store Vĩnh Long',
                'tax_code'=>1000000024,
                'code'=>'vnvst1000000024',
                'branch'=>2,
@@ -309,7 +309,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Sóc Trăng',
                'email'=>'vstore.soctrang@gmail.com',
-               'company_name' => 'V-Store Sóc Trăng',
+               'company_name' => 'Store Sóc Trăng',
                'tax_code'=>1000000025,
                'code'=>'vnvst1000000025',
                'branch'=>2,
@@ -322,7 +322,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Hà Nam',
                'email'=>'vstore.hanam@gmail.com',
-               'company_name' => 'V-Store Hà Nam',
+               'company_name' => 'Store Hà Nam',
                'tax_code'=>1000000026,
                'code'=>'vnvst1000000026',
                'branch'=>2,
@@ -334,7 +334,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Vĩnh Phúc',
                'email'=>'vstore.vinhphuc@gmail.com',
-               'company_name' => 'V-Store Vinh Phuc',
+               'company_name' => 'Store Vinh Phuc',
                'tax_code'=>1000000027,
                'code'=>'vnvst1000000027',
                'branch'=>2,
@@ -346,7 +346,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Hồ Chí Minh',
                'email'=>'vstore.hcm@gmail.com',
-               'company_name' => 'V-Store Hồ Chí Minh',
+               'company_name' => 'Store Hồ Chí Minh',
                'tax_code'=>1000000028,
                'code'=>'vnvst1000000028',
                'branch'=>2,
@@ -358,7 +358,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Phú thọ',
                'email'=>'vstore.phutho@gmail.com',
-               'company_name' => 'V-Store Phú thọ',
+               'company_name' => 'Store Phú thọ',
                'tax_code'=>1000000029,
                'code'=>'vnvst1000000029',
                'branch'=>2,
@@ -370,7 +370,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Bắc Kạn',
                'email'=>'vstore.backan@gmail.com',
-               'company_name' => 'V-Store Bắc Kạn',
+               'company_name' => 'Store Bắc Kạn',
                'tax_code'=>1000000030,
                'code'=>'vnvst1000000030',
                'branch'=>2,
@@ -383,7 +383,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Cần Thơ',
                'email'=>'vstore.cantho@gmail.com',
-               'company_name' => 'V-Store Cần thơ',
+               'company_name' => 'Store Cần thơ',
                'tax_code'=>1000000031,
                'code'=>'vnvst1000000032',
                'branch'=>2,
@@ -395,7 +395,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Hà Tĩnh',
                'email'=>'vstore.hatinh@gmail.com',
-               'company_name' => 'V-Store Hà Tĩnh',
+               'company_name' => 'Store Hà Tĩnh',
                'tax_code'=>1000000033,
                'code'=>'vnvst1000000033',
                'branch'=>2,
@@ -407,7 +407,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Long An',
                'email'=>'vstore.longan@gmail.com',
-               'company_name' => 'V-Store Hà Tĩnh',
+               'company_name' => 'Store Hà Tĩnh',
                'tax_code'=>1000000034,
                'code'=>'vnvst1000000034',
                'branch'=>2,
@@ -419,7 +419,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Lạng Sơn',
                'email'=>'vstore.langson@gmail.com',
-               'company_name' => 'V-Store Lạng Sơn',
+               'company_name' => 'Store Lạng Sơn',
                'tax_code'=>1000000035,
                'code'=>'vnvst1000000035',
                'branch'=>2,
@@ -431,7 +431,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Kon Tum',
                'email'=>'vstore.kontum@gmail.com',
-               'company_name' => 'V-Store Kon Tum',
+               'company_name' => 'Store Kon Tum',
                'tax_code'=>1000000036,
                'code'=>'vnvst1000000036',
                'branch'=>2,
@@ -443,7 +443,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Nam Định',
                'email'=>'vstore.namdinh@gmail.com',
-               'company_name' => 'V-Store Nam Định',
+               'company_name' => 'Store Nam Định',
                'tax_code'=>10000000137,
                'code'=>'vnvst1000000037',
                'branch'=>2,
@@ -455,7 +455,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Lào Cai',
                'email'=>'vstore.laocai@gmail.com',
-               'company_name' => 'V-Store Lào Cai',
+               'company_name' => 'Store Lào Cai',
                'tax_code'=>1000000038,
                'code'=>'vnvst1000000038',
                'branch'=>2,
@@ -467,7 +467,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'An Giang',
                'email'=>'vstore.angiang@gmail.com',
-               'company_name' => 'V-Store An Giang',
+               'company_name' => 'Store An Giang',
                'tax_code'=>1000000039,
                'code'=>'vnvst1000000039',
                'branch'=>2,
@@ -479,7 +479,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Nghệ An',
                'email'=>'vstore.nghean@gmail.com',
-               'company_name' => 'V-Store Nghệ An',
+               'company_name' => 'Store Nghệ An',
                'tax_code'=>1000000040,
                'code'=>'vnvst1000000040',
                'branch'=>2,
@@ -491,7 +491,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Bà Rịa - Vũng Tàu',
                'email'=>'vstore.bariavungtau@gmail.com',
-               'company_name' => 'V-Store Bà Rịa - Vũng Tàu',
+               'company_name' => 'Store Bà Rịa - Vũng Tàu',
                'tax_code'=>10000000141,
                'code'=>'vnvst1000000041',
                'branch'=>2,
@@ -503,7 +503,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Tuyên Quang',
                'email'=>'vstore.tuyenquang@gmail.com',
-               'company_name' => 'V-Store Tuyên Quang',
+               'company_name' => 'Store Tuyên Quang',
                'tax_code'=>1000000042,
                'code'=>'vnvst1000000042',
                'branch'=>2,
@@ -515,7 +515,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Quãng Ngãi',
                'email'=>'vstore.quangngai@gmail.com',
-               'company_name' => 'V-Store Quãng Ngãi',
+               'company_name' => 'Store Quãng Ngãi',
                'tax_code'=>1000000043,
                'code'=>'vnvst1000000043',
                'branch'=>2,
@@ -527,7 +527,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Hải Dương',
                'email'=>'vstore.haiduong@gmail.com',
-               'company_name' => 'V-Store Hải Dương',
+               'company_name' => 'Store Hải Dương',
                'tax_code'=>1000000044,
                'code'=>'vnvst1000000044',
                'branch'=>2,
@@ -539,7 +539,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Lai Châu',
                'email'=>'vstore.laichau@gmail.com',
-               'company_name' => 'V-Store Lai châu',
+               'company_name' => 'Store Lai châu',
                'tax_code'=>1000000045,
                'code'=>'vnvst100000045',
                'branch'=>2,
@@ -551,7 +551,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Huế',
                'email'=>'vstore.hue@gmail.com',
-               'company_name' => 'V-Store Huế',
+               'company_name' => 'Store Huế',
                'tax_code'=>1000000046,
                'code'=>'vnvst1000000046',
                'branch'=>2,
@@ -563,7 +563,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Khánh hòa',
                'email'=>'vstore.khánh hòa@gmail.com',
-               'company_name' => 'V-Store khánh hòa',
+               'company_name' => 'Store khánh hòa',
                'tax_code'=>1000000047,
                'code'=>'vnvst1000000047',
                'branch'=>2,
@@ -575,7 +575,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Điện Biên',
                'email'=>'vstore.dienbien@gmail.com',
-               'company_name' => 'V-Store Điện Biên',
+               'company_name' => 'Store Điện Biên',
                'tax_code'=>1000000048,
                'code'=>'vnvst1000000048',
                'branch'=>2,
@@ -587,7 +587,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Hưng yên',
                'email'=>'vstore.hungyen@gmail.com',
-               'company_name' => 'V-Store Hưng yên',
+               'company_name' => 'Store Hưng yên',
                'tax_code'=>1000000049,
                'code'=>'vnvst1000000049',
                'branch'=>2,
@@ -599,7 +599,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Hòa Bình',
                'email'=>'vstore.hoabinh@gmail.com',
-               'company_name' => 'V-Store Hòa Bình',
+               'company_name' => 'Store Hòa Bình',
                'tax_code'=>1000000050,
                'code'=>'vnvst1000000050',
                'branch'=>2,
@@ -611,7 +611,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Kiên Giang',
                'email'=>'vstore.kiengiang@gmail.com',
-               'company_name' => 'V-Store Kiên Giang',
+               'company_name' => 'Store Kiên Giang',
                'tax_code'=>1000000051,
                'code'=>'vnvst1000000051',
                'branch'=>2,
@@ -623,7 +623,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Lâm Đồng',
                'email'=>'vstore.lamdong@gmail.com',
-               'company_name' => 'V-Store Lâm Đồng',
+               'company_name' => 'Store Lâm Đồng',
                'tax_code'=>1000000052,
                'code'=>'vnvst1000000052',
                'branch'=>2,
@@ -635,7 +635,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Quảng Ninh',
                'email'=>'vstore.quangninh@gmail.com',
-               'company_name' => 'V-Store Quảng Ninh',
+               'company_name' => 'Store Quảng Ninh',
                'tax_code'=>1000000053,
                'code'=>'vnvst1000000053',
                'branch'=>2,
@@ -647,7 +647,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Hà Giang',
                'email'=>'vstore.hagiang@gmail.com',
-               'company_name' => 'V-Store Hà Giang',
+               'company_name' => 'Store Hà Giang',
                'tax_code'=>1000000054,
                'code'=>'vnvst1000000054',
                'branch'=>2,
@@ -659,7 +659,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Thái Nguyên',
                'email'=>'vstore.thainguyen@gmail.com',
-               'company_name' => 'V-Store Thái Nguyên',
+               'company_name' => 'Store Thái Nguyên',
                'tax_code'=>1000000055,
                'code'=>'vnvst1000000055',
                'branch'=>2,
@@ -671,7 +671,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Cao Bằng',
                'email'=>'vstore.caobang@gmail.com',
-               'company_name' => 'V-Store Cao Bằng',
+               'company_name' => 'Store Cao Bằng',
                'tax_code'=>1000000056,
                'code'=>'vnvst1000000056',
                'branch'=>2,
@@ -683,7 +683,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Đồng Nai',
                'email'=>'vstore.dongnai@gmail.com',
-               'company_name' => 'V-Store Đồng Nai',
+               'company_name' => 'Store Đồng Nai',
                'tax_code'=>1000000057,
                'code'=>'vnvst1000000057',
                'branch'=>2,
@@ -695,7 +695,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Thái Bình',
                'email'=>'vstore.thaibinh@gmail.com',
-               'company_name' => 'V-Store Thái Bình',
+               'company_name' => 'Store Thái Bình',
                'tax_code'=>1000000058,
                'code'=>'vnvst1000000058',
                'branch'=>2,
@@ -707,7 +707,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Cà Mau',
                'email'=>'vstore.camau@gmail.com',
-               'company_name' => 'V-Store Cà Mau',
+               'company_name' => 'Store Cà Mau',
                'tax_code'=>1000000059,
                'code'=>'vnvst1000000059',
                'branch'=>2,
@@ -719,7 +719,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Bình Phước',
                'email'=>'vstore.binhphuoc@gmail.com',
-               'company_name' => 'V-Store Bình Phước',
+               'company_name' => 'Store Bình Phước',
                'tax_code'=>1000000060,
                'code'=>'vnvst1000000060',
                'branch'=>2,
@@ -731,7 +731,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Quảng Bình',
                'email'=>'vstore.quangbinh@gmail.com',
-               'company_name' => 'V-Store Quảng Bình',
+               'company_name' => 'Store Quảng Bình',
                'tax_code'=>1000000061,
                'code'=>'vnvst1000000061',
                'branch'=>2,
@@ -743,7 +743,7 @@ class UserSeeder extends Seeder
            [
                'name' => 'Thừa Thiên Huế',
                'email'=>'vstore.quangbinh@gmail.com',
-               'company_name' => 'V-Store Thừa Thiên Huế',
+               'company_name' => 'Store Thừa Thiên Huế',
                'tax_code'=>1000000062,
                'code'=>'vnvst1000000062',
                'branch'=>2,

@@ -91,14 +91,14 @@
                         <a class="nav-link {{ (request()->is('partners*')) ? 'active' : '' }}" href=""
                            data-toggle="collapse" aria-expanded="{{ (request()->is('partners*')) ? 'true' : 'false' }}"
                            data-target="#submenu-4" aria-controls="submenu-4"><i
-                                class="fab fa-fw fas fa-users"></i>Liên kết V-Store</a>
+                                class="fab fa-fw fas fa-users"></i>Liên kết Store</a>
                         <div id="submenu-4"
                              class="{{ (request()->is('partners*')) ? 'collapshow' : 'collapse' }} submenu" style="">
                             <ul class="nav flex-column">
                                 <li class="nav-item">
                                     <a class="nav-link {{ (request()->is('partners')) ? 'active1' : '' }}"
                                        id="listVstore" href="{{route('screens.manufacture.partner.index')}}">Danh sách
-                                        V-Store liên kết</a>
+                                        Store liên kết</a>
                                 </li>
 
                             </ul>

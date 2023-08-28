@@ -179,7 +179,7 @@
                                 kho</a></li>
                     </ul>
                 </div>
-                {{--                Quản lý V-Store--}}
+                {{--                Quản lý Store--}}
                 <div data-index="3" class="flex flex-col gap-3 cursor-pointer select-none tab__menu ">
                     <div class="flex items-center">
                         <div class="tab__left rounded-[16px] p-2">
@@ -197,7 +197,7 @@
                                     </svg>
                                 </div>
                                 <div class="flex gap-2 items-center">
-                                    <p class="text-[#495057] text-sm  text__menu">Quản lý V-Store</p>
+                                    <p class="text-[#495057] text-sm  text__menu">Quản lý Store</p>
                                     <svg width="11" height="6" viewBox="0 0 11 6" fill="none"
                                          xmlns="http://www.w3.org/2000/svg">
                                         <path class="svg_arr" d="M9.99902 1L5.71749 5L1.43596 1" stroke="#B8BED9"

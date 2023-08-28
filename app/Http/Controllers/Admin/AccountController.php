@@ -35,7 +35,7 @@ class   AccountController extends Controller
             'id_vdone' => 'required',
 
         ], [
-            'name.required' => 'Tên v-store bắt buộc nhập',
+            'name.required' => 'Tên Store bắt buộc nhập',
             'company_name.required' => 'Tên công ty bắt buộc nhập',
             'tax_code.required' => 'Mã số thuế bắt buộc nhập',
             'address.required' => 'Địa chỉ bắt buộc nhập',

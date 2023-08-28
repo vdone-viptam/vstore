@@ -81,7 +81,7 @@
             </div>
             <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                 <div class="form-group">
-                    <label for="name">Chiết khấu cho V-Store</label>
+                    <label for="name">Chiết khấu cho Store</label>
                     <input type="text" disabled class="form-control form-control-lg" id="name"
                            value="{{$product->discount != null ? $product->discount .'%' : 'Chưa niêm yết'}}"
                            placeholder="Nhập xuất xứ">

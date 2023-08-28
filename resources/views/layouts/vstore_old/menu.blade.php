@@ -198,7 +198,7 @@
                             sách
                             nhà cung cấp</a></li>
                     <li data-page="vshop"><a class="hover:underline" href="{{Route('screens.vstore.partner.vshop')}}">Danh
-                            sách V-Shop</a></li>
+                            sách Shop</a></li>
                     {{--                <li data-page="ship"><a class="hover:underline" href="{{Route('screens.vstore.partner.ship')}}">Dối tác--}}
                     {{--                        giao hàng</a></li>--}}
                 </ul>

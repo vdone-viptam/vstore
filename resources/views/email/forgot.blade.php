@@ -9,7 +9,7 @@
         @elseif($role_id==2)
             Nhà cung cấp
         @elseif($role_id ==3)
-            V-Store
+            Store
         @else
             KHO
         @endif
@@ -389,7 +389,7 @@
                             @elseif($role_id==2)
                                 Nhà cung cấp
                             @elseif($role_id ==3)
-                                V-Store
+                                Store
                             @else
                                 KHO
                             @endif

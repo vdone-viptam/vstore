@@ -114,7 +114,7 @@
                                         @elseif($history->type == 'KHO')
                                             <span class="text-success font-medium">Kho</span>
                                         @else
-                                            <span class="text-danger font-medium">V-Store</span>
+                                            <span class="text-danger font-medium">Store</span>
                                         @endif
                                     </td>
                                     <td class="white-space-200">{{$history->name}}</td>

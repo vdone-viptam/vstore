@@ -4,7 +4,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <title>
-        Chào mừng quý khách hàng đã đăng ký tài khoản V-Store
+        Chào mừng quý khách hàng đã đăng ký tài khoản Store
     </title>
     <style>
       /* -------------------------------------
@@ -361,7 +361,7 @@
                   <table role="presentation" border="0" cellpadding="0" cellspacing="0">
                     <tr>
                       <td>
-                        <p style="font-weight:bold;font-size:19px;">V-Store chào mừng quý khách hàng</p>
+                        <p style="font-weight:bold;font-size:19px;">Store chào mừng quý khách hàng</p>
                         <p>Quý khách hàng đã đăng ký tài khoản NCC với những thông tin như sau : </p>
 
                         <table role="presentation" border="0" cellpadding="0" cellspacing="0" class="btn btn-primary">

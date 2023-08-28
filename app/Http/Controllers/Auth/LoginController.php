@@ -316,8 +316,8 @@ class LoginController extends Controller
                 'tax_code.between' => 'Mã số thuế không hợp lệ',
                 'email.required' => 'Email bắt buộc nhập',
                 'email.email' => 'Email không đúng dịnh dạng',
-                'name.required' => 'Tên nhà V-Store bắt buộc nhập',
-                'name.max' => 'Tên nhà V-Store tối đa 30 ký tự',
+                'name.required' => 'Tên nhà Store bắt buộc nhập',
+                'name.max' => 'Tên nhà Store tối đa 30 ký tự',
                 'company_name.required' => 'Tên công ty bắt buộc nhập',
                 'company_name.max' => 'Tên công ty tối đa 50 kí tự',
                 'tax_code.required' => 'Mã số thuế bắt buộc nhập',
@@ -966,7 +966,7 @@ class LoginController extends Controller
                     $message1 = 'Mã xác thực đăng nhập tài khoản Nhà cung cấp';
                 }
                 if ($role_id == 3) {
-                    $message1 = 'Mã xác thực đăng nhập tài khoản V-Store';
+                    $message1 = 'Mã xác thực đăng nhập tài khoản Store';
                 }
                 if ($role_id == 4) {
                     $message1 = 'Mã xác thực đăng nhập tài khoản KHO';
@@ -1038,7 +1038,7 @@ class LoginController extends Controller
         }
         if ($domain == config('domain.vstore')) {
             $role_id = 3;
-            $message1 = 'Xác thực quên mật khẩu tài khoản V-Store';
+            $message1 = 'Xác thực quên mật khẩu tài khoản Store';
         }
         if ($domain == config('domain.storage')) {
             $role_id = 4;
